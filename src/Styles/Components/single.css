@@ -1,0 +1,9 @@
+.single-top-head {
+
+    color: white;
+    background-color: black;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    padding: 0px 50px;
+}

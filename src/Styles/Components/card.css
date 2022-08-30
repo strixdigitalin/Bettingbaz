@@ -1,0 +1,324 @@
+*{
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+.card-head{
+    background-color: #2C2C2C;
+    color: white;
+    display: flex;
+    padding-left: 50px;
+    height: 54px;
+    align-items: center;
+    justify-content: space-between;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.card-subhead{
+    background-color: #414141;  
+    color: white;
+    display: flex;
+    padding-left: 50px;
+    height: 48px;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+.card-subhead-inplay{
+    background-color: #ffffff;
+    border: 1px solid #707070;
+    color: white;
+    display: flex;
+    padding-left: 50px;
+    height: 48px;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+
+
+.change-but{
+    display: flex;
+    gap: 10%;
+    width: 70px;
+    /* height: 100%; */
+    /* display: flex; */
+    /* align-items: center; */
+    
+}
+.singleBut {
+    border-left: 1px solid #707070;
+    width: 80px;
+    text-align: center;
+}
+.card-left-text {
+    color: #F97D09;
+    text-decoration: underline;
+    margin-right: 10px;
+
+}
+
+.cardTeam{
+    color: #949494;
+    margin-left: 20px;
+}
+
+
+/* -------------------------------- today */
+.card-today{
+    height: 48px;
+    background-color: #EAEAEA;
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid #707070; */
+    align-items: center;
+    padding-left: 50px;
+}
+
+.card-today-right{
+    display: flex;
+    flex-direction:row-reverse ;
+    justify-content:flex-end;
+    text-align: center;
+    color: black;
+    height: 100%;
+    align-items: center;
+    /* gap: 5%; */
+    /* width: 200px; */
+    
+}
+
+.card-today-row {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding-left: 50px;
+    height: 48px;
+    align-items: center;
+    border: 1px solid #707070;
+}
+.singleRight{
+    width: 110px;
+    color: #707070;
+    
+}
+.singleRightrow{
+    width: 110px;
+    color: black;
+    border-left: 1px solid #707070;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+}
+
+.card-today-wrap-right{
+    display: flex;
+    height: 100%;
+    align-items: center;
+/* border-left: 1px solid #a9a9a9; */
+    text-align: center;
+
+}
+
+
+.game-slide{
+height: 63px;
+    /* height: 100%; */
+    display: flex;
+    align-items: center;
+    background-color: #EAEAEA;
+}
+.navigator {
+    border: 1px solid #707070;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5%;
+}
+.middle-games{
+width: 90%;
+display: flex;
+overflow:hidden;
+/* overflow-x: scroll; */
+}
+.singleSliderIcon{
+    /* margin: auto; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px solid #707070;
+    width: 200px !important;
+    /* border-right: 1px solid #707070; */
+}
+
+.singleGame{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid #707070;
+    padding: 0px 5px;
+    width: 90px;
+    font-size: 12px;
+    /* height: 42px; */
+}
+
+.card-today-inPlay {
+    height: 48px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+}
+
+
+.live-but{
+    background-color: #504E4E;
+    border: 1px solid #707070;
+    color: white;
+    height: 26px;
+    border-radius: 3px;
+
+    width: 80px;
+}
+.upcoming-but{
+    width: 80px;
+    background-color: white;
+    border: 1px solid #707070;
+    border-radius: 3px;
+
+    color: black;
+    height: 26px;
+}
+.seemore{
+    height: 48px;
+    display: flex;
+    justify-content:end;
+    background-color: #EAEAEA;
+    align-items: center;
+    padding: 0px 15px;
+    text-decoration: underline;
+    /* color: #F97D09; */
+    font-weight: bold;
+border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px;
+
+
+    /* flex-direction: ; */
+}
+
+
+.heighlight-wrap{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.single-highlight{
+    border: 1px solid #707070 ;
+    
+    background-color: #EAEAEA;
+    border-top: 0px;
+}
+.heighlight-head{
+    width:100%;
+    background-color: #EAEAEA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    gap: 5%;
+    height: 40px;
+    /* height: 40px; */
+
+    /* border: 1px solid #2c2c2c; */
+}
+.heighlight-headsingle{
+    /* width: 33.3%; */
+}
+.heighlight-row{
+    /* margin: 0px 10px; */
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 29px;
+    border-bottom: 1px solid #707070    ;
+    background-color: white;
+    font-size: 12px;
+    /* text-align: center; */
+}
+.heighlight-row-end{
+    /* margin: 0px 10px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    /* text-align: center; */
+    
+}
+
+.heighlight-row-right{
+    border-left: 1px solid #707070;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.heighlight-row-left{
+    width: 100%;
+    padding-left: 20px;
+/* padding-left: 80%; */
+}
+
+
+
+/* -------------- */
+.single-category{
+    background-color: #2c2c2c;
+    display: flex;
+    /* padding: 0px 50px; */
+    /* gap: 3%; */
+    align-items: center;
+    height: 54px;
+    color: white;
+}
+
+.item-left-right-bord{
+    border-right: 1px solid #707070;
+    border-left: 1px solid #707070;
+    /* padding: 0px 15px; */
+}
+
+.single-item{
+    width: 100px;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+.bottom-orange {
+    border-bottom: 4px solid #F97D09;
+}
+
+.leagueSingleBox{
+    height: 72px;
+    border: 1px solid #c6c6c6;
+    padding: 0px 10px;
+    font-size: 15px;
+    width: 25%;
+}
+
+.league-card-wrap{
+    flex-wrap: wrap;
+}

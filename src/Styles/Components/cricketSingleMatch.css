@@ -1,0 +1,53 @@
+.one-eaning{
+    height: 56px;
+    display: flex;
+    align-items: center;
+    
+}
+.eaning-left{
+    width: 22%;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* align-items: center; */
+    
+}
+.scoreData {
+    background-color: #727272;
+    height: 56px;
+    display:flex;
+    align-items: center;
+    color: white;
+}
+
+.eaning-mid {
+width:50%;
+text-align: center;
+}
+.eaning-right{
+    width: 22%;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.playerScore{
+width: 22%;
+margin-left: 50px;
+}
+
+
+.cricket-data-table{
+    height: 48px;
+    background-color: white;
+    border-top: 1px solid #707070;
+    /* border-bottom: 1px solid #707070; */
+}
+
+
+.cricket-heighlight-row-left{
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+}
