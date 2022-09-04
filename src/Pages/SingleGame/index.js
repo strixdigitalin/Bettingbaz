@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Heighlights,
-  InPlayCard,
-  SingleGameCard,
-} from "../../Components/Heighlights";
+import { Heighlights, SingleGameCard } from "../../Components/Heighlights";
 import banner from "../../Assets/Banner.png";
 import QuickLinks from "../../Components/QuickLinks";
 import HomeMiddle from "../Home/HomeMiddle";

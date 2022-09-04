@@ -35,9 +35,10 @@ border: none;
 
 .header-buttons{
     display: flex;
-    width: 230px;
+    width: 30%px;
 
     justify-content: space-between;
+    align-items:flex-end;
 gap: 5%;
 }
 
@@ -46,6 +47,7 @@ gap: 5%;
     padding: 8px 10px;
     width: 80px;
     border-radius: 5px;
+    height: 40px;
     color: white;
 }
 
@@ -67,4 +69,11 @@ align-items: center;
     gap: 10%;
     width: 150px;
     text-align: center;
+}
+
+.input-header{
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+
 }

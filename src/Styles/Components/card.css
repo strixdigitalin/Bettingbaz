@@ -76,16 +76,34 @@
 
 .card-today-right{
     display: flex;
-    flex-direction:row-reverse ;
-    justify-content:flex-end;
+    /* flex-direction:row-reverse ; */
+    justify-content:space-between;
     text-align: center;
     color: black;
     height: 100%;
     align-items: center;
     /* gap: 5%; */
-    /* width: 200px; */
+    width: 40%;
     
 }
+.card-today-right-in-play{
+    display: flex;
+    /* flex-direction:row-reverse ; */
+    justify-content:space-between;
+    text-align: center;
+    color: black;
+    height: 30%;
+    align-items: center;
+    /* gap: 5%; */
+    width: 40%;
+    
+}
+.card-today-left-row{
+    width: 60%;
+}
+
+
+
 
 .card-today-row {
     background-color: #ffffff;
@@ -96,19 +114,26 @@
     height: 48px;
     align-items: center;
     border: 1px solid #707070;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
 }
 .singleRight{
-    width: 110px;
+    width: 50%;
     color: #707070;
     
 }
 .singleRightrow{
-    width: 110px;
-    color: black;
+    width:100%;
+    /* color: black; */
     border-left: 1px solid #707070;
     display: flex;
-    justify-content: center;
+    padding: 0px 5px;
+    /* justify-content: center; */
+    text-align: center;
+    font-weight: 600;
     align-items: center;
+    
     height: 100%;
     
 }
@@ -119,6 +144,9 @@
     align-items: center;
 /* border-left: 1px solid #a9a9a9; */
     text-align: center;
+    width: 40%;
+    /* justify-content: ; */
+    
 
 }
 
@@ -160,10 +188,25 @@ overflow:hidden;
     justify-content: center;
     align-items: center;
     border-left: 1px solid #707070;
+    cursor: pointer;
     padding: 0px 5px;
     width: 90px;
     font-size: 12px;
+    color: #707070;
     /* height: 42px; */
+}
+/*  singlegame click */
+.singleClick{
+    display: flex;
+    flex-direction: column;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid #707070;
+    cursor: pointer;
+    padding: 0px 5px;
+    width: 90px;
+    font-size: 12px;
 }
 
 .card-today-inPlay {
@@ -201,8 +244,9 @@ overflow:hidden;
     background-color: #EAEAEA;
     align-items: center;
     padding: 0px 15px;
-    text-decoration: underline;
+    /* text-decoration: underline; */
     /* color: #F97D09; */
+    color: #000000;
     font-weight: bold;
 border-bottom-left-radius: 10px;
 border-bottom-right-radius: 10px;
@@ -321,4 +365,9 @@ border-bottom-right-radius: 10px;
 
 .league-card-wrap{
     flex-wrap: wrap;
+}
+
+.in-play-row-left{
+    width: 70%;
+
 }

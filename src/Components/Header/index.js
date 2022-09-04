@@ -5,6 +5,7 @@ import football from "../../Assets/Header/Football icon.png";
 import inPlay from "../../Assets/Header/In Play.png";
 import tableTennis from "../../Assets/Header/table tenis icon.png";
 import tenisBall from "../../Assets/Header/tenis ball icon.png";
+import { Link, BrowserRouter as Router } from "react-router-dom";
 function Header() {
   const [selectedTab, setSelectedTab] = useState(1);
 
@@ -30,6 +31,14 @@ function Header() {
     { name: "Tenis", icon: tenisBall, width: "30px", height: "30px" },
     { name: "Table Tennis", icon: tableTennis, width: "40px", height: "40px" },
   ];
+  const Inputs = [
+    {
+      name: "Email",
+    },
+    {
+      name: "Password",
+    },
+  ];
 
   return (
     <div>
@@ -51,10 +60,22 @@ function Header() {
         </div>
         {/* ---------middle */}
         <div className="mid-header">
-          <div>
-            <img src={logo} />
-          </div>
+          {/* <Router> */}
+          <Link to="/home">
+            <div>
+              <img src={logo} />
+            </div>
+          </Link>
+          {/* </Router> */}
           <div className="header-buttons">
+            {Inputs.map((item) => {
+              return (
+                <div>
+                  {item.name}
+                  <input className="input-header" />
+                </div>
+              );
+            })}
             {buttons.map((item, key) => (
               <button className="singlebutton">{item.name}</button>
             ))}{" "}

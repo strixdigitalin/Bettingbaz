@@ -18,15 +18,30 @@ import "./Styles/Components/cricketSingleMatch.css";
 import { SingleGameCard } from "./Components/Heighlights";
 import SingleGame from "./Pages/SingleGame";
 import CricketSingleMatch from "./Pages/SingleGame/CricketSingleMatch";
+import InPlaySingleGame from "./Components/Controler/InPlayControler";
+import PageCover from "./Components/PageCover";
+import InPlayGame from "./Pages/InplayGame";
+import { MatchByCompetition } from "./Pages/MatchByCompetition/MatchByCompetition";
+import MatchByCompetitionIndex from "./Pages/MatchByCompetition";
+import CompetitionByGame from "./Pages/CompetitionByGame";
 
 function App() {
   return (
     <div className="App">
-      <Header />
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/game" element={<SingleGame />}></Route>
+          <Route path="/in-play" element={<InPlayGame />}></Route>
+          <Route
+            path="/all-competition-by-sports/:sport"
+            element={<CompetitionByGame />}
+          ></Route>
+          <Route
+            path="/match-by-competition/sport/:game/:league/:id"
+            element={<MatchByCompetitionIndex />}
+          ></Route>
           <Route
             path="/cricket-single"
             element={<CricketSingleMatch />}

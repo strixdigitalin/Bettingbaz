@@ -4,26 +4,24 @@ import banner from "../../Assets/Banner.png";
 import logo from "../../Assets/Header/logo.png";
 import { Heighlights, SingleGameCard } from "../../Components/Heighlights";
 import { InPlayCard } from "../../Components/InplayCard";
-import SingleGameListCover from "./SingleGameListCover";
+import { MatchByCompetitionCard } from "../../Components/MatchByCompetitionCard";
 
-function HomeMiddle() {
+function MatchByCompetition() {
   // useEffect(() => {
   //   API.get("cricket", (res) => console.log(res));
   // }, []);
 
   return (
     <div className="home-middle">
-      <div>
-        <img src={banner} width="100%" />
-      </div>
+      <div>{/* <img src={banner} width="100%" /> */}</div>
       <div className="home-display-card" style={{ marginTop: "20px" }}>
-        <Heighlights />
-        <InPlayCard show="3" />
-        <SingleGameListCover show={3} />
-        {/* <SingleGameCard heading={"Football"} subTitle={"title"} team={"team"} /> */}
+        {/* <Heighlights /> */}
+        {/* <InPlayCard show="all" /> */}
+        <MatchByCompetitionCard show="all" />
+        {/* <SingleGameCard /> */}
       </div>
     </div>
   );
 }
 
-export default HomeMiddle;
+export default MatchByCompetition;

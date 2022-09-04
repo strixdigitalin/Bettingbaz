@@ -7,8 +7,8 @@ import tableTenis from "../Assets/Header/table tenis icon.png";
 import tenis from "../Assets/Card/tenis ball icon.png";
 
 const gameList = [
-  { name: "Cricket", icon: Cricket },
-  { name: "Football", icon: Football },
+  { name: "cricket", icon: Cricket },
+  { name: "football", icon: Football },
   { name: "Table tenis", icon: tableTenis },
   { name: "Tenis", icon: tenis },
 ];
@@ -83,7 +83,7 @@ export function SingleHeighlighCardHead({
   );
 }
 
-export const GameSlider = ({ games = [1, 2, 3] }) => {
+export const GameSlider = ({ selectedGame, changeGame }) => {
   return (
     <div className="flex-row just-between game-slide w100">
       <div className="navigator">
@@ -92,7 +92,12 @@ export const GameSlider = ({ games = [1, 2, 3] }) => {
       <div className="middle-games">
         {[...gameList].map((item, key) => {
           return (
-            <div className="singleGame">
+            <div
+              className={`${
+                selectedGame == item.name ? "singleClick" : "singleGame"
+              }`}
+              onClick={() => changeGame(item.name)}
+            >
               <div>
                 <img src={item.icon} width="22px" height="22px" />
               </div>
