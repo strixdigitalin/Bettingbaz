@@ -18,7 +18,7 @@ function HomeMiddle() {
       </div>
       <div className="home-display-card" style={{ marginTop: "20px" }}>
         <Heighlights />
-        <InPlayCard show="3" />
+        <InPlayCard show="3"  />
         <SingleGameListCover show={3} />
         {/* <SingleGameCard heading={"Football"} subTitle={"title"} team={"team"} /> */}
       </div>
