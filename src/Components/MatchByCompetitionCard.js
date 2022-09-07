@@ -93,6 +93,7 @@ export function MatchByCompetitionCard({
             <MatchByCompetition
               item={{
                 name: item.name,
+                id: item.id,
                 odds: item.odds,
                 start_datetime: item.start_datetime,
               }}

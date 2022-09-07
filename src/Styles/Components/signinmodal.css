@@ -1,0 +1,39 @@
+.sign-in-modal{
+    position: fixed;
+    background: white;
+     width: 90%;
+     
+     z-index: 5;
+     top: 80px;
+     /* left: 35%; */
+     /* right: 0px; */
+     left: 5%;
+     height: 50vh;
+     border-radius: 10px;
+     padding: 20px;
+     display: flex;
+     justify-content:center;
+     flex-direction: column;
+     gap: 5%;
+     align-items:center;
+}
+.modal-heading{
+    color: black;
+    font-size: 20px;
+
+    text-shadow: 1px 1px #707070;
+}
+
+.signin-input{
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.submit-but{
+    width:100%;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+}

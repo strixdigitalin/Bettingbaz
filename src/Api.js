@@ -97,6 +97,31 @@ const matchByCompetition = async (id, successCallback) => {
     });
 };
 
+export const betbySingleMatc = async (params, successCallBack) => {
+  const options = {
+    method: "GET",
+    url: "https://betfair-sportsbook.p.rapidapi.com/markets-by-match",
+    params: {
+      matchid: `/sport/${params.game}/${params.legue}/${params.teams}/${params.id}`,
+      lang: "en",
+    },
+    headers: {
+      "X-RapidAPI-Key": "290fd5be0fmsh6cbd06c612060b1p174658jsn61b406721b77",
+      "X-RapidAPI-Host": "betfair-sportsbook.p.rapidapi.com",
+    },
+  };
+
+  axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data);
+      successCallBack(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+};
+
 API.getInPlay = getInPlay;
 API.competitionBySports = competitionBySports;
 API.matchByCompetition = matchByCompetition;

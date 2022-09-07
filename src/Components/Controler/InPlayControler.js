@@ -4,8 +4,20 @@ import moveRight from "../../Assets/Card/Path 3.png";
 import movedown from "../../Assets/Card/Path2.png";
 import inPlay from "../../Assets/Card/In Play.png";
 import BetMark from "../../Assets/Card/Bet Mark.png";
+import { useDispatch, useSelector } from "react-redux";
+import { placeBid, showModal } from "../../Redux/Reducers/PlaceBid";
 
 const InPlaySingleGame = ({ item }) => {
+  const PlaceBid = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  // --------------
+  const openBidModal = (modalData) => {
+    // alert("clicked");
+    dispatch(showModal({ ...modalData, show: true, matchId: item.id }));
+  };
+
+  console.log(PlaceBid);
   const [handleContent, setHandleContent] = useState(true);
   const firstOdd = item?.odds["1"];
   const second = item?.odds["2"];
@@ -48,11 +60,31 @@ const InPlaySingleGame = ({ item }) => {
           </div>
           <div className="card-today-wrap-right">
             <div className="card-today-right">
-              <div className="singleRightrow">{firstOdd}</div>
+              <div
+                className="singleRightrow"
+                onClick={() =>
+                  openBidModal({
+                    odds: firstOdd,
+                    team: item.team1.name,
+                  })
+                }
+              >
+                {firstOdd}
+              </div>
             </div>
 
             <div className="card-today-right">
-              <div className="singleRightrow">{second}</div>
+              <div
+                className="singleRightrow"
+                onClick={() =>
+                  openBidModal({
+                    odds: second,
+                    team: item.team2.name,
+                  })
+                }
+              >
+                {second}
+              </div>
             </div>
           </div>
         </div>

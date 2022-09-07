@@ -1,16 +1,25 @@
 import React from "react";
 import moveLect from "../Assets/Card/Path -1.png";
 import moveRight from "../Assets/Card/Path 3.png";
-import Football from "../Assets/Header/Football icon.png";
-import Cricket from "../Assets/Header/Cricket ball icon.png";
-import tableTenis from "../Assets/Header/table tenis icon.png";
-import tenis from "../Assets/Card/tenis ball icon.png";
+import Football from "../Assets/gameicon/football.png";
+import australianRule from "../Assets/gameicon/australian-rules.png";
+import americalFootball from "../Assets/gameicon/american-football.png";
+import Baseball from "../Assets/gameicon/Baseball.png";
+import basketball from "../Assets/gameicon/basketball.png";
+import boxing from "../Assets/gameicon/boxing.png";
+import Cricket from "../Assets/gameicon/Cricket.png";
+// import tableTenis from "../Assets/Header/table tenis icon.png";
+import tenis from "../Assets/gameicon/tennis.png";
 
 const gameList = [
   { name: "cricket", icon: Cricket },
   { name: "football", icon: Football },
-  { name: "Table tenis", icon: tableTenis },
   { name: "Tenis", icon: tenis },
+  { name: "australian-rules", icon: australianRule },
+  { name: "americal-football", icon: americalFootball },
+  { name: "Baseball", icon: Baseball },
+  { name: "Basketball", icon: basketball },
+  { name: "Boxing", icon: boxing },
 ];
 
 export function CardHead({

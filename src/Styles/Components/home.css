@@ -17,3 +17,34 @@
     flex-direction: column;
     gap: 20px;
 }
+
+
+@media screen and (max-width: 1200px) {
+    .home-body{
+        width: 95%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .home-body{
+        width: 95%;
+    }
+    .home-middle{
+        width: 100%;
+    }   
+   }
+@media screen and (max-width:768px) {
+    .mobile-bottom{
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        color: white;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    
+        height: 3.5rem;
+        background-color: black
+    }
+    
+}

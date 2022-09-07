@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import logo from "../../Assets/Header/logo.png";
-import cricket from "../../Assets/Header/Cricket ball icon.png";
-import football from "../../Assets/Header/Football icon.png";
+import cricket from "../../Assets/gameicon/Cricket.png";
+import football from "../../Assets/gameicon/football.png";
 import inPlay from "../../Assets/Header/In Play.png";
-import tableTennis from "../../Assets/Header/table tenis icon.png";
-import tenisBall from "../../Assets/Header/tenis ball icon.png";
+import tenisBall from "../../Assets/gameicon/tennis.png";
 import { Link, BrowserRouter as Router } from "react-router-dom";
+import { login } from "../../ClientApi/Auth";
+
+import menu from "../../Assets/menu.png";
 function Header() {
   const [selectedTab, setSelectedTab] = useState(1);
-
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
   const headerItems = [
     {
       name: "Sports",
@@ -23,22 +25,48 @@ function Header() {
       index: 3,
     },
   ];
-  const buttons = [{ name: "Log In" }, { name: "Sign Up" }];
+
+  const handleSubmit = () => {
+    console.log(loginData);
+    login(loginData, (res) => {
+      console.log(res);
+      if (res.user) {
+        alert("success");
+        localStorage.setItem(
+          "betting_user",
+          JSON.stringify({ ...res.user, bearer: res["bearer-token"] })
+        );
+      } else {
+        alert("fail");
+      }
+    });
+  };
+  const buttons = [
+    { name: "Log In", onClick: handleSubmit },
+    { name: "Sign Up" },
+  ];
   const bottomItems = [
     { name: "In Play", icon: inPlay, width: "25px", height: "25px" },
     { name: "Football", icon: football, width: "25px", height: "25px" },
     { name: "Cricket", icon: cricket, width: "30px", height: "30px" },
     { name: "Tenis", icon: tenisBall, width: "30px", height: "30px" },
-    { name: "Table Tennis", icon: tableTennis, width: "40px", height: "40px" },
+    // { name: "Table Tennis", icon: tableTennis, width: "40px", height: "40px" },
   ];
   const Inputs = [
     {
-      name: "Email",
+      label: "Email",
+      name: "email",
     },
     {
-      name: "Password",
+      label: "Password",
+      name: "password",
     },
   ];
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData({ ...loginData, [name]: value });
+  };
 
   return (
     <div>
@@ -71,15 +99,25 @@ function Header() {
             {Inputs.map((item) => {
               return (
                 <div>
-                  {item.name}
-                  <input className="input-header" />
+                  {/* {item.name} */}
+                  <input
+                    className="input-header"
+                    name={item.name}
+                    placeholder={item.label}
+                    onChange={(e) => handleChange(e)}
+                  />
                 </div>
               );
             })}
             {buttons.map((item, key) => (
-              <button className="singlebutton">{item.name}</button>
+              <button className="singlebutton" onClick={item.onClick}>
+                {item.name}
+              </button>
             ))}{" "}
             <div></div>
+          </div>
+          <div className="breadcrum">
+            <img src={menu} height="40px" width="40px" />
           </div>
         </div>
 

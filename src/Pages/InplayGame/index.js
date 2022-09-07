@@ -7,6 +7,7 @@ import { InPlayCard } from "../../Components/InplayCard";
 import PageCover from "../../Components/PageCover";
 import InPlayGame from "./InplayGame";
 
+
 function InPlayIndex() {
   // useEffect(() => {
   //   API.get("cricket", (res) => console.log(res));

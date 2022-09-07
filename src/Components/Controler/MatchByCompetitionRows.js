@@ -4,6 +4,7 @@ import moveRight from "../../Assets/Card/Path 3.png";
 import movedown from "../../Assets/Card/Path2.png";
 import inPlay from "../../Assets/Card/In Play.png";
 import BetMark from "../../Assets/Card/Bet Mark.png";
+import { Link } from "react-router-dom";
 
 function MatchByCompetitionRows({
   item = {
@@ -40,34 +41,44 @@ function MatchByCompetitionRows({
       {/* ----- single row */}
 
       {handleContent && (
-        <div className="card-today-row  align-ctr">
-          <div className=" flex-row align-ctr in-play-row-left">
-            {" "}
-            <span>Date</span>
+        <Link
+          to={`/match-single${item.id}`}
+          className=""
+          style={{ textDecoration: "none" }}
+        >
+          <div className="card-today-row  align-ctr">
             <div
-              style={{ color: "black", marginLeft: "25px" }}
-              className="row-left flex-row just-bet  align-ctr w100"
+              className=" flex-row align-ctr in-play-row-left"
+              style={{ textDecoration: "none" }}
             >
-              <div>{item.start_datetime}</div>
-              {/* <div className="flex-row just-center align-ctr">
+              {" "}
+              <span style={{ textDecoration: "none" }}>Date</span>
+              <div
+                style={{ color: "black", marginLeft: "25px" }}
+                className="row-left flex-row just-bet  align-ctr w100"
+              >
+                <div>{item.start_datetime}</div>
+                {/* <div className="flex-row just-center align-ctr">
                 <img src={inPlay} width="30px" />
                 <img src={BetMark} width="30px" />
               </div> */}
-            </div>
-          </div>
-          <div className="card-today-wrap-right">
-            <div className="card-today-right">
-              <div className="singleRightrow">{firstOdd}</div>
+              </div>
             </div>
 
-            <div className="card-today-right">
-              <div className="singleRightrow">{draw}</div>
-            </div>
-            <div className="card-today-right">
-              <div className="singleRightrow">{second}</div>
+            <div className="card-today-wrap-right">
+              <div className="card-today-right">
+                <div className="singleRightrow">{firstOdd}</div>
+              </div>
+
+              <div className="card-today-right">
+                <div className="singleRightrow">{draw}</div>
+              </div>
+              <div className="card-today-right">
+                <div className="singleRightrow">{second}</div>
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
       )}
     </>
   );

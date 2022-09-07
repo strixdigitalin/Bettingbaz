@@ -3,7 +3,9 @@
     gap: 3%;
     
 }   
-
+.breadcrum{
+    display: none;
+}
 .onetab{
     width: 80px;
     text-align: center;
@@ -45,13 +47,14 @@ gap: 5%;
 .singlebutton{
     background-color: #F97D09;
     padding: 8px 10px;
-    width: 80px;
+    width: 158px;
     border-radius: 5px;
     height: 40px;
     color: white;
 }
 
 /* ------------------------ */
+
 
 
 .bottom-header{
@@ -67,13 +70,24 @@ align-items: center;
     display: flex;
     align-items: center;
     gap: 10%;
-    width: 150px;
+    width: 170px;
     text-align: center;
 }
 
 .input-header{
+
     width: 150px;
     height: 40px;
     border-radius: 10px;
+    padding: 2px 4px;
 
+}
+
+@media screen and (max-width:768px) {
+    .header-buttons{
+        display: none;
+    }
+    .breadcrum{
+        display: block;
+    }
 }

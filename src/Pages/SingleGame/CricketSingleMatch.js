@@ -1,16 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageCover from "../../Components/PageCover";
 import india from "../../Assets/Card/india.png";
 import pakistan from "../../Assets/Card/pakistan.png";
 import bat from "../../Assets/Card/bat.png";
 import ball from "../../Assets/Card/Cricket ball icon.png";
 import movedown from "../../Assets/Card/Path2.png";
+import { useParams } from "react-router-dom";
+import { betbySingleMatc } from "../../Api";
+import { useDispatch } from "react-redux";
+import { showModal } from "../../Redux/Reducers/PlaceBid";
 
 export default function CricketSingleMatch() {
   return <PageCover component={<CricketSingle />} />;
 }
 
 const CricketSingle = ({ name = "India - Pakistan" }) => {
+  const dispatch = useDispatch();
+
+  const params = useParams();
+  const [matchData, setMatchData] = useState([]);
+  console.log(params, "<<<<params");
+  useEffect(() => {
+    betbySingleMatc(params, (res) => {
+      console.log(res);
+      setMatchData(res);
+    });
+  }, []);
+
+  const placeBid = (item) => {
+    console.log(">>>", item);
+    dispatch(
+      showModal({
+        show: true,
+        matchId: `/sport/${params.game}/${params.legue}/${params.teams}/${params.id}`,
+        team: name,
+        odds: item.odds,
+      })
+    );
+  };
+
   return (
     <div style={{ width: "60%" }}>
       <div className="single-top-head">{name}</div>
@@ -29,7 +57,6 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
           <img src={ball} width="60px" height="60px" />
         </div>
       </div>
-
       {/* -----------------------------
       <div className="flex-row just-bet scoreData">
         <div className="flex-col align-ctr just-bet playerScore">
@@ -45,26 +72,29 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
         </div>
         <div className="flex-row just-bet"></div>
       </div> */}
-
       {/* ----------------- */}
-
-      {[1, 2, 3, 4].map((item) => {
+      {matchData.map((item) => {
         return (
           <div style={{ marginTop: "20px" }}>
             <div className="card-today" style={{ backgroundColor: "#EAEAEA" }}>
               <div>
                 <img src={movedown} width="15px" />
-                <span style={{ marginLeft: "15px" }}>
-                  First Ball Of Match
-                </span>{" "}
+                <span style={{ marginLeft: "15px" }}>{item?.name}</span>{" "}
                 {/* <span className="cardTeam"> englend</span> */}
               </div>
             </div>
-            {[1, 2, 3, 4, 5].map((item) => {
+            {item?.values.map((inItem) => {
               return (
                 <div className="flex-row just-bet w100 cricket-data-table">
-                  <div className="cricket-heighlight-row-left"> Team 1</div>{" "}
-                  <div className="heighlight-row-right">1.83 </div>{" "}
+                  <div className="cricket-heighlight-row-left">
+                    {inItem.val1}
+                  </div>{" "}
+                  <div
+                    className="heighlight-row-right"
+                    onClick={() => placeBid({ ...item, odds: inItem.odds })}
+                  >
+                    {inItem.odds}{" "}
+                  </div>{" "}
                 </div>
               );
             })}

@@ -16,6 +16,7 @@ import InPlaySingleGame from "./Controler/InPlayControler";
 import { Link } from "react-router-dom";
 import CustomLoader from "./CustomLoader";
 import NoDataFound from "./NoDataFound";
+import { useDispatch, useSelector } from "react-redux";
 
 export function InPlayCard({
   heading = "heading",
@@ -25,6 +26,11 @@ export function InPlayCard({
   team = "team",
   show,
 }) {
+  const { PlaceBid } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  console.log(PlaceBid);
+
   // -------------------states
   const [InPlayGames, setInPlayGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState("cricket");
@@ -47,7 +53,7 @@ export function InPlayCard({
     <div>
       <CardHead
         heading="In Play"
-        rightText="right text"
+        rightText=""
         navigation={false}
         icon={inPlay}
       />

@@ -41,7 +41,7 @@ export function SingleGameCard({
     <div>
       <CardHead
         heading={heading}
-        rightText="right text"
+        rightText=""
         navigation={false}
         icon={Football}
       />
@@ -77,14 +77,14 @@ export function SingleGameCard({
         show == "all" &&
         singleGame.map((item, key) => {
           return (
-            <div
-              className="card-today-row  align-ctr"
-              style={{ cursor: "pointer" }}
-            >
-              <div className=" flex-row align-ctr card-today-left-row">
-                {" "}
-                <span>{key + 1}</span>
-                <Link to={`/match-by-competition${item.id}`}>
+            <Link to={`/match-by-competition${item.id}`} className="hoverRow">
+              <div
+                className="card-today-row  align-ctr"
+                style={{ cursor: "pointer", height: "100%" }}
+              >
+                <div className=" flex-row align-ctr card-today-left-row">
+                  {" "}
+                  <span>{key + 1}</span>
                   <div
                     style={{ color: "black", marginLeft: "25px" }}
                     className="row-left flex-row just-bet w100 align-ctr"
@@ -95,18 +95,18 @@ export function SingleGameCard({
                   <img src={BetMark} width="30px" />
                 </div> */}
                   </div>
-                </Link>
-              </div>
-              <div className="card-today-wrap-right">
-                <div className="card-today-right" style={{ width: "100%" }}>
-                  <div className="singleRightrow col-70">{item?.name}</div>
                 </div>
+                <div className="card-today-wrap-right">
+                  <div className="card-today-right" style={{ width: "100%" }}>
+                    <div className="singleRightrow col-70">{item?.name}</div>
+                  </div>
 
-                {/* <div className="card-today-right">
+                  {/* <div className="card-today-right">
                 <div className="singleRightrow">Home</div>
               </div> */}
+                </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       {showIt &&
