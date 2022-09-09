@@ -69,6 +69,7 @@ align-items: center;
     border-right: 1px solid #707070;
     display: flex;
     align-items: center;
+    color: white;
     gap: 10%;
     width: 170px;
     text-align: center;
@@ -90,4 +91,39 @@ align-items: center;
     .breadcrum{
         display: block;
     }
+}
+
+.logged-in-buttons{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+.loggedInButton{
+    width:150px;
+    padding: 5px 10px;
+border-radius: 10px;
+display: flex;
+justify-content: space-between;
+position: relative;
+align-items: center;
+}
+
+.walletDropDown{
+    position: absolute;
+    width: 150px;
+background-color: rgb(207, 207, 207);
+/* padding: 10px; */
+border-radius: 5px;
+gap: 2%;
+/* bottom: 0px; */
+top:100px;
+color: black;
+
+}
+.wallet-single{
+    border-bottom: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+    gap: 6%;
 }

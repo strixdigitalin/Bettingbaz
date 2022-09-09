@@ -37,3 +37,66 @@ export const PlaceBetApi = async (item, successCallback) => {
       successCallback({ status: false, msg: "Unable to place bid" });
     });
 };
+
+export const getUserDetail = async (successCallback) => {
+  // WARNING: For POST requests, body is set to null by browsers.
+  var myHeaders = new Headers();
+  const user = localStorage.getItem("betting_user");
+  const userData = JSON.parse(user);
+  const token = userData.usertoken;
+  const { bearer } = userData;
+
+  myHeaders.append("Authorization", "Bearer " + bearer);
+  var formdata = new FormData();
+  formdata.append("token", token);
+
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: formdata,
+    redirect: "follow",
+  };
+
+  fetch(
+    "https://client.drazs.com/backend/public/api/getUser?user_type=user",
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => {
+      const data = JSON.parse(result);
+      console.log(data, "<<<<user details");
+      successCallback(data);
+    })
+    .catch((error) => console.log("error", error));
+};
+
+export const changePasswordApi = async (password, successCallback) => {
+  const user = localStorage.getItem("betting_user");
+  const userData = JSON.parse(user);
+  const token = userData.usertoken;
+  console.log(userData, "<<<user");
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer " + userData.bearer);
+
+  var formdata = new FormData();
+  console.log(userData.usertoken, userData.email, password, userData.bearer);
+  formdata.append("token", userData.usertoken);
+  formdata.append("email", userData.email);
+  formdata.append("password", password);
+  formdata.append("user_type", "user");
+
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: formdata,
+    redirect: "follow",
+  };
+
+  fetch(
+    "https://client.drazs.com/backend/public/api/updateUser",
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => successCallback(result))
+    .catch((error) => console.log("error", error));
+};

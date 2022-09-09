@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -6,9 +6,15 @@ import QuickLinks from "../Components/QuickLinks";
 import { showSigninModal } from "../Redux/Reducers/SigninModal";
 
 function PageCover({ component }) {
+  const [userLoggedIn, setUserLoggedIn] = useState({});
   const dispatch = useDispatch();
   const openSigninModal = () => {
+    const user = localStorage.getItem("betting_user");
+    // if (user != null || user != "") {
     dispatch(showSigninModal(true));
+    // } else {
+    // alert("Log in to place bid");
+    // }
   };
   return (
     <div style={{ backgroundColor: "#C7C7C7" }}>

@@ -29,14 +29,20 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
 
   const placeBid = (item) => {
     console.log(">>>", item);
-    dispatch(
-      showModal({
-        show: true,
-        matchId: `/sport/${params.game}/${params.legue}/${params.teams}/${params.id}`,
-        team: name,
-        odds: item.odds,
-      })
-    );
+    const user = localStorage.getItem("betting_user");
+    if (user == null || user == "null") {
+      alert("Log in to place bid");
+    } else {
+      console.log(user, "<<<user");
+      dispatch(
+        showModal({
+          show: true,
+          matchId: `/sport/${params.game}/${params.legue}/${params.teams}/${params.id}`,
+          team: name,
+          odds: item.odds,
+        })
+      );
+    }
   };
 
   return (
@@ -90,7 +96,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                     {inItem.val1}
                   </div>{" "}
                   <div
-                    className="heighlight-row-right"
+                    className="heighlight-row-right pointer"
                     onClick={() => placeBid({ ...item, odds: inItem.odds })}
                   >
                     {inItem.odds}{" "}

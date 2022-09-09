@@ -14,7 +14,13 @@ const InPlaySingleGame = ({ item }) => {
   // --------------
   const openBidModal = (modalData) => {
     // alert("clicked");
-    dispatch(showModal({ ...modalData, show: true, matchId: item.id }));
+    const user = localStorage.getItem("betting_user");
+    if (user != null || user != "") {
+      // dispatch(showSigninModal(true));
+      dispatch(showModal({ ...modalData, show: true, matchId: item.id }));
+    } else {
+      alert("Log in to place bid");
+    }
   };
 
   console.log(PlaceBid);

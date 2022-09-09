@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import Home from "./Pages/Home/Index";
 import Header from "./Components/Header";
@@ -17,7 +17,9 @@ import "./Styles/Components/single.css";
 import "./Styles/Components/modal.css";
 import "./Styles/Components/cricketSingleMatch.css";
 import "./Styles/Components/signinmodal.css";
+import "./Styles/Components/mybet.css";
 import { SingleGameCard } from "./Components/Heighlights";
+
 import SingleGame from "./Pages/SingleGame";
 import CricketSingleMatch from "./Pages/SingleGame/CricketSingleMatch";
 import InPlaySingleGame from "./Components/Controler/InPlayControler";
@@ -28,16 +30,24 @@ import MatchByCompetitionIndex from "./Pages/MatchByCompetition";
 import CompetitionByGame from "./Pages/CompetitionByGame";
 import { useSelector } from "react-redux";
 import PlaceBidModal from "./Modals/PlaceBidModal";
+import ResetPasswordModal from "./Modals/ResetPasswordModal";
 import SignIn from "./Modals/SignIn";
+import MyBet from "./Pages/MyBet";
+import ResetPassword from "./Redux/Reducers/ResetPassword.js";
 
 function App() {
-  const { PlaceBid, SignInState } = useSelector((state) => state);
-  console.log(PlaceBid, SignInState, "<<<< Place Bid");
+  const { PlaceBid, SignInState, ResetPassword } = useSelector(
+    (state) => state
+  );
+  console.log(PlaceBid, ResetPassword, "<<<< Place Bid");
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
         <Routes>
+          {/* <Route path="/" > */}
+          {/* </Route> */}
+          <Route path="/" element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/game" element={<SingleGame />}></Route>
           <Route path="/in-play" element={<InPlayGame />}></Route>
@@ -53,6 +63,7 @@ function App() {
             path="/match-single/sport/:game/:legue/:teams/:id"
             element={<CricketSingleMatch />}
           ></Route>
+          <Route path="my-bet" element={<MyBet />}></Route>
         </Routes>
       </BrowserRouter>
       {PlaceBid.show && (
@@ -65,6 +76,11 @@ function App() {
         <div className="modal-outer">
           {" "}
           <SignIn />
+        </div>
+      )}
+      {ResetPassword?.show && (
+        <div className="modal-outer">
+          <ResetPasswordModal />
         </div>
       )}
     </div>

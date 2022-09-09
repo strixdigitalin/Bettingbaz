@@ -80,7 +80,7 @@ export function SingleGameCard({
             <Link to={`/match-by-competition${item.id}`} className="hoverRow">
               <div
                 className="card-today-row  align-ctr"
-                style={{ cursor: "pointer", height: "100%" }}
+                style={{ cursor: "pointer", }}
               >
                 <div className=" flex-row align-ctr card-today-left-row">
                   {" "}
