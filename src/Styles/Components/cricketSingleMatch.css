@@ -50,4 +50,25 @@ margin-left: 50px;
     margin-left: 50px;
     display: flex;
     align-items: center;
+    width: 60%;
+    word-wrap: break-word;
+}
+.prem-fancy-cover{
+    display: flex;
+    margin-top: 20px;
+/* margin-bottom: -20px; */
+align-items: center ;
+text-align: center;
+}
+.prem-fancy{
+    background-color: white;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 30%;
+    padding: 10px;
+
 }

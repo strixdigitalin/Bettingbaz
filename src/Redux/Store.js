@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import LiveMatch from "./Reducers/LiveMatch";
 import PlaceBid from "./Reducers/PlaceBid";
 import ResetPassword from "./Reducers/ResetPassword.js";
 import SignIn from "./Reducers/SigninModal";
@@ -10,5 +11,6 @@ export default configureStore({
     SignInState: SignIn,
     WalletDropDown: WalletDropDown,
     ResetPassword: ResetPassword,
+    LiveMatch:LiveMatch
   },
 });

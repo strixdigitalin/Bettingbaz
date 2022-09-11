@@ -24,6 +24,7 @@ export function SingleGameCard({
   team = "team",
   sport,
   show = "all",
+  icon,
 }) {
   const [singleGame, setSingleGame] = useState([]);
   const [showLoader, setShowLoader] = useState(false);
@@ -35,16 +36,11 @@ export function SingleGameCard({
       setSingleGame(res);
       setShowLoader(false);
     });
-  }, []);
+  }, [sport]);
 
   return (
     <div>
-      <CardHead
-        heading={heading}
-        rightText=""
-        navigation={false}
-        icon={Football}
-      />
+      <CardHead heading={heading} rightText="" navigation={false} icon={icon} />
 
       {/* --------------------------------------------------------- sub heading card */}
       {/* 
@@ -80,7 +76,7 @@ export function SingleGameCard({
             <Link to={`/match-by-competition${item.id}`} className="hoverRow">
               <div
                 className="card-today-row  align-ctr"
-                style={{ cursor: "pointer", }}
+                style={{ cursor: "pointer" }}
               >
                 <div className=" flex-row align-ctr card-today-left-row">
                   {" "}

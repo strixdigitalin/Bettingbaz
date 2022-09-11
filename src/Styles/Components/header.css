@@ -60,10 +60,13 @@ gap: 5%;
 .bottom-header{
 display: flex;
 color: white;
-height: 52px;
-justify-content: center;
+height: 75px;
+/* justify-content: center; */
 align-items: center;
 /* gap: 5%; */
+padding: 0px 20px;
+font-size: 12px;
+overflow-x: scroll;
 }
 .bottom-single{
     border-right: 1px solid #707070;

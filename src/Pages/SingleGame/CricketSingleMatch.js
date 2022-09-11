@@ -5,6 +5,7 @@ import pakistan from "../../Assets/Card/pakistan.png";
 import bat from "../../Assets/Card/bat.png";
 import ball from "../../Assets/Card/Cricket ball icon.png";
 import movedown from "../../Assets/Card/Path2.png";
+import inPlay from "../../Assets/Header/In Play.png";
 import { useParams } from "react-router-dom";
 import { betbySingleMatc } from "../../Api";
 import { useDispatch } from "react-redux";
@@ -17,6 +18,7 @@ export default function CricketSingleMatch() {
 const CricketSingle = ({ name = "India - Pakistan" }) => {
   const dispatch = useDispatch();
 
+  const [premiumToggle, setPremiumToggle] = useState(false);
   const params = useParams();
   const [matchData, setMatchData] = useState([]);
   console.log(params, "<<<<params");
@@ -79,33 +81,119 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
         <div className="flex-row just-bet"></div>
       </div> */}
       {/* ----------------- */}
-      {matchData.map((item) => {
-        return (
-          <div style={{ marginTop: "20px" }}>
-            <div className="card-today" style={{ backgroundColor: "#EAEAEA" }}>
-              <div>
-                <img src={movedown} width="15px" />
-                <span style={{ marginLeft: "15px" }}>{item?.name}</span>{" "}
-                {/* <span className="cardTeam"> englend</span> */}
-              </div>
-            </div>
-            {item?.values.map((inItem) => {
-              return (
-                <div className="flex-row just-bet w100 cricket-data-table">
-                  <div className="cricket-heighlight-row-left">
-                    {inItem.val1}
-                  </div>{" "}
-                  <div
-                    className="heighlight-row-right pointer"
-                    onClick={() => placeBid({ ...item, odds: inItem.odds })}
-                  >
-                    {inItem.odds}{" "}
-                  </div>{" "}
-                </div>
-              );
-            })}
-          </div>
+      <div className="prem-fancy-cover">
+        <div
+          onClick={() => setPremiumToggle(false)}
+          className="prem-fancy pointer"
+          style={{
+            backgroundColor: !premiumToggle ? "#F97D09" : "white",
+            // color: "white",
+            color: !premiumToggle ? "white" : "black",
+          }}
+        >
+          <img src={inPlay} />
+          Fancy
+        </div>
+        <div
+          className="prem-fancy pointer"
+          onClick={() => setPremiumToggle(true)}
+          style={{
+            backgroundColor: premiumToggle ? "#F97D09" : "white",
+            color: premiumToggle ? "white" : "black",
+          }}
+        >
+          Premium
+        </div>
+      </div>
+      <div className="flex-row just-bet w100 cricket-data-table">
+        <div className="cricket-heighlight-row-left">Fancy Bet</div>{" "}
+        <div
+          style={{ color: "black" }}
+          className="heighlight-row-right pointer"
+          // onClick={() => placeBid({ ...item, odds: inItem.odds })}
+        >
+          Yes
+        </div>{" "}
+        <div
+          className="heighlight-row-right pointer"
+          style={{ color: "black" }}
+          // onClick={() => placeBid({ ...item, odds: inItem.odds })}
+        >
+          No
+        </div>{" "}
+      </div>
+
+      {matchData.map((item, index) => {
+        const checkIsNull = item.values.filter(
+          (item) => item.val2 != null && item.val2 != "null"
         );
+
+        if (index > 0 && checkIsNull.length > 0) {
+          return (
+            <div style={{ marginTop: "1px" }}>
+              {/* <div
+                className="card-today"
+                style={{ backgroundColor: "#EAEAEA" }}
+              >
+                <div>
+                  <img src={movedown} width="15px" />
+                  <span style={{ marginLeft: "15px" }}>{item?.name}</span>{" "}
+                </div>
+              </div> */}
+              {(() => {
+                if (premiumToggle == false) {
+                  // if (inItem.val2 == null || inItem.val2 == "null") return null;
+
+                  return (
+                    <div className="flex-row just-bet w100 cricket-data-table">
+                      <div className="cricket-heighlight-row-left">
+                        {item.name}
+                      </div>{" "}
+                      <div
+                        style={{ backgroundColor: "#F97D09", color: "white" }}
+                        className="heighlight-row-right pointer"
+                        // onClick={() => placeBid({ ...item, odds: inItem.odds })}
+                      >
+                        {item.values[0].val2.substring(1)} <br />
+                        {item.values[0].odds}{" "}
+                      </div>{" "}
+                      <div
+                        className="heighlight-row-right pointer"
+                        style={{ backgroundColor: "#064778", color: "white" }}
+                        // onClick={() => placeBid({ ...item, odds: inItem.odds })}
+                      >
+                        {item.values[1].val2.substring(1)} <br />
+                        {item.values[1].odds}{" "}
+                      </div>{" "}
+                    </div>
+                  );
+                }
+              })()}
+              {/* {premiumToggle == false &&
+                item?.values.map((inItem) => {
+                  if (inItem.val2 == null || inItem.val2 == "null") return null;
+
+             
+                })} */}
+              {/* {premiumToggle == true &&
+                item?.values.map((inItem) => {
+                  return (
+                    <div className="flex-row just-bet w100 cricket-data-table">
+                      <div className="cricket-heighlight-row-left">
+                        {inItem.val1}
+                      </div>{" "}
+                      <div
+                        className="heighlight-row-right pointer"
+                        onClick={() => placeBid({ ...item, odds: inItem.odds })}
+                      >
+                        {inItem.odds}{" "}
+                      </div>{" "}
+                    </div>
+                  );
+                })} */}
+            </div>
+          );
+        }
       })}
     </div>
   );

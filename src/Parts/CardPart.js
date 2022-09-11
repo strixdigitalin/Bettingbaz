@@ -10,13 +10,14 @@ import boxing from "../Assets/gameicon/boxing.png";
 import Cricket from "../Assets/gameicon/Cricket.png";
 // import tableTenis from "../Assets/Header/table tenis icon.png";
 import tenis from "../Assets/gameicon/tennis.png";
+import { allSports, fetchImage } from "../Components/Controler/ImageBySport";
 
 const gameList = [
   { name: "cricket", icon: Cricket },
   { name: "football", icon: Football },
-  { name: "Tenis", icon: tenis },
+  { name: "tenis", icon: tenis },
   { name: "australian-rules", icon: australianRule },
-  { name: "americal-football", icon: americalFootball },
+  { name: "american-football", icon: americalFootball },
   { name: "Baseball", icon: Baseball },
   { name: "Basketball", icon: basketball },
   { name: "Boxing", icon: boxing },
@@ -33,7 +34,7 @@ export function CardHead({
   return (
     <div className="card-head radiusTop">
       <div className="flex-row">
-        <img src={icon} />
+        <img src={icon} width="30px" height="30px" />
         <span style={{ marginLeft: "10px", fontSize: "20px" }}> {heading}</span>
       </div>
 
@@ -99,18 +100,18 @@ export const GameSlider = ({ selectedGame, changeGame }) => {
         <img src={moveLect} />
       </div>
       <div className="middle-games">
-        {[...gameList].map((item, key) => {
+        {allSports.map((item, key) => {
           return (
             <div
               className={`${
-                selectedGame == item.name ? "singleClick" : "singleGame"
+                selectedGame == item.sport ? "singleClick" : "singleGame"
               }`}
-              onClick={() => changeGame(item.name)}
+              onClick={() => changeGame(item.sport)}
             >
               <div>
-                <img src={item.icon} width="22px" height="22px" />
+                <img src={fetchImage(item.sport)} width="22px" height="22px" />
               </div>
-              <div className="textcenter">{item.name}</div>
+              <div className="textcenter">{item.sport}</div>
             </div>
           );
         })}

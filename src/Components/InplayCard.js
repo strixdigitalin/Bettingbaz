@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import CustomLoader from "./CustomLoader";
 import NoDataFound from "./NoDataFound";
 import { useDispatch, useSelector } from "react-redux";
+import { LiveMAtchList } from "../Redux/Reducers/LiveMatch";
 
 export function InPlayCard({
   heading = "heading",
@@ -28,20 +29,22 @@ export function InPlayCard({
 }) {
   const { PlaceBid } = useSelector((state) => state);
   const dispatch = useDispatch();
-
   console.log(PlaceBid);
 
   // -------------------states
   const [InPlayGames, setInPlayGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState("cricket");
   const [showLoader, setShowLoader] = useState(false);
+  const [liveGame, setLiveGame] = useState([]);
   // -----------use effects
   useEffect(() => {
     setShowLoader(true);
     API.getInPlay(selectedGame, (res) => {
       setInPlayGames(res);
       setShowLoader(false);
-      console.log(res.slice(0, 3));
+      const ThreeGame = res.slice(0, 3);
+      setLiveGame(ThreeGame.map((item) => item.id));
+      dispatch(LiveMAtchList(ThreeGame.map((item) => item.id)));
     });
   }, [selectedGame]);
 

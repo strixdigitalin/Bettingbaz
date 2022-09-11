@@ -17,7 +17,7 @@ function HomeMiddle() {
         <img src={banner} width="100%" />
       </div>
       <div className="home-display-card" style={{ marginTop: "20px" }}>
-        <Heighlights />
+        {/* <Heighlights /> */}
         <InPlayCard show="3" />
         <SingleGameListCover show={3} />
         {/* <SingleGameCard heading={"Football"} subTitle={"title"} team={"team"} /> */}
