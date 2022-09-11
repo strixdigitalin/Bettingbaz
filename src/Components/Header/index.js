@@ -264,9 +264,12 @@ function Header() {
 
         {/* ------------------bottom */}
         <div className="bottom-header bg2c ">
-          {allSports.map((item, key) => (
+          {allSports.slice(0, 4).map((item, key) => (
             <Link to={`/all-competition-by-sports/${item.sport}`}>
-              <div className="bottom-single">
+              <div
+                className="bottom-single"
+                style={{ borderLeft: "1px solid gray", paddingLeft: "10px" }}
+              >
                 <img src={item.icon} width="25px" height="25px" /> {item.sport}
               </div>
             </Link>

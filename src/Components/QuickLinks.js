@@ -1,12 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { leftLinkData } from "./Controler/ImageBySport";
 
-export default function QuickLinks({ heading = "title", items = [] }) {
+export default function QuickLinks({ heading = "title", data = leftLinkData }) {
   return (
     <div className="quick-link">
       <div className="quicklink-heading">{heading}</div>
       <div className="wrapContent-links">
-        {[1, 2, 3, 4].map((item) => {
-          return <div className="quicklink-item"> Daily Cricket MAtches</div>;
+        {data.map((item) => {
+          return (
+            <Link to={item.link}>
+              <div className="quicklink-item"> {item.name}</div>
+            </Link>
+          );
         })}
       </div>
     </div>

@@ -21,6 +21,21 @@ import volleyball from "../../Assets/gameicon/volleyball.png";
 import winterSports from "../../Assets/gameicon/winter-sports.png";
 import movedown from "../../Assets/Card/Path2.png";
 
+export const leftLinkData = [
+  { name: "In Play", link: "/in-play" },
+  { name: "Live Cricekt", link: "/all-competition-by-sports/cricket" },
+  { name: "Live Football", link: "/all-competition-by-sports/football" },
+  { name: "Live Tennis", link: "/all-competition-by-sports/tennis" },
+  { name: "Live Snooker", link: "/all-competition-by-sports/snooker" },
+];
+export const rightLinkData = [
+  { name: "Cricket Tournaments", link: "/all-competition-by-sports/cricket" },
+  { name: "Football Tournaments", link: "/all-competition-by-sports/football" },
+  { name: "Tennis Tournaments", link: "/all-competition-by-sports/tennis" },
+  // { name: "Tennis", link: "/all-competition-by-sports/tennis" },
+  // { name: "Live Snooker", link: "/all-competition-by-sports/snooker" },
+];
+
 const sports = [
   {
     sport: "cricket",
@@ -29,6 +44,14 @@ const sports = [
   {
     sport: "football",
     icon: football,
+  },
+  {
+    sport: "snooker",
+    icon: snooker,
+  },
+  {
+    sport: "tennis",
+    icon: tennis,
   },
   {
     sport: "american-football",
@@ -81,14 +104,7 @@ const sports = [
     sport: "rugby-league",
     icon: rugbyLeague,
   },
-  {
-    sport: "snooker",
-    icon: snooker,
-  },
-  {
-    sport: "tennis",
-    icon: tennis,
-  },
+
   {
     sport: "volleyball",
     icon: volleyball,

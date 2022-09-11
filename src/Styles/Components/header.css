@@ -61,7 +61,7 @@ gap: 5%;
 display: flex;
 color: white;
 height: 75px;
-/* justify-content: center; */
+justify-content: center;
 align-items: center;
 /* gap: 5%; */
 padding: 0px 20px;
@@ -69,7 +69,7 @@ font-size: 12px;
 overflow-x: scroll;
 }
 .bottom-single{
-    border-right: 1px solid #707070;
+    /* border-right: 1px solid #707070; */
     display: flex;
     align-items: center;
     color: white;

@@ -46,6 +46,11 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
       );
     }
   };
+  const calCulatePercentage = (base, value) => {
+    const temp = value / base;
+    console.log(temp, value, base, "<<<temp");
+    return (temp * 100).toFixed(2);
+  };
 
   return (
     <div style={{ width: "60%" }}>
@@ -105,23 +110,25 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
           Premium
         </div>
       </div>
-      <div className="flex-row just-bet w100 cricket-data-table">
-        <div className="cricket-heighlight-row-left">Fancy Bet</div>{" "}
-        <div
-          style={{ color: "black" }}
-          className="heighlight-row-right pointer"
-          // onClick={() => placeBid({ ...item, odds: inItem.odds })}
-        >
-          Yes
-        </div>{" "}
-        <div
-          className="heighlight-row-right pointer"
-          style={{ color: "black" }}
-          // onClick={() => placeBid({ ...item, odds: inItem.odds })}
-        >
-          No
-        </div>{" "}
-      </div>
+      {premiumToggle == false && (
+        <div className="flex-row just-bet w100 cricket-data-table">
+          <div className="cricket-heighlight-row-left">Fancy Bet</div>{" "}
+          <div
+            style={{ color: "black" }}
+            className="heighlight-row-right pointer"
+            // onClick={() => placeBid({ ...item, odds: inItem.odds })}
+          >
+            No
+          </div>{" "}
+          <div
+            className="heighlight-row-right pointer"
+            style={{ color: "black" }}
+            // onClick={() => placeBid({ ...item, odds: inItem.odds })}
+          >
+            Yes{" "}
+          </div>{" "}
+        </div>
+      )}
 
       {matchData.map((item, index) => {
         const checkIsNull = item.values.filter(
@@ -148,6 +155,8 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                     <div className="flex-row just-bet w100 cricket-data-table">
                       <div className="cricket-heighlight-row-left">
                         {item.name}
+                        <br />
+                        {item.values[0].val1}
                       </div>{" "}
                       <div
                         style={{ backgroundColor: "#F97D09", color: "white" }}
@@ -155,7 +164,11 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                         // onClick={() => placeBid({ ...item, odds: inItem.odds })}
                       >
                         {item.values[0].val2.substring(1)} <br />
-                        {item.values[0].odds}{" "}
+                        {/* {item.values[0].odds}{" "} */}
+                        {calCulatePercentage(
+                          matchData[0].values[0].odds,
+                          item.values[0].val2
+                        )}
                       </div>{" "}
                       <div
                         className="heighlight-row-right pointer"
@@ -163,7 +176,11 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                         // onClick={() => placeBid({ ...item, odds: inItem.odds })}
                       >
                         {item.values[1].val2.substring(1)} <br />
-                        {item.values[1].odds}{" "}
+                        {/* {item.values[1].odds}{" "} */}
+                        {calCulatePercentage(
+                          matchData[0].values[1].odds,
+                          item.values[1].val2
+                        )}
                       </div>{" "}
                     </div>
                   );
@@ -175,7 +192,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
 
              
                 })} */}
-              {/* {premiumToggle == true &&
+              {premiumToggle == true &&
                 item?.values.map((inItem) => {
                   return (
                     <div className="flex-row just-bet w100 cricket-data-table">
@@ -190,7 +207,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                       </div>{" "}
                     </div>
                   );
-                })} */}
+                })}
             </div>
           );
         }

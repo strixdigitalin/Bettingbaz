@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import QuickLinks from "../Components/QuickLinks";
 import { showSigninModal } from "../Redux/Reducers/SigninModal";
+import { leftLinkData, rightLinkData } from "./Controler/ImageBySport";
 
 function PageCover({ component }) {
   const [userLoggedIn, setUserLoggedIn] = useState({});
@@ -19,10 +20,18 @@ function PageCover({ component }) {
   return (
     <div style={{ backgroundColor: "#C7C7C7" }}>
       <div className="home-body">
-        <QuickLinks heading="Quick Links" item={[1, 2, 3]} />
+        <QuickLinks
+          heading="Quick Links"
+          item={[1, 2, 3]}
+          data={leftLinkData}
+        />
         {component}
 
-        <QuickLinks heading="Quick Links" item={[1, 2, 3]} />
+        <QuickLinks
+          heading="Quick Links"
+          item={[1, 2, 3]}
+          data={rightLinkData}
+        />
       </div>
       <div className="mobile-bottom">
         <Link to="/in-play">

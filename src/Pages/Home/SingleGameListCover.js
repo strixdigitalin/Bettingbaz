@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { betBysingleGameUsingId } from "../../Api";
 import { fetchImage } from "../../Components/Controler/ImageBySport";
 import { SingleGameCard } from "../../Components/Heighlights";
+import { CardHead } from "../../Parts/CardPart";
 
 function SingleGameListCover({ show }) {
   const { LiveMatch } = useSelector((state) => state);
@@ -16,7 +17,7 @@ function SingleGameListCover({ show }) {
       betBysingleGameUsingId(item, (res) => {
         console.log("Live match response data", res);
         liveData = [...liveData, res];
-        setLiveMatchData([...LiveMatchData, res]);
+        setLiveMatchData([...LiveMatchData]);
       });
     });
     console.log(liveData, "<<<<<< Live match odd data", LiveMatch.liveMatch);
@@ -49,11 +50,18 @@ function SingleGameListCover({ show }) {
   // };
   return (
     <>
-      {/* {LiveMatchData.map((item) => {
-        console.log("item", item);
+      {LiveMatchData.map((item) => {
+        console.log("Livematch", item);
         return item.map((inItem) => {
+          // console.log(inItem, "<<<< Livematch data");
           return (
             <div style={{ marginTop: "20px" }}>
+              <CardHead
+                heading={"Live"}
+                rightText=""
+                navigation={false}
+                icon={fetchImage("cricket")}
+              />
               <div
                 className="card-today"
                 style={{ backgroundColor: "#EAEAEA" }}
@@ -63,7 +71,7 @@ function SingleGameListCover({ show }) {
                   <span style={{ marginLeft: "15px" }}>
                     {inItem?.name}
                   </span>{" "}
-                  <span className="cardTeam"> englend</span>
+                  {/* <span className="cardTeam"> englend</span> */}
                 </div>
               </div>
 
@@ -85,7 +93,7 @@ function SingleGameListCover({ show }) {
             </div>
           );
         });
-      })} */}
+      })}
       {/* {LiveMatchData?.map((item, key) => {
         return (
           <SingleGameCard
