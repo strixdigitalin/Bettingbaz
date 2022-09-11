@@ -51,6 +51,7 @@ margin-left: 50px;
     display: flex;
     align-items: center;
     width: 60%;
+    font-size: 12px;
     word-wrap: break-word;
 }
 .prem-fancy-cover{

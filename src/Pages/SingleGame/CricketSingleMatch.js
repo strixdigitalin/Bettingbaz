@@ -11,6 +11,9 @@ import { betbySingleMatc } from "../../Api";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../Redux/Reducers/PlaceBid";
 
+const TOTAL_RUNS = "Runs";
+const WICKETS = "Wicket";
+
 export default function CricketSingleMatch() {
   return <PageCover component={<CricketSingle />} />;
 }
@@ -21,6 +24,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
   const [premiumToggle, setPremiumToggle] = useState(false);
   const params = useParams();
   const [matchData, setMatchData] = useState([]);
+  const [equalValue, setEqualValue] = useState(0);
   console.log(params, "<<<<params");
   useEffect(() => {
     betbySingleMatc(params, (res) => {
@@ -28,7 +32,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
       setMatchData(res);
     });
   }, []);
-
+  const { teams } = params;
   const placeBid = (item) => {
     console.log(">>>", item);
     const user = localStorage.getItem("betting_user");
@@ -46,10 +50,52 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
       );
     }
   };
-  const calCulatePercentage = (base, value) => {
-    const temp = value / base;
-    console.log(temp, value, base, "<<<temp");
+
+  useEffect(() => {
+    let equalPart = matchData.filter(
+      (item) =>
+        item.values[0].odds != null &&
+        item.values[1].odds != null &&
+        item.values[0].odds == item.values[1].odds
+    );
+    setEqualValue(equalPart[0]?.values[0].odds);
+    console.log(equalPart[0]?.values[0].odds, "<<<<this is equal part");
+  }, [matchData]);
+
+  const calCulatePercentage = (value) => {
+    // const temp = value / equalValue;
+    if (value == null) return 0;
+    const temp = value?.split(".")[1] / equalValue?.split(".")[1];
+    // console.log(temp, value.split(".")[1], base, "<<<temp");
     return (temp * 100).toFixed(2);
+  };
+  const replaceString = (name, values) => {
+    let a = name.replace(
+      "Team A",
+      ` ${teams.split("v")[0].toLocaleUpperCase()} `
+    );
+    let b = a.replace("Team B", ` ${teams.split("v")[1].toLocaleUpperCase()} `);
+    let c = b.replace("Batsman ", values[0].val1);
+    let d = c.replace("Under", " ");
+    let e = d.replace("-", " ");
+    let f = e.replace("Alternate", " ");
+    // let b = a.replace("Team B", ` ${teams.split("-")[1]} `);
+    return f;
+  };
+  const NumberCalculation = (name, value, operation) => {
+    const floatPart = value.split(".")[1];
+    const intPart = value.split(".")[0];
+    const matchTotalRuns = name.match(TOTAL_RUNS);
+    const matchWickets = name.match(WICKETS);
+
+    if (floatPart != null || floatPart != undefined) {
+      if (matchTotalRuns != null) {
+        if (operation == "-") return intPart;
+        else return +intPart + 1;
+      } else if (matchWickets != null) {
+        return +intPart + 1;
+      }
+    }
   };
 
   return (
@@ -154,33 +200,42 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                   return (
                     <div className="flex-row just-bet w100 cricket-data-table">
                       <div className="cricket-heighlight-row-left">
-                        {item.name}
+                        {/* {item.name.replace(" A ", ` ${teams.split("-")[0]} `)} */}
+                        {replaceString(item.name, item.values)}
                         <br />
-                        {item.values[0].val1}
+                        {/* {item.values[0].val1} */}
                       </div>{" "}
                       <div
                         style={{ backgroundColor: "#F97D09", color: "white" }}
                         className="heighlight-row-right pointer"
                         // onClick={() => placeBid({ ...item, odds: inItem.odds })}
                       >
-                        {item.values[0].val2.substring(1)} <br />
-                        {/* {item.values[0].odds}{" "} */}
-                        {calCulatePercentage(
-                          matchData[0].values[0].odds,
-                          item.values[0].val2
+                        {/* {item.values[0].val2.substring(1)} */}
+                        {NumberCalculation(
+                          item.name,
+                          item.values[0].val2.substring(1),
+                          "-"
                         )}
+
+                        <br />
+                        {/* {calCulatePercentage(item.values[0].val2)} */}
+                        {calCulatePercentage(item.values[0].odds)}
                       </div>{" "}
                       <div
                         className="heighlight-row-right pointer"
                         style={{ backgroundColor: "#064778", color: "white" }}
                         // onClick={() => placeBid({ ...item, odds: inItem.odds })}
                       >
-                        {item.values[1].val2.substring(1)} <br />
-                        {/* {item.values[1].odds}{" "} */}
-                        {calCulatePercentage(
-                          matchData[0].values[1].odds,
-                          item.values[1].val2
+                        {NumberCalculation(
+                          item.name,
+                          item.values[1].val2.substring(1),
+                          "+"
                         )}
+                        {/* {item.values[1].val2.substring(1)} */}
+                        <br />
+                        {/* {item.values[1].odds}{" "} */}
+                        {/* {calCulatePercentage(item.values[1].val2)} */}
+                        {calCulatePercentage(item.values[1].odds)}
                       </div>{" "}
                     </div>
                   );
