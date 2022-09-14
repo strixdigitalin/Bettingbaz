@@ -120,7 +120,7 @@ export function ShowLiveMatchCard({
             <div
               className="card-today-row  align-ctr"
               style={{ cursor: "pointer" }}
-            >
+            >  
               <div className=" flex-row align-ctr card-today-left-row">
                 {" "}
                 <span>{key + 1}</span>
