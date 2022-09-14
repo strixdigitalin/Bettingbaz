@@ -100,7 +100,7 @@ export const GameSlider = ({ selectedGame, changeGame }) => {
         <img src={moveLect} />
       </div>
       <div className="middle-games">
-        {allSports.map((item, key) => {
+        {allSports.slice(0, 10).map((item, key) => {
           return (
             <div
               className={`${

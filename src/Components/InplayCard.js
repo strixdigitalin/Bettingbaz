@@ -17,7 +17,10 @@ import { Link } from "react-router-dom";
 import CustomLoader from "./CustomLoader";
 import NoDataFound from "./NoDataFound";
 import { useDispatch, useSelector } from "react-redux";
-import { LiveMAtchList } from "../Redux/Reducers/LiveMatch";
+import {
+  CricketLiveMatchList,
+  LiveMAtchList,
+} from "../Redux/Reducers/LiveMatch";
 
 export function InPlayCard({
   heading = "heading",
@@ -39,14 +42,52 @@ export function InPlayCard({
   // -----------use effects
   useEffect(() => {
     setShowLoader(true);
+
     API.getInPlay(selectedGame, (res) => {
       setInPlayGames(res);
       setShowLoader(false);
-      const ThreeGame = res.slice(0, 3);
-      setLiveGame(ThreeGame.map((item) => item.id));
-      dispatch(LiveMAtchList(ThreeGame.map((item) => item.id)));
+      // const ThreeGame = res.slice(0, 3);
+      // const setThisToLiveGame = ThreeGame.map((item) => item.id);
+      // console.log(setThisToLiveGame, "<<<setthistolivegame");
+      // setLiveGame(ThreeGame.map((item) => item.id));
+      // dispatch(LiveMAtchList(ThreeGame.map((item) => item.id)));
     });
   }, [selectedGame]);
+
+  useEffect(() => {
+    console.log("cricket data live");
+    let allLive = [];
+    API.getInPlay("football", (res) => {
+      // setInPlayGames(res);
+      // setShowLoader(false);
+      const ThreeGame = res.slice(0, 3);
+      const setThisToLiveGame = ThreeGame.map((item) => item.id);
+      console.log(setThisToLiveGame, "<<<setthistolivegame");
+      setLiveGame(setThisToLiveGame);
+      dispatch(LiveMAtchList(setThisToLiveGame));
+      allLive = setThisToLiveGame;
+      // allLive = [...allLive, [...setThisToLiveGame]];
+    });
+
+    console.log(liveGame, "<<<<checkLive");
+  }, []);
+  useEffect(() => {
+    console.log("cricket data live");
+    let allLive = [];
+    API.getInPlay("football", (res) => {
+      // setInPlayGames(res);
+      // setShowLoader(false);
+      const ThreeGame = res.slice(0, 3);
+      const setThisToLiveGame = ThreeGame.map((item) => item.id);
+      console.log(setThisToLiveGame, "<<<setthistolivegame");
+      setLiveGame(setThisToLiveGame);
+      dispatch(CricketLiveMatchList(setThisToLiveGame));
+      allLive = setThisToLiveGame;
+      // allLive = [...allLive, [...setThisToLiveGame]];
+    });
+
+    console.log(liveGame, "<<<<checkLive");
+  }, []);
 
   //   ------ ONCLCICKS-----
   //   const onChangeGame = (game) => set;

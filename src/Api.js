@@ -122,6 +122,7 @@ export const betbySingleMatc = async (params, successCallBack) => {
     });
 };
 export const betBysingleGameUsingId = async (id, successCallBack) => {
+  console.log("api called to get live");
   const options = {
     method: "GET",
     url: "https://betfair-sportsbook.p.rapidapi.com/markets-by-match",
@@ -138,7 +139,7 @@ export const betBysingleGameUsingId = async (id, successCallBack) => {
   axios
     .request(options)
     .then(function (response) {
-      console.log(response.data,"<<<< match by id response");
+      console.log(response.data, "<<<< match by id response");
       successCallBack(response.data);
     })
     .catch(function (error) {

@@ -11,7 +11,7 @@ import darts from "../../Assets/gameicon/darts.png";
 import gaelicGames from "../../Assets/gameicon/gaelic-games.png";
 import handball from "../../Assets/gameicon/handball.png";
 import iceHockey from "../../Assets/gameicon/ice-hockey.png";
-import inPlayIcon from "../../Assets/gameicon/Inplay icon.png";
+import inPlayIcon from "../../Assets/Header/In Play.png";
 import mma from "../../Assets/gameicon/mma.png";
 import rugbyLeague from "../../Assets/gameicon/rugby-league.png";
 import rugbyUnion from "../../Assets/gameicon/rugby-union.png";
@@ -128,6 +128,7 @@ const sports = [
 ];
 export const fetchImage = (sport) => {
   {
+    if (sport == "in-play") return inPlayIcon;
     const currSport = sports.filter((item) => item.sport == sport);
     if (currSport.length) return currSport[0].icon;
     else return cricket;

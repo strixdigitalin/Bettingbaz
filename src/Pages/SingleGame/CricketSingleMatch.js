@@ -52,6 +52,9 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
   };
 
   useEffect(() => {
+    if(params.game!="cricket"){
+      
+    }
     let equalPart = matchData.filter(
       (item) =>
         item.values[0].odds != null &&
@@ -90,6 +93,9 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
 
     if (floatPart != null || floatPart != undefined) {
       if (matchTotalRuns != null) {
+        //  operation - then ---> if has point value then increase 1
+        //  operation + then ---> if has point value then remove point
+
         if (operation == "-") return intPart;
         else return +intPart + 1;
       } else if (matchWickets != null) {
@@ -133,18 +139,20 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
       </div> */}
       {/* ----------------- */}
       <div className="prem-fancy-cover">
-        <div
-          onClick={() => setPremiumToggle(false)}
-          className="prem-fancy pointer"
-          style={{
-            backgroundColor: !premiumToggle ? "#F97D09" : "white",
-            // color: "white",
-            color: !premiumToggle ? "white" : "black",
-          }}
-        >
-          <img src={inPlay} />
-          Fancy
-        </div>
+        {params.game == "cricket" && (
+          <div
+            onClick={() => setPremiumToggle(false)}
+            className="prem-fancy pointer"
+            style={{
+              backgroundColor: !premiumToggle ? "#F97D09" : "white",
+              // color: "white",
+              color: !premiumToggle ? "white" : "black",
+            }}
+          >
+            <img src={inPlay} />
+            Fancy
+          </div>
+        )}
         <div
           className="prem-fancy pointer"
           onClick={() => setPremiumToggle(true)}

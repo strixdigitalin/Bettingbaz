@@ -20,10 +20,10 @@ function HomeMiddle() {
         {/* <Heighlights /> */}
         <InPlayCard show="3" />
         <SingleGameListCover show={3} />
-        {/* <SingleGameCard heading={"Football"} subTitle={"title"} team={"team"} /> */}
+        
       </div>
     </div>
   );
 }
-
+{/* <SingleGameCard heading={"Football"} subTitle={"title"} team={"team"} /> */}
 export default HomeMiddle;

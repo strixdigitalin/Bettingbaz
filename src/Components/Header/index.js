@@ -19,7 +19,7 @@ import { getUserDetail } from "../../ClientApi/BetApi";
 import { useSelector, useDispatch } from "react-redux";
 import { openWallet } from "../../Redux/Reducers/WalletDropDown";
 import { showResetPasswordModal } from "../../Redux/Reducers/ResetPassword.js";
-import { allSports } from "../Controler/ImageBySport";
+import { allSports, fetchImage } from "../Controler/ImageBySport";
 
 export const betting_user = "betting_user";
 
@@ -264,6 +264,15 @@ function Header() {
 
         {/* ------------------bottom */}
         <div className="bottom-header bg2c ">
+          <Link to={`/in-play`}>
+            <div
+              className="bottom-single"
+              style={{ borderLeft: "1px solid gray", paddingLeft: "10px" }}
+            >
+              <img src={fetchImage("in-play")} width="25px" height="25px" /> In
+              Play
+            </div>
+          </Link>
           {allSports.slice(0, 4).map((item, key) => (
             <Link to={`/all-competition-by-sports/${item.sport}`}>
               <div
