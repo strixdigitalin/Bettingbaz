@@ -43,6 +43,7 @@ const InPlaySingleGame = ({ item }) => {
         <div className="card-today-right-in-play">
           <div className="singleRight">Home</div>
           <div className="singleRight">Away</div>
+          <div className="singleRight">Away</div>
         </div>
       </div>
 
@@ -65,7 +66,10 @@ const InPlaySingleGame = ({ item }) => {
             </div>
           </div>
           <div className="card-today-wrap-right">
-            <div className="card-today-right">
+            <div
+              className="card-today-right"
+              style={{ background: "#064778", color: "white" }}
+            >
               <div
                 className="singleRightrow"
                 onClick={() =>
@@ -79,7 +83,71 @@ const InPlaySingleGame = ({ item }) => {
               </div>
             </div>
 
-            <div className="card-today-right">
+            <div
+              className="card-today-right"
+              style={{
+                background: "#F98417",
+                color: "white ",
+              }}
+            >
+              <div
+                className="singleRightrow"
+                onClick={() =>
+                  openBidModal({
+                    odds: second,
+                    team: item.team2.name,
+                  })
+                }
+              >
+                {second}
+              </div>
+            </div>
+            <div
+              className="card-today-right"
+              style={{ background: "#064778", opacity: "0.5" }}
+            >
+              <div
+                className="singleRightrow"
+                onClick={() =>
+                  openBidModal({
+                    odds: second,
+                    team: item.team2.name,
+                  })
+                }
+              >
+                {second}
+              </div>
+            </div>
+            <div
+              className="card-today-right"
+              style={{ background: "#F98417", opacity: "0.5" }}
+            >
+              <div
+                className="singleRightrow"
+                onClick={() =>
+                  openBidModal({
+                    odds: second,
+                    team: item.team2.name,
+                  })
+                }
+              >
+                {second}
+              </div>
+            </div>
+            <div className="card-today-right" style={{ background: "#064778" }}>
+              <div
+                className="singleRightrow"
+                onClick={() =>
+                  openBidModal({
+                    odds: second,
+                    team: item.team2.name,
+                  })
+                }
+              >
+                {second}
+              </div>
+            </div>
+            <div className="card-today-right" style={{ background: "#F98417" }}>
               <div
                 className="singleRightrow"
                 onClick={() =>

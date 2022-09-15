@@ -95,7 +95,7 @@
     height: 30%;
     align-items: center;
     /* gap: 5%; */
-    width: 40%;
+    width: 60%;
     
 }
 .card-today-left-row{
@@ -155,7 +155,7 @@
     align-items: center;
 /* border-left: 1px solid #a9a9a9; */
     text-align: center;
-    width: 40%;
+    width: 60%;
     /* justify-content: ; */
     
 
@@ -380,6 +380,6 @@ border-bottom-right-radius: 10px;
 }
 
 .in-play-row-left{
-    width: 70%;
+    width: 40%;
 
 }
