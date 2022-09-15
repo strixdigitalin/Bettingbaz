@@ -152,7 +152,7 @@ export function ShowLiveMatchCard({
                       //   })
                       // }
                     >
-                      {sport[0].odds}
+                      {showOdds(sport[0].odds)}
                     </div>
                   </div>
 
@@ -172,7 +172,7 @@ export function ShowLiveMatchCard({
                       //   })
                       // }
                     >
-                      {+sport[0].odds + 1}
+                      {showOdds(sport[0].odds) + 0.1}
                       {/* {+firstOdd + 1} */}
                     </div>
                   </div>
@@ -189,7 +189,7 @@ export function ShowLiveMatchCard({
                       //   })
                       // }
                     >
-                      {sport[1].odds}
+                      {showOdds(sport[1].odds)}
                     </div>
                   </div>
                   <div
@@ -205,7 +205,7 @@ export function ShowLiveMatchCard({
                       //   })
                       // }
                     >
-                      {+sport[1].odds + 1}
+                      {showOdds(sport[1].odds) + 0.1}
 
                       {/* {second} */}
                     </div>
@@ -223,7 +223,7 @@ export function ShowLiveMatchCard({
                       //   })
                       // }
                     >
-                      {sport[2].odds}
+                      {showOdds(sport[2].odds)}
 
                       {/* {second} */}
                     </div>
@@ -242,7 +242,7 @@ export function ShowLiveMatchCard({
                       // }
                     >
                       {/* /                      {+second + 1} */}
-                      {+sport[2].odds + 1}
+                      {showOdds(sport[2].odds) + 0.1}
                     </div>
                   </div>
                 </div>
@@ -475,3 +475,5 @@ export function ShowLiveMatchCard({
 //     </div>
 //   );
 // };
+
+export const showOdds = (item) => parseFloat(parseFloat(item).toFixed(2));

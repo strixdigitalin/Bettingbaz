@@ -6,6 +6,7 @@ import inPlay from "../../Assets/Card/In Play.png";
 import BetMark from "../../Assets/Card/Bet Mark.png";
 import { useDispatch, useSelector } from "react-redux";
 import { placeBid, showModal } from "../../Redux/Reducers/PlaceBid";
+import { showOdds } from "../ShowLiveMatchCard";
 
 const InPlaySingleGame = ({ item }) => {
   const PlaceBid = useSelector((state) => state);
@@ -27,6 +28,7 @@ const InPlaySingleGame = ({ item }) => {
   const [handleContent, setHandleContent] = useState(true);
   const firstOdd = item?.odds["1"];
   const second = item?.odds["2"];
+
   return (
     <>
       <div className="card-today">
@@ -58,7 +60,7 @@ const InPlaySingleGame = ({ item }) => {
               style={{ color: "black", marginLeft: "25px" }}
               className="row-left flex-row just-bet  align-ctr w100"
             >
-              <div>Today</div>
+              <div>Todady</div>
               <div className="flex-row just-center align-ctr">
                 <img src={inPlay} width="30px" />
                 <img src={BetMark} width="30px" />
@@ -79,7 +81,7 @@ const InPlaySingleGame = ({ item }) => {
                   })
                 }
               >
-                {firstOdd}
+                {showOdds(firstOdd)}
               </div>
             </div>
 
@@ -99,7 +101,7 @@ const InPlaySingleGame = ({ item }) => {
                   })
                 }
               >
-                {+firstOdd + 1}
+                {showOdds(firstOdd) + 0.1}
               </div>
             </div>
             <div
@@ -115,7 +117,7 @@ const InPlaySingleGame = ({ item }) => {
                   })
                 }
               >
-                {firstOdd}
+                {showOdds(firstOdd)}
               </div>
             </div>
             <div
@@ -131,7 +133,7 @@ const InPlaySingleGame = ({ item }) => {
                   })
                 }
               >
-                {second}
+                {showOdds(second)}
               </div>
             </div>
             <div className="card-today-right" style={{ background: "#064778" }}>
@@ -144,7 +146,7 @@ const InPlaySingleGame = ({ item }) => {
                   })
                 }
               >
-                {second}
+                {showOdds(second)}
               </div>
             </div>
             <div className="card-today-right" style={{ background: "#F98417" }}>
@@ -152,12 +154,12 @@ const InPlaySingleGame = ({ item }) => {
                 className="singleRightrow"
                 onClick={() =>
                   openBidModal({
-                    odds: +second + 2,
+                    odds: second,
                     team: item.team2.name,
                   })
                 }
               >
-                {+second + 1}
+                {showOdds(second) + 0.1}
               </div>
             </div>
           </div>
