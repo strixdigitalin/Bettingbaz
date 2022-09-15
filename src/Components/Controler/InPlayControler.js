@@ -27,7 +27,7 @@ const InPlaySingleGame = ({ item }) => {
   console.log(PlaceBid);
   const [handleContent, setHandleContent] = useState(true);
   const firstOdd = item?.odds["1"];
-  console.log(item.odds,"<<<<inplaygameodd")
+  console.log(item.odds, "<<<<inplaygameodd");
   const second = item?.odds["2"];
 
   return (
@@ -102,7 +102,7 @@ const InPlaySingleGame = ({ item }) => {
                   })
                 }
               >
-                {showOdds(firstOdd) + 0.1}
+                {parseFloat(showOdds(firstOdd) + +0.1).toFixed(1)}
               </div>
             </div>
             <div
@@ -160,7 +160,7 @@ const InPlaySingleGame = ({ item }) => {
                   })
                 }
               >
-                {showOdds(second) + 0.1}
+                {parseFloat(showOdds(second) + +0.1).toFixed(1)}
               </div>
             </div>
           </div>
