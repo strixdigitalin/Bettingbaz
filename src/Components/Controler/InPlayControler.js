@@ -27,6 +27,7 @@ const InPlaySingleGame = ({ item }) => {
   console.log(PlaceBid);
   const [handleContent, setHandleContent] = useState(true);
   const firstOdd = item?.odds["1"];
+  console.log(item.odds,"<<<<inplaygameodd")
   const second = item?.odds["2"];
 
   return (

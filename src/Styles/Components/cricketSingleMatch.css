@@ -14,13 +14,32 @@
     
 }
 .scoreData {
-    background-color: #727272;
-    height: 56px;
+    background-color:  rgb(199, 199, 199);
+    
+    /* height: 56px; */
     display:flex;
     align-items: center;
-    color: white;
+    /* color: white; */
+    margin-top: 10px;
+    padding: 10px 0px;
+    /* border-radius: 1px solid black; */
+    /* border-top-left-radius: 10px; */
+    /* border-top-right-radius: 10px; */
+
+}
+.scoredata-team{
+ width: 60%;   
+ color: black;
+ 
+ border-top-left-radius: 10px;
+ border-top-right-radius: 10px;
+ /* padding:px 0px; */
+ /* padding-left: 15px; */
 }
 
+.text-center{
+    text-align: center;
+}
 .eaning-mid {
 width:50%;
 text-align: center;
@@ -34,9 +53,24 @@ text-align: center;
 }
 .playerScore{
 width: 22%;
-margin-left: 50px;
+display: flex;
+align-items: center;
+height: 100%;
+/* margin-left: 50px; */
+}
+.scoredata-team{
+    width: 60%;   
+    color: black;
+   }
+.score-data-single-team{
+    
+
+
 }
 
+.playerScore-odd{
+    width: 20%;
+}
 
 .cricket-data-table{
     height: 48px;

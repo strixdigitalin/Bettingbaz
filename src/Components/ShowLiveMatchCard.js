@@ -476,4 +476,5 @@ export function ShowLiveMatchCard({
 //   );
 // };
 
-export const showOdds = (item) => parseFloat(parseFloat(item).toFixed(2));
+export const showOdds = (item) =>
+  parseFloat(parseFloat(item).toFixed(2)).toFixed(1);

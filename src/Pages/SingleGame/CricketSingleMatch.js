@@ -52,8 +52,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
   };
 
   useEffect(() => {
-    if(params.game!="cricket"){
-      
+    if (params.game != "cricket") {
     }
     let equalPart = matchData.filter(
       (item) =>
@@ -122,8 +121,148 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
           <img src={ball} width="60px" height="60px" />
         </div>
       </div>
-      {/* -----------------------------
-      <div className="flex-row just-bet scoreData">
+      {/* ----------------------------- */}
+      <div
+        className="flex-row just-bet scoreData "
+        // style={{ background: "white" }}
+      >
+        <div
+          className="flex-col align-ctr just-bet playerScore scoredata-team"
+          style={{ background: "white" }}
+        >
+          <div
+            className="flex-row w100  score-data-single-team"
+            style={{ padding: "5px 10px" }}
+            // style={{ paddingLeft: "15px" }}
+          >
+            Asia Cup <span style={{ color: "#6E6E6E",marginLeft:"2px" }}> International</span>
+            {/* <div>(54)</div> */}
+          </div>
+          <div
+            className="flex-row  w100 score-data-single-team"
+            style={{
+              border: "1px solid #707070",
+              padding: "5px 10px",
+              color: "#6E6E6E",
+            }}
+          >
+            Team 1{/* <div>(54)</div> */}
+          </div>
+          <div
+            className="flex-row  w100 score-data-single-team"
+            style={{
+              border: "1px solid #707070",
+              padding: "5px 10px",
+              color: "#6E6E6E",
+            }}
+          >
+            Team 2{/* <div>(54)</div> */}
+          </div>
+          <br />
+        </div>
+        <div
+          className="flex-col align-ctr just-bet playerScore-odd"
+          style={{
+            background: "#064778",
+            borderTopRightRadius: "10px",
+            borderTopLeftRadius: "10px",
+          }}
+        >
+          <div
+            className="flex-row w100 just-ctr"
+            style={{ padding: "5px 0px", color: "wheat" }}
+          >
+            Back
+            {/* <div>(54)</div> */}
+          </div>
+          <div
+            className="flex-row w100 just-ctr"
+            style={{
+              border: "1px solid #707070",
+              padding: "5px 0px",
+              color: "wheat",
+            }}
+          >
+            5.1
+            {/* <div>(54)</div> */}
+          </div>
+
+          <div
+            className="flex-row w100 just-ctr"
+            style={{
+              border: "1px solid #707070",
+              padding: "5px 0px",
+              color: "wheat",
+            }}
+          >
+            5.2 {/* <div>(54)</div> */}
+          </div>
+          <br />
+        </div>
+        <div
+          className="flex-col align-ctr just-bet playerScore"
+          style={{
+            background: "#F97D09",
+            height: "100%",
+            borderTopRightRadius: "10px",
+            borderTopLeftRadius: "10px",
+          }}
+        >
+          <div
+            className="flex-row w100 text-center just-ctr"
+            style={{ padding: "5px 0px", color: "wheat" }}
+          >
+            Lay
+            {/* <div>(54)</div> */}
+          </div>
+          <div
+            className="flex-row w100 text-center just-ctr"
+            style={{
+              border: "1px solid #707070",
+              padding: "5px 0px",
+              color: "wheat",
+            }}
+          >
+            6.1 {/* <div>(54)</div> */}
+          </div>
+          <div
+            className="flex-row w100 just-ctr"
+            style={{
+              border: "1px solid #707070",
+              padding: "5px 0px",
+              color: "wheat",
+            }}
+          >
+            6.2
+            {/* <div>(54)</div> */}
+          </div>
+          <br />
+        </div>
+        {/* <div className="flex-row just-bet"></div> */}
+      </div>
+      {/* <div className="flex-row just-bet scoreData scoredata-team">
+        <div className="flex-col align-ctr just-bet playerScore">
+          <div className="flex-row just-bet w100">
+            <div>V Kohli</div>
+            <div>(54)</div>
+          </div>
+          <div className="flex-row just-bet w100">
+            <div>V Kohli</div>
+            <div>(54)</div>
+          </div>
+          <br />
+        </div>
+        <div className="flex-col align-ctr just-bet playerScore">
+          <div className="flex-row just-bet w100">
+            <div>V Kohli</div>
+            <div>(54)</div>
+          </div>
+          <div className="flex-row just-bet w100">
+            <div>V Kohli</div>
+            <div>(54)</div>
+          </div>
+          <br />
+        </div>
         <div className="flex-col align-ctr just-bet playerScore">
           <div className="flex-row just-bet w100">
             <div>V Kohli</div>
@@ -183,7 +322,6 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
           </div>{" "}
         </div>
       )}
-
       {matchData.map((item, index) => {
         const checkIsNull = item.values.filter(
           (item) => item.val2 != null && item.val2 != "null"
