@@ -41,9 +41,9 @@ const InPlaySingleGame = ({ item }) => {
           <span className="cardTeam"> {item?.competition_name}</span>
         </div>
         <div className="card-today-right-in-play">
-          <div className="singleRight">Home</div>
-          <div className="singleRight">Away</div>
-          <div className="singleRight">Away</div>
+          <div className="singleRight">1</div>
+          <div className="singleRight">X</div>
+          <div className="singleRight">2</div>
         </div>
       </div>
 
@@ -94,12 +94,12 @@ const InPlaySingleGame = ({ item }) => {
                 className="singleRightrow"
                 onClick={() =>
                   openBidModal({
-                    odds: second,
+                    odds: +firstOdd + 1,
                     team: item.team2.name,
                   })
                 }
               >
-                {second}
+                {+firstOdd + 1}
               </div>
             </div>
             <div
@@ -110,12 +110,12 @@ const InPlaySingleGame = ({ item }) => {
                 className="singleRightrow"
                 onClick={() =>
                   openBidModal({
-                    odds: second,
+                    odds: firstOdd,
                     team: item.team2.name,
                   })
                 }
               >
-                {second}
+                {firstOdd}
               </div>
             </div>
             <div
@@ -152,12 +152,12 @@ const InPlaySingleGame = ({ item }) => {
                 className="singleRightrow"
                 onClick={() =>
                   openBidModal({
-                    odds: second,
+                    odds: +second + 2,
                     team: item.team2.name,
                   })
                 }
               >
-                {second}
+                {+second + 1}
               </div>
             </div>
           </div>

@@ -37,6 +37,7 @@ export function ShowLiveMatchCard({
   //       setShowLoader(false);
   //     });
   //   }, [sport]);
+  console.log("sport", sport);
 
   return (
     <div>
@@ -46,35 +47,19 @@ export function ShowLiveMatchCard({
         navigation={false}
         icon={icon}
       />
-
       {/* --------------------------------------------------------- sub heading card */}
       {/* 
       <div className="card-subhead">
         <div>{subTitle}</div>{" "}
         <div className="cardTeam"> {singleGame?.name}s</div>
       </div> */}
-
       {/* ------------------------------------------------------- today section */}
-      <div className="card-today">
-        <div>
-          <img src={movedown} width="15px" onClick={() => setShowIt(!showIt)} />
-          <span style={{ color: "black", marginLeft: "30px" }}>
-            Win / Draw / Loose
-          </span>
-        </div>
-        <div className="card-today-right ">
-          <div className="singleRight">Odds</div>
-          {/* <div className="singleRight">Home</div> */}
-        </div>
-      </div>
 
       {/* ----- single row */}
-
       {/* {showLoader && <CustomLoader />}
       {!showLoader && !singleGame.length && (
         <NoDataFound selectedGame={heading} />
       )} */}
-
       {/* {showIt &&
         !showLoader &&
         show == "all" &&
@@ -112,43 +97,193 @@ export function ShowLiveMatchCard({
             </Link>
           );
         })} */}
-      {showIt &&
-        !showLoader &&
-        show != "all" &&
-        sport.map((item, key) => {
-          return (
-            <div
-              className="card-today-row  align-ctr"
-              style={{ cursor: "pointer" }}
-            >  
-              <div className=" flex-row align-ctr card-today-left-row">
-                {" "}
-                <span>{key + 1}</span>
-                <Link to={`/match-by-competition${item.id}`}>
+      <div className="card-today">
+        <div className="inplay-head-left">
+          <img
+            src={movedown}
+            style={{ cursor: "pointer" }}
+            width="15px"
+            // onClick={() => setHandleContent(!handleContent)}
+          />
+          <span style={{ marginLeft: "15px" }}>Team</span>{" "}
+          {/* <span className="cardTeam"> {item?.competition_name}</span> */}
+        </div>
+        <div className="card-today-right-in-play">
+          <div className="singleRight">1</div>
+          <div className="singleRight">X</div>
+          <div className="singleRight">2</div>
+        </div>
+      </div>
+      {
+        showIt && !showLoader && show != "all" && (
+          // sport.map((item, key) => {
+          //   console.log(item, "<<<item at live");
+          //   return (
+          <>
+            {true && (
+              <div className="card-today-row  align-ctr">
+                <div className=" flex-row align-ctr in-play-row-left">
+                  {" "}
+                  <span>15:330</span>
                   <div
                     style={{ color: "black", marginLeft: "25px" }}
-                    className="row-left flex-row just-bet w100 align-ctr"
+                    className="row-left flex-row just-bet  align-ctr w100"
                   >
-                    <div className="col-70">{item?.val1}</div>
-                    {/* <div className="flex-row just-center align-ctr">
-                  <img src={inPlay} width="30px" />
-                  <img src={BetMark} width="30px" />
-                </div> */}
+                    <div>
+                      {sport[0].val1} vs {sport[2].val1}
+                    </div>
+                    <div className="flex-row just-center align-ctr">
+                      <img src={inPlay} width="30px" />
+                      {/* <img src={BetMark} width="30px" /> */}
+                    </div>
                   </div>
-                </Link>
-              </div>
-              <div className="card-today-wrap-right">
-                <div className="card-today-right" style={{ width: "100%" }}>
-                  <div className="singleRightrow col-70">{item?.odds}</div>
                 </div>
+                <div className="card-today-wrap-right">
+                  <div
+                    className="card-today-right"
+                    style={{ background: "#064778", color: "white" }}
+                  >
+                    <div
+                      className="singleRightrow"
+                      // onClick={() =>
+                      //   openBidModal({
+                      //     odds: firstOdd,
+                      //     team: item.team1.name,
+                      //   })
+                      // }
+                    >
+                      {sport[0].odds}
+                    </div>
+                  </div>
 
-                {/* <div className="card-today-right">
-                <div className="singleRightrow">Home</div>
-              </div> */}
+                  <div
+                    className="card-today-right"
+                    style={{
+                      background: "#F98417",
+                      color: "white ",
+                    }}
+                  >
+                    <div
+                      className="singleRightrow"
+                      // onClick={() =>
+                      //   openBidModal({
+                      //     odds: +firstOdd + 1,
+                      //     team: item.team2.name,
+                      //   })
+                      // }
+                    >
+                      {+sport[0].odds + 1}
+                      {/* {+firstOdd + 1} */}
+                    </div>
+                  </div>
+                  <div
+                    className="card-today-right"
+                    style={{ background: "#064778", opacity: "0.5" }}
+                  >
+                    <div
+                      className="singleRightrow"
+                      // onClick={() =>
+                      //   openBidModal({
+                      //     odds: firstOdd,
+                      //     team: item.team2.name,
+                      //   })
+                      // }
+                    >
+                      {sport[1].odds}
+                    </div>
+                  </div>
+                  <div
+                    className="card-today-right"
+                    style={{ background: "#F98417", opacity: "0.5" }}
+                  >
+                    <div
+                      className="singleRightrow"
+                      // onClick={() =>
+                      //   openBidModal({
+                      //     odds: second,
+                      //     team: item.team2.name,
+                      //   })
+                      // }
+                    >
+                      {+sport[1].odds + 1}
+
+                      {/* {second} */}
+                    </div>
+                  </div>
+                  <div
+                    className="card-today-right"
+                    style={{ background: "#064778" }}
+                  >
+                    <div
+                      className="singleRightrow"
+                      // onClick={() =>
+                      //   openBidModal({
+                      //     odds: second,
+                      //     team: item.team2.name,
+                      //   })
+                      // }
+                    >
+                      {sport[2].odds}
+
+                      {/* {second} */}
+                    </div>
+                  </div>
+                  <div
+                    className="card-today-right"
+                    style={{ background: "#F98417" }}
+                  >
+                    <div
+                      className="singleRightrow"
+                      // onClick={() =>
+                      //   openBidModal({
+                      //     odds: +second + 2,
+                      //     team: item.team2.name,
+                      //   })
+                      // }
+                    >
+                      {/* /                      {+second + 1} */}
+                      {+sport[2].odds + 1}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            )}
+          </>
+        )
+        // );
+        // return (
+        //   <div
+        //     className="card-today-row  align-ctr"
+        //     style={{ cursor: "pointer" }}
+        //   >
+        //     <div className=" flex-row align-ctr card-today-left-row">
+        //       {" "}
+        //       <span>{key + 1}</span>
+        //       <Link to={`/match-by-competition${item.id}`}>
+        //         <div
+        //           style={{ color: "black", marginLeft: "25px" }}
+        //           className="row-left flex-row just-bet w100 align-ctr"
+        //         >
+        //           <div className="col-70">{item?.val1}</div>
+        //           {/* <div className="flex-row just-center align-ctr">
+        //         <img src={inPlay} width="30px" />
+        //         <img src={BetMark} width="30px" />
+        //       </div> */}
+        //         </div>
+        //       </Link>
+        //     </div>
+        //     <div className="card-today-wrap-right">
+        //       <div className="card-today-right" style={{ width: "100%" }}>
+        //         <div className="singleRightrow col-70">{item?.odds}</div>
+        //       </div>
+
+        //       {/* <div className="card-today-right">
+        //       <div className="singleRightrow">Home</div>
+        //     </div> */}
+        //     </div>
+        //   </div>
+        // );
+      }
 
       {show != "all" && (
         <div className="seemore linktag">
