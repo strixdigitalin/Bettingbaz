@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import moveLect from "../Assets/Card/Path -1.png";
 import moveRight from "../Assets/Card/Path 3.png";
 import Football from "../Assets/gameicon/football.png";
@@ -94,10 +94,18 @@ export function SingleHeighlighCardHead({
 }
 
 export const GameSlider = ({ selectedGame, changeGame }) => {
+  const slideLeft = useRef(null);
+
+  const onSlideLeft = () => {
+    // slideLeft.current.border = "5px solid red";
+    // document.getElementsByClassName("middle-games").style.border =
+    //   "5px solid red";
+  };
+
   return (
     <div className="flex-row just-between game-slide w100">
       <div className="navigator">
-        <img src={moveLect} />
+        <img src={moveLect} onClick={onSlideLeft} ref={slideLeft} />
       </div>
       <div className="middle-games">
         {allSports.slice(0, 10).map((item, key) => {

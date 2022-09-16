@@ -22,7 +22,7 @@ function HomeMiddle() {
     // alert("here");
     if (countBanner == 3) setCountBanner(0);
     else setCountBanner(countBanner + 1);
-  }, 5000);
+  }, 3000);
 
   return (
     <div className="home-middle">
