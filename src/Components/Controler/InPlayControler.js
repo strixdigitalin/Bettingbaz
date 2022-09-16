@@ -16,7 +16,7 @@ const InPlaySingleGame = ({ item }) => {
   const openBidModal = (modalData) => {
     // alert("clicked");
     const user = localStorage.getItem("betting_user");
-    if (user != null || user != "") {
+    if (user != null && user != "null" && user != "") {
       // dispatch(showSigninModal(true));
       dispatch(showModal({ ...modalData, show: true, matchId: item.id }));
     } else {
@@ -79,6 +79,7 @@ const InPlaySingleGame = ({ item }) => {
                   openBidModal({
                     odds: firstOdd,
                     team: item.team1.name,
+                    team_id: 1,
                   })
                 }
               >
@@ -97,12 +98,13 @@ const InPlaySingleGame = ({ item }) => {
                 className="singleRightrow"
                 onClick={() =>
                   openBidModal({
-                    odds: +firstOdd + 1,
+                    odds: parseFloat(firstOdd) + 1.0,
                     team: item.team2.name,
+                    team_id: 1,
                   })
                 }
               >
-                {parseFloat(showOdds(firstOdd) + +0.1).toFixed(1)}
+                {parseFloat(parseFloat(showOdds(firstOdd)) + +0.1).toFixed(1)}
               </div>
             </div>
             <div
@@ -114,7 +116,8 @@ const InPlaySingleGame = ({ item }) => {
                 onClick={() =>
                   openBidModal({
                     odds: firstOdd,
-                    team: item.team2.name,
+                    team: item.team1.name,
+                    team_id: 1,
                   })
                 }
               >
@@ -131,6 +134,7 @@ const InPlaySingleGame = ({ item }) => {
                   openBidModal({
                     odds: second,
                     team: item.team2.name,
+                    team_id: 2,
                   })
                 }
               >
@@ -144,6 +148,7 @@ const InPlaySingleGame = ({ item }) => {
                   openBidModal({
                     odds: second,
                     team: item.team2.name,
+                    team_id: 2,
                   })
                 }
               >
@@ -155,12 +160,13 @@ const InPlaySingleGame = ({ item }) => {
                 className="singleRightrow"
                 onClick={() =>
                   openBidModal({
-                    odds: second,
+                    odds: parseFloat(second) + 1.0,
                     team: item.team2.name,
+                    team_id: 2,
                   })
                 }
               >
-                {parseFloat(showOdds(second) + +0.1).toFixed(1)}
+                {parseFloat(parseFloat(showOdds(second)) + +0.1).toFixed(1)}
               </div>
             </div>
           </div>

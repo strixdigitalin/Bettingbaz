@@ -119,6 +119,7 @@ function SingleGameListCover({ show }) {
             subTitle={"title"}
             team={"team"}
             show={true}
+            matchId={LiveMatch.liveMatch[key]}
           />
         );
       })}
@@ -132,6 +133,7 @@ function SingleGameListCover({ show }) {
             subTitle={"title"}
             team={"team"}
             show={true}
+            matchId={LiveMatch.cricketLiveMatch[key]}
           />
         );
       })}

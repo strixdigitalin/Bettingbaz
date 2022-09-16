@@ -18,6 +18,8 @@ import "./Styles/Components/modal.css";
 import "./Styles/Components/cricketSingleMatch.css";
 import "./Styles/Components/signinmodal.css";
 import "./Styles/Components/mybet.css";
+import "./Styles/Components/footer.css";
+import "./Styles/Components/terms.css";
 import { SingleGameCard } from "./Components/Heighlights";
 
 import SingleGame from "./Pages/SingleGame";
@@ -34,6 +36,8 @@ import ResetPasswordModal from "./Modals/ResetPasswordModal";
 import SignIn from "./Modals/SignIn";
 import MyBet from "./Pages/MyBet";
 import ResetPassword from "./Redux/Reducers/ResetPassword.js";
+import Footer from "./Components/Footer";
+import Terms from "./Pages/Terms/Terms";
 
 function App() {
   const { PlaceBid, SignInState, ResetPassword } = useSelector(
@@ -64,7 +68,9 @@ function App() {
             element={<CricketSingleMatch />}
           ></Route>
           <Route path="my-bet" element={<MyBet />}></Route>
+          <Route path="/terms/:terms" element={<Terms />}></Route>
         </Routes>
+        <Footer />
       </BrowserRouter>
       {PlaceBid.show && (
         <div className="modal-outer">

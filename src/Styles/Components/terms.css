@@ -1,0 +1,28 @@
+.terms-cover{
+    width: 60%;
+    margin: auto;
+    /* border: 1px solid red; */
+    text-align:left;
+}
+
+.terms-head{
+    /* border-bottom: 1px solid gray; */
+    text-shadow: 1px 1px #434141;
+    /* color: gray; */
+    font-weight: 400;
+    /* font-weight: 400px; */
+    padding: 010px 0px ;
+    text-decoration: underline;
+    margin-block-start: 0px;
+}
+.terms-content{
+    font-weight: 100px !important;
+    margin-block-start: 0px;
+    color:black;
+    /* color: rgb(115, 115, 115); */
+    font-size: 15px;
+    border-left: 1px solid black;
+    padding: 10px;
+
+    
+}

@@ -100,3 +100,44 @@ export const changePasswordApi = async (password, successCallback) => {
     .then((result) => successCallback(result))
     .catch((error) => console.log("error", error));
 };
+
+export const getDataSavedInDb = (payload, successCallback) => {
+  try {
+    var myHeaders = new Headers();
+    const user = localStorage.getItem("betting_user");
+    const userData = JSON.parse(user);
+    const token = userData.usertoken;
+    myHeaders.append("Authorization", "Bearer " + userData.bearer);
+
+    var formdata = new FormData();
+    formdata.append("token", token);
+    formdata.append("game_id", payload.matchId);
+    // formdata.append(
+    //   "game_id",
+    //   "/sport/football/japanese-j-league/tosu-v-kashima/31736038"
+    // );
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: formdata,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://client.drazs.com/backend/public/api/getmatch",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        // console.log(result, "<<<<<resultatpar");
+        const parseIt = JSON.parse(result);
+        const parseData = JSON.parse(parseIt.game_data);
+        console.log(parseData, "<<<parse it data");
+        successCallback(parseData);
+      })
+      .catch((error) => console.log("error", error));
+  } catch (e) {
+    console.log(e);
+  }
+};

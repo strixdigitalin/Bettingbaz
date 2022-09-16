@@ -15,6 +15,8 @@ import API from "../Api";
 import { Link } from "react-router-dom";
 import CustomLoader from "./CustomLoader";
 import NoDataFound from "./NoDataFound";
+import { useDispatch, useSelector } from "react-redux";
+import { showModal } from "../Redux/Reducers/PlaceBid";
 
 export function ShowLiveMatchCard({
   heading = "heading",
@@ -25,7 +27,11 @@ export function ShowLiveMatchCard({
   sport,
   show = "all",
   icon,
+  matchId,
 }) {
+  const dispatch = useDispatch();
+  const { LiveMatch } = useSelector((state) => state);
+
   const [singleGame, setSingleGame] = useState([]);
   const [showLoader, setShowLoader] = useState(false);
   const [showIt, setShowIt] = useState(true);
@@ -38,6 +44,18 @@ export function ShowLiveMatchCard({
   //     });
   //   }, [sport]);
   console.log("sport", sport);
+
+  const openBidModal = (modalData) => {
+    console.log(modalData, `<<<<${matchId} this is modal data -----${matchId}`);
+    const user = localStorage.getItem("betting_user");
+    console.log(user, "<<<this is betway user");
+    if (user != null && user != "null" && user != "") {
+      // dispatch(showSigninModal(true));
+      dispatch(showModal({ ...modalData, show: true, matchId }));
+    } else {
+      alert("Log in to place bid");
+    }
+  };
 
   return (
     <div>
@@ -145,12 +163,12 @@ export function ShowLiveMatchCard({
                   >
                     <div
                       className="singleRightrow"
-                      // onClick={() =>
-                      //   openBidModal({
-                      //     odds: firstOdd,
-                      //     team: item.team1.name,
-                      //   })
-                      // }
+                      onClick={() =>
+                        openBidModal({
+                          odds: parseFloat(showOdds(sport[0].odds)).toFixed(1),
+                          team: sport[0].val1,
+                        })
+                      }
                     >
                       {parseFloat(showOdds(sport[0].odds)).toFixed(1)}
                     </div>
@@ -165,14 +183,16 @@ export function ShowLiveMatchCard({
                   >
                     <div
                       className="singleRightrow"
-                      // onClick={() =>
-                      //   openBidModal({
-                      //     odds: +firstOdd + 1,
-                      //     team: item.team2.name,
-                      //   })
-                      // }
+                      onClick={() =>
+                        openBidModal({
+                          odds: parseFloat(showOdds(sport[0].odds)) + +0.1,
+                          team: sport[0].val1,
+                        })
+                      }
                     >
-                      {parseFloat(showOdds(sport[0].odds) + +0.1).toFixed(1)}
+                      {parseFloat(
+                        parseFloat(showOdds(sport[0].odds)) + +0.1
+                      ).toFixed(1)}
                       {/* {+firstOdd + 1} */}
                     </div>
                   </div>
@@ -182,12 +202,12 @@ export function ShowLiveMatchCard({
                   >
                     <div
                       className="singleRightrow"
-                      // onClick={() =>
-                      //   openBidModal({
-                      //     odds: firstOdd,
-                      //     team: item.team2.name,
-                      //   })
-                      // }
+                      onClick={() =>
+                        openBidModal({
+                          odds: showOdds(sport[1].odds),
+                          team: sport[0].val1,
+                        })
+                      }
                     >
                       {showOdds(sport[1].odds)}
                     </div>
@@ -198,14 +218,18 @@ export function ShowLiveMatchCard({
                   >
                     <div
                       className="singleRightrow"
-                      // onClick={() =>
-                      //   openBidModal({
-                      //     odds: second,
-                      //     team: item.team2.name,
-                      //   })
-                      // }
+                      onClick={() =>
+                        openBidModal({
+                          odds: parseFloat(
+                            parseFloat(showOdds(sport[1].odds)) + +0.1
+                          ).toFixed(1),
+                          team: sport[2].val1,
+                        })
+                      }
                     >
-                      {parseFloat(showOdds(sport[1].odds) + +0.1).toFixed(1)}
+                      {parseFloat(
+                        parseFloat(showOdds(sport[1].odds)) + +0.1
+                      ).toFixed(1)}
 
                       {/* {second} */}
                     </div>
@@ -216,12 +240,12 @@ export function ShowLiveMatchCard({
                   >
                     <div
                       className="singleRightrow"
-                      // onClick={() =>
-                      //   openBidModal({
-                      //     odds: second,
-                      //     team: item.team2.name,
-                      //   })
-                      // }
+                      onClick={() =>
+                        openBidModal({
+                          odds: showOdds(sport[2].odds),
+                          team: sport[2].val1,
+                        })
+                      }
                     >
                       {showOdds(sport[2].odds)}
 
@@ -234,15 +258,17 @@ export function ShowLiveMatchCard({
                   >
                     <div
                       className="singleRightrow"
-                      // onClick={() =>
-                      //   openBidModal({
-                      //     odds: +second + 2,
-                      //     team: item.team2.name,
-                      //   })
-                      // }
+                      onClick={() =>
+                        openBidModal({
+                          odds: parseFloat(showOdds(sport[2].odds)) + 0.1,
+                          team: sport[2].val1,
+                        })
+                      }
                     >
                       {/* /                      {+second + 1} */}
-                      {parseFloat(showOdds(sport[2].odds) + +0.1).toFixed(1)}
+                      {parseFloat(
+                        parseFloat(showOdds(sport[2].odds)) + 0.1
+                      ).toFixed(1)}
                     </div>
                   </div>
                 </div>

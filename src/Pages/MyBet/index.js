@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { getUserDetail } from "../../ClientApi/BetApi";
+import { getDataSavedInDb, getUserDetail } from "../../ClientApi/BetApi";
+import SingleRowRunningBid from "./SingleRowRunningBid";
 
+export const GameHeading = [
+  { name: "Sports Name", width: "5%" },
+  { name: "Tournament Id", width: "50%" },
+  { name: "Time & Date", width: "25%" },
+  { name: "Bid Amount", width: "5%" },
+  { name: "Current Odds", width: "5%" },
+  { name: "Win/loss", width: "5%" },
+];
 function MyBet() {
   const BET_HISTORY = "BET_HISTORY";
   const RUNNING_BET = "RUNNING_BET";
   const PROFITE_LOSS = "PROFITE_LOSS";
-  const GameHeading = [
-    { name: "Sports Name", width: "5%" },
-    { name: "Tournament Id", width: "50%" },
-    { name: "Time & Date", width: "25%" },
-    { name: "Bid Amount", width: "5%" },
-    { name: "Odds", width: "5%" },
-    { name: "Win/loss", width: "5%" },
-  ];
+
   const BetHistory = [
     { name: "id", width: "5%" },
     { name: "From", width: "10%" },
@@ -33,7 +35,7 @@ function MyBet() {
       console.log(res);
       console.log(res.games, "<<<<< games");
       setuserDetails(res);
-      setgameTransection(res.games);
+      setgameTransection(res.games.reverse().slice(0, 3));
       // setCoingSentTransaction(res.coin_sent_transactions);
       // setCoingSentTransaction(res.coin_sent_transactions);
       setcoinRieved([
@@ -94,6 +96,9 @@ function MyBet() {
                 ))}
               </div>
               {gameTransection.map((item, index) => (
+                <SingleRowRunningBid item={item} />
+              ))}
+              {/* {gameTransection.map((item, index) => (
                 <div className="table-row">
                   <div
                     className="table-col"
@@ -108,13 +113,11 @@ function MyBet() {
                     className="table-col"
                     style={{
                       width: GameHeading[1].width,
-                      // wordBreak: "break-word",
                       minWidth: "200px",
                     }}
                   >
                     {item?.game_id}
                   </div>
-                  {/* <div className="table-col">Company</div> */}
                   <div
                     className="table-col"
                     style={{ width: GameHeading[2].width, minWidth: "200px" }}
@@ -140,7 +143,7 @@ function MyBet() {
                     {item?.reward_amount}
                   </div>
                 </div>
-              ))}
+              ))} */}
             </>
           )}
 

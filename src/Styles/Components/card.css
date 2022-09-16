@@ -130,11 +130,11 @@
 }
 
 
-.singleRight{
+.singleRight{    
     width: 50%;
     color: #707070;
-    
 }
+
 .singleRightrow{
     width:100%;
     /* color: black; */
@@ -146,7 +146,7 @@
     font-weight: 600;
     align-items: center;
     text-align: center;
-    color: white;
+    /* color: white; */
     height: 100%;
     
 }

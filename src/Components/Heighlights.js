@@ -72,6 +72,7 @@ export function SingleGameCard({
         !showLoader &&
         show == "all" &&
         singleGame.map((item, key) => {
+          console.log(item, "<<<item in single game card");
           return (
             <Link to={`/match-by-competition${item.id}`} className="hoverRow">
               <div
@@ -109,6 +110,7 @@ export function SingleGameCard({
         !showLoader &&
         show != "all" &&
         singleGame.slice(0, 3).map((item, key) => {
+          console.log(item, "item in single game card");
           return (
             <div
               className="card-today-row  align-ctr"
@@ -132,7 +134,10 @@ export function SingleGameCard({
               </div>
               <div className="card-today-wrap-right">
                 <div className="card-today-right" style={{ width: "100%" }}>
-                  <div className="singleRightrow col-70">{item?.name}</div>
+                  <div className="singleRightrow col-70">
+                    {item?.name}
+                    {/* {`${item}`} */}
+                  </div>
                 </div>
 
                 {/* <div className="card-today-right">

@@ -86,16 +86,6 @@ font-size: 12px;
     padding: 2px 4px;
 
 }
-
-@media screen and (max-width:768px) {
-    .header-buttons{
-        display: none;
-    }
-    .breadcrum{
-        display: block;
-    }
-}
-
 .logged-in-buttons{
     display: flex;
     justify-content: flex-end;
@@ -130,3 +120,18 @@ color: black;
     cursor: pointer;
     gap: 6%;
 }
+@media screen and (max-width:768px) {
+    .header-buttons{
+        display: none;
+    }
+    .logged-in-buttons{
+        display: none;
+    }
+    .breadcrum{
+        display: block;
+    }
+    .bottom-single{
+        width: 17%;
+    }
+}
+
