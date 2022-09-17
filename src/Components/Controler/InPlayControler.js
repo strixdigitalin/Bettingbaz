@@ -7,6 +7,7 @@ import BetMark from "../../Assets/Card/Bet Mark.png";
 import { useDispatch, useSelector } from "react-redux";
 import { placeBid, showModal } from "../../Redux/Reducers/PlaceBid";
 import { showOdds } from "../ShowLiveMatchCard";
+import { Link } from "react-router-dom";
 
 const InPlaySingleGame = ({ item }) => {
   const PlaceBid = useSelector((state) => state);
@@ -18,7 +19,15 @@ const InPlaySingleGame = ({ item }) => {
     const user = localStorage.getItem("betting_user");
     if (user != null && user != "null" && user != "") {
       // dispatch(showSigninModal(true));
-      dispatch(showModal({ ...modalData, show: true, matchId: item.id }));
+      console.log(modalData, "<<<this is modal data");
+      dispatch(
+        showModal({
+          ...modalData,
+          show: true,
+          matchId: item.id,
+          team_id: modalData.team_id,
+        })
+      );
     } else {
       alert("Log in to place bid");
     }
@@ -40,7 +49,7 @@ const InPlaySingleGame = ({ item }) => {
             width="15px"
             onClick={() => setHandleContent(!handleContent)}
           />
-          <span style={{ marginLeft: "15px" }}>{item?.name}</span>{" "}
+          {/* <span style={{ marginLeft: "15px" }}>{item?.name}</span>{" "} */}
           <span className="cardTeam"> {item?.competition_name}</span>
         </div>
         <div className="card-today-right-in-play">
@@ -54,17 +63,19 @@ const InPlaySingleGame = ({ item }) => {
 
       {handleContent && (
         <div className="card-today-row  align-ctr">
-          <div className=" flex-row align-ctr in-play-row-left">
+          <div className=" flex-row align-ctr in-play-row-left ">
             {" "}
-            <span>15:330</span>
+            {/* <span>15:330</span> */}
             <div
-              style={{ color: "black", marginLeft: "25px" }}
+              style={{ color: "black" }}
               className="row-left flex-row just-bet  align-ctr w100"
             >
-              <div>Todady</div>
+              <Link to={`/match-single${item.id}`} style={{ color: "black" }}>
+                <div>{item?.name}</div>
+              </Link>
               <div className="flex-row just-center align-ctr">
                 <img src={inPlay} width="30px" />
-                <img src={BetMark} width="30px" />
+                {/* <img src={BetMark} width="30px" /> */}
               </div>
             </div>
           </div>
@@ -72,19 +83,15 @@ const InPlaySingleGame = ({ item }) => {
             <div
               className="card-today-right"
               style={{ background: "#064778", color: "white" }}
+              onClick={() =>
+                openBidModal({
+                  odds: firstOdd,
+                  team: item.team1.name,
+                  team_id: 1,
+                })
+              }
             >
-              <div
-                className="singleRightrow"
-                onClick={() =>
-                  openBidModal({
-                    odds: firstOdd,
-                    team: item.team1.name,
-                    team_id: 1,
-                  })
-                }
-              >
-                {showOdds(firstOdd)}
-              </div>
+              {showOdds(firstOdd)}
             </div>
 
             <div
@@ -93,81 +100,69 @@ const InPlaySingleGame = ({ item }) => {
                 background: "#F98417",
                 color: "white ",
               }}
+              onClick={() =>
+                openBidModal({
+                  odds: parseFloat(firstOdd) + 1.0,
+                  team: item.team2.name,
+                  team_id: 1,
+                })
+              }
             >
-              <div
-                className="singleRightrow"
-                onClick={() =>
-                  openBidModal({
-                    odds: parseFloat(firstOdd) + 1.0,
-                    team: item.team2.name,
-                    team_id: 1,
-                  })
-                }
-              >
-                {parseFloat(parseFloat(showOdds(firstOdd)) + +0.1).toFixed(1)}
-              </div>
+              {parseFloat(parseFloat(showOdds(firstOdd)) + +0.1).toFixed(1)}
+              {/* </div> */}
             </div>
             <div
               className="card-today-right"
               style={{ background: "#064778", opacity: "0.5" }}
+              onClick={() =>
+                openBidModal({
+                  odds: firstOdd,
+                  team: item.team1.name,
+                  team_id: 1,
+                })
+              }
             >
-              <div
-                className="singleRightrow"
-                onClick={() =>
-                  openBidModal({
-                    odds: firstOdd,
-                    team: item.team1.name,
-                    team_id: 1,
-                  })
-                }
-              >
-                {showOdds(firstOdd)}
-              </div>
+              {showOdds(firstOdd)}
             </div>
             <div
               className="card-today-right"
               style={{ background: "#F98417", opacity: "0.5" }}
+              onClick={() =>
+                openBidModal({
+                  odds: second,
+                  team: item.team2.name,
+                  team_id: 2,
+                })
+              }
             >
-              <div
-                className="singleRightrow"
-                onClick={() =>
-                  openBidModal({
-                    odds: second,
-                    team: item.team2.name,
-                    team_id: 2,
-                  })
-                }
-              >
-                {showOdds(second)}
-              </div>
+              {showOdds(second)}
+              {/* </div> */}
             </div>
-            <div className="card-today-right" style={{ background: "#064778" }}>
-              <div
-                className="singleRightrow"
-                onClick={() =>
-                  openBidModal({
-                    odds: second,
-                    team: item.team2.name,
-                    team_id: 2,
-                  })
-                }
-              >
-                {showOdds(second)}
-              </div>
+            <div
+              className="card-today-right"
+              style={{ background: "#064778" }}
+              onClick={() =>
+                openBidModal({
+                  odds: second,
+                  team: item.team2.name,
+                  team_id: 2,
+                })
+              }
+            >
+              {showOdds(second)}
             </div>
-            <div className="card-today-right" style={{ background: "#F98417" }}>
-              <div
-                className="singleRightrow"
-                onClick={() =>
-                  openBidModal({
-                    odds: parseFloat(second) + 1.0,
-                    team: item.team2.name,
-                    team_id: 2,
-                  })
-                }
-              >
-                {parseFloat(parseFloat(showOdds(second)) + +0.1).toFixed(1)}
-              </div>
+            <div
+              className="card-today-right"
+              style={{ background: "#F98417" }}
+              onClick={() =>
+                openBidModal({
+                  odds: parseFloat(second) + 1.0,
+                  team: item.team2.name,
+                  team_id: 2,
+                })
+              }
+            >
+              {parseFloat(parseFloat(showOdds(second)) + +0.1).toFixed(1)}
             </div>
           </div>
         </div>

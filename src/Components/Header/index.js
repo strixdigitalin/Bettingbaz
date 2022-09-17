@@ -170,7 +170,7 @@ function Header() {
           {/* <Router> */}
           <Link to="/home">
             <div>
-              <img src={logo} />
+              <img src={logo} width="70px" />
             </div>
           </Link>
           {/* </Router> */}
@@ -267,7 +267,11 @@ function Header() {
           <Link to={`/in-play`}>
             <div
               className="bottom-single"
-              style={{ borderLeft: "1px solid gray", paddingLeft: "10px" }}
+              style={{
+                borderLeft: "1px solid gray",
+                paddingLeft: "10px",
+                fontSize: "10px",
+              }}
             >
               <img src={fetchImage("in-play")} width="25px" height="25px" /> In
               Play
@@ -277,9 +281,13 @@ function Header() {
             <Link to={`/all-competition-by-sports/${item.sport}`}>
               <div
                 className="bottom-single"
-                style={{ borderLeft: "1px solid gray", paddingLeft: "10px" }}
+                style={{
+                  borderLeft: "1px solid gray",
+                  paddingLeft: "10px",
+                  fontSize: "10px",
+                }}
               >
-                <img src={item.icon} width="25px" height="25px" /> {item.sport}
+                <img src={item.icon} width="21px" height="21px" /> {item.name}
               </div>
             </Link>
           ))}

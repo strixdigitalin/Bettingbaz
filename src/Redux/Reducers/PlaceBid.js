@@ -19,6 +19,7 @@ export const PlaceBid = createSlice({
       state.team = action.payload.team;
       state.odds = action.payload.odds;
       state.matchId = action.payload.matchId;
+      state.team_id=action.payload.team_id
       // console.log(action.payload, state, "<<<<action");
     },
     hideModal: (state, action) => {

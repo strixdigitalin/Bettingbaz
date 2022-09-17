@@ -78,11 +78,13 @@
 .card-today-right{
     display: flex;
     /* flex-direction:row-reverse ; */
-    justify-content:space-between;
+    /* justify-content:space-between; */
     text-align: center;
     color: black;
     height: 100%;
     align-items: center;
+    color: white;
+    justify-content: center;
     /* gap: 5%; */
     width: 40%;
     
@@ -165,11 +167,12 @@
 
 
 .game-slide{
-height: 63px;
+height: 83px;
     /* height: 100%; */
     display: flex;
     align-items: center;
     background-color: #EAEAEA;
+    /* position:relative */
 }
 .navigator {
     border: 1px solid #707070;
@@ -182,8 +185,25 @@ height: 63px;
 .middle-games{
 width: 90%;
 display: flex;
-overflow:hidden;
+height: 100%;
+/* position: absolute; */
+/* overflow:hidden; */
+/* left: -25px; */
+overflow-x: scroll;
+
+
 /* overflow-x: scroll; */
+}
+
+.left-nav{
+    /* position: absolute; */
+    /* left: 0; */
+    /* z-index: 5; */
+
+}
+.right-nav{
+    /* position: absolute; */
+    /* right: 0%; */
 }
 .singleSliderIcon{
     /* margin: auto; */
@@ -203,9 +223,11 @@ overflow:hidden;
     border-left: 1px solid #707070;
     cursor: pointer;
     padding: 0px 5px;
-    width: 90px;
     font-size: 12px;
+    margin: 22px 0px;
     color: #707070;
+    min-width: 100px;
+
     /* height: 42px; */
 }
 /*  singlegame click */
@@ -218,8 +240,10 @@ overflow:hidden;
     border-left: 1px solid #707070;
     cursor: pointer;
     padding: 0px 5px;
-    width: 90px;
     font-size: 12px;
+    min-width: 100px;
+    border-bottom: 5px solid #F97D09;
+
 }
 
 .card-today-inPlay {

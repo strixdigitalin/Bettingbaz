@@ -28,6 +28,7 @@ export function ShowLiveMatchCard({
   show = "all",
   icon,
   matchId,
+  game,
 }) {
   const dispatch = useDispatch();
   const { LiveMatch } = useSelector((state) => state);
@@ -35,15 +36,8 @@ export function ShowLiveMatchCard({
   const [singleGame, setSingleGame] = useState([]);
   const [showLoader, setShowLoader] = useState(false);
   const [showIt, setShowIt] = useState(true);
-  //   useEffect(() => {
-  //     setShowLoader(true);
-  //     API.competitionBySports(sport, (res) => {
-  //       console.log(sport, "-->>>", res);
-  //       setSingleGame(res);
-  //       setShowLoader(false);
-  //     });
-  //   }, [sport]);
-  console.log("sport", sport);
+
+  console.log("sport>>>>", sport);
 
   const openBidModal = (modalData) => {
     console.log(modalData, `<<<<${matchId} this is modal data -----${matchId}`);
@@ -59,62 +53,8 @@ export function ShowLiveMatchCard({
 
   return (
     <div>
-      <CardHead
-        heading={"Live Match"}
-        rightText=""
-        navigation={false}
-        icon={icon}
-      />
-      {/* --------------------------------------------------------- sub heading card */}
-      {/* 
-      <div className="card-subhead">
-        <div>{subTitle}</div>{" "}
-        <div className="cardTeam"> {singleGame?.name}s</div>
-      </div> */}
-      {/* ------------------------------------------------------- today section */}
-
-      {/* ----- single row */}
-      {/* {showLoader && <CustomLoader />}
-      {!showLoader && !singleGame.length && (
-        <NoDataFound selectedGame={heading} />
-      )} */}
-      {/* {showIt &&
-        !showLoader &&
-        show == "all" &&
-        singleGame.map((item, key) => {
-          return (
-            <Link to={`/match-by-competition${item.id}`} className="hoverRow">
-              <div
-                className="card-today-row  align-ctr"
-                style={{ cursor: "pointer" }}
-              >
-                <div className=" flex-row align-ctr card-today-left-row">
-                  {" "}
-                  <span>{key + 1}</span>
-                  <div
-                    style={{ color: "black", marginLeft: "25px" }}
-                    className="row-left flex-row just-bet w100 align-ctr"
-                  >
-                    <div className="col-70">{item?.group}</div>
-                    <div className="flex-row just-center align-ctr">
-                      <img src={inPlay} width="30px" />
-                      <img src={BetMark} width="30px" />
-                    </div>
-                  </div>
-                </div>
-                <div className="card-today-wrap-right">
-                  <div className="card-today-right" style={{ width: "100%" }}>
-                    <div className="singleRightrow col-70">{item?.name}</div>
-                  </div>
-
-                  <div className="card-today-right">
-                    <div className="singleRightrow">Home</div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          );
-        })} */}
+      <CardHead heading={game} rightText="" navigation={false} icon={icon} />
+   
       <div className="card-today">
         <div className="inplay-head-left">
           <img
@@ -142,13 +82,12 @@ export function ShowLiveMatchCard({
               <div className="card-today-row  align-ctr">
                 <div className=" flex-row align-ctr in-play-row-left">
                   {" "}
-                  <span>15:330</span>
                   <div
                     style={{ color: "black", marginLeft: "25px" }}
                     className="row-left flex-row just-bet  align-ctr w100"
                   >
                     <div>
-                      {sport[0].val1} vs {sport[2].val1}
+                      {sport[0]?.val1} vs {sport[2]?.val1}
                     </div>
                     <div className="flex-row just-center align-ctr">
                       <img src={inPlay} width="30px" />
@@ -160,18 +99,14 @@ export function ShowLiveMatchCard({
                   <div
                     className="card-today-right"
                     style={{ background: "#064778", color: "white" }}
+                    onClick={() =>
+                      openBidModal({
+                        odds: parseFloat(showOdds(sport[0]?.odds)).toFixed(1),
+                        team: sport[0]?.val1,
+                      })
+                    }
                   >
-                    <div
-                      className="singleRightrow"
-                      onClick={() =>
-                        openBidModal({
-                          odds: parseFloat(showOdds(sport[0].odds)).toFixed(1),
-                          team: sport[0].val1,
-                        })
-                      }
-                    >
-                      {parseFloat(showOdds(sport[0].odds)).toFixed(1)}
-                    </div>
+                    {parseFloat(showOdds(sport[0]?.odds)).toFixed(1)}
                   </div>
 
                   <div
@@ -180,96 +115,76 @@ export function ShowLiveMatchCard({
                       background: "#F98417",
                       color: "white ",
                     }}
+                    onClick={() =>
+                      openBidModal({
+                        odds: parseFloat(showOdds(sport[0]?.odds)) + +0.1,
+                        team: sport[0]?.val1,
+                      })
+                    }
                   >
-                    <div
-                      className="singleRightrow"
-                      onClick={() =>
-                        openBidModal({
-                          odds: parseFloat(showOdds(sport[0].odds)) + +0.1,
-                          team: sport[0].val1,
-                        })
-                      }
-                    >
-                      {parseFloat(
-                        parseFloat(showOdds(sport[0].odds)) + +0.1
-                      ).toFixed(1)}
-                      {/* {+firstOdd + 1} */}
-                    </div>
+                    {parseFloat(
+                      parseFloat(showOdds(sport[0]?.odds)) + +0.1
+                    ).toFixed(1)}
+                    {/* {+firstOdd + 1} */}
                   </div>
                   <div
                     className="card-today-right"
                     style={{ background: "#064778", opacity: "0.5" }}
+                    onClick={() =>
+                      openBidModal({
+                        odds: showOdds(sport[1]?.odds),
+                        team: sport[0]?.val1,
+                      })
+                    }
                   >
-                    <div
-                      className="singleRightrow"
-                      onClick={() =>
-                        openBidModal({
-                          odds: showOdds(sport[1].odds),
-                          team: sport[0].val1,
-                        })
-                      }
-                    >
-                      {showOdds(sport[1].odds)}
-                    </div>
+                    {showOdds(sport[1]?.odds)}
                   </div>
                   <div
                     className="card-today-right"
                     style={{ background: "#F98417", opacity: "0.5" }}
+                    onClick={() =>
+                      openBidModal({
+                        odds: parseFloat(
+                          parseFloat(showOdds(sport[1]?.odds)) + +0.1
+                        ).toFixed(1),
+                        team: sport[2]?.val1,
+                      })
+                    }
                   >
-                    <div
-                      className="singleRightrow"
-                      onClick={() =>
-                        openBidModal({
-                          odds: parseFloat(
-                            parseFloat(showOdds(sport[1].odds)) + +0.1
-                          ).toFixed(1),
-                          team: sport[2].val1,
-                        })
-                      }
-                    >
-                      {parseFloat(
-                        parseFloat(showOdds(sport[1].odds)) + +0.1
-                      ).toFixed(1)}
+                    {parseFloat(
+                      parseFloat(showOdds(sport[1].odds)) + +0.1
+                    ).toFixed(1)}
 
-                      {/* {second} */}
-                    </div>
+                    {/* {second} */}
                   </div>
                   <div
                     className="card-today-right"
                     style={{ background: "#064778" }}
+                    onClick={() =>
+                      openBidModal({
+                        odds: showOdds(sport[2]?.odds),
+                        team: sport[2]?.val1,
+                      })
+                    }
                   >
-                    <div
-                      className="singleRightrow"
-                      onClick={() =>
-                        openBidModal({
-                          odds: showOdds(sport[2].odds),
-                          team: sport[2].val1,
-                        })
-                      }
-                    >
-                      {showOdds(sport[2].odds)}
+                    {showOdds(sport[2]?.odds)}
 
-                      {/* {second} */}
-                    </div>
+                    {/* {second} */}
                   </div>
                   <div
                     className="card-today-right"
                     style={{ background: "#F98417" }}
+                    onClick={() =>
+                      openBidModal({
+                        odds: parseFloat(showOdds(sport[2]?.odds)) + 0.1,
+                        team: sport[2]?.val1,
+                      })
+                    }
                   >
-                    <div
-                      className="singleRightrow"
-                      onClick={() =>
-                        openBidModal({
-                          odds: parseFloat(showOdds(sport[2].odds)) + 0.1,
-                          team: sport[2].val1,
-                        })
-                      }
-                    >
-                      {/* /                      {+second + 1} */}
-                      {parseFloat(
-                        parseFloat(showOdds(sport[2].odds)) + 0.1
-                      ).toFixed(1)}
-                    </div>
+                    {/* /                      {+second + 1} */}
+                    {parseFloat(
+                      parseFloat(showOdds(sport[2]?.odds)) + 0.1
+                    ).toFixed(1)}
                   </div>
                 </div>
               </div>

@@ -10,40 +10,57 @@ function SingleGameListCover({ show }) {
   const { LiveMatch } = useSelector((state) => state);
   const [LiveMatchData, setLiveMatchData] = useState([]); // for football
   const [cricketLiveMatchData, setcricketLiveMatchData] = useState([]); // for football
+  const [basketballLiveMatchData, setBassketballLiveMatchData] = useState([]); // for football
+  const [tennisLiveMatchData, settennisLiveMatchData] = useState([]);
+  // let liveData = [];
 
   useEffect(() => {}, []);
   console.log(LiveMatch, "<<<<livematch");
   useEffect(() => {
-    let liveData = [];
     LiveMatch.liveMatch.map((item) => {
+      // alert("here");
+      // console.log(item,"<<calledfootballgamedata")
       betBysingleGameUsingId(item, (res) => {
         console.log("Live match response data", res);
-        // liveData = [...liveData, res[0]];
-        // console.log(liveData, "<<<live Data");
         setLiveMatchData([...LiveMatchData, res[0]]);
       });
     });
-
+    // setLiveMatchData(liveData);
     console.log(LiveMatchData, "<<<<<< Live match odd data");
 
     // betBysingleGameUsingId()
-  }, [LiveMatch]);
+  }, [LiveMatch.liveMatch]);
+
   useEffect(() => {
-    let liveData = [];
+    // let liveData = [];
     LiveMatch.cricketLiveMatch.map((item) => {
       betBysingleGameUsingId(item, (res) => {
         console.log("Live match response data", res);
-        // liveData = [...liveData, res[0]];
-        // console.log(liveData, "<<<live Data");
-        setcricketLiveMatchData([...LiveMatchData, res[0]]);
+        setcricketLiveMatchData([...cricketLiveMatchData, res[0]]);
       });
     });
+  }, [LiveMatch.cricketLiveMatch]);
+  // useEffect(() => {
+  //   LiveMatch.basketballLiveMatch.map((item) => {
+  //     betBysingleGameUsingId(item, (res) => {
+  //       console.log("Live match response data", res);
+  //       setBassketballLiveMatchData([...basketballLiveMatchData, res[0]]);
+  //     });
+  //   });
+  // }, [LiveMatch.basketballLiveMatch]);
+  useEffect(() => {
+    LiveMatch.tennisLiveMatch.map((item) => {
+      betBysingleGameUsingId(item, (res) => {
+        console.log("Live match response data", res);
+        settennisLiveMatchData([...tennisLiveMatchData, res[0]]);
+      });
+    });
+  }, [LiveMatch.tennisLiveMatch]);
 
-    console.log(LiveMatchData, "<<<<<< Live match odd data");
+  // useEffect(() => {
+  //   setLiveMatchData(liveData);
+  // }, [liveData]);
 
-    // betBysingleGameUsingId()
-  }, [LiveMatch]);
-  console.log("LiveMatchData", LiveMatchData);
   const games = [
     { sport: "cricket", icon: "", heading: "Cricket" },
     { sport: "football", icon: "", heading: "Football" },
@@ -109,26 +126,13 @@ function SingleGameListCover({ show }) {
         );
       })} */}
       {/* for footballonly */}
-      {LiveMatchData?.map((item, key) => {
-        console.log("map this value,", item);
-        return (
-          <ShowLiveMatchCard
-            heading={item.name}
-            icon={fetchImage("football")}
-            sport={item.values}
-            subTitle={"title"}
-            team={"team"}
-            show={true}
-            matchId={LiveMatch.liveMatch[key]}
-          />
-        );
-      })}
       {cricketLiveMatchData?.map((item, key) => {
         console.log("map this value,", item);
         return (
           <ShowLiveMatchCard
             heading={item.name}
             icon={fetchImage("cricket")}
+            game="Cricket"
             sport={item.values}
             subTitle={"title"}
             team={"team"}
@@ -137,7 +141,53 @@ function SingleGameListCover({ show }) {
           />
         );
       })}
-      {games.map((item, key) => {
+      {LiveMatchData?.map((item, key) => {
+        console.log("map this value,", item);
+        return (
+          <ShowLiveMatchCard
+            heading={item.name}
+            icon={fetchImage("football")}
+            game="Football"
+            sport={item.values}
+            subTitle={"title"}
+            team={"team"}
+            show={true}
+            matchId={LiveMatch.liveMatch[key]}
+          />
+        );
+      })}
+      {tennisLiveMatchData?.map((item, key) => {
+        console.log("map this value,", item);
+        return (
+          <ShowLiveMatchCard
+            heading={item.name}
+            game="Tennis"
+            icon={fetchImage("tennis")}
+            sport={item.values}
+            subTitle={"title"}
+            team={"team"}
+            show={true}
+            matchId={LiveMatch.tennisLiveMatch[key]}
+          />
+        );
+      })}
+      {/* {basketballLiveMatchData?.map((item, key) => {
+        console.log("map this value,", item);
+        return (
+          <ShowLiveMatchCard
+            heading={item.name}
+            game="Basketball"
+            icon={fetchImage("basketball")}
+            sport={item.values}
+            subTitle={"title"}
+            team={"team"}
+            show={true}
+            matchId={LiveMatch.basketballLiveMatch[key]}
+          />
+        );
+      })} */}
+
+      {/* {games.map((item, key) => {
         return (
           <SingleGameCard
             heading={item.heading}
@@ -148,7 +198,7 @@ function SingleGameListCover({ show }) {
             show={show}
           />
         );
-      })}
+      })} */}
     </>
   );
 }

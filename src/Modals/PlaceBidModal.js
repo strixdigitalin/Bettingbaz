@@ -9,7 +9,7 @@ function PlaceBidModal() {
     msg: "",
   });
   const dispatch = useDispatch();
-  console.log(PlaceBid);
+  console.log(PlaceBid, "placebid");
   const pressCancel = () => {
     dispatch(hideModal());
   };

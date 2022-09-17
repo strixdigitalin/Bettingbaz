@@ -64,17 +64,17 @@ export function SingleGameCard({
       {/* ----- single row */}
 
       {showLoader && <CustomLoader />}
-      {!showLoader && !singleGame.length && (
+      {!showLoader && !singleGame?.length && (
         <NoDataFound selectedGame={heading} />
       )}
 
       {showIt &&
         !showLoader &&
         show == "all" &&
-        singleGame.map((item, key) => {
+        singleGame?.map((item, key) => {
           console.log(item, "<<<item in single game card");
           return (
-            <Link to={`/match-by-competition${item.id}`} className="hoverRow">
+            <Link to={`/match-by-competition${item?.id}`} className="hoverRow">
               <div
                 className="card-today-row  align-ctr"
                 style={{ cursor: "pointer" }}
@@ -109,7 +109,7 @@ export function SingleGameCard({
       {showIt &&
         !showLoader &&
         show != "all" &&
-        singleGame.slice(0, 3).map((item, key) => {
+        singleGame?.slice(0, 3).map((item, key) => {
           console.log(item, "item in single game card");
           return (
             <div
@@ -119,7 +119,7 @@ export function SingleGameCard({
               <div className=" flex-row align-ctr card-today-left-row">
                 {" "}
                 <span>{key + 1}</span>
-                <Link to={`/match-by-competition${item.id}`}>
+                <Link to={`/match-by-competition${item?.id}`}>
                   <div
                     style={{ color: "black", marginLeft: "25px" }}
                     className="row-left flex-row just-bet w100 align-ctr"

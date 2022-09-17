@@ -21,8 +21,10 @@ export default function CricketSingleMatch() {
 const CricketSingle = ({ name = "India - Pakistan" }) => {
   const dispatch = useDispatch();
 
-  const [premiumToggle, setPremiumToggle] = useState(false);
   const params = useParams();
+  const [premiumToggle, setPremiumToggle] = useState(
+    params.game == "cricket" ? false : true
+  );
   const [matchData, setMatchData] = useState([]);
   const [equalValue, setEqualValue] = useState(0);
   console.log(params, "<<<<params");
@@ -72,6 +74,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
     return (temp * 100).toFixed(2);
   };
   const replaceString = (name, values) => {
+    if (params.game != "cricket") return name;
     let a = name.replace(
       "Team A",
       ` ${teams.split("v")[0].toLocaleUpperCase()} `
@@ -85,6 +88,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
     return f;
   };
   const NumberCalculation = (name, value, operation) => {
+    if (params.game != "cricket") return value;
     const floatPart = value.split(".")[1];
     const intPart = value.split(".")[0];
     const matchTotalRuns = name.match(TOTAL_RUNS);
@@ -135,7 +139,11 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
             style={{ padding: "5px 10px" }}
             // style={{ paddingLeft: "15px" }}
           >
-            Asia Cup <span style={{ color: "#6E6E6E",marginLeft:"2px" }}> International</span>
+            Asia Cup{" "}
+            <span style={{ color: "#6E6E6E", marginLeft: "2px" }}>
+              {" "}
+              International
+            </span>
             {/* <div>(54)</div> */}
           </div>
           <div
@@ -356,12 +364,13 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                         className="heighlight-row-right pointer"
                         // onClick={() => placeBid({ ...item, odds: inItem.odds })}
                       >
-                        {/* {item.values[0].val2.substring(1)} */}
-                        {NumberCalculation(
-                          item.name,
-                          item.values[0].val2.substring(1),
-                          "-"
-                        )}
+                        {params.game != "cricket" && item.values[0].val2}
+                        {params.game == "cricket" &&
+                          NumberCalculation(
+                            item.name,
+                            item.values[0].val2.substring(1),
+                            "-"
+                          )}
 
                         <br />
                         {/* {calCulatePercentage(item.values[0].val2)} */}

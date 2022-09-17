@@ -104,11 +104,11 @@ export const GameSlider = ({ selectedGame, changeGame }) => {
 
   return (
     <div className="flex-row just-between game-slide w100">
-      <div className="navigator">
+      <div className="navigator left-nav">
         <img src={moveLect} onClick={onSlideLeft} ref={slideLeft} />
       </div>
       <div className="middle-games">
-        {allSports.slice(0, 10).map((item, key) => {
+        {allSports.map((item, key) => {
           return (
             <div
               className={`${
@@ -117,14 +117,16 @@ export const GameSlider = ({ selectedGame, changeGame }) => {
               onClick={() => changeGame(item.sport)}
             >
               <div>
-                <img src={fetchImage(item.sport)} width="22px" height="22px" />
+                <img src={fetchImage(item.sport)} width="25px" />
               </div>
-              <div className="textcenter">{item.sport}</div>
+              <div className="textcenter" style={{ fontSize: "7px" }}>
+                {item.name}
+              </div>
             </div>
           );
         })}
       </div>
-      <div className="navigator">
+      <div className="navigator right-nav">
         <img src={moveRight} />
       </div>
     </div>

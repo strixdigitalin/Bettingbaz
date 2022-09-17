@@ -5,10 +5,12 @@ function ImageAndText({ text, image }) {
     {
       label: "Powered By",
       src: require("../../Assets/Header/betfair-logo-1.png"),
+      width: "200px",
     },
     {
       label: "Copyrighted By",
       src: require("../../Assets/Header/BettingBaaz Yxd Logo.png"),
+      width: "100px",
     },
   ];
   return (
@@ -18,7 +20,7 @@ function ImageAndText({ text, image }) {
           <div className="">
             {item.label}
             <div className="flex-row align-ctr h100">
-              <img src={item.src} width="100px" />
+              <img src={item.src} width={item.width} />
             </div>
           </div>
         );

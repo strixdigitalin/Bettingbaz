@@ -13,12 +13,14 @@ export const PlaceBetApi = async (item, successCallback) => {
     amount: item.amount,
     multiply_value: item.odds,
     status: "running",
+    team_id: item.team_id,
   };
   myHeaders.append("Authorization", "Bearer " + bearer);
 
   var formdata = new FormData();
   formdata.append("token", token);
   formdata.append("game_id", payloadData.game_id);
+  formdata.append("team_id", payloadData.team_id);
   formdata.append("amount", payloadData.amount);
   formdata.append("multiply_value", payloadData.multiply_value);
   formdata.append("status", "running");

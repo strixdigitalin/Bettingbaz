@@ -6,7 +6,7 @@ import QuickLinks from "../Components/QuickLinks";
 import { showSigninModal } from "../Redux/Reducers/SigninModal";
 import { leftLinkData, rightLinkData } from "./Controler/ImageBySport";
 
-function PageCover({ component }) {
+function PageCover({ component, gamename }) {
   const [userLoggedIn, setUserLoggedIn] = useState({});
   const dispatch = useDispatch();
   const openSigninModal = () => {

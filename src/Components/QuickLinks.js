@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { leftLinkData } from "./Controler/ImageBySport";
 
 export default function QuickLinks({ heading = "title", data = leftLinkData }) {

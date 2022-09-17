@@ -11,11 +11,11 @@ function Footer() {
     },
     {
       src: require("../../Assets/Header/pngwing.com (6).png"),
-      text: "@bettingbazhelp",
+      text: "@bettingbaazhelp",
     },
     {
       src: require("../../Assets/Header/pngwing.com (7).png"),
-      text: "support@bettingbaz.com",
+      text: "support@bettingbaaz.com",
     },
   ];
   const footerTexts = [

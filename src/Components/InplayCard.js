@@ -13,13 +13,15 @@ import Football from "../Assets/Card/Football icon.png";
 import Cricket from "../Assets/Card/Cricket ball icon.png";
 import API from "../Api";
 import InPlaySingleGame from "./Controler/InPlayControler";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CustomLoader from "./CustomLoader";
 import NoDataFound from "./NoDataFound";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  BasketBallMatchList,
   CricketLiveMatchList,
   LiveMAtchList,
+  TennisMatchList,
 } from "../Redux/Reducers/LiveMatch";
 
 export function InPlayCard({
@@ -38,35 +40,30 @@ export function InPlayCard({
   const [InPlayGames, setInPlayGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState("cricket");
   const [showLoader, setShowLoader] = useState(false);
+  const { gamename } = useParams();
+
   const [liveGame, setLiveGame] = useState([]);
   // -----------use effects
   useEffect(() => {
     setShowLoader(true);
+    if (gamename) setSelectedGame(gamename);
 
     API.getInPlay(selectedGame, (res) => {
       setInPlayGames(res);
       setShowLoader(false);
-      // const ThreeGame = res.slice(0, 3);
-      // const setThisToLiveGame = ThreeGame.map((item) => item.id);
-      // console.log(setThisToLiveGame, "<<<setthistolivegame");
-      // setLiveGame(ThreeGame.map((item) => item.id));
-      // dispatch(LiveMAtchList(ThreeGame.map((item) => item.id)));
     });
-  }, [selectedGame]);
+  }, [selectedGame, gamename]);
+
+  // ---these are live game on home pages----live match ids are being stored in array
 
   useEffect(() => {
     console.log("cricket data live");
     let allLive = [];
     API.getInPlay("football", (res) => {
-      // setInPlayGames(res);
-      // setShowLoader(false);
       const ThreeGame = res.slice(0, 3);
       const setThisToLiveGame = ThreeGame.map((item) => item.id);
-      console.log(setThisToLiveGame, "<<<setthistolivegame");
-      setLiveGame(setThisToLiveGame);
+      console.log(setThisToLiveGame, "threegamesfootball");
       dispatch(LiveMAtchList(setThisToLiveGame));
-      allLive = setThisToLiveGame;
-      // allLive = [...allLive, [...setThisToLiveGame]];
     });
 
     console.log(liveGame, "<<<<checkLive");
@@ -74,19 +71,36 @@ export function InPlayCard({
   useEffect(() => {
     console.log("cricket data live");
     let allLive = [];
-    API.getInPlay("football", (res) => {
-      // setInPlayGames(res);
-      // setShowLoader(false);
+    API.getInPlay("cricket", (res) => {
       const ThreeGame = res.slice(0, 3);
       const setThisToLiveGame = ThreeGame.map((item) => item.id);
-      console.log(setThisToLiveGame, "<<<setthistolivegame");
-      setLiveGame(setThisToLiveGame);
+      console.log(setThisToLiveGame, "<<<threegamescricket");
       dispatch(CricketLiveMatchList(setThisToLiveGame));
       allLive = setThisToLiveGame;
-      // allLive = [...allLive, [...setThisToLiveGame]];
     });
 
     console.log(liveGame, "<<<<checkLive");
+  }, []);
+  // useEffect(() => {
+  //   console.log("cricket data live");
+  //   let allLive = [];
+  //   API.getInPlay("basketball", (res) => {
+  //     const ThreeGame = res.slice(0, 3);
+  //     const setThisToLiveGame = ThreeGame.map((item) => item.id);
+  //     console.log(setThisToLiveGame, "<<<setthistolivegame");
+  //     dispatch(BasketBallMatchList(setThisToLiveGame));
+  //     allLive = setThisToLiveGame;
+  //   });
+
+  //   console.log(liveGame, "<<<<checkLive");
+  // }, []);
+  useEffect(() => {
+    API.getInPlay("tennis", (res) => {
+      const ThreeGame = res.slice(0, 3);
+      const setThisToLiveGame = ThreeGame.map((item) => item.id);
+      console.log(setThisToLiveGame, "<<< threegame tennis");
+      dispatch(TennisMatchList(setThisToLiveGame));
+    });
   }, []);
 
   //   ------ ONCLCICKS-----

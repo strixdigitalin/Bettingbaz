@@ -23,10 +23,10 @@ import movedown from "../../Assets/Card/Path2.png";
 
 export const leftLinkData = [
   { name: "In Play", link: "/in-play" },
-  { name: "Live Cricekt", link: "/all-competition-by-sports/cricket" },
-  { name: "Live Football", link: "/all-competition-by-sports/football" },
-  { name: "Live Tennis", link: "/all-competition-by-sports/tennis" },
-  { name: "Live Snooker", link: "/all-competition-by-sports/snooker" },
+  { name: "Live Cricekt", link: "/in-play/cricket" },
+  { name: "Live Football", link: "/in-play/football" },
+  { name: "Live Tennis", link: "/in-play/tennis" },
+  { name: "Live Snooker", link: "/in-play/snooker" },
 ];
 export const rightLinkData = [
   { name: "Cricket Tournaments", link: "/all-competition-by-sports/cricket" },
@@ -40,90 +40,107 @@ const sports = [
   {
     sport: "cricket",
     icon: cricket,
+    name: "Cricket",
   },
   {
     sport: "football",
     icon: football,
-  },
-  {
-    sport: "snooker",
-    icon: snooker,
+    name: "Football",
   },
   {
     sport: "tennis",
     icon: tennis,
+    name: "Tennis",
   },
+  {
+    sport: "basketball",
+    icon: basketball,
+    name: "Baskentball",
+  },
+
   {
     sport: "american-football",
     icon: americalFootball,
+    name: "American Football",
   },
   {
     sport: "australian-rules",
     icon: australianRules,
+    name: "Australian Rules",
   },
   {
     sport: "baseball",
     icon: baseball,
+    name: "Baseball",
   },
   {
-    sport: "australian-rules",
-    icon: australianRules,
+    sport: "snooker",
+    icon: snooker,
+    name: "Snooker",
   },
 
   {
-    sport: "basketball",
-    icon: basketball,
-  },
-  {
     sport: "boxing",
     icon: boxing,
+    name: "Boxing",
   },
 
   {
     sport: "darts",
     icon: darts,
+    name: "Darts",
   },
 
   {
     sport: "gaelic-games",
     icon: gaelicGames,
+    name: "Gaelic Games",
   },
   {
     sport: "handball",
     icon: handball,
+    name: "Handball",
   },
   {
     sport: "ice-hockey",
     icon: iceHockey,
+    name: "Ice Hockey",
   },
   {
     sport: "mma",
     icon: mma,
+    name: "M M A",
   },
   {
     sport: "rugby-league",
     icon: rugbyLeague,
+    name: "Rugby League",
   },
 
   {
     sport: "volleyball",
     icon: volleyball,
+    name: "Volley Ball",
   },
   {
     sport: "rugby-union",
     icon: rugbyUnion,
+    name: "Rugby Union",
   },
   {
     sport: "winter-sports",
     icon: winterSports,
+    name: "Winter Sports",
   },
   {
     sport: "inPlayIcon",
     icon: inPlayIcon,
+    name: "In Play",
   },
   {
     sport: "movedown",
     icon: movedown,
+    name: "Move Down",
   },
 ];
 export const fetchImage = (sport) => {

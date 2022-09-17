@@ -5,6 +5,8 @@ export const LiveMatch = createSlice({
   initialState: {
     liveMatch: [],
     cricketLiveMatch: [],
+    basketballLiveMatch: [],
+    tennisLiveMatch: [],
   },
   reducers: {
     // for football
@@ -17,6 +19,14 @@ export const LiveMatch = createSlice({
       console.log(`${typeof action.payload}`, "<<<<action payload");
       state.cricketLiveMatch = action.payload;
     },
+    BasketBallMatchList: (state, action) => {
+      console.log(`${typeof action.payload}`, "<<<<action payload");
+      state.basketballLiveMatch = action.payload;
+    },
+    TennisMatchList: (state, action) => {
+      console.log(`${typeof action.payload}`, "<<<<action payload");
+      state.tennisLiveMatch = action.payload;
+    },
 
     // incrementByAmount: (state, action) => {
     //   state.value += action.payload
@@ -25,6 +35,11 @@ export const LiveMatch = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { LiveMAtchList,CricketLiveMatchList } = LiveMatch.actions;
+export const {
+  LiveMAtchList,
+  CricketLiveMatchList,
+  BasketBallMatchList,
+  TennisMatchList,
+} = LiveMatch.actions;
 
 export default LiveMatch.reducer;
