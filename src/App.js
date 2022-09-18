@@ -20,6 +20,7 @@ import "./Styles/Components/signinmodal.css";
 import "./Styles/Components/mybet.css";
 import "./Styles/Components/footer.css";
 import "./Styles/Components/terms.css";
+import "./Styles/Components/inplay.css";
 import { SingleGameCard } from "./Components/Heighlights";
 
 import SingleGame from "./Pages/SingleGame";

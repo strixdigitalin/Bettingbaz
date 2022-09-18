@@ -3,10 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 export const LiveMatch = createSlice({
   name: "counter",
   initialState: {
+    // these are having date from live match and then livematch by id 0th pos.
     liveMatch: [],
     cricketLiveMatch: [],
     basketballLiveMatch: [],
     tennisLiveMatch: [],
+
+    // ----Use below state only---these are having data from live match
+    footballAllLiveMatch: [],
+    cricketAllLiveMatch: [],
+    tennisAllLiveMatch: [],
+    basketBallLiveMatch:[]
   },
   reducers: {
     // for football
@@ -28,9 +35,19 @@ export const LiveMatch = createSlice({
       state.tennisLiveMatch = action.payload;
     },
 
-    // incrementByAmount: (state, action) => {
-    //   state.value += action.payload
-    // },
+    // ----Use these functions only as suggested in initializing state comment
+    FootballAllLiveMatchFun: (state, action) => {
+      state.footballAllLiveMatch = action.payload;
+    },
+    cricketAllLiveMatchFun: (state, action) => {
+      state.cricketAllLiveMatch = action.payload;
+    },
+    TennisAllLiveMatchFun: (state, action) => {
+      state.tennisAllLiveMatch = action.payload;
+    },
+    BasketBallLiveMatchFun:(state,action)=>{
+      state.basketBallLiveMatch=action.payload
+    }
   },
 });
 
@@ -40,6 +57,10 @@ export const {
   CricketLiveMatchList,
   BasketBallMatchList,
   TennisMatchList,
+  FootballAllLiveMatchFun,
+  cricketAllLiveMatchFun,
+  TennisAllLiveMatchFun,
+  BasketBallLiveMatchFun
 } = LiveMatch.actions;
 
 export default LiveMatch.reducer;

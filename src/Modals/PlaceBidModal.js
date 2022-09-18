@@ -68,7 +68,7 @@ function PlaceBidModal() {
           <div style={{ fontSize: "12px" }}>
             Est ret
             <br />
-            {(bidAmount * PlaceBid?.odds).toFixed(2)}
+            {parseFloat(parseFloat(bidAmount * PlaceBid?.odds)).toFixed(1)}
           </div>
         </div>
       </div>

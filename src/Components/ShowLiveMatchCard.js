@@ -17,6 +17,9 @@ import CustomLoader from "./CustomLoader";
 import NoDataFound from "./NoDataFound";
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../Redux/Reducers/PlaceBid";
+import { PlaceBetApi } from "../ClientApi/BetApi";
+
+const initialBlock = { row: null, box: null };
 
 export function ShowLiveMatchCard({
   heading = "heading",
@@ -28,13 +31,23 @@ export function ShowLiveMatchCard({
   show = "all",
   icon,
   matchId,
+  data,
   game,
 }) {
+  console.log(data, "<<<<livematchalldata");
   const dispatch = useDispatch();
   const { LiveMatch } = useSelector((state) => state);
 
   const [singleGame, setSingleGame] = useState([]);
   const [showLoader, setShowLoader] = useState(false);
+  const [bidAmount, setBidAmount] = useState(0);
+  const [clickedRow, setClickedRow] = useState(null);
+  const [bidContent, setBidContent] = useState({ odds: 0 });
+  const [clickedBlock, setClickedBlock] = useState(initialBlock);
+  const [bidStatus, setbidStatus] = useState({
+    status: null,
+    msg: "",
+  });
   const [showIt, setShowIt] = useState(true);
 
   console.log("sport>>>>", sport);
@@ -51,10 +64,23 @@ export function ShowLiveMatchCard({
     }
   };
 
+  const submitBid = () => {
+    setbidStatus({ status: null, msg: "" });
+
+    PlaceBetApi({ ...bidContent, amount: bidAmount }, (res) => {
+      console.log(res);
+      if (res.status) {
+        setbidStatus({ status: true, msg: res.message });
+      } else {
+        setbidStatus({ status: false, msg: res.message });
+      }
+    });
+  };
+
   return (
     <div>
       <CardHead heading={game} rightText="" navigation={false} icon={icon} />
-   
+
       <div className="card-today">
         <div className="inplay-head-left">
           <img
@@ -72,159 +98,269 @@ export function ShowLiveMatchCard({
           <div className="singleRight">2</div>
         </div>
       </div>
-      {
-        showIt && !showLoader && show != "all" && (
-          // sport.map((item, key) => {
-          //   console.log(item, "<<<item at live");
-          //   return (
+
+      {data.map((item, index) => {
+        console.log(item, "<<<thisisitem");
+        return (
           <>
-            {true && (
-              <div className="card-today-row  align-ctr">
-                <div className=" flex-row align-ctr in-play-row-left">
-                  {" "}
-                  <div
-                    style={{ color: "black", marginLeft: "25px" }}
-                    className="row-left flex-row just-bet  align-ctr w100"
-                  >
-                    <div>
-                      {sport[0]?.val1} vs {sport[2]?.val1}
-                    </div>
-                    <div className="flex-row just-center align-ctr">
-                      <img src={inPlay} width="30px" />
-                      {/* <img src={BetMark} width="30px" /> */}
-                    </div>
+            <div className="card-today-row  align-ctr">
+              <div className=" flex-row align-ctr in-play-row-left">
+                {" "}
+                <Link
+                  to={`/match-single${item.id}`}
+                  style={{ color: "black", marginLeft: "25px" }}
+                  className="row-left flex-row just-bet  align-ctr w100"
+                >
+                  <div>
+                    {item?.team1?.name} vs {item?.team2?.name}
+                  </div>
+                  <div className="flex-row just-center align-ctr">
+                    <img src={inPlay} width="30px" />
+                    {/* <img src={BetMark} width="30px" /> */}
+                  </div>
+                </Link>
+              </div>
+              <div className="card-today-wrap-right">
+                <div
+                  className="card-today-right"
+                  style={{
+                    background:
+                      clickedBlock.row == index && clickedBlock.box == 1
+                        ? "black"
+                        : "#064778",
+                    color: "white",
+                  }}
+                  onClick={() => {
+                    // openBidModal({
+                    //   odds: parseFloat(showOdds(item?.odds[1])).toFixed(1),
+                    //   team: item?.team1?.name,
+                    // })
+                    setClickedBlock({
+                      row: index,
+                      box: 1,
+                    });
+                    setBidContent({
+                      odds: parseFloat(showOdds(item.odds[1])).toFixed(1),
+                      team: item.team1.name,
+                      team_id: 1,
+                    });
+                    setClickedRow(index);
+                  }}
+                >
+                  {parseFloat(showOdds(item.odds[1])).toFixed(1)}
+                </div>
+
+                <div
+                  className="card-today-right"
+                  style={{
+                    background:
+                      clickedBlock.row == index && clickedBlock.box == 2
+                        ? "black"
+                        : "#F98417",
+
+                    color: "white ",
+                  }}
+                  onClick={() => {
+                    setClickedBlock({
+                      row: index,
+                      box: 2,
+                    });
+                    setBidContent({
+                      odds: parseFloat(
+                        parseFloat(showOdds(item?.odds[1])) + +0.1
+                      ).toFixed(1),
+                      team: item.team1.name,
+                      team_id: 1,
+                    });
+                    setClickedRow(index);
+                  }}
+                >
+                  {parseFloat(
+                    parseFloat(showOdds(item?.odds[1])) + +0.1
+                  ).toFixed(1)}
+                  {/* {+firstOdd + 1} */}
+                </div>
+                <div
+                  className="card-today-right"
+                  style={{
+                    background: "#064778",
+                    opacity: "0.5",
+                    background:
+                      clickedBlock.row == index && clickedBlock.box == 3
+                        ? "black"
+                        : "#064778",
+                  }}
+                  onClick={() => {
+                    setClickedBlock({
+                      row: index,
+                      box: 3,
+                    });
+                    setBidContent({
+                      odds: showOdds(item?.odds.X),
+                      team: "X",
+                      team_id: "X",
+                    });
+                    setClickedRow(index);
+                  }}
+                >
+                  {showOdds(item?.odds.X) != "NaN"
+                    ? showOdds(item?.odds.X)
+                    : "--"}
+                </div>
+                <div
+                  className="card-today-right"
+                  style={{
+                    background: "#F98417",
+                    opacity: "0.5",
+                    background:
+                      clickedBlock.row == index && clickedBlock.box == 4
+                        ? "black"
+                        : "#F98417",
+                  }}
+                  onClick={() => {
+                    setClickedBlock({
+                      row: index,
+                      box: 4,
+                    });
+                    setBidContent({
+                      odds: parseFloat(
+                        parseFloat(showOdds(item.odds.X)) + 0.1
+                      ).toFixed(1),
+                      team: "X",
+                      team_id: "X",
+                    });
+                    setClickedRow(index);
+                  }}
+                >
+                  {parseFloat(parseFloat(showOdds(item.odds.X)) + 0.1).toFixed(
+                    1
+                  ) != "NaN"
+                    ? parseFloat(
+                        parseFloat(showOdds(item.odds.X)) + 0.1
+                      ).toFixed(1)
+                    : "--"}
+
+                  {/* {second} */}
+                </div>
+                <div
+                  className="card-today-right"
+                  style={{
+                    background: "#064778",
+                    background:
+                      clickedBlock.row == index && clickedBlock.box == 5
+                        ? "black"
+                        : "#064778",
+                  }}
+                  onClick={() => {
+                    setClickedBlock({
+                      row: index,
+                      box: 5,
+                    });
+                    setBidContent({
+                      odds: showOdds(item.odds[2]),
+                      team: item.team2.name,
+                      team_id: 2,
+                    });
+                    setClickedRow(index);
+                  }}
+                >
+                  {showOdds(item.odds[2])}
+
+                  {/* {second} */}
+                </div>
+                <div
+                  className="card-today-right"
+                  style={{
+                    background: "#F98417",
+                    background:
+                      clickedBlock.row == index && clickedBlock.box == 6
+                        ? "black"
+                        : "#F98417",
+                  }}
+                  onClick={() => {
+                    setClickedBlock({
+                      row: index,
+                      box: 6,
+                    });
+                    setBidContent({
+                      odds: parseFloat(
+                        parseFloat(showOdds(item?.odds[2])) + 0.1
+                      ).toFixed(1),
+                      team: item.team2.name,
+                      team_id: 2,
+                    });
+                    setClickedRow(index);
+                  }}
+                >
+                  {/* /                      {+second + 1} */}
+                  {parseFloat(
+                    parseFloat(showOdds(item?.odds[2])) + 0.1
+                  ).toFixed(1)}
+                </div>
+              </div>
+            </div>
+
+            {index == clickedRow && (
+              <div className="placebid-cover ">
+                <div className="button-cover">
+                  {[100, 500, 1000, 2000].map((item) => {
+                    return (
+                      <button onClick={() => setBidAmount(item)}>{item}</button>
+                    );
+                  })}
+                </div>
+                <div className="input-est-cover">
+                  <input
+                    value={bidAmount}
+                    onChange={(e) => setBidAmount(e.target.value)}
+                  />
+                  <div className="button-est">
+                    {[
+                      { label: "Place Bid", onClick: submitBid },
+                      {
+                        label: "Hide",
+                        onClick: () => {
+                          setClickedRow(null);
+                          setClickedBlock(initialBlock);
+                          setbidStatus({ status: null, message: "" });
+                          setBidAmount(0);
+                          setBidContent({ odds: 0 });
+                        },
+                      },
+                    ].map((item, key) => {
+                      return (
+                        <button
+                          onClick={item.onClick}
+                          style={{
+                            background: `${key == 0 ? "green" : "red"}`,
+                          }}
+                        >
+                          {item.label}
+                        </button>
+                      );
+                    })}
+                    <button>
+                      Est:{parseFloat(bidContent.odds * bidAmount).toFixed(1)}
+                    </button>
                   </div>
                 </div>
-                <div className="card-today-wrap-right">
+                {bidStatus.status != null && (
                   <div
-                    className="card-today-right"
-                    style={{ background: "#064778", color: "white" }}
-                    onClick={() =>
-                      openBidModal({
-                        odds: parseFloat(showOdds(sport[0]?.odds)).toFixed(1),
-                        team: sport[0]?.val1,
-                      })
-                    }
-                  >
-                    {parseFloat(showOdds(sport[0]?.odds)).toFixed(1)}
-                  </div>
-
-                  <div
-                    className="card-today-right"
+                    className="bid-placed"
                     style={{
-                      background: "#F98417",
-                      color: "white ",
+                      display: `${bidStatus.status == null && "none"}`,
+                      color: `${bidStatus.status == true ? "green" : "red"}`,
                     }}
-                    onClick={() =>
-                      openBidModal({
-                        odds: parseFloat(showOdds(sport[0]?.odds)) + +0.1,
-                        team: sport[0]?.val1,
-                      })
-                    }
                   >
-                    {parseFloat(
-                      parseFloat(showOdds(sport[0]?.odds)) + +0.1
-                    ).toFixed(1)}
-                    {/* {+firstOdd + 1} */}
+                    {" "}
+                    {bidStatus.msg}
                   </div>
-                  <div
-                    className="card-today-right"
-                    style={{ background: "#064778", opacity: "0.5" }}
-                    onClick={() =>
-                      openBidModal({
-                        odds: showOdds(sport[1]?.odds),
-                        team: sport[0]?.val1,
-                      })
-                    }
-                  >
-                    {showOdds(sport[1]?.odds)}
-                  </div>
-                  <div
-                    className="card-today-right"
-                    style={{ background: "#F98417", opacity: "0.5" }}
-                    onClick={() =>
-                      openBidModal({
-                        odds: parseFloat(
-                          parseFloat(showOdds(sport[1]?.odds)) + +0.1
-                        ).toFixed(1),
-                        team: sport[2]?.val1,
-                      })
-                    }
-                  >
-                    {parseFloat(
-                      parseFloat(showOdds(sport[1].odds)) + +0.1
-                    ).toFixed(1)}
-
-                    {/* {second} */}
-                  </div>
-                  <div
-                    className="card-today-right"
-                    style={{ background: "#064778" }}
-                    onClick={() =>
-                      openBidModal({
-                        odds: showOdds(sport[2]?.odds),
-                        team: sport[2]?.val1,
-                      })
-                    }
-                  >
-                    {showOdds(sport[2]?.odds)}
-
-                    {/* {second} */}
-                  </div>
-                  <div
-                    className="card-today-right"
-                    style={{ background: "#F98417" }}
-                    onClick={() =>
-                      openBidModal({
-                        odds: parseFloat(showOdds(sport[2]?.odds)) + 0.1,
-                        team: sport[2]?.val1,
-                      })
-                    }
-                  >
-                    {/* /                      {+second + 1} */}
-                    {parseFloat(
-                      parseFloat(showOdds(sport[2]?.odds)) + 0.1
-                    ).toFixed(1)}
-                  </div>
-                </div>
+                )}
               </div>
             )}
           </>
-        )
-        // );
-        // return (
-        //   <div
-        //     className="card-today-row  align-ctr"
-        //     style={{ cursor: "pointer" }}
-        //   >
-        //     <div className=" flex-row align-ctr card-today-left-row">
-        //       {" "}
-        //       <span>{key + 1}</span>
-        //       <Link to={`/match-by-competition${item.id}`}>
-        //         <div
-        //           style={{ color: "black", marginLeft: "25px" }}
-        //           className="row-left flex-row just-bet w100 align-ctr"
-        //         >
-        //           <div className="col-70">{item?.val1}</div>
-        //           {/* <div className="flex-row just-center align-ctr">
-        //         <img src={inPlay} width="30px" />
-        //         <img src={BetMark} width="30px" />
-        //       </div> */}
-        //         </div>
-        //       </Link>
-        //     </div>
-        //     <div className="card-today-wrap-right">
-        //       <div className="card-today-right" style={{ width: "100%" }}>
-        //         <div className="singleRightrow col-70">{item?.odds}</div>
-        //       </div>
-
-        //       {/* <div className="card-today-right">
-        //       <div className="singleRightrow">Home</div>
-        //     </div> */}
-        //     </div>
-        //   </div>
-        // );
-      }
+        );
+      })}
 
       {show != "all" && (
         <div className="seemore linktag">

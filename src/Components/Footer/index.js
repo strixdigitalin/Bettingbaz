@@ -18,6 +18,20 @@ function Footer() {
       text: "support@bettingbaaz.com",
     },
   ];
+  const socialCards2 = [
+    {
+      src: require("../../Assets/Header/pngwing.com (5).png"),
+      text: "+91 7827506565",
+    },
+    {
+      src: require("../../Assets/Header/pngwing.com (6).png"),
+      text: "@bettingbaazhelp",
+    },
+    {
+      src: require("../../Assets/Header/pngwing.com (7).png"),
+      text: "contact@bettingbaaz.com",
+    },
+  ];
   const footerTexts = [
     { label: "Privacy Policy", link: "/privacy-policy" },
     { label: "Terms and Conditions", link: "/terms-and-conditions" },
@@ -40,7 +54,7 @@ function Footer() {
       </div>
       <div className="footer-support">Contact Us</div>
       <div>
-        <DisplayCardds data={socialCards1} />
+        <DisplayCardds data={socialCards2} />
       </div>
       <div className="links-cover">
         {footerTexts.map((item) => (

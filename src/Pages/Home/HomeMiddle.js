@@ -30,7 +30,7 @@ function HomeMiddle() {
         <img src={bannerArray[countBanner]} width="100%" />
         <button className="join-now">Join Now</button>
       </div>
-      <div className="home-display-card" style={{ marginTop: "20px" }}>
+      <div className="home-display-card">
         {/* <Heighlights /> */}
         <InPlayCard show="3" />
         <SingleGameListCover show={3} />

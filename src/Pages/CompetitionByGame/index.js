@@ -11,7 +11,7 @@ function CompetitionByGame() {
     <PageCover
       component={
         <div className="home-middle">
-          <div className="home-display-card" style={{ marginTop: "20px" }}>
+          <div className="home-display-card">
             <SingleGameCard
               icon={fetchImage(sport)}
               heading={sport.toLocaleUpperCase()}

@@ -126,66 +126,54 @@ function SingleGameListCover({ show }) {
         );
       })} */}
       {/* for footballonly */}
-      {cricketLiveMatchData?.map((item, key) => {
+      {/* {cricketLiveMatchData?.map((item, key) => {
         console.log("map this value,", item);
-        return (
-          <ShowLiveMatchCard
-            heading={item.name}
-            icon={fetchImage("cricket")}
-            game="Cricket"
-            sport={item.values}
-            subTitle={"title"}
-            team={"team"}
-            show={true}
-            matchId={LiveMatch.cricketLiveMatch[key]}
-          />
-        );
-      })}
-      {LiveMatchData?.map((item, key) => {
-        console.log("map this value,", item);
-        return (
-          <ShowLiveMatchCard
-            heading={item.name}
-            icon={fetchImage("football")}
-            game="Football"
-            sport={item.values}
-            subTitle={"title"}
-            team={"team"}
-            show={true}
-            matchId={LiveMatch.liveMatch[key]}
-          />
-        );
-      })}
-      {tennisLiveMatchData?.map((item, key) => {
-        console.log("map this value,", item);
-        return (
-          <ShowLiveMatchCard
-            heading={item.name}
-            game="Tennis"
-            icon={fetchImage("tennis")}
-            sport={item.values}
-            subTitle={"title"}
-            team={"team"}
-            show={true}
-            matchId={LiveMatch.tennisLiveMatch[key]}
-          />
-        );
-      })}
-      {/* {basketballLiveMatchData?.map((item, key) => {
-        console.log("map this value,", item);
-        return (
-          <ShowLiveMatchCard
-            heading={item.name}
-            game="Basketball"
-            icon={fetchImage("basketball")}
-            sport={item.values}
-            subTitle={"title"}
-            team={"team"}
-            show={true}
-            matchId={LiveMatch.basketballLiveMatch[key]}
-          />
-        );
-      })} */}
+        return ( */}
+      {LiveMatch.cricketAllLiveMatch.length > 0 && (
+        <ShowLiveMatchCard
+          icon={fetchImage("cricket")}
+          game="Cricket"
+          // sport={item.values}
+          subTitle={"title"}
+          team={"team"}
+          data={LiveMatch.cricketAllLiveMatch}
+          show={true}
+        />
+      )}
+
+      {LiveMatch.footballAllLiveMatch.length > 0 && (
+        <ShowLiveMatchCard
+          // heading={item.name}
+          icon={fetchImage("football")}
+          game="Football"
+          // sport={item.values}
+          subTitle={"title"}
+          team={"team"}
+          show={true}
+          data={LiveMatch.footballAllLiveMatch}
+        />
+      )}
+
+      {LiveMatch.tennisAllLiveMatch.length > 0 && (
+        <ShowLiveMatchCard
+          game="Tennis"
+          icon={fetchImage("tennis")}
+          subTitle={"title"}
+          data={LiveMatch.tennisAllLiveMatch}
+          team={"team"}
+          show={true}
+        />
+      )}
+      {LiveMatch.basketBallLiveMatch.length > 0 && (
+        <ShowLiveMatchCard
+          game="Basketball"
+          icon={fetchImage("basketball")}
+          subTitle={"title"}
+          data={LiveMatch.basketBallLiveMatch}
+          team={"team"}
+          show={true}
+        />
+      )}
 
       {/* {games.map((item, key) => {
         return (

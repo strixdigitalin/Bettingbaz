@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import moveLect from "../Assets/Card/Path -1.png";
 import moveRight from "../Assets/Card/Path 3.png";
 import Football from "../Assets/gameicon/football.png";
@@ -93,40 +93,56 @@ export function SingleHeighlighCardHead({
   );
 }
 
-export const GameSlider = ({ selectedGame, changeGame }) => {
+export const GameSlider = ({ selectedGame, changeGame, matchCount }) => {
   const slideLeft = useRef(null);
+  const [moveSlider, setMoveSlider] = useState(0);
 
   const onSlideLeft = () => {
-    // slideLeft.current.border = "5px solid red";
-    // document.getElementsByClassName("middle-games").style.border =
-    //   "5px solid red";
+    if (moveSlider == 0) return null;
+    setMoveSlider(moveSlider - 7);
+  };
+  const onSlideRight = () => {
+    if (moveSlider == 14) return null;
+    setMoveSlider(moveSlider + 7);
   };
 
   return (
     <div className="flex-row just-between game-slide w100">
-      <div className="navigator left-nav">
-        <img src={moveLect} onClick={onSlideLeft} ref={slideLeft} />
+      <div className="navigator left-nav pointer" onClick={onSlideLeft}>
+        <img src={moveLect} ref={slideLeft} />
       </div>
       <div className="middle-games">
-        {allSports.map((item, key) => {
-          return (
-            <div
-              className={`${
-                selectedGame == item.sport ? "singleClick" : "singleGame"
-              }`}
-              onClick={() => changeGame(item.sport)}
-            >
-              <div>
-                <img src={fetchImage(item.sport)} width="25px" />
+        {allSports
+          .slice(0, 18)
+          .slice(moveSlider, moveSlider + 7)
+          .map((item, key) => {
+            return (
+              <div
+                style={{
+                  borderBottom:
+                    selectedGame == item.sport ? "5px solid orange" : "",
+                  height: "100%",
+                }}
+              >
+                <div
+                  className={`${"singleGame"}`}
+                  onClick={() => changeGame(item.sport)}
+                >
+                  <div>
+                    <img src={fetchImage(item.sport)} width="25px" />
+                  </div>
+                  <div className="textcenter" style={{ fontSize: "9.3px" }}>
+                    {item.name}{" "}
+                    <span style={{ fontWeight: "bold", color: "black" }}>
+                      {selectedGame == item.sport ? "(" + matchCount + ")" : ""}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div className="textcenter" style={{ fontSize: "7px" }}>
-                {item.name}
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
-      <div className="navigator right-nav">
+      <div className="navigator right-nav pointer" onClick={onSlideRight}>
         <img src={moveRight} />
       </div>
     </div>

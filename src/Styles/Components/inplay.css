@@ -1,0 +1,46 @@
+.placebid-cover {
+    padding: 10px 10%;
+    background-color: white;
+}
+
+.button-cover {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.button-cover > button{
+    background-color: #707070;
+    color: white;
+    border-radius: 20px;
+    width: 80px;
+    cursor: pointer;
+    height: 30px;
+    border: none;
+}
+
+.input-est-cover {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.input-est-cover > input {
+    border-radius: 10px;
+    width: 40%;
+    padding:5px 10px;
+    border: 1px solid  #707070;
+}
+.button-est{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+}
+.button-est > button {
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    min-width: 80px;
+    background-color: #707070;
+    cursor: pointer;
+}

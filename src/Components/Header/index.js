@@ -268,7 +268,7 @@ function Header() {
             <div
               className="bottom-single"
               style={{
-                borderLeft: "1px solid gray",
+                // borderLeft: "1px solid gray",
                 paddingLeft: "10px",
                 fontSize: "10px",
               }}

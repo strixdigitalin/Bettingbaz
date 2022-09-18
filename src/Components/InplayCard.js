@@ -18,9 +18,13 @@ import CustomLoader from "./CustomLoader";
 import NoDataFound from "./NoDataFound";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  BasketBallLiveMatchFun,
   BasketBallMatchList,
+  cricketAllLiveMatchFun,
   CricketLiveMatchList,
+  FootballAllLiveMatchFun,
   LiveMAtchList,
+  TennisAllLiveMatchFun,
   TennisMatchList,
 } from "../Redux/Reducers/LiveMatch";
 
@@ -41,15 +45,18 @@ export function InPlayCard({
   const [selectedGame, setSelectedGame] = useState("cricket");
   const [showLoader, setShowLoader] = useState(false);
   const { gamename } = useParams();
+  const [matchCount, setMatchCount] = useState(null);
 
   const [liveGame, setLiveGame] = useState([]);
   // -----------use effects
   useEffect(() => {
+    setMatchCount("...");
     setShowLoader(true);
     if (gamename) setSelectedGame(gamename);
 
     API.getInPlay(selectedGame, (res) => {
       setInPlayGames(res);
+      setMatchCount(res.length);
       setShowLoader(false);
     });
   }, [selectedGame, gamename]);
@@ -57,49 +64,29 @@ export function InPlayCard({
   // ---these are live game on home pages----live match ids are being stored in array
 
   useEffect(() => {
-    console.log("cricket data live");
-    let allLive = [];
     API.getInPlay("football", (res) => {
       const ThreeGame = res.slice(0, 3);
-      const setThisToLiveGame = ThreeGame.map((item) => item.id);
-      console.log(setThisToLiveGame, "threegamesfootball");
-      dispatch(LiveMAtchList(setThisToLiveGame));
+      dispatch(FootballAllLiveMatchFun(ThreeGame));
     });
 
     console.log(liveGame, "<<<<checkLive");
   }, []);
   useEffect(() => {
-    console.log("cricket data live");
-    let allLive = [];
     API.getInPlay("cricket", (res) => {
       const ThreeGame = res.slice(0, 3);
-      const setThisToLiveGame = ThreeGame.map((item) => item.id);
-      console.log(setThisToLiveGame, "<<<threegamescricket");
-      dispatch(CricketLiveMatchList(setThisToLiveGame));
-      allLive = setThisToLiveGame;
+      dispatch(cricketAllLiveMatchFun(ThreeGame));
     });
-
-    console.log(liveGame, "<<<<checkLive");
   }, []);
-  // useEffect(() => {
-  //   console.log("cricket data live");
-  //   let allLive = [];
-  //   API.getInPlay("basketball", (res) => {
-  //     const ThreeGame = res.slice(0, 3);
-  //     const setThisToLiveGame = ThreeGame.map((item) => item.id);
-  //     console.log(setThisToLiveGame, "<<<setthistolivegame");
-  //     dispatch(BasketBallMatchList(setThisToLiveGame));
-  //     allLive = setThisToLiveGame;
-  //   });
-
-  //   console.log(liveGame, "<<<<checkLive");
-  // }, []);
+  useEffect(() => {
+    API.getInPlay("basketball", (res) => {
+      const ThreeGame = res.slice(0, 3);
+      dispatch(BasketBallLiveMatchFun(ThreeGame));
+    });
+  }, []);
   useEffect(() => {
     API.getInPlay("tennis", (res) => {
       const ThreeGame = res.slice(0, 3);
-      const setThisToLiveGame = ThreeGame.map((item) => item.id);
-      console.log(setThisToLiveGame, "<<< threegame tennis");
-      dispatch(TennisMatchList(setThisToLiveGame));
+      dispatch(TennisAllLiveMatchFun(ThreeGame));
     });
   }, []);
 
@@ -117,32 +104,25 @@ export function InPlayCard({
       />
       <GameSlider
         selectedGame={selectedGame}
+        matchCount={matchCount}
         changeGame={(game) => setSelectedGame(game)}
       />
-
       {/* --------------------------------------------------------- sub heading card */}
-
       <div className="card-subhead-inplay">
         <button className="live-but">Live</button>
         <button className="upcoming-but">Upcoming</button>
       </div>
-
       {/* ------------------------------------------------------- today section */}
       {showLoader && <CustomLoader />}
       {!showLoader && !InPlayGames.length && (
         <NoDataFound selectedGame={selectedGame} />
       )}
-      {show != "all" &&
-        !showLoader &&
-        InPlayGames.slice(0, +show)?.map((item, key) => {
-          return <InPlaySingleGame item={item} />;
-        })}
-      {show == "all" &&
-        !showLoader &&
-        InPlayGames?.map((item, key) => {
-          return <InPlaySingleGame item={item} />;
-        })}
-
+      {show != "all" && !showLoader && InPlayGames.length > 0 && (
+        <InPlaySingleGame allMatch={InPlayGames.slice(0, 3)} />
+      )}
+      {show == "all" && !showLoader && InPlayGames.length > 0 && (
+        <InPlaySingleGame allMatch={InPlayGames} />
+      )}
       <div className="seemore linktag">
         <Link
           to="/in-play"

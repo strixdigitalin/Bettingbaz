@@ -189,9 +189,7 @@ height: 100%;
 /* position: absolute; */
 /* overflow:hidden; */
 /* left: -25px; */
-overflow-x: scroll;
-
-
+/* overflow-x: scroll; */
 /* overflow-x: scroll; */
 }
 
@@ -226,7 +224,9 @@ overflow-x: scroll;
     font-size: 12px;
     margin: 22px 0px;
     color: #707070;
-    min-width: 100px;
+    box-sizing: border-box;
+
+    min-width: 92px;
 
     /* height: 42px; */
 }
@@ -238,12 +238,21 @@ overflow-x: scroll;
     justify-content: center;
     align-items: center;
     border-left: 1px solid #707070;
+    /* padding: 20px 0px; */
+    margin-top: 22px;
     cursor: pointer;
     padding: 0px 5px;
     font-size: 12px;
-    min-width: 100px;
-    border-bottom: 5px solid #F97D09;
+    box-sizing: border-box;
+    /* margin-top: 22px; */
+    min-width: 92px;
+    border-bottom: 4px solid #F97D09;
+    /* margin: 22px 0px; */
 
+
+}
+.singleClick > img {
+    border-left: 1px solid #707070;
 }
 
 .card-today-inPlay {

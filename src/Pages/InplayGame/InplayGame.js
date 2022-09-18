@@ -13,7 +13,7 @@ function InPlayGame() {
   return (
     <div className="home-middle">
       <div>{/* <img src={banner} width="100%" /> */}</div>
-      <div className="home-display-card" style={{ marginTop: "20px" }}>
+      <div className="home-display-card">
         {/* <Heighlights /> */}
         <InPlayCard show="all" />
         {/* <SingleGameCard /> */}
