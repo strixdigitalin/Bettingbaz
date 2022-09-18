@@ -21,6 +21,7 @@ import "./Styles/Components/mybet.css";
 import "./Styles/Components/footer.css";
 import "./Styles/Components/terms.css";
 import "./Styles/Components/inplay.css";
+import "./Styles/Components/staticpage.css";
 import { SingleGameCard } from "./Components/Heighlights";
 
 import SingleGame from "./Pages/SingleGame";
@@ -39,6 +40,8 @@ import MyBet from "./Pages/MyBet";
 import ResetPassword from "./Redux/Reducers/ResetPassword.js";
 import Footer from "./Components/Footer";
 import Terms from "./Pages/Terms/Terms";
+import SinglePages from "./Pages/SinglePages";
+import LandingPage from "./Pages/SinglePages/LandingPage";
 
 function App() {
   const { PlaceBid, SignInState, ResetPassword } = useSelector(
@@ -52,9 +55,11 @@ function App() {
         <Routes>
           {/* <Route path="/" > */}
           {/* </Route> */}
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<LandingPage />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/game" element={<SingleGame />}></Route>
+          {/* <Route path="/" element={<SingleGame />}></Route> */}
+          <Route path="/casino" element={<SinglePages />}></Route>
           <Route path="/in-play" element={<InPlayGame />}></Route>
           <Route path="/in-play/:gamename" element={<InPlayGame />}></Route>
           <Route

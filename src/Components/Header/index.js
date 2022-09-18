@@ -36,14 +36,17 @@ function Header() {
     {
       name: "Sports",
       index: 1,
+      link: "/",
     },
     {
       name: "E Sports",
       index: 2,
+      link: "/",
     },
     {
       name: "Casino",
       index: 3,
+      link: "/casino",
     },
   ];
 
@@ -154,14 +157,15 @@ function Header() {
         <div className={`bg2c header-upper flex-row just-ctr col-white `}>
           {headerItems.map((item, key) => {
             return (
-              <div
+              <Link
+                to={item.link}
                 className={`pointer onetab  ${
                   selectedTab != item.index ? "not-selected" : "selected-tab"
                 }`}
                 onClick={() => setSelectedTab(item.index)}
               >
                 {item.name}
-              </div>
+              </Link>
             );
           })}
         </div>

@@ -9,6 +9,7 @@ import banner1 from "../../Assets/banners/bannercard1.jpg";
 import banner2 from "../../Assets/banners/bannercard2.jpg";
 import banner3 from "../../Assets/banners/bannercard3.jpg";
 import banner4 from "../../Assets/banners/bannercard4.jpg";
+import { betting_user } from "../../Components/Header";
 const bannerArray = [banner1, banner2, banner3, banner4];
 
 function HomeMiddle() {
@@ -28,7 +29,9 @@ function HomeMiddle() {
     <div className="home-middle">
       <div className="banner-cover">
         <img src={bannerArray[countBanner]} width="100%" />
-        <button className="join-now">Join Now</button>
+        {localStorage.getItem(betting_user) == "null" && (
+          <button className="join-now">Join Now</button>
+        )}
       </div>
       <div className="home-display-card">
         {/* <Heighlights /> */}
