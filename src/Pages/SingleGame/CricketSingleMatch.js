@@ -374,8 +374,8 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
           (item) => item.val2 != null && item.val2 != "null"
         );
 
-        // if (index > 0 && checkIsNull.length > 0) {
-        if (index > 0) {
+        // if (index > 0) {
+        if (index > 0 && checkIsNull.length > 0) {
           return (
             <>
               <div style={{ marginTop: "1px" }}>
