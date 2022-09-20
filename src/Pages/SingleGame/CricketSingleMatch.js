@@ -140,6 +140,23 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
     return league.replace("-", " ").toLocaleUpperCase();
   };
 
+  const IncreaseOrangeData = (num) => {
+    let sendThis = num;
+    const values = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+    values.map((item) => {
+      if (item < num < item + 10) sendThis = item + 10;
+    });
+    return sendThis;
+  };
+  const decreaseDataBlue = (num) => {
+    let sendThis = num;
+    const values = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+    values.map((item) => {
+      if (item < num > item + 10) sendThis = item;
+    });
+    return sendThis;
+  };
+
   return (
     <div style={{ width: "60%" }}>
       <div className="single-top-head">{name}</div>
@@ -430,7 +447,9 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
 
                             <br />
                             {/* {calCulatePercentage(item.values[0].val2)} */}
-                            {calCulatePercentage(item.values[0].odds)}
+                            {IncreaseOrangeData(
+                              calCulatePercentage(item.values[0].odds)
+                            )}
                           </div>{" "}
                           <div
                             className="heighlight-row-right pointer"
@@ -464,7 +483,9 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                             <br />
                             {/* {item.values[1].odds}{" "} */}
                             {/* {calCulatePercentage(item.values[1].val2)} */}
-                            {calCulatePercentage(item.values[1].odds)}
+                            {decreaseDataBlue(
+                              calCulatePercentage(item.values[1].odds)
+                            )}
                           </div>{" "}
                         </div>
                         {/* {true && ( */}
@@ -548,7 +569,6 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                 item?.values.map((inItem) => {
                   if (inItem.val2 == null || inItem.val2 == "null") return null;
 
-             
                 })} */}
                 {premiumToggle == true &&
                   item?.values.map((inItem) => {
@@ -584,6 +604,435 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
               {/* {index == clickedRow && ( */}
             </>
           );
+
+          {
+            return item.values.map((initem, index) => {
+              if (initem.val2 == null || initem.val2 == "null") return null;
+
+              return (
+                <>
+                  <div style={{ marginTop: "1px" }}>
+                    {(() => {
+                      if (premiumToggle == false) {
+                        // if (inItem?.val2 == null || inItem?.val2 == "null")
+                        //   return null;
+
+                        return (
+                          <>
+                            <div className="flex-row just-bet w100 cricket-data-table">
+                              <div className="cricket-heighlight-row-left">
+                                {/* {item.name.replace(" A ", ` ${teams?.split("-")[0]} `)} */}
+                                {replaceString(item.name, item.values)}
+                                <br />
+                                {/* {item.values[0].val1} */}
+                              </div>{" "}
+                              <div
+                                style={{
+                                  backgroundColor: "#F97D09",
+                                  color: "white",
+                                }}
+                                className="heighlight-row-right pointer"
+                                onClick={() => {
+                                  setClickedBlock({
+                                    row: index,
+                                    box: 1,
+                                  });
+                                  setBidContent({
+                                    odds: showOdds(item.values[0].val2),
+                                    team: "",
+                                    team_id: 2,
+                                  });
+                                  setClickedRow(index);
+                                }}
+                              >
+                                {params.game != "cricket" &&
+                                  item.values[0].val2}
+
+                                {params.game == "cricket" &&
+                                  IncreaseOrangeData(
+                                    NumberCalculation(
+                                      item.name,
+                                      item.values[0]?.val2?.substring(1),
+                                      "-"
+                                    )
+                                  )}
+                                {}
+
+                                <br />
+                                {/* {calCulatePercentage(item.values[0].val2)} */}
+                                {calCulatePercentage(item.values[0].odds)}
+                              </div>{" "}
+                              <div
+                                className="heighlight-row-right pointer"
+                                style={{
+                                  backgroundColor: "#064778",
+                                  color: "white",
+                                }}
+                                onClick={() => {
+                                  setClickedBlock({
+                                    row: index,
+                                    box: 2,
+                                  });
+                                  setBidContent({
+                                    odds: NumberCalculation(
+                                      item.name,
+                                      item.values[1].val2?.substring(1),
+                                      "+"
+                                    ),
+                                    team: "",
+                                    team_id: 2,
+                                  });
+                                  setClickedRow(index);
+                                }}
+                              >
+                                {NumberCalculation(
+                                  item.name,
+                                  item.values[1].val2?.substring(1),
+                                  "+"
+                                )}
+                                {/* {item.values[1].val2?.substring(1)} */}
+                                <br />
+                                {/* {item.values[1].odds}{" "} */}
+                                {/* {calCulatePercentage(item.values[1].val2)} */}
+                                {calCulatePercentage(item.values[1].odds)}
+                              </div>{" "}
+                            </div>
+                            {/* {true && ( */}
+                            {index == clickedRow && (
+                              <div className="placebid-cover ">
+                                <div className="button-cover">
+                                  {[100, 500, 1000, 2000].map((item) => {
+                                    return (
+                                      <button
+                                        onClick={() => setBidAmount(item)}
+                                      >
+                                        {item}
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                                <div className="input-est-cover">
+                                  <input
+                                    value={bidAmount}
+                                    onChange={(e) =>
+                                      setBidAmount(e.target.value)
+                                    }
+                                  />
+                                  <div className="button-est">
+                                    {[
+                                      {
+                                        label: "Place Bid",
+                                        onClick: submitBid,
+                                      },
+                                      {
+                                        label: "Hide",
+                                        onClick: () => {
+                                          setClickedRow(null);
+                                          setClickedBlock(initialBlock);
+                                          setbidStatus({
+                                            status: null,
+                                            message: "",
+                                          });
+                                          setBidAmount(0);
+                                          setBidContent({ odds: 0 });
+                                        },
+                                      },
+                                    ].map((item, key) => {
+                                      return (
+                                        <button
+                                          onClick={item.onClick}
+                                          style={{
+                                            background: `${
+                                              key == 0 ? "green" : "red"
+                                            }`,
+                                          }}
+                                        >
+                                          {item.label}
+                                        </button>
+                                      );
+                                    })}
+                                    <button>
+                                      Est:
+                                      {parseFloat(
+                                        bidContent.odds * bidAmount
+                                      ).toFixed(1)}
+                                    </button>
+                                  </div>
+                                </div>
+                                {bidStatus.status != null && (
+                                  <div
+                                    className="bid-placed"
+                                    style={{
+                                      display: `${
+                                        bidStatus.status == null && "none"
+                                      }`,
+                                      color: `${
+                                        bidStatus.status == true
+                                          ? "green"
+                                          : "red"
+                                      }`,
+                                    }}
+                                  >
+                                    {" "}
+                                    {bidStatus.msg}
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </>
+                        );
+                      }
+                    })()}
+                    {/* {premiumToggle == false &&
+        item?.values.map((inItem) => {
+          if (inItem.val2 == null || inItem.val2 == "null") return null;
+
+     
+        })} */}
+                    {premiumToggle == true &&
+                      item?.values.map((inItem) => {
+                        return (
+                          <div className="flex-row just-bet w100 cricket-data-table">
+                            <div className="cricket-heighlight-row-left">
+                              {inItem.val1}
+                            </div>{" "}
+                            <div
+                              className="heighlight-row-right pointer"
+                              onClick={() => {
+                                // placeBid({ ...item, odds: inItem.odds })
+                                setClickedBlock({
+                                  row: index,
+                                  box: 1,
+                                });
+                                setBidContent({
+                                  odds: parseFloat(
+                                    showOdds(inItem.odds)
+                                  ).toFixed(1),
+                                  team: "",
+                                  team_id: 1,
+                                });
+                                setClickedRow(index);
+                              }}
+                            >
+                              {inItem.odds}{" "}
+                            </div>{" "}
+                          </div>
+                        );
+                      })}
+                  </div>
+                  {/* {index == clickedRow && ( */}
+                </>
+              );
+            });
+          }
+
+          // return (
+          //   <>
+          //     <div style={{ marginTop: "1px" }}>
+          //       {/* <div
+          //       className="card-today"
+          //       style={{ backgroundColor: "#EAEAEA" }}
+          //     >
+          //       <div>
+          //         <img src={movedown} width="15px" />
+          //         <span style={{ marginLeft: "15px" }}>{item?.name}</span>{" "}
+          //       </div>
+          //     </div> */}
+          //       {(() => {
+          //         if (premiumToggle == false) {
+          //           // if (inItem.val2 == null || inItem.val2 == "null") return null;
+
+          //           return (
+          //             <>
+          //               <div className="flex-row just-bet w100 cricket-data-table">
+          //                 <div className="cricket-heighlight-row-left">
+          //                   {/* {item.name.replace(" A ", ` ${teams?.split("-")[0]} `)} */}
+          //                   {replaceString(item.name, item.values)}
+          //                   <br />
+          //                   {/* {item.values[0].val1} */}
+          //                 </div>{" "}
+          //                 <div
+          //                   style={{
+          //                     backgroundColor: "#F97D09",
+          //                     color: "white",
+          //                   }}
+          //                   className="heighlight-row-right pointer"
+          //                   onClick={() => {
+          //                     setClickedBlock({
+          //                       row: index,
+          //                       box: 1,
+          //                     });
+          //                     setBidContent({
+          //                       odds: showOdds(item.values[0].val2),
+          //                       team: "",
+          //                       team_id: 2,
+          //                     });
+          //                     setClickedRow(index);
+          //                   }}
+          //                 >
+          //                   {params.game != "cricket" && item.values[0].val2}
+          //                   {params.game == "cricket" &&
+          //                     NumberCalculation(
+          //                       item.name,
+          //                       item.values[0]?.val2?.substring(1),
+          //                       "-"
+          //                     )}
+
+          //                   <br />
+          //                   {/* {calCulatePercentage(item.values[0].val2)} */}
+          //                   {calCulatePercentage(item.values[0].odds)}
+          //                 </div>{" "}
+          //                 <div
+          //                   className="heighlight-row-right pointer"
+          //                   style={{
+          //                     backgroundColor: "#064778",
+          //                     color: "white",
+          //                   }}
+          //                   onClick={() => {
+          //                     setClickedBlock({
+          //                       row: index,
+          //                       box: 2,
+          //                     });
+          //                     setBidContent({
+          //                       odds: NumberCalculation(
+          //                         item.name,
+          //                         item.values[1].val2?.substring(1),
+          //                         "+"
+          //                       ),
+          //                       team: "",
+          //                       team_id: 2,
+          //                     });
+          //                     setClickedRow(index);
+          //                   }}
+          //                 >
+          //                   {NumberCalculation(
+          //                     item.name,
+          //                     item.values[1].val2?.substring(1),
+          //                     "+"
+          //                   )}
+          //                   {/* {item.values[1].val2?.substring(1)} */}
+          //                   <br />
+          //                   {/* {item.values[1].odds}{" "} */}
+          //                   {/* {calCulatePercentage(item.values[1].val2)} */}
+          //                   {calCulatePercentage(item.values[1].odds)}
+          //                 </div>{" "}
+          //               </div>
+          //               {/* {true && ( */}
+          //               {index == clickedRow && (
+          //                 <div className="placebid-cover ">
+          //                   <div className="button-cover">
+          //                     {[100, 500, 1000, 2000].map((item) => {
+          //                       return (
+          //                         <button onClick={() => setBidAmount(item)}>
+          //                           {item}
+          //                         </button>
+          //                       );
+          //                     })}
+          //                   </div>
+          //                   <div className="input-est-cover">
+          //                     <input
+          //                       value={bidAmount}
+          //                       onChange={(e) => setBidAmount(e.target.value)}
+          //                     />
+          //                     <div className="button-est">
+          //                       {[
+          //                         { label: "Place Bid", onClick: submitBid },
+          //                         {
+          //                           label: "Hide",
+          //                           onClick: () => {
+          //                             setClickedRow(null);
+          //                             setClickedBlock(initialBlock);
+          //                             setbidStatus({
+          //                               status: null,
+          //                               message: "",
+          //                             });
+          //                             setBidAmount(0);
+          //                             setBidContent({ odds: 0 });
+          //                           },
+          //                         },
+          //                       ].map((item, key) => {
+          //                         return (
+          //                           <button
+          //                             onClick={item.onClick}
+          //                             style={{
+          //                               background: `${
+          //                                 key == 0 ? "green" : "red"
+          //                               }`,
+          //                             }}
+          //                           >
+          //                             {item.label}
+          //                           </button>
+          //                         );
+          //                       })}
+          //                       <button>
+          //                         Est:
+          //                         {parseFloat(
+          //                           bidContent.odds * bidAmount
+          //                         ).toFixed(1)}
+          //                       </button>
+          //                     </div>
+          //                   </div>
+          //                   {bidStatus.status != null && (
+          //                     <div
+          //                       className="bid-placed"
+          //                       style={{
+          //                         display: `${
+          //                           bidStatus.status == null && "none"
+          //                         }`,
+          //                         color: `${
+          //                           bidStatus.status == true ? "green" : "red"
+          //                         }`,
+          //                       }}
+          //                     >
+          //                       {" "}
+          //                       {bidStatus.msg}
+          //                     </div>
+          //                   )}
+          //                 </div>
+          //               )}
+          //             </>
+          //           );
+          //         }
+          //       })()}
+          //       {/* {premiumToggle == false &&
+          //       item?.values.map((inItem) => {
+          //         if (inItem.val2 == null || inItem.val2 == "null") return null;
+
+          //       })} */}
+          //       {premiumToggle == true &&
+          //         item?.values.map((inItem) => {
+          //           return (
+          //             <div className="flex-row just-bet w100 cricket-data-table">
+          //               <div className="cricket-heighlight-row-left">
+          //                 {inItem.val1}
+          //               </div>{" "}
+          //               <div
+          //                 className="heighlight-row-right pointer"
+          //                 onClick={() => {
+          //                   // placeBid({ ...item, odds: inItem.odds })
+          //                   setClickedBlock({
+          //                     row: index,
+          //                     box: 1,
+          //                   });
+          //                   setBidContent({
+          //                     odds: parseFloat(showOdds(inItem.odds)).toFixed(
+          //                       1
+          //                     ),
+          //                     team: "",
+          //                     team_id: 1,
+          //                   });
+          //                   setClickedRow(index);
+          //                 }}
+          //               >
+          //                 {inItem.odds}{" "}
+          //               </div>{" "}
+          //             </div>
+          //           );
+          //         })}
+          //     </div>
+          //     {/* {index == clickedRow && ( */}
+          //   </>
+          // );
         }
       })}
     </div>
