@@ -187,6 +187,7 @@ width: 90%;
 display: flex;
 height: 100%;
 /* position: absolute; */
+padding-left: 50px;
 /* overflow:hidden; */
 /* left: -25px; */
 /* overflow-x: scroll; */
@@ -355,7 +356,7 @@ border-bottom-right-radius: 10px;
 
 .heighlight-row-right{
     border-left: 1px solid #707070;
-    width: 30%;
+    width: 20%;
     height: 100%;
     display: flex;
     align-items: center;

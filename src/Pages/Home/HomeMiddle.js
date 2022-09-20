@@ -29,9 +29,11 @@ function HomeMiddle() {
     <div className="home-middle">
       <div className="banner-cover">
         <img src={bannerArray[countBanner]} width="100%" />
-        {localStorage.getItem(betting_user) == "null" && (
+        {
+        localStorage.getItem(betting_user) == "null" && (
           <button className="join-now">Join Now</button>
-        )}
+        )
+        }
       </div>
       <div className="home-display-card">
         {/* <Heighlights /> */}
