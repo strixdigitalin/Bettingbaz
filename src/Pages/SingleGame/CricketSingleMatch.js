@@ -319,7 +319,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
         >
           <div
             className="flex-row w100 just-ctr"
-            style={{ padding: "5px 0px", color: "wheat" }}
+            style={{ padding: "5px 0px", color: "wheat", height: "40px" }}
           >
             Back
             {/* <div>(54)</div> */}
@@ -328,11 +328,12 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
             className="flex-row w100 just-ctr"
             style={{
               border: "1px solid #707070",
+              height: "40px",
               padding: "5px 0px",
               color: "wheat",
             }}
           >
-            {parseFloat(matchData[0]?.values[0]?.odds).toFixed(1)}
+            {parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)}
             {/* <div>(54)</div> */}
           </div>
 
@@ -342,9 +343,10 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
               border: "1px solid #707070",
               padding: "5px 0px",
               color: "wheat",
+              height: "40px",
             }}
           >
-            {parseFloat(matchData[0]?.values[1]?.odds).toFixed(1)}
+            {parseFloat(matchData[0]?.values[1]?.odds).toFixed(2)}
           </div>
           {/* <br /> */}
         </div>
@@ -359,7 +361,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
         >
           <div
             className="flex-row w100 text-center just-ctr"
-            style={{ padding: "5px 0px", color: "wheat" }}
+            style={{ padding: "5px 0px", color: "wheat", height: "40px" }}
           >
             Lay
             {/* <div>(54)</div> */}
@@ -370,6 +372,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
               border: "1px solid #707070",
               padding: "5px 0px",
               color: "wheat",
+              height: "40px",
             }}
           >
             {parseFloat(
@@ -382,6 +385,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
               border: "1px solid #707070",
               padding: "5px 0px",
               color: "wheat",
+              height: "40px",
             }}
           >
             {parseFloat(
@@ -441,7 +445,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
               color: !premiumToggle ? "white" : "black",
             }}
           >
-            <img src={inPlay} />
+            {/* <img src={inPlay} /> */}
             Fancy
           </div>
         )}
@@ -576,7 +580,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                         {index == clickedRow && (
                           <div className="placebid-cover ">
                             <div className="button-cover">
-                              {[100, 500, 1000, 2000].map((item) => {
+                              {[100, 500, 1000, 2000,5000].map((item) => {
                                 return (
                                   <button onClick={() => setBidAmount(item)}>
                                     {item}
@@ -1120,7 +1124,57 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
         }
       })}
       {filterNull(matchData).length == 0 && (
-        <div style={{ width: "100%", textAlign: "center" }}> No Data </div>
+        <div
+          style={{
+            marginTop: "5px",
+            width: "100%",
+            textAlign: "center",
+            background: "white",
+            opacity: "0.5",
+          }}
+        >
+          {" "}
+          {/* No Data{" "} */}
+          <div className="flex-row just-bet w100 cricket-data-table">
+            <div className="cricket-heighlight-row-left">
+              {/* {item.name.replace(" A ", ` ${teams?.split("-")[0]} `)} */}
+              {/* {replaceString(item.name, item.values)} */}
+              {/* <br /> */}
+              {/* {item.values[0].val1} */}
+              No Data
+            </div>{" "}
+            <div
+              style={{
+                // backgroundColor: "#F97D09",
+                color: "white",
+              }}
+              className="heighlight-row-right pointer"
+            >
+              <br />
+              {/* {calCulatePercentage(item.values[0].val2)} */}
+              {/* calCulatePercentage(item.values[0].odds) */}
+              {/* {IncreaseOrangeData(21)} */}
+            </div>{" "}
+            <div
+              className="heighlight-row-right pointer"
+              style={{
+                // backgroundColor: "#064778",
+                color: "white",
+              }}
+            >
+              {/* {NumberCalculation(
+                item.name,
+                item.values[1].val2?.substring(1),
+                "+"
+              )} */}
+              {/* {item.values[1].val2?.substring(1)} */}
+              <br />
+              {/* {item.values[1].odds}{" "} */}
+              {/* {calCulatePercentage(item.values[1].val2)} */}
+              {/* {decreaseDataBlue(calCulatePercentage(item.values[1].odds))} */}
+            </div>{" "}
+          </div>
+        </div>
       )}
     </div>
   );

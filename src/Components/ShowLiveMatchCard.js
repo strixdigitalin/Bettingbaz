@@ -161,7 +161,9 @@ export function ShowLiveMatchCard({
                     setClickedRow(index);
                   }}
                 >
-                  {parseFloat(showOdds(item.odds[1])).toFixed(1)}
+                  {parseFloat(showOdds(item.odds[1])).toFixed(1) == "NaN"
+                    ? "--"
+                    : parseFloat(showOdds(item.odds[1])).toFixed(1)}
                 </div>
 
                 <div
@@ -193,14 +195,19 @@ export function ShowLiveMatchCard({
                 >
                   {parseFloat(
                     parseFloat(showOdds(item?.odds[1])) + +0.1
-                  ).toFixed(1)}
+                  ).toFixed(1) == "NaN"
+                    ? "--"
+                    : parseFloat(
+                        parseFloat(showOdds(item?.odds[1])) + +0.1
+                      ).toFixed(1)}
                   {/* {+firstOdd + 1} */}
                 </div>
                 <div
                   className="card-today-right"
                   style={{
                     background: "#064778",
-                    opacity: "0.5",
+                    opacity: "0.8",
+
                     background:
                       clickedBlock.row == index && clickedBlock.box == 3
                         ? "black"
@@ -320,7 +327,11 @@ export function ShowLiveMatchCard({
                   {/* /                      {+second + 1} */}
                   {parseFloat(
                     parseFloat(showOdds(item?.odds[2])) + 0.1
-                  ).toFixed(1)}
+                  ).toFixed(1) == "NaN"
+                    ? "--"
+                    : parseFloat(
+                        parseFloat(showOdds(item?.odds[2])) + 0.1
+                      ).toFixed(1)}
                 </div>
               </div>
             </div>
@@ -328,7 +339,7 @@ export function ShowLiveMatchCard({
             {index == clickedRow && (
               <div className="placebid-cover ">
                 <div className="button-cover">
-                  {[100, 500, 1000, 2000].map((item) => {
+                  {[100, 500, 1000, 2000, 5000].map((item) => {
                     return (
                       <button onClick={() => setBidAmount(item)}>{item}</button>
                     );

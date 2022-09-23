@@ -209,7 +209,7 @@ function Header() {
               <Link to="/my-bet">
                 <button className="loggedInButton pointer">
                   <div>
-                    <img src={wallet} />
+                    <img src={wallet} height="18px" />
                   </div>
                   <div>{loggedInUser?.user_coin + " coins"}</div>
                 </button>
@@ -219,7 +219,7 @@ function Header() {
                 onClick={() => dispatch(openWallet(!WalletDropDown.show))}
               >
                 <div>
-                  <img src={avatar} />
+                  <img src={avatar} height="18px" />
                 </div>
                 <div>{loggedInUser?.name}</div>
               </button>

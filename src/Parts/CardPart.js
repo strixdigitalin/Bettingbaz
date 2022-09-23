@@ -105,17 +105,17 @@ export const GameSlider = ({ selectedGame, changeGame, matchCount }) => {
       setMoveSlider(moveSlider - 3);
     } else {
       if (moveSlider == 0) return null;
-      setMoveSlider(moveSlider - 7);
+      setMoveSlider(moveSlider - 3);
     }
   };
   const onSlideRight = () => {
-    alert(window.screen.width);
+    // alert(window.screen.width);
     if (window.screen.width < 500) {
       if (moveSlider == 14) return null;
       setMoveSlider(moveSlider + 3);
     } else {
       if (moveSlider == 14) return null;
-      setMoveSlider(moveSlider + 7);
+      setMoveSlider(moveSlider + 3);
     }
   };
 
@@ -127,7 +127,7 @@ export const GameSlider = ({ selectedGame, changeGame, matchCount }) => {
       <div className="middle-games">
         {allSports
           .slice(0, 18)
-          .slice(moveSlider, moveSlider + 7)
+          .slice(moveSlider, moveSlider + 9)
           .map((item, key) => {
             return (
               <div
@@ -137,12 +137,18 @@ export const GameSlider = ({ selectedGame, changeGame, matchCount }) => {
                   height: "100%",
                 }}
               >
+             
                 <div
                   className={`${"singleGame"}`}
                   onClick={() => changeGame(item.sport)}
                 >
+                  
                   <div>
-                    <img src={fetchImage(item.sport)} width="25px" />
+                    <img
+                      src={fetchImage(item.sport)}
+                      width="25px"
+                      style={{ marginLeft: "1px solid black" }}
+                    />
                   </div>
                   <div className="textcenter" style={{ fontSize: "9.3px" }}>
                     {item.name}{" "}

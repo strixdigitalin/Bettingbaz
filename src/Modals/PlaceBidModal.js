@@ -32,7 +32,7 @@ function PlaceBidModal() {
   return (
     <div className="placeBidModal">
       <div className="flex-row just-bet">
-        {[100, 500, 1000, 2000].map((item) => {
+        {[100, 500, 1000, 2000,5000].map((item) => {
           return (
             <div className="bid-but pointer" onClick={() => setBidAmount(item)}>
               {item}{" "}

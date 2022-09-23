@@ -210,7 +210,7 @@ const InPlaySingleGame = (props) => {
             {index == clickedRow && (
               <div className="placebid-cover ">
                 <div className="button-cover">
-                  {[100, 500, 1000, 2000].map((item) => {
+                  {[100, 500, 1000, 2000,5000].map((item) => {
                     return (
                       <button onClick={() => setBidAmount(item)}>{item}</button>
                     );

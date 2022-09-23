@@ -28,7 +28,7 @@
 
 }
 .scoredata-team{
- width: 60%;   
+ width: 74%;   
  color: black;
  
  border-top-left-radius: 10px;
@@ -55,24 +55,25 @@ text-align: center;
     align-items: center;
 }
 .playerScore{
-width: 22%;
+width: 18%;
 display: flex;
 align-items: center;
 height: 100%;
 /* margin-left: 50px; */
 }
 .scoredata-team{
-    width: 60%;   
+    width: 63%;   
     color: black;
    }
 .score-data-single-team{
+    height: 40px;
     
 
 
 }
 
 .playerScore-odd{
-    width: 20%;
+    width: 18%;
 }
 
 .cricket-data-table{
@@ -108,6 +109,7 @@ text-align: center;
     
     width: 30%;
     padding: 10px;
+    margin-bottom: -3px;
 
 }
 .mob-one-eaning{
