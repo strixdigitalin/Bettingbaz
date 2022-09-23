@@ -4,6 +4,7 @@ export const SignIn = createSlice({
   name: "counter",
   initialState: {
     show: false,
+    showWithdraw: false,
   },
   reducers: {
     showSigninModal: (state, action) => {
@@ -14,7 +15,9 @@ export const SignIn = createSlice({
 
       // console.log(action.payload, state, "<<<<action");
     },
-
+    showWithdrawFun: (state, action) => {
+      state.showWithdraw = action.payload;
+    },
     // incrementByAmount: (state, action) => {
     //   state.value += action.payload
     // },
@@ -22,6 +25,6 @@ export const SignIn = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { showSigninModal } = SignIn.actions;
+export const { showSigninModal, showWithdrawFun } = SignIn.actions;
 
 export default SignIn.reducer;

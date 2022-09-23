@@ -4,11 +4,12 @@ import SingleRowRunningBid from "./SingleRowRunningBid";
 
 export const GameHeading = [
   { name: "Sports Name", width: "5%" },
-  { name: "Tournament Id", width: "50%" },
+  { name: "Tournament Id", width: "45%" },
   { name: "Time & Date", width: "25%" },
   { name: "Bid Amount", width: "5%" },
   { name: "Current Odds", width: "5%" },
   { name: "Win/loss", width: "5%" },
+  { name: "Action", width: "5%" },
 ];
 function MyBet() {
   const BET_HISTORY = "BET_HISTORY";
@@ -95,9 +96,10 @@ function MyBet() {
                   </div>
                 ))}
               </div>
-              {gameTransection.map((item, index) => (
-                <SingleRowRunningBid item={item} />
-              ))}
+              {gameTransection.map((item, index) => {
+                console.log(item, "<<<<itemsingle");
+                return <SingleRowRunningBid item={item} />;
+              })}
               {/* {gameTransection.map((item, index) => (
                 <div className="table-row">
                   <div

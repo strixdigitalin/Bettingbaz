@@ -44,6 +44,7 @@ import Terms from "./Pages/Terms/Terms";
 import SinglePages from "./Pages/SinglePages";
 import LandingPage from "./Pages/SinglePages/LandingPage";
 import MobDashboard from "./Pages/MobDashboard";
+import Withdraw from "./Modals/Withdraw";
 
 function App() {
   const { PlaceBid, SignInState, ResetPassword } = useSelector(
@@ -97,6 +98,11 @@ function App() {
       {ResetPassword?.show && (
         <div className="modal-outer">
           <ResetPasswordModal />
+        </div>
+      )}
+      {SignInState?.showWithdraw && (
+        <div className="modal-outer">
+          <Withdraw />
         </div>
       )}
     </div>

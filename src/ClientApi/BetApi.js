@@ -144,3 +144,97 @@ export const getDataSavedInDb = (payload, successCallback) => {
     console.log(e);
   }
 };
+
+export const amountWidraw = async (amount, successCallBack) => {
+  try {
+    var myHeaders = new Headers();
+    const user = localStorage.getItem("betting_user");
+    const userData = JSON.parse(user);
+    const token = userData.usertoken;
+    myHeaders.append("Authorization", "Bearer " + userData.bearer);
+
+    var formdata = new FormData();
+    formdata.append("token", token);
+    formdata.append("amount", amount);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: formdata,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://client.drazs.com/backend/public/api/addwithdrawl",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        successCallBack(result);
+      })
+      .catch((error) => console.log("error", error));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const earnAmount = async (amount, id, successCallBack) => {
+  var myHeaders = new Headers();
+  const user = localStorage.getItem("betting_user");
+  const userData = JSON.parse(user);
+  const token = userData.usertoken;
+  myHeaders.append("Authorization", "Bearer " + userData.bearer);
+  var formdata = new FormData();
+  formdata.append("token", token);
+
+  formdata.append("amount", amount);
+  formdata.append("id", id);
+
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: formdata,
+    redirect: "follow",
+  };
+
+  fetch(
+    "https://client.drazs.com/backend/public/api/earnamount",
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => {
+      successCallBack(result);
+      console.log(result);
+    })
+    .catch((error) => console.log("error", error));
+};
+
+export const withdrawApi = async (amount, successCallBack) => {
+  var myHeaders = new Headers();
+  const user = localStorage.getItem("betting_user");
+  const userData = JSON.parse(user);
+  const token = userData.usertoken;
+  myHeaders.append("Authorization", "Bearer " + userData.bearer);
+  var formdata = new FormData();
+  formdata.append("token", token);
+  formdata.append("amount", amount);
+
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: formdata,
+    redirect: "follow",
+  };
+
+  fetch(
+    "https://client.drazs.com/backend/public/api/addwithdrawl",
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => {
+      successCallBack(JSON.parse(result));
+      console.log(result, "<<<<withdrawl");
+    })
+    .catch((error) => console.log("error", error));
+};

@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../ClientApi/Auth";
-import { PlaceBetApi } from "../ClientApi/BetApi";
+import { getUserDetail, PlaceBetApi } from "../ClientApi/BetApi";
 import { hideModal, placeBid } from "../Redux/Reducers/PlaceBid";
 import SigninModal, { showSigninModal } from "../Redux/Reducers/SigninModal";
+import loginsvg from "../Assets/Header/Svgs/login.svg";
+import signup from "../Assets/Header/Svgs/signup.svg";
 function SignInModal() {
   const { PlaceBid } = useSelector((state) => state);
+  const [IsLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch = useDispatch();
   console.log(PlaceBid);
   const pressCancel = () => {
@@ -13,6 +16,21 @@ function SignInModal() {
   };
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [bidAmount, setBidAmount] = useState(0);
+  const [loggedInUser, setLoggedInUser] = useState({});
+
+  useEffect(() => {
+    const stringUser = localStorage.getItem("betting_user");
+    console.log(stringUser, "<<<is");
+    if (stringUser == null || stringUser == "" || stringUser == "null") {
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
+      getUserDetail((res) => {
+        setLoggedInUser(res.user);
+      });
+    }
+    // const parseIt = JSON.parse(stringUser);
+  }, []);
 
   const submitBid = () => {
     PlaceBetApi({ ...PlaceBid, amount: bidAmount }, (res) => {
@@ -40,6 +58,7 @@ function SignInModal() {
           JSON.stringify({ ...res.user, bearer: res["bearer-token"] })
         );
         dispatch(showSigninModal(false));
+        window.location.href = "/home";
       } else {
         alert("fail");
       }
@@ -59,9 +78,11 @@ function SignInModal() {
           />
         );
       })}
-      <button className="submit-but" onClick={handleSubmit}>
+      {/* <button className="submit-but" onClick={handleSubmit}>
         Sign in
-      </button>
+      </button> */}
+      <img onClick={handleSubmit} src={loginsvg} />
+      <img onClick={handleSubmit} src={signup} />
     </div>
   );
 }

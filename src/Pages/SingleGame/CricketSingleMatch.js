@@ -46,6 +46,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
   });
 
   console.log(params, "<<<<params");
+  const matchId = `/sport/${params.game}/${params.legue}/${params.teams}/${params.id}`;
   useEffect(() => {
     setInterval(function () {
       // method to be executed;
@@ -116,7 +117,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
   const submitBid = () => {
     setbidStatus({ status: null, msg: "" });
 
-    PlaceBetApi({ ...bidContent, amount: bidAmount }, (res) => {
+    PlaceBetApi({ ...bidContent, amount: bidAmount, matchId }, (res) => {
       console.log(res);
       if (res.status) {
         setbidStatus({ status: true, msg: res.message });
@@ -181,11 +182,11 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
   };
   const filterNull = (arr) => {
     console.log(arr);
-    // const sendThis = arr.filter(
-    //   (item) => item.odds != null && item.odds != "null"
-    // );
+    const sendThis = arr.filter(
+      (item) => item.val2 != null && item.val2 != "null"
+    );
     // console.log(arr, sendThis, "<<<<sendThis");
-    return arr;
+    return sendThis;
   };
   return (
     <div className="single-middle">

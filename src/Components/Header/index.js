@@ -21,6 +21,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { openWallet } from "../../Redux/Reducers/WalletDropDown";
 import { showResetPasswordModal } from "../../Redux/Reducers/ResetPassword.js";
 import { allSports, fetchImage } from "../Controler/ImageBySport";
+import { showWithdrawFun } from "../../Redux/Reducers/SigninModal";
 
 export const betting_user = "betting_user";
 
@@ -256,6 +257,20 @@ function Header() {
                       <img src={logout} />
                     </div>
                     <div onClick={Logout}>Logout</div>
+                  </div>
+                  <div className="flex-row  wallet-single">
+                    {" "}
+                    <div>
+                      <img src={logout} />
+                    </div>
+                    <div
+                      onClick={() => {
+                        dispatch(showWithdrawFun(true));
+                        dispatch(openWallet(!WalletDropDown.show));
+                      }}
+                    >
+                      Withdraw
+                    </div>
                   </div>
                 </div>
               )}

@@ -28,6 +28,8 @@ import {
   TennisAllLiveMatchFun,
   TennisMatchList,
 } from "../Redux/Reducers/LiveMatch";
+import { SingleGameCard } from "./Heighlights";
+import { fetchImage } from "./Controler/ImageBySport";
 
 export function InPlayCard({
   heading = "heading",
@@ -47,6 +49,8 @@ export function InPlayCard({
   const [showLoader, setShowLoader] = useState(false);
   const { gamename } = useParams();
   const [matchCount, setMatchCount] = useState(null);
+  const [handleLive, setHandleLive] = useState(true);
+  const [singleGame, setSingleGame] = useState([]);
 
   const [liveGame, setLiveGame] = useState([]);
 
@@ -68,7 +72,6 @@ export function InPlayCard({
   // ---these are live game on home pages----live match ids are being stored in array
 
   useEffect(() => {
-
     setInterval(() => {
       API.getInPlay("football", (res) => {
         const ThreeGame = res.slice(0, 3);
@@ -84,9 +87,8 @@ export function InPlayCard({
         const ThreeGame = res.slice(0, 3);
         dispatch(cricketAllLiveMatchFun(ThreeGame));
       });
-      console.log("cricket fetched")
+      console.log("cricket fetched");
     }, 10000);
-
   }, []);
   useEffect(() => {
     setInterval(() => {
@@ -94,7 +96,7 @@ export function InPlayCard({
         const ThreeGame = res.slice(0, 3);
         dispatch(BasketBallLiveMatchFun(ThreeGame));
       });
-      console.log("basketball fetched")
+      console.log("basketball fetched");
     }, 5000);
   }, []);
   useEffect(() => {
@@ -103,10 +105,17 @@ export function InPlayCard({
         const ThreeGame = res.slice(0, 3);
         dispatch(TennisAllLiveMatchFun(ThreeGame));
       });
-      console.log("tennis fetched")
+      console.log("tennis fetched");
     }, 10000);
   }, []);
-
+  useEffect(() => {
+    setShowLoader(true);
+    API.competitionBySports(selectedGame, (res) => {
+      console.log(selectedGame, "-->>>", res);
+      setSingleGame(res);
+      setShowLoader(false);
+    });
+  }, [selectedGame]);
   //   ------ ONCLCICKS-----
   //   const onChangeGame = (game) => set;
   //   ----
@@ -135,20 +144,140 @@ export function InPlayCard({
       )}
       {/* --------------------------------------------------------- sub heading card */}
       <div className="card-subhead-inplay">
-        <button className="live-but">Live</button>
-        <button className="upcoming-but">Upcoming</button>
+        <button
+          className="live-but"
+          style={{
+            color: handleLive ? "white" : "black",
+            background: handleLive ? "#504E4E" : "white",
+          }}
+          onClick={() => setHandleLive(true)}
+        >
+          Live
+        </button>
+        <button
+          style={{
+            color: !handleLive ? "white" : "black",
+            background: !handleLive ? "#504E4E" : "white",
+          }}
+          className="upcoming-but"
+          onClick={() => setHandleLive(false)}
+        >
+          Upcoming
+        </button>
       </div>
       {/* ------------------------------------------------------- today section */}
       {showLoader && <CustomLoader />}
       {!showLoader && !InPlayGames.length && (
         <NoDataFound selectedGame={selectedGame} />
       )}
-      {show != "all" && !showLoader && InPlayGames.length > 0 && (
+      {handleLive && show != "all" && !showLoader && InPlayGames.length > 0 && (
         <InPlaySingleGame allMatch={InPlayGames.slice(0, 3)} />
       )}
-      {show == "all" && !showLoader && InPlayGames.length > 0 && (
+      {handleLive && show == "all" && !showLoader && InPlayGames.length > 0 && (
         <InPlaySingleGame allMatch={InPlayGames} />
       )}
+      {!handleLive && show != "all" && !showLoader && singleGame.length > 0 && (
+        <>
+          {singleGame.slice(0, 3)?.map((item, key) => {
+            console.log(item, "<<<item in single game card");
+            return (
+              <Link
+                to={`/match-by-competition${item?.id}`}
+                className="hoverRow"
+              >
+                <div
+                  className="card-today-row-comp  align-ctr"
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className=" flex-row align-ctr card-today-left-row-comp">
+                    {" "}
+                    <span>{key + 1}</span>
+                    <div
+                      style={{ color: "black" }}
+                      className="row-left flex-row just-bet w100 align-ctr"
+                    >
+                      <div className="col-70">{item?.group}</div>
+                      {/* <div className="flex-row just-center align-ctr">
+                  <img src={inPlay} width="30px" />
+                  <img src={BetMark} width="30px" />
+                </div> */}
+                    </div>
+                  </div>
+                  <div className="card-today-wrap-right-comp">
+                    <div
+                      className="card-today-right-comp"
+                      style={{ width: "100%" }}
+                    >
+                      <div
+                        className="singleRightrow col-70"
+                        style={{ border: "none" }}
+                      >
+                        {item?.name}
+                      </div>
+                    </div>
+
+                    {/* <div className="card-today-right">
+                <div className="singleRightrow">Home</div>
+              </div> */}
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </>
+      )}
+      {!handleLive && show == "all" && !showLoader && singleGame.length > 0 && (
+        <>
+          {singleGame?.map((item, key) => {
+            console.log(item, "<<<item in single game card");
+            return (
+              <Link
+                to={`/match-by-competition${item?.id}`}
+                className="hoverRow"
+              >
+                <div
+                  className="card-today-row-comp  align-ctr"
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className=" flex-row align-ctr card-today-left-row-comp">
+                    {" "}
+                    <span>{key + 1}</span>
+                    <div
+                      style={{ color: "black" }}
+                      className="row-left flex-row just-bet w100 align-ctr"
+                    >
+                      <div className="col-70">{item?.group}</div>
+                      {/* <div className="flex-row just-center align-ctr">
+                  <img src={inPlay} width="30px" />
+                  <img src={BetMark} width="30px" />
+                </div> */}
+                    </div>
+                  </div>
+                  <div className="card-today-wrap-right-comp">
+                    <div
+                      className="card-today-right-comp"
+                      style={{ width: "100%" }}
+                    >
+                      <div
+                        className="singleRightrow col-70"
+                        style={{ border: "none" }}
+                      >
+                        {item?.name}
+                      </div>
+                    </div>
+
+                    {/* <div className="card-today-right">
+                <div className="singleRightrow">Home</div>
+              </div> */}
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </>
+      )}
+      {}
+
       <div className="seemore linktag">
         <Link
           to="/in-play"

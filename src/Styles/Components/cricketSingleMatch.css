@@ -5,7 +5,7 @@
     
 }
 .eaning-left{
-    width: 22%;
+    width: 30%;
     text-align: center;
     display: flex;
     justify-content: space-between;
@@ -44,11 +44,11 @@
     text-align: center;
 }
 .eaning-mid {
-width:50%;
+width:40%;
 text-align: center;
 }
 .eaning-right{
-    width: 22%;
+    width: 30%;
     text-align: center;
     display: flex;
     justify-content: space-between;
