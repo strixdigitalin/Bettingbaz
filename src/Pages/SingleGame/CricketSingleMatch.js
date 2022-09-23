@@ -184,7 +184,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
     // const sendThis = arr.filter(
     //   (item) => item.odds != null && item.odds != "null"
     // );
-    console.log(arr, sendThis, "<<<<sendThis");
+    // console.log(arr, sendThis, "<<<<sendThis");
     return arr;
   };
   return (

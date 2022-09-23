@@ -48,7 +48,7 @@ const InPlaySingleGame = (props) => {
   const submitBid = () => {
     setbidStatus({ status: null, msg: "" });
 
-    PlaceBetApi({ ...bidContent, amount: bidAmount }, (res) => {
+    PlaceBetApi({ ...bidContent, amount: bidAmount  }, (res) => {
       console.log(res);
       if (res.status) {
         setbidStatus({ status: true, msg: res.message });
@@ -115,6 +115,7 @@ const InPlaySingleGame = (props) => {
                       odds: firstOdd,
                       team: item.team1.name,
                       team_id: 1,
+                      matchId: item.id,
                     });
                     setClickedRow(index);
                   }}
@@ -135,6 +136,7 @@ const InPlaySingleGame = (props) => {
                       ).toFixed(1),
                       team: item.team2.name,
                       team_id: 1,
+                      matchId: item.id,
                     });
                     setClickedRow(index);
                   }}
@@ -149,6 +151,7 @@ const InPlaySingleGame = (props) => {
                       odds: firstOdd,
                       team: item.team1.name,
                       team_id: 1,
+                      matchId: item.id,
                     });
                     setClickedRow(index);
                   }}
@@ -163,6 +166,7 @@ const InPlaySingleGame = (props) => {
                       odds: second,
                       team: item.team2.name,
                       team_id: 2,
+                      matchId: item.id,
                     });
                     setClickedRow(index);
                   }}
@@ -177,6 +181,7 @@ const InPlaySingleGame = (props) => {
                       odds: second,
                       team: item.team2.name,
                       team_id: 2,
+                      matchId: item.id,
                     });
                     setClickedRow(index);
                   }}
@@ -193,6 +198,7 @@ const InPlaySingleGame = (props) => {
                       ).toFixed(1),
                       team: item.team2.name,
                       team_id: 2,
+                      matchId: item.id,
                     });
                     setClickedRow(index);
                   }}
