@@ -36,6 +36,9 @@
  /* padding:px 0px; */
  /* padding-left: 15px; */
 }
+.single-middle{
+    width: 60%;
+}
 
 .text-center{
     text-align: center;
@@ -106,4 +109,62 @@ text-align: center;
     width: 30%;
     padding: 10px;
 
+}
+.mob-one-eaning{
+    display: none;
+}
+
+
+@media screen and (max-width:768px) {
+    .one-eaning{
+        height: 100px;
+        display: flex;
+        align-items: center;
+        
+    }
+    .eaning-mid {
+        width:40%;
+        text-align: center;
+        }
+        .eaning-right{
+            width: 30%;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    .eaning-left{
+        display: flex;
+        width: 30%;
+        text-align: center;
+        flex-direction: column;
+    }
+    .single-middle{
+        width: 100%;
+    }
+    .single-top-head{
+        /* display: none; */
+    }
+    .one-eaning{
+        /* border-radius: 40px; */
+        /* display: none; */
+    }
+    .mob-one-eaning{
+        display: flex;
+        border-radius: 40px;
+        width: 95%;
+        margin: auto;
+        display: flex;
+        background-color: white;
+        align-items: center;
+
+
+    }
+    .mob-one-eaning-single{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }

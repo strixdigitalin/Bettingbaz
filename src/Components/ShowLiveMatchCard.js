@@ -66,15 +66,20 @@ export function ShowLiveMatchCard({
 
   const submitBid = () => {
     setbidStatus({ status: null, msg: "" });
+    console.log(bidContent, "<<<bid content");
+    // return null;
 
-    PlaceBetApi({ ...bidContent, amount: bidAmount }, (res) => {
-      console.log(res);
-      if (res.status) {
-        setbidStatus({ status: true, msg: res.message });
-      } else {
-        setbidStatus({ status: false, msg: res.message });
+    PlaceBetApi(
+      { ...bidContent, amount: bidAmount, matchId: bidContent.game_id },
+      (res) => {
+        console.log(res);
+        if (res.status) {
+          setbidStatus({ status: true, msg: res.message });
+        } else {
+          setbidStatus({ status: false, msg: res.message });
+        }
       }
-    });
+    );
   };
 
   return (
@@ -108,17 +113,25 @@ export function ShowLiveMatchCard({
                 {" "}
                 <Link
                   to={`/match-single${item.id}`}
-                  style={{ color: "black", marginLeft: "25px" }}
+                  style={{ color: "black", marginLeft: "10px" }}
                   className="row-left flex-row just-bet  align-ctr w100"
                 >
                   <div>
-                    {item?.team1?.name} vs {item?.team2?.name}
+                    {item?.team1?.name} vs {item?.team2?.name}{" "}
+                    <span style={{ color: "grey" }}>
+                      {item?.competition_name}
+                    </span>
                   </div>
                   <div className="flex-row just-center align-ctr">
                     <img src={inPlay} width="30px" />
                     {/* <img src={BetMark} width="30px" /> */}
                   </div>
                 </Link>
+              </div>
+              <div className="card-today-right-in-play-mob">
+                <div className="singleRight-mob">1</div>
+                <div className="singleRight-mob">X</div>
+                <div className="singleRight-mob">2</div>
               </div>
               <div className="card-today-wrap-right">
                 <div
@@ -143,6 +156,7 @@ export function ShowLiveMatchCard({
                       odds: parseFloat(showOdds(item.odds[1])).toFixed(1),
                       team: item.team1.name,
                       team_id: 1,
+                      game_id: item.id,
                     });
                     setClickedRow(index);
                   }}
@@ -171,6 +185,8 @@ export function ShowLiveMatchCard({
                       ).toFixed(1),
                       team: item.team1.name,
                       team_id: 1,
+                      // team_id: 1,
+                      game_id: item.id,
                     });
                     setClickedRow(index);
                   }}
@@ -199,6 +215,8 @@ export function ShowLiveMatchCard({
                       odds: showOdds(item?.odds.X),
                       team: "X",
                       team_id: "X",
+                      // team_id: 1,
+                      game_id: item.id,
                     });
                     setClickedRow(index);
                   }}
@@ -228,6 +246,8 @@ export function ShowLiveMatchCard({
                       ).toFixed(1),
                       team: "X",
                       team_id: "X",
+                      // team_id: 1,
+                      game_id: item.id,
                     });
                     setClickedRow(index);
                   }}
@@ -260,6 +280,8 @@ export function ShowLiveMatchCard({
                       odds: showOdds(item.odds[2]),
                       team: item.team2.name,
                       team_id: 2,
+                      // team_id: 1,
+                      game_id: item.id,
                     });
                     setClickedRow(index);
                   }}
@@ -288,7 +310,10 @@ export function ShowLiveMatchCard({
                       ).toFixed(1),
                       team: item.team2.name,
                       team_id: 2,
+                      // team_id: 1,
+                      game_id: item.id,
                     });
+
                     setClickedRow(index);
                   }}
                 >
@@ -364,12 +389,12 @@ export function ShowLiveMatchCard({
 
       {show != "all" && (
         <div className="seemore linktag">
-          <Link
+          {/* <Link
             to={`/in-play`}
             style={{ color: "black", textDecoration: "underLine" }}
           >
             See more in play
-          </Link>
+          </Link> */}
         </div>
       )}
     </div>

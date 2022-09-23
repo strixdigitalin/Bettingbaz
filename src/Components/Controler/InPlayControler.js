@@ -94,7 +94,12 @@ const InPlaySingleGame = (props) => {
                     to={`/match-single${item.id}`}
                     style={{ color: "black" }}
                   >
-                    <div>{item?.name.replace("@", "vs")}</div>
+                    <div>
+                      {item?.name.replace("@", "vs")}{" "}
+                      <span style={{ color: "grey" }}>
+                        {item?.competition_name}
+                      </span>
+                    </div>
                   </Link>
                   <div className="flex-row just-center align-ctr">
                     <img src={inPlay} width="30px" />

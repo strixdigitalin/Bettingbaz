@@ -26,7 +26,7 @@ export const leftLinkData = [
   { name: "Live Cricekt", link: "/in-play/cricket" },
   { name: "Live Football", link: "/in-play/football" },
   { name: "Live Tennis", link: "/in-play/tennis" },
-  { name: "Live Snooker", link: "/in-play/snooker" },
+  { name: "Live Basketball", link: "/in-play/basketball" },
 ];
 export const rightLinkData = [
   { name: "Cricket Tournaments", link: "/all-competition-by-sports/cricket" },
@@ -40,22 +40,26 @@ const sports = [
   {
     sport: "cricket",
     icon: cricket,
+    link: "/cricket",
     name: "Cricket",
   },
   {
     sport: "football",
     icon: football,
     name: "Football",
+    link: "/football",
   },
   {
     sport: "tennis",
     icon: tennis,
     name: "Tennis",
+    link: "/tennis",
   },
   {
     sport: "basketball",
     icon: basketball,
     name: "Baskentball",
+    link: "/basketball",
   },
 
   {

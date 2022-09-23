@@ -50,12 +50,12 @@ export function SingleGameCard({
       </div> */}
 
       {/* ------------------------------------------------------- today section */}
-      <div className="card-today">
-        <div>
+      <div className="card-today-comp">
+        <div className="card-today-left-comp">
           <img src={movedown} width="15px" onClick={() => setShowIt(!showIt)} />
-          <span style={{ color: "black", marginLeft: "30px" }}>Groups</span>
+          <span style={{ color: "black", marginLeft: "10px" }}>Groups</span>
         </div>
-        <div className="card-today-right ">
+        <div className="card-today-right-comp ">
           <div className="singleRight">Name</div>
           {/* <div className="singleRight">Home</div> */}
         </div>
@@ -76,14 +76,14 @@ export function SingleGameCard({
           return (
             <Link to={`/match-by-competition${item?.id}`} className="hoverRow">
               <div
-                className="card-today-row  align-ctr"
+                className="card-today-row-comp  align-ctr"
                 style={{ cursor: "pointer" }}
               >
-                <div className=" flex-row align-ctr card-today-left-row">
+                <div className=" flex-row align-ctr card-today-left-row-comp">
                   {" "}
                   <span>{key + 1}</span>
                   <div
-                    style={{ color: "black", marginLeft: "25px" }}
+                    style={{ color: "black" }}
                     className="row-left flex-row just-bet w100 align-ctr"
                   >
                     <div className="col-70">{item?.group}</div>
@@ -93,9 +93,17 @@ export function SingleGameCard({
                 </div> */}
                   </div>
                 </div>
-                <div className="card-today-wrap-right">
-                  <div className="card-today-right" style={{ width: "100%" }}>
-                    <div className="singleRightrow col-70">{item?.name}</div>
+                <div className="card-today-wrap-right-comp">
+                  <div
+                    className="card-today-right-comp"
+                    style={{ width: "100%" }}
+                  >
+                    <div
+                      className="singleRightrow col-70"
+                      style={{ border: "none" }}
+                    >
+                      {item?.name}
+                    </div>
                   </div>
 
                   {/* <div className="card-today-right">
@@ -121,7 +129,7 @@ export function SingleGameCard({
                 <span>{key + 1}</span>
                 <Link to={`/match-by-competition${item?.id}`}>
                   <div
-                    style={{ color: "black", marginLeft: "25px" }}
+                    style={{ color: "black" }}
                     className="row-left flex-row just-bet w100 align-ctr"
                   >
                     <div className="col-70">{item?.group}</div>

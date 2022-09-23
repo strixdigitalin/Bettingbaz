@@ -6,6 +6,7 @@ export const PlaceBetApi = async (item, successCallback) => {
   const userData = JSON.parse(user);
   const token = userData.usertoken;
   const { bearer } = userData;
+  console.log(item.matchId, "<<<<item match id");
   console.log(user);
   const payloadData = {
     token,

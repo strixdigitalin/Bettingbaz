@@ -44,3 +44,7 @@
     background-color: #707070;
     cursor: pointer;
 }
+
+@media screen and (max-width: 767px) {
+    
+}

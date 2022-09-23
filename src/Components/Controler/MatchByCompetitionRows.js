@@ -13,11 +13,12 @@ function MatchByCompetitionRows({
     odds: { 1: 5, 2: "6" },
   },
 }) {
-  console.log(item);
+  console.log(item.odds.X, "<<itemodds");
   const [handleContent, setHandleContent] = useState(true);
   const firstOdd = item?.odds["1"];
   const second = item?.odds["2"];
-  const draw = item?.odds["X"];
+  const draw = item?.odds.X;
+  const dateTime = new Date(Date.parse(item.start_datetime));
   return (
     <>
       <div className="card-today">
@@ -57,7 +58,7 @@ function MatchByCompetitionRows({
                 style={{ color: "black", marginLeft: "25px" }}
                 className="row-left flex-row just-bet  align-ctr w100"
               >
-                <div>{item.start_datetime}</div>
+                <div>{dateTime.toLocaleString()}</div>
                 {/* <div className="flex-row just-center align-ctr">
                 <img src={inPlay} width="30px" />
                 <img src={BetMark} width="30px" />
@@ -67,14 +68,14 @@ function MatchByCompetitionRows({
 
             <div className="card-today-wrap-right">
               <div className="card-today-right">
-                <div className="singleRightrow">{firstOdd}</div>
+                {parseFloat(firstOdd).toFixed(1)}
               </div>
 
               <div className="card-today-right">
-                <div className="singleRightrow">{draw}</div>
+                {parseFloat(item.odds.X).toFixed(1)}
               </div>
               <div className="card-today-right">
-                <div className="singleRightrow">{second}</div>
+                {parseFloat(second).toFixed(1)}
               </div>
             </div>
           </div>

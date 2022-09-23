@@ -1,6 +1,8 @@
 .footer-cover{
     background-color: #F5F4F4;
     padding-top: 25px;
+    border-top-left-radius: 20px;
+    border-top-RIGHT-radius: 20px;
 }
 
 .upper-cover{
@@ -64,4 +66,13 @@ text-decoration: underline;
 a{
     text-decoration: none;
 
+}
+
+@media screen and (max-width: 768px) {
+    .singleContact-cover {
+        display: none;
+    }
+    .footer-support{
+        display: none;
+    }
 }

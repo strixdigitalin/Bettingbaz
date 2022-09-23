@@ -63,7 +63,109 @@
     font-size: 12px;
 }
 
+/* competition by game */
+.card-today-comp{
+    height: 48px;
+    background-color: #EAEAEA;
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid #707070; */
+    border: none;
+    align-items: center;
+    padding-left: 10px;
+}
+.card-today-left-comp{
+    border-left: 1px solid #707070;
+    padding: 0px 5px;
+    /* justify-content: center; */
+    font-weight: 600;
+    
+    /* color: white; */
+    /* color: black; */
+    height: 100%;
+    display: flex;
+    /* flex-direction:row-reverse ; */
+    /* justify-content:space-between; */
+    text-align: center;
+    color: black;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    /* gap: 5%; */
+    width: 50%;
+}
+.card-today-right-comp{
+    border-left: 1px solid #707070;
+    padding: 0px 5px;
+    /* justify-content: center; */
+    font-weight: 600;
+    
+    /* color: white; */
+    /* color: black; */
+    height: 100%;
+    display: flex;
+    /* flex-direction:row-reverse ; */
+    /* justify-content:space-between; */
+    text-align: center;
+    color: black;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    /* gap: 5%; */
+    width: 50%;
+}
 
+.card-today-row-comp {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding-left: 10px;
+    height: 48px;
+    align-items: center;
+    border: 1px solid #707070;
+    width: 100%;
+    /* height: 100%; */
+    text-align: center;
+    font-weight: 600;
+}
+.card-today-left-row-comp{
+    width: 50%;
+}
+.card-today-wrap-right-comp{
+    display: flex;
+    height: 100%;
+    align-items: center;
+/* border-left: 1px solid #a9a9a9; */
+    text-align: center;
+    width: 50%;
+    /* justify-content: ; */
+    
+
+}
+.card-today-right-comp{
+    /* color: black; */
+    /* border-left: 1px solid #707070; */
+    padding: 0px 5px;
+    /* justify-content: center; */
+    font-weight: 600;
+    
+    /* color: white; */
+    color: black;
+    height: 100%;
+    display: flex;
+    /* flex-direction:row-reverse ; */
+    /* justify-content:space-between; */
+    text-align: center;
+    color: black;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    /* gap: 5%; */
+    width: 50%;
+
+    
+}
 /* -------------------------------- today */
 .card-today{
     height: 48px;
@@ -76,6 +178,15 @@
 }
 
 .card-today-right{
+    /* color: black; */
+    border-left: 1px solid #707070;
+    padding: 0px 5px;
+    /* justify-content: center; */
+    font-weight: 600;
+    
+    /* color: white; */
+    color: black;
+    height: 100%;
     display: flex;
     /* flex-direction:row-reverse ; */
     /* justify-content:space-between; */
@@ -83,10 +194,10 @@
     color: black;
     height: 100%;
     align-items: center;
-    color: white;
     justify-content: center;
     /* gap: 5%; */
     width: 40%;
+
     
 }
 .card-today-right-in-play{
@@ -113,7 +224,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 12px;
-    padding-left: 50px;
+    padding-left: 10px;
     height: 48px;
     align-items: center;
     border: 1px solid #707070;
@@ -148,7 +259,9 @@
     font-weight: 600;
     align-items: center;
     text-align: center;
+    
     /* color: white; */
+    color: black;
     height: 100%;
     
 }
@@ -187,7 +300,8 @@ width: 90%;
 display: flex;
 height: 100%;
 /* position: absolute; */
-padding-left: 50px;
+/* padding-left: 50px; */
+overflow-x: hidden;
 /* overflow:hidden; */
 /* left: -25px; */
 /* overflow-x: scroll; */
@@ -417,5 +531,155 @@ border-bottom-right-radius: 10px;
 
 .in-play-row-left{
     width: 40%;
+
+}
+.row-left{
+    margin-left: 25px;
+}
+.card-today-right-in-play-mob{
+    display: none;
+}
+
+.game-slide-mob{display: none;}
+@media screen and (max-width: 768px) {
+    .row-left{
+        margin-left: 10px;
+        font-size: 10px;
+        text-align: start;
+    }
+    .in-play-row-left{
+        width: 90%;
+    
+    }
+.card-today-row {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding-left: 0px ;
+    height: 100%;
+    min-height: 48px;
+flex-direction: column;
+    align-items: center;
+    border: 1px solid #707070;
+    width: 100%;
+    /* height: 100%; */
+    text-align: center;
+    font-weight: 600;
+}
+.card-today{
+    height: 48px;
+    background-color: #EAEAEA;
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid #707070; */
+    align-items: center;
+    padding-left: 0px;
+    display: none;
+}
+.card-today-right{
+    /* color: black; */
+    border-left: 1px solid #707070;
+    padding: 0px 5px;
+    /* justify-content: center; */
+    font-weight: 600;
+    
+    /* color: white; */
+    color: black;
+    display: flex;
+    /* flex-direction:row-reverse ; */
+    /* justify-content:space-between; */
+    text-align: center;
+    color: black;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    /* gap: 5%; */
+    width: 40%;
+
+    
+}
+
+.card-today-wrap-right{
+    display: flex;
+    height: 100%;
+    align-items: center;
+/* border-left: 1px solid #a9a9a9; */
+    text-align: center;
+    /* width: 60%; */
+    width: 100%;
+    height: 20px;
+    /* justify-content: ; */
+ }
+ .card-today-right-in-play{
+    display: flex;
+    /* flex-direction:row-reverse ; */
+    justify-content:space-between;
+    text-align: center;
+    color: black;
+    height: 30%;
+    align-items: center;
+    /* gap: 5%; */
+    width: 20%;
+    display: none;
+    
+}
+ .card-today-right-in-play-mob{
+    display: flex;
+    /* flex-direction:row-reverse ; */
+    justify-content:space-between;
+    text-align: center;
+    color: black;
+    height: 30%;
+    align-items: center;
+    /* gap: 5%; */  
+    width: 100%;
+padding: 0px 15%;
+    background-color:#c6c6c6;
+    /* display: none; */
+    
+}
+.inplay-head-left{
+    display: none;
+}
+.in-play-row-left{
+    height: 40px;
+}
+.game-slide{display: none;}
+.game-slide-mob{display: block;
+    background-color: #B7B7B7;
+
+}
+.singleGame{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border-left: 1px solid #707070; */
+    border: none;
+    cursor: pointer;
+    padding: 0px 5px;
+    font-size: 12px;
+    margin: 22px 0px;
+    color: #707070;
+    box-sizing: border-box;
+    
+
+    min-width: 92px;
+
+    /* height: 42px; */
+}
+.middle-games{
+    width: 100%;
+    display: flex;
+    height: 100%;
+    /* position: absolute; */
+    /* padding-left: 50px; */
+    overflow-x: scroll;
+    /* overflow:hidden; */
+    /* left: -25px; */
+    /* overflow-x: scroll; */
+    /* overflow-x: scroll; */
+    }
 
 }

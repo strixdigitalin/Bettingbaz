@@ -12,6 +12,12 @@ import { useDispatch } from "react-redux";
 import { showModal } from "../../Redux/Reducers/PlaceBid";
 import { PlaceBetApi } from "../../ClientApi/BetApi";
 import { showOdds } from "../../Components/ShowLiveMatchCard";
+import { compose } from "@reduxjs/toolkit";
+import indiasvg from "../../Assets/Country/india.svg";
+import batsvg from "../../Assets/Country/bat.svg";
+import ballsvg from "../../Assets/Country/ball.svg";
+
+import pakistansvg from "../../Assets/Country/pakistan.svg";
 
 const TOTAL_RUNS = "Runs";
 const WICKETS = "Wicket";
@@ -41,10 +47,14 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
 
   console.log(params, "<<<<params");
   useEffect(() => {
-    betbySingleMatc(params, (res) => {
-      console.log(res);
-      setMatchData(res);
-    });
+    setInterval(function () {
+      // method to be executed;
+      console.log("fetch by single game called");
+      betbySingleMatc(params, (res) => {
+        console.log(res);
+        setMatchData(res);
+      });
+    }, 5000);
   }, []);
   const { teams } = params;
   const placeBid = (item) => {
@@ -83,7 +93,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
     if (value == null) return 0;
     const temp = value?.split(".")[1] / equalValue?.split(".")[1];
     // console.log(temp, value?.split(".")[1], base, "<<<temp");
-    return (temp * 100).toFixed(2);
+    return parseInt(temp * 100);
   };
   const replaceString = (name, values) => {
     if (params.game != "cricket") return name;
@@ -144,37 +154,115 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
     let sendThis = num;
     const values = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     values.map((item) => {
-      if (item < num < item + 10) sendThis = item + 10;
+      if (item < num < item + 10) {
+        console.log(item, "<<<<<", num, "<<<<i", item + 10);
+        sendThis = item + 10;
+      }
     });
+    console.log(num, "<<<<< increase to ", sendThis);
     return sendThis;
   };
   const decreaseDataBlue = (num) => {
     let sendThis = num;
     const values = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     values.map((item) => {
-      if (item < num > item + 10) sendThis = item;
+      if (num < item) {
+        sendThis = item - 10;
+        console.log(+num, "<<<decrease num", sendThis, item);
+        // console.log(sendThis, "<<<send this");
+      } else {
+        // console.log("decrease num not--->", item, num);
+      }
+      // if (+item < parseInt(num) < +item + 10) {
+      //   sendThis = item;
+      // }
     });
     return sendThis;
   };
-
+  const filterNull = (arr) => {
+    console.log(arr);
+    // const sendThis = arr.filter(
+    //   (item) => item.odds != null && item.odds != "null"
+    // );
+    console.log(arr, sendThis, "<<<<sendThis");
+    return arr;
+  };
   return (
-    <div style={{ width: "60%" }}>
+    <div className="single-middle">
       <div className="single-top-head">{name}</div>
-      {/* ------------------------------------ */}
+      {/*desktop ------------------------------------ */}
       <div className="flex-row just-bet one-eaning bgwhite">
         <div className="eaning-left">
-          <img src={bat} width="60px" height="60px" />
-          <img src={india} />
-          {matchData[0]?.values[0]?.val1}
+          <div className="flex-row align-ctr">
+            <img src={bat} width="60px" height="60px" />
+            <img src={india} width="30px" height="30px" />
+          </div>
+          <div>{matchData[0]?.values[0]?.val1}</div>
           <span>15-2</span>
         </div>
         <div className="eaning-mid">1 st Ennings</div>
-        <div className="eaning-right">
-          <img src={pakistan} />
-          {matchData[0]?.values[1]?.val1}
-          <img src={ball} width="60px" height="60px" />
+        <div className="eaning-left">
+          <div className="flex-row align-ctr">
+            <img src={pakistan} />
+
+            <img src={ball} width="40px" height="40px" />
+          </div>
+          <div> {matchData[0]?.values[1]?.val1}</div>
+          <span>15-2</span>
         </div>
       </div>
+      {/* <768 px mob */}
+      {/* <div className="mob-one-eaning">
+        <div className="mob-one-eaning-single">
+          <img src={indiasvg} />
+          <div>India</div>
+          <div style={{ color: "#F98417" }}>24/4</div>
+          <div
+            className="flex-row align-ctr just-ctr"
+            style={{ height: "", border: "1px solid black" }}
+          >
+            <div>
+              <img src={batsvg} width="40px" />
+            </div>
+            <div
+              style={{
+                height: "40%",
+                borderLeft: "1px solid #F98417",
+                borderRight: "1px solid #F98417",
+                padding: "0px 5px",
+              }}
+            >
+              V. Kohli
+            </div>
+            <div style={{ color: "#F98417", padding: "10px" }}>51 * </div>
+          </div>
+        </div>
+        <div style={{ border: "1px solid #F97D09", height: "40px" }}></div>
+        <div className="mob-one-eaning-single">
+          <img src={pakistansvg} />
+          <div>Pakistan</div>
+          <div style={{ color: "#F98417" }}>24/4</div>
+          <div
+            className="flex-row align-ctr just-ctr"
+            style={{ height: "", border: "1px solid black" }}
+          >
+            <div>
+              <img src={ballsvg} width="30px" />
+            </div>
+            <div
+              style={{
+                height: "40%",
+                borderLeft: "1px solid #F98417",
+                borderRight: "1px solid #F98417",
+                padding: "0px 5px",
+              }}
+            >
+              Irfan
+            </div>
+            <div style={{ color: "#F98417", padding: "10px" }}>6.5/1 </div>
+          </div>
+        </div>
+      </div> */}
       {/* ----------------------------- */}
       <div
         className="flex-row just-bet scoreData "
@@ -218,7 +306,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
           >
             {matchData[0]?.values[1]?.val1}
           </div>
-          <br />
+          {/* <br /> */}
         </div>
         <div
           className="flex-col align-ctr just-bet playerScore-odd"
@@ -257,7 +345,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
           >
             {parseFloat(matchData[0]?.values[1]?.odds).toFixed(1)}
           </div>
-          <br />
+          {/* <br /> */}
         </div>
         <div
           className="flex-col align-ctr just-bet playerScore"
@@ -300,7 +388,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
             ).toFixed(1)}
             {/* <div>(54)</div> */}
           </div>
-          <br />
+          {/* <br /> */}
         </div>
         {/* <div className="flex-row just-bet"></div> */}
       </div>
@@ -386,13 +474,9 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
           </div>{" "}
         </div>
       )}
-      {matchData.map((item, index) => {
-        const checkIsNull = item.values.filter(
-          (item) => item.val2 != null && item.val2 != "null"
-        );
-
-        // if (index > 0) {
-        if (index > 0 && checkIsNull.length > 0) {
+      {filterNull(matchData).map((item, index) => {
+        // if (index > 0 && checkIsNull.length > 0) {
+        if (index > 0) {
           return (
             <>
               <div style={{ marginTop: "1px" }}>
@@ -415,7 +499,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                           <div className="cricket-heighlight-row-left">
                             {/* {item.name.replace(" A ", ` ${teams?.split("-")[0]} `)} */}
                             {replaceString(item.name, item.values)}
-                            <br />
+                            {/* <br /> */}
                             {/* {item.values[0].val1} */}
                           </div>{" "}
                           <div
@@ -447,9 +531,8 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
 
                             <br />
                             {/* {calCulatePercentage(item.values[0].val2)} */}
-                            {IncreaseOrangeData(
-                              calCulatePercentage(item.values[0].odds)
-                            )}
+                            {/* calCulatePercentage(item.values[0].odds) */}
+                            {IncreaseOrangeData(21)}
                           </div>{" "}
                           <div
                             className="heighlight-row-right pointer"
@@ -1035,6 +1118,9 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
           // );
         }
       })}
+      {filterNull(matchData).length == 0 && (
+        <div style={{ width: "100%", textAlign: "center" }}> No Data </div>
+      )}
     </div>
   );
 };

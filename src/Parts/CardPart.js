@@ -23,6 +23,8 @@ const gameList = [
   { name: "Boxing", icon: boxing },
 ];
 
+export const getScreenWidth = window.screen.width;
+
 export function CardHead({
   icon,
   text,
@@ -98,12 +100,23 @@ export const GameSlider = ({ selectedGame, changeGame, matchCount }) => {
   const [moveSlider, setMoveSlider] = useState(0);
 
   const onSlideLeft = () => {
-    if (moveSlider == 0) return null;
-    setMoveSlider(moveSlider - 7);
+    if (window.screen.width < 500) {
+      if (moveSlider == 0) return null;
+      setMoveSlider(moveSlider - 3);
+    } else {
+      if (moveSlider == 0) return null;
+      setMoveSlider(moveSlider - 7);
+    }
   };
   const onSlideRight = () => {
-    if (moveSlider == 14) return null;
-    setMoveSlider(moveSlider + 7);
+    alert(window.screen.width);
+    if (window.screen.width < 500) {
+      if (moveSlider == 14) return null;
+      setMoveSlider(moveSlider + 3);
+    } else {
+      if (moveSlider == 14) return null;
+      setMoveSlider(moveSlider + 7);
+    }
   };
 
   return (
@@ -145,6 +158,117 @@ export const GameSlider = ({ selectedGame, changeGame, matchCount }) => {
       <div className="navigator right-nav pointer" onClick={onSlideRight}>
         <img src={moveRight} />
       </div>
+    </div>
+  );
+};
+export const GameSliderMob = ({ selectedGame, changeGame, matchCount }) => {
+  const slideLeft = useRef(null);
+  const [moveSlider, setMoveSlider] = useState(0);
+
+  const onSlideLeft = () => {
+    if (window.screen.width < 500) {
+      if (moveSlider == 0) return null;
+      setMoveSlider(moveSlider - 3);
+    } else {
+      if (moveSlider == 0) return null;
+      setMoveSlider(moveSlider - 7);
+    }
+  };
+  const onSlideRight = () => {
+    alert(window.screen.width);
+    if (window.screen.width < 500) {
+      if (moveSlider == 14) return null;
+      setMoveSlider(moveSlider + 3);
+    } else {
+      if (moveSlider == 14) return null;
+      setMoveSlider(moveSlider + 7);
+    }
+  };
+
+  return (
+    <div className="flex-row just-between game-slide-mob w100">
+      {/* <div className="navigator left-nav pointer" onClick={onSlideLeft}>
+        <img src={moveLect} ref={slideLeft} />
+      </div> */}
+      <div className="middle-games">
+        {window.screen.width > 768 &&
+          allSports
+            .slice(0, 18)
+            .slice(moveSlider, moveSlider + 7)
+            .map((item, key) => {
+              return (
+                <div
+                  style={{
+                    borderBottom:
+                      selectedGame == item.sport ? "5px solid orange" : "",
+                    height: "100%",
+                  }}
+                >
+                  <div
+                    className={`${"singleGame"}`}
+                    onClick={() => changeGame(item.sport)}
+                  >
+                    {/* <div> */}
+                    <img
+                      src={fetchImage(item.sport)}
+                      width={window.screen.width < 768 ? "35px" : "25px"}
+                    />
+                    {/* </div> */}
+                    <div className="textcenter" style={{ fontSize: "9.3px" }}>
+                      {item.name}{" "}
+                      <span style={{ fontWeight: "bold", color: "black" }}>
+                        {selectedGame == item.sport
+                          ? "(" + matchCount + ")"
+                          : ""}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+      </div>
+
+      {/*  for mobile screen */}
+      <div className="middle-games">
+        {window.screen.width <= 768 &&
+          allSports
+            .slice(0, 18)
+            .slice(moveSlider, moveSlider + 7)
+            .map((item, key) => {
+              return (
+                <div
+                  style={{
+                    borderBottom:
+                      selectedGame == item.sport ? "5px solid orange" : "",
+                    height: "100%",
+                  }}
+                >
+                  <div
+                    className={`${"singleGame"}`}
+                    onClick={() => changeGame(item.sport)}
+                  >
+                    {/* <div> */}
+                    <img
+                      src={fetchImage(item.sport)}
+                      width={window.screen.width < 768 ? "45px" : "25px"}
+                    />
+                    {/* </div> */}
+                    <div className="textcenter" style={{ fontSize: "9.3px" }}>
+                      {item.name}{" "}
+                      <span style={{ fontWeight: "bold", color: "black" }}>
+                        {selectedGame == item.sport
+                          ? "(" + matchCount + ")"
+                          : ""}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+      </div>
+      {/* <div className="navigator right-nav pointer" onClick={onSlideRight}>
+        <img src={moveRight} />
+      </div> */}
     </div>
   );
 };

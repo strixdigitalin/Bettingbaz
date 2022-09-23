@@ -22,6 +22,7 @@ import "./Styles/Components/footer.css";
 import "./Styles/Components/terms.css";
 import "./Styles/Components/inplay.css";
 import "./Styles/Components/staticpage.css";
+import "./Styles/Components/mobdashboard.css";
 import { SingleGameCard } from "./Components/Heighlights";
 
 import SingleGame from "./Pages/SingleGame";
@@ -42,6 +43,7 @@ import Footer from "./Components/Footer";
 import Terms from "./Pages/Terms/Terms";
 import SinglePages from "./Pages/SinglePages";
 import LandingPage from "./Pages/SinglePages/LandingPage";
+import MobDashboard from "./Pages/MobDashboard";
 
 function App() {
   const { PlaceBid, SignInState, ResetPassword } = useSelector(
@@ -75,6 +77,7 @@ function App() {
             element={<CricketSingleMatch />}
           ></Route>
           <Route path="my-bet" element={<MyBet />}></Route>
+          <Route path="/mob-dashboard" element={<MobDashboard />}></Route>
           <Route path="/terms/:terms" element={<Terms />}></Route>
         </Routes>
         <Footer />

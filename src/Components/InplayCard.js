@@ -7,6 +7,7 @@ import BetMark from "../Assets/Card/Bet Mark.png";
 import {
   CardHead,
   GameSlider,
+  GameSliderMob,
   SingleHeighlighCardHead,
 } from "../Parts/CardPart";
 import Football from "../Assets/Card/Football icon.png";
@@ -48,8 +49,10 @@ export function InPlayCard({
   const [matchCount, setMatchCount] = useState(null);
 
   const [liveGame, setLiveGame] = useState([]);
+
   // -----------use effects
   useEffect(() => {
+    // setInterval(() => {
     setMatchCount("...");
     setShowLoader(true);
     if (gamename) setSelectedGame(gamename);
@@ -59,35 +62,49 @@ export function InPlayCard({
       setMatchCount(res.length);
       setShowLoader(false);
     });
+    // }, 5000);
   }, [selectedGame, gamename]);
 
   // ---these are live game on home pages----live match ids are being stored in array
 
   useEffect(() => {
-    API.getInPlay("football", (res) => {
-      const ThreeGame = res.slice(0, 3);
-      dispatch(FootballAllLiveMatchFun(ThreeGame));
-    });
 
-    console.log(liveGame, "<<<<checkLive");
+    setInterval(() => {
+      API.getInPlay("football", (res) => {
+        const ThreeGame = res.slice(0, 3);
+        dispatch(FootballAllLiveMatchFun(ThreeGame));
+      });
+
+      console.log(liveGame, "<<<<football fetched");
+    }, 7000);
   }, []);
   useEffect(() => {
-    API.getInPlay("cricket", (res) => {
-      const ThreeGame = res.slice(0, 3);
-      dispatch(cricketAllLiveMatchFun(ThreeGame));
-    });
+    setInterval(() => {
+      API.getInPlay("cricket", (res) => {
+        const ThreeGame = res.slice(0, 3);
+        dispatch(cricketAllLiveMatchFun(ThreeGame));
+      });
+      console.log("cricket fetched")
+    }, 10000);
+
   }, []);
   useEffect(() => {
-    API.getInPlay("basketball", (res) => {
-      const ThreeGame = res.slice(0, 3);
-      dispatch(BasketBallLiveMatchFun(ThreeGame));
-    });
+    setInterval(() => {
+      API.getInPlay("basketball", (res) => {
+        const ThreeGame = res.slice(0, 3);
+        dispatch(BasketBallLiveMatchFun(ThreeGame));
+      });
+      console.log("basketball fetched")
+    }, 5000);
   }, []);
   useEffect(() => {
-    API.getInPlay("tennis", (res) => {
-      const ThreeGame = res.slice(0, 3);
-      dispatch(TennisAllLiveMatchFun(ThreeGame));
-    });
+    setInterval(() => {
+      API.getInPlay("tennis", (res) => {
+        const ThreeGame = res.slice(0, 3);
+        dispatch(TennisAllLiveMatchFun(ThreeGame));
+      });
+      console.log("tennis fetched")
+    }, 10000);
   }, []);
 
   //   ------ ONCLCICKS-----
@@ -96,17 +113,26 @@ export function InPlayCard({
 
   return (
     <div>
+      {window.screen.width <= 768 && (
+        <GameSliderMob
+          selectedGame={selectedGame}
+          matchCount={matchCount}
+          changeGame={(game) => setSelectedGame(game)}
+        />
+      )}
       <CardHead
         heading="In Play"
         rightText=""
         navigation={false}
         icon={inPlay}
       />
-      <GameSlider
-        selectedGame={selectedGame}
-        matchCount={matchCount}
-        changeGame={(game) => setSelectedGame(game)}
-      />
+      {window.screen.width > 768 && (
+        <GameSlider
+          selectedGame={selectedGame}
+          matchCount={matchCount}
+          changeGame={(game) => setSelectedGame(game)}
+        />
+      )}
       {/* --------------------------------------------------------- sub heading card */}
       <div className="card-subhead-inplay">
         <button className="live-but">Live</button>
