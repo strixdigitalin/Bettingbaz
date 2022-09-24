@@ -37,7 +37,7 @@ function Footer() {
     { label: "Terms and Conditions", link: "/terms-and-conditions" },
     { label: "Rules and Regulation", link: "/rules-and-regulations" },
     { label: "Responsible Gaming", link: "/responsible-gaming" },
-    { label: "About Us", link: "/responsible-gaming" },
+    { label: "About Us", link: "/about-us" },
     { label: "Self-exclusion Policy", link: "/self-exclusion-policy" },
     { label: "Underage Policy", link: "/underage-policy" },
   ];
