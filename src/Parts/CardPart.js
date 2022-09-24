@@ -111,10 +111,10 @@ export const GameSlider = ({ selectedGame, changeGame, matchCount }) => {
   const onSlideRight = () => {
     // alert(window.screen.width);
     if (window.screen.width < 500) {
-      if (moveSlider == 14) return null;
+      if (moveSlider == 15) return null;
       setMoveSlider(moveSlider + 3);
     } else {
-      if (moveSlider == 14) return null;
+      if (moveSlider == 15) return null;
       setMoveSlider(moveSlider + 3);
     }
   };
@@ -137,12 +137,10 @@ export const GameSlider = ({ selectedGame, changeGame, matchCount }) => {
                   height: "100%",
                 }}
               >
-             
                 <div
                   className={`${"singleGame"}`}
                   onClick={() => changeGame(item.sport)}
                 >
-                  
                   <div>
                     <img
                       src={fetchImage(item.sport)}

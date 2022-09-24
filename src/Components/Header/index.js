@@ -85,7 +85,7 @@ function Header() {
   };
   const buttons = [
     { name: "Log In", onClick: handleSubmit },
-    { name: "Sign Up" },
+    { name: "Sign Up", onClick: () => (window.location.href = "/signup") },
   ];
   const bottomItems = [
     {

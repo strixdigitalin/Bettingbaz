@@ -22,6 +22,7 @@ import "./Styles/Components/footer.css";
 import "./Styles/Components/terms.css";
 import "./Styles/Components/inplay.css";
 import "./Styles/Components/staticpage.css";
+import "./Styles/Components/signup.css";
 import "./Styles/Components/mobdashboard.css";
 import { SingleGameCard } from "./Components/Heighlights";
 
@@ -45,6 +46,7 @@ import SinglePages from "./Pages/SinglePages";
 import LandingPage from "./Pages/SinglePages/LandingPage";
 import MobDashboard from "./Pages/MobDashboard";
 import Withdraw from "./Modals/Withdraw";
+import Signup from "./Pages/Signup";
 
 function App() {
   const { PlaceBid, SignInState, ResetPassword } = useSelector(
@@ -58,9 +60,11 @@ function App() {
         <Routes>
           {/* <Route path="/" > */}
           {/* </Route> */}
-          <Route path="/" element={<LandingPage />}></Route>
+          {/* <Route path="/" element={<LandingPage />}></Route> */}
+          <Route path="/" element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/game" element={<SingleGame />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
           {/* <Route path="/" element={<SingleGame />}></Route> */}
           <Route path="/casino" element={<SinglePages />}></Route>
           <Route path="/in-play" element={<InPlayGame />}></Route>

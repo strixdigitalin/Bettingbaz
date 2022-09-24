@@ -15,7 +15,7 @@ function MobDashboard() {
         dispatch(showSigninModal(true));
       },
     },
-    { label: "Sign up", onclick: () => {} },
+    { label: "Sign up", onclick: () => (window.location.href = "/signup") },
   ];
   const allSportsButton = [
     { label: "All Sports", onclick: () => {} },
