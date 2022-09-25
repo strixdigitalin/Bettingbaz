@@ -28,7 +28,7 @@ export default function CricketSingleMatch() {
   return <PageCover component={<CricketSingle />} />;
 }
 
-const CricketSingle = ({ name = "India - Pakistan" }) => {
+const CricketSingle = () => {
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -75,7 +75,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
         showModal({
           show: true,
           matchId: `/sport/${params.game}/${params.legue}/${params.teams}/${params.id}`,
-          team: name,
+          team: params.teams,
           odds: item.odds,
         })
       );
@@ -194,7 +194,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
     const sendThis = arr.filter(
       (item) => item.val2 != null && item.val2 != "null"
     );
-    // console.log(arr, sendThis, "<<<<sendThis");
+    console.log(arr, sendThis, "<<<<sendThis");
     return sendThis;
   };
 
@@ -211,7 +211,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
 
   return (
     <div className="single-middle">
-      <div className="single-top-head">{name}</div>
+      <div className="single-top-head">{params.teams}</div>
       {/*desktop ------------------------------------ */}
       <div className="flex-row just-bet one-eaning bgwhite">
         <div className="eaning-left">
@@ -506,7 +506,8 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
         </div>
       )}
       {/* {[{}, {}].map((item, index) => { */}
-      {filterNull(matchData).map((item, index) => {
+      {/* {filterNull().map((item, index) => { */}
+      {matchData.map((item, index) => {
         if (index > 0) {
           return (
             <>
@@ -515,159 +516,170 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                   if (premiumToggle == false) {
                     // if (inItem.val2 == null || inItem.val2 == "null") return null;
 
-                    return (
-                      <>
-                        <div className="flex-row just-bet w100 cricket-data-table">
-                          <div className="cricket-heighlight-row-left">
-                            {/* {item.name.replace(" A ", ` ${teams?.split("-")[0]} `)} */}
-                            {replaceString(item.name, item.values)}
-                            {/* <br /> */}
-                            {/* {item.values[0].val1} */}
-                          </div>{" "}
-                          <div
-                            style={{
-                              backgroundColor: "#F97D09",
-                              color: "white",
-                            }}
-                            className="heighlight-row-right pointer"
-                            onClick={() => {
-                              setClickedBlock({
-                                row: index,
-                                box: 1,
-                              });
-                              setBidContent({
-                                odds: showOdds(item?.values[0]?.val2),
-                                team: "",
-                                team_id: 2,
-                              });
-                              setClickedRow(index);
-                            }}
-                          >
-                            {/* {params.game != "cricket" && item?.values[0]?.val2}
-                            {params.game == "cricket" &&
-                              NumberCalculation(
-                                item?.name,
-                                item?.values[0]?.val2?.substring(1),
-                                "-"
-                              )} */}
-
-                            <br />
-                            {/* {calCulatePercentage(item.values[0].val2)} */}
-                            {/* calCulatePercentage(item.values[0].odds) */}
-                            {IncreaseOrangeData(21)}
-                          </div>{" "}
-                          <div
-                            className="heighlight-row-right pointer"
-                            style={{
-                              backgroundColor: "#064778",
-                              color: "white",
-                            }}
-                            onClick={() => {
-                              setClickedBlock({
-                                row: index,
-                                box: 2,
-                              });
-                              setBidContent({
-                                odds: NumberCalculation(
+                    return filterNull(item.values).map((initem, row) => {
+                      console.log(initem, "<<<initem");
+                      return (
+                        <>
+                          <div className="flex-row just-bet w100 cricket-data-table">
+                            <div className="cricket-heighlight-row-left">
+                              {/* {item.name.replace(" A ", ` ${teams?.split("-")[0]} `)} */}
+                              {replaceString(item.name, item.values)}
+                              {/* <br /> */}
+                              {/* {item.values[0].val1} */}
+                            </div>{" "}
+                            <div
+                              style={{
+                                backgroundColor: "#F97D09",
+                                color: "white",
+                              }}
+                              className="heighlight-row-right pointer"
+                              onClick={() => {
+                                setClickedBlock({
+                                  row: index,
+                                  box: 1,
+                                });
+                                setBidContent({
+                                  odds: showOdds(initem?.val2),
+                                  // odds: showOdds(item?.values[0]?.val2),
+                                  team: "",
+                                  team_id: 2,
+                                });
+                                setClickedRow(index);
+                              }}
+                            >
+                              {/* {params.game != "cricket" && initem?.val2}s */}
+                              {/* {params.game == "cricket" &&
+                                NumberCalculation(
                                   item?.name,
-                                  item?.values[1].val2?.substring(1),
-                                  "+"
-                                ),
-                                team: "",
-                                team_id: 2,
-                              });
-                              setClickedRow(index);
-                            }}
-                          >
-                            {/* {NumberCalculation(
-                              item?.name,
-                              item?.values[1].val2?.substring(1),
-                              "+"
-                            )} */}
-                            {/* {item.values[1].val2?.substring(1)} */}
-                            <br />
-                            {/* {item.values[1].odds}{" "} */}
-                            {/* {calCulatePercentage(item.values[1].val2)} */}
-                            {/* {decreaseDataBlue(
-                              calCulatePercentage(item?.values[1]?.odds)
-                            )} */}
-                          </div>{" "}
-                        </div>
-                        {/* {true && ( */}
-                        {index == clickedRow && (
-                          <div className="placebid-cover ">
-                            <div className="button-cover">
-                              {[100, 500, 1000, 2000, 5000].map((item) => {
-                                return (
-                                  <button onClick={() => setBidAmount(item)}>
-                                    {item}
-                                  </button>
-                                );
-                              })}
-                            </div>
-                            <div className="input-est-cover">
-                              <input
-                                value={bidAmount}
-                                onChange={(e) => setBidAmount(e?.target?.value)}
-                              />
-                              <div className="button-est">
-                                {[
-                                  { label: "Place Bid", onClick: submitBid },
-                                  {
-                                    label: "Hide",
-                                    onClick: () => {
-                                      setClickedRow(null);
-                                      setClickedBlock(initialBlock);
-                                      setbidStatus({
-                                        status: null,
-                                        message: "",
-                                      });
-                                      setBidAmount(0);
-                                      setBidContent({ odds: 0 });
-                                    },
-                                  },
-                                ].map((item, key) => {
+                                  initem.val2?.substring(1),
+                                  "-"
+                                )} */}
+                              <br />
+                              {/* {calCulatePercentage(item.values[0].val2)} */}
+                              {/* calCulatePercentage(item.values[0].odds) */}
+                              {/* {IncreaseOrangeData(initem.val2?.substring(1))} */}
+                              {initem.val2?.substring(1)}
+                            </div>{" "}
+                            <div
+                              className="heighlight-row-right pointer"
+                              style={{
+                                backgroundColor: "#064778",
+                                color: "white",
+                              }}
+                              onClick={() => {
+                                setClickedBlock({
+                                  row: index,
+                                  box: 2,
+                                });
+                                setBidContent({
+                                  odds: NumberCalculation(
+                                    item?.name,
+                                    initem.val2?.substring(1),
+                                    "+"
+                                  ),
+                                  team: "",
+                                  team_id: 2,
+                                });
+                                setClickedRow(index);
+                              }}
+                            >
+                              {/* {NumberCalculation(
+            item?.name,
+            item?.values[1].val2?.substring(1),
+            "+"
+          )} */}
+                              {/* {item.values[1].val2?.substring(1)} */}
+                              <br />
+                              {/* {item.values[1].odds}{" "} */}
+                              {/* {calCulatePercentage(item.values[1].val2)} */}
+                              {decreaseDataBlue(
+                                calCulatePercentage(initem.odds)
+                              )}
+                            </div>{" "}
+                          </div>
+                          {/* {true && ( */}
+                          {index == clickedRow && (
+                            <div className="placebid-cover ">
+                              <div className="button-cover">
+                                {[100, 500, 1000, 2000, 5000].map((item) => {
                                   return (
-                                    <button
-                                      onClick={item?.onClick}
-                                      style={{
-                                        background: `${
-                                          key == 0 ? "green" : "red"
-                                        }`,
-                                      }}
-                                    >
-                                      {item?.label}
+                                    <button onClick={() => setBidAmount(item)}>
+                                      {item}
                                     </button>
                                   );
                                 })}
-                                <button>
-                                  Est:
-                                  {parseFloat(
-                                    bidContent.odds * bidAmount
-                                  ).toFixed(1)}
-                                </button>
                               </div>
+                              <div className="input-est-cover">
+                                <input
+                                  value={bidAmount}
+                                  onChange={(e) =>
+                                    setBidAmount(e?.target?.value)
+                                  }
+                                />
+                                <div className="button-est">
+                                  {[
+                                    {
+                                      label: "Place Bid",
+                                      onClick: submitBid,
+                                    },
+                                    {
+                                      label: "Hide",
+                                      onClick: () => {
+                                        setClickedRow(null);
+                                        setClickedBlock(initialBlock);
+                                        setbidStatus({
+                                          status: null,
+                                          message: "",
+                                        });
+                                        setBidAmount(0);
+                                        setBidContent({ odds: 0 });
+                                      },
+                                    },
+                                  ].map((item, key) => {
+                                    return (
+                                      <button
+                                        onClick={item?.onClick}
+                                        style={{
+                                          background: `${
+                                            key == 0 ? "green" : "red"
+                                          }`,
+                                        }}
+                                      >
+                                        {item?.label}
+                                      </button>
+                                    );
+                                  })}
+                                  <button>
+                                    Est:
+                                    {parseFloat(
+                                      bidContent.odds * bidAmount
+                                    ).toFixed(1)}
+                                  </button>
+                                </div>
+                              </div>
+                              {bidStatus?.status != null && (
+                                <div
+                                  className="bid-placed"
+                                  style={{
+                                    display: `${
+                                      bidStatus?.status == null && "none"
+                                    }`,
+                                    color: `${
+                                      bidStatus?.status == true
+                                        ? "green"
+                                        : "red"
+                                    }`,
+                                  }}
+                                >
+                                  {" "}
+                                  {bidStatus?.msg}
+                                </div>
+                              )}
                             </div>
-                            {bidStatus?.status != null && (
-                              <div
-                                className="bid-placed"
-                                style={{
-                                  display: `${
-                                    bidStatus?.status == null && "none"
-                                  }`,
-                                  color: `${
-                                    bidStatus?.status == true ? "green" : "red"
-                                  }`,
-                                }}
-                              >
-                                {" "}
-                                {bidStatus?.msg}
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </>
-                    );
+                          )}
+                        </>
+                      );
+                    });
                   }
                 })()}
                 {/* {premiumToggle == false &&
@@ -694,6 +706,9 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                     </div>
                     {!hideThis.includes(index) &&
                       item?.values.map((inItem, key) => {
+                        // console.log(inItem,"<<<initemvalue")
+                        if (inItem.odds == null || inItem.odds == "null")
+                          return null;
                         return (
                           <>
                             <div className="flex-row just-bet w100 cricket-data-table">
@@ -717,7 +732,9 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
                                   setPremiumSelected({ one: index, two: key });
                                 }}
                               >
-                                {parseFloat(inItem.odds).toFixed(2)}
+                                {parseFloat(inItem.odds).toFixed(2) == "NaN"
+                                  ? "--"
+                                  : parseFloat(inItem.odds).toFixed(2)}
                               </div>{" "}
                             </div>
                             {key == premiumSelected.two &&
@@ -1248,7 +1265,7 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
           // );
         }
       })}
-      {filterNull(matchData).length == 0 && (
+      {/* {filterNull(matchData).length == 0 && (
         <div
           style={{
             marginTop: "5px",
@@ -1258,49 +1275,26 @@ const CricketSingle = ({ name = "India - Pakistan" }) => {
             opacity: "0.5",
           }}
         >
-          {" "}
-          {/* No Data{" "} */}
+
           <div className="flex-row just-bet w100 cricket-data-table">
-            <div className="cricket-heighlight-row-left">
-              {/* {item.name.replace(" A ", ` ${teams?.split("-")[0]} `)} */}
-              {/* {replaceString(item.name, item.values)} */}
-              {/* <br /> */}
-              {/* {item.values[0].val1} */}
-              No Data
-            </div>{" "}
+            <div className="cricket-heighlight-row-left">No Data</div>
             <div
               style={{
-                // backgroundColor: "#F97D09",
                 color: "white",
               }}
               className="heighlight-row-right pointer"
             >
               <br />
-              {/* {calCulatePercentage(item.values[0].val2)} */}
-              {/* calCulatePercentage(item.values[0].odds) */}
-              {/* {IncreaseOrangeData(21)} */}
-            </div>{" "}
+            </div>
             <div
               className="heighlight-row-right pointer"
               style={{
-                // backgroundColor: "#064778",
                 color: "white",
               }}
-            >
-              {/* {NumberCalculation(
-                item.name,
-                item.values[1].val2?.substring(1),
-                "+"
-              )} */}
-              {/* {item.values[1].val2?.substring(1)} */}
-              <br />
-              {/* {item.values[1].odds}{" "} */}
-              {/* {calCulatePercentage(item.values[1].val2)} */}
-              {/* {decreaseDataBlue(calCulatePercentage(item.values[1].odds))} */}
-            </div>{" "}
+            ></div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
