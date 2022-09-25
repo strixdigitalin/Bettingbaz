@@ -6,6 +6,7 @@ import { hideModal, placeBid } from "../Redux/Reducers/PlaceBid";
 import SigninModal, { showSigninModal } from "../Redux/Reducers/SigninModal";
 import loginsvg from "../Assets/Header/Svgs/login.svg";
 import signup from "../Assets/Header/Svgs/signup.svg";
+import { Link } from "react-router-dom";
 function SignInModal() {
   const { PlaceBid } = useSelector((state) => state);
   const [IsLoggedIn, setIsLoggedIn] = useState(false);
@@ -82,7 +83,9 @@ function SignInModal() {
         Sign in
       </button> */}
       <img onClick={handleSubmit} src={loginsvg} />
-      <img onClick={handleSubmit} src={signup} />
+      <Link to="/sign-up">
+        <img onClick={handleSubmit} src={signup} />
+      </Link>
     </div>
   );
 }

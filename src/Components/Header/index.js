@@ -11,7 +11,7 @@ import logout from "../../Assets/Header/Svgs/logout.svg";
 import page from "../../Assets/Header/Svgs/page.svg";
 import hamburger from "../../Assets/Header/Svgs/burgericon.svg";
 import rule from "../../Assets/Header/Svgs/rule.svg";
-import { Link, BrowserRouter as Router } from "react-router-dom";
+import { Link, BrowserRouter as Router, useNavigate } from "react-router-dom";
 
 import { login } from "../../ClientApi/Auth";
 
@@ -33,6 +33,7 @@ function Header() {
   const { WalletDropDown } = useSelector((state) => state);
   const dispatch = useDispatch();
   console.log(WalletDropDown, "<<<wallet");
+  const navigation = useNavigate();
 
   const headerItems = [
     {
@@ -85,7 +86,7 @@ function Header() {
   };
   const buttons = [
     { name: "Log In", onClick: handleSubmit },
-    { name: "Sign Up", onClick: () => (window.location.href = "/signup") },
+    { name: "Sign Up", onClick: () => navigation("/sign-up") },
   ];
   const bottomItems = [
     {

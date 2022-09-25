@@ -36,7 +36,7 @@ function MyBet() {
       console.log(res);
       console.log(res.games, "<<<<< games");
       setuserDetails(res);
-      setgameTransection(res.games.reverse().slice(0, 3));
+      setgameTransection(res.games.reverse());
       // setCoingSentTransaction(res.coin_sent_transactions);
       // setCoingSentTransaction(res.coin_sent_transactions);
       setcoinRieved([

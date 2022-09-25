@@ -64,9 +64,10 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/game" element={<SingleGame />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/sign-up" element={<Signup />}></Route>
           {/* <Route path="/" element={<SingleGame />}></Route> */}
           <Route path="/casino" element={<SinglePages />}></Route>
+          <Route path="/e-sport" element={<SinglePages />}></Route>
           <Route path="/in-play" element={<InPlayGame />}></Route>
           <Route path="/in-play/:gamename" element={<InPlayGame />}></Route>
           <Route

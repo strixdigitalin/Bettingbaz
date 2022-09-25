@@ -541,6 +541,9 @@ border-bottom-right-radius: 10px;
 }
 
 .game-slide-mob{display: none;}
+
+
+
 @media screen and (max-width: 768px) {
     .row-left{
         margin-left: 10px;
@@ -680,6 +683,16 @@ padding: 0px 15%;
     /* left: -25px; */
     /* overflow-x: scroll; */
     /* overflow-x: scroll; */
+    }
+    .heighlight-row-right{
+        border-left: 1px solid #707070;
+        width: 25%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        font-size: 12px;
+        justify-content: center;
     }
 
 }

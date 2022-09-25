@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 
 import QuickLinks from "../Components/QuickLinks";
 import { showSigninModal } from "../Redux/Reducers/SigninModal";
+import homeicon from "../Assets/Card/home.png";
+import footballicon from "../Assets/Card/footballicon.png";
+import videogame from "../Assets/Card/videogame.png";
+import casino from "../Assets/Card/casino.jpg";
 import {
   allSports,
+  fetchImage,
   leftLinkData,
   rightLinkData,
 } from "./Controler/ImageBySport";
@@ -39,19 +44,45 @@ function PageCover({ component, gamename }) {
         />
       </div>
       <div className="mobile-bottom">
-        <Link to="/in-play">
-          <div style={{ textDecoration: "none", color: "white" }}>In Play</div>
+        <Link to="/home" className="text-icon-cover">
+          <img
+            src={homeicon}
+            width="30px"
+            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+          />
+          <div style={{ textDecoration: "none", color: "black" }}>Home</div>
         </Link>
 
-        <div
-          onClick={openSigninModal}
-          style={{ textDecoration: "none", color: "white" }}
+        <Link
+          to="/home"
+          // onClick={openSigninModal}
+          className="text-icon-cover"
+          style={{ textDecoration: "none", color: "black" }}
         >
-          Sign in
-        </div>
+          {" "}
+          <img
+            src={footballicon}
+            width="30px"
+            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+          />
+          Sports
+        </Link>
 
-        <Link to="/">
-          <div style={{ textDecoration: "none", color: "white" }}>Blog</div>
+        <Link to="/e-sport" className="text-icon-cover">
+          <img
+            src={videogame}
+            width="30px"
+            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+          />
+          <div style={{ textDecoration: "none", color: "black" }}>E sports</div>
+        </Link>
+        <Link to="/casino" className="text-icon-cover">
+          <img
+            src={casino}
+            width="30px"
+            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+          />
+          <div style={{ textDecoration: "none", color: "black" }}>Casino</div>
         </Link>
       </div>
     </div>

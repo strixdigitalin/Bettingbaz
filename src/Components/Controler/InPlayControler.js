@@ -48,7 +48,7 @@ const InPlaySingleGame = (props) => {
   const submitBid = () => {
     setbidStatus({ status: null, msg: "" });
 
-    PlaceBetApi({ ...bidContent, amount: bidAmount  }, (res) => {
+    PlaceBetApi({ ...bidContent, amount: bidAmount }, (res) => {
       console.log(res);
       if (res.status) {
         setbidStatus({ status: true, msg: res.message });
@@ -62,12 +62,12 @@ const InPlaySingleGame = (props) => {
     <>
       <div className="card-today">
         <div className="inplay-head-left">
-          <img
+          {/* <img
             src={movedown}
             style={{ cursor: "pointer" }}
             width="15px"
             onClick={() => setHandleContent(!handleContent)}
-          />
+          /> */}
           <span className="cardTeam"> Teams</span>
         </div>
         <div className="card-today-right-in-play">
@@ -210,7 +210,7 @@ const InPlaySingleGame = (props) => {
             {index == clickedRow && (
               <div className="placebid-cover ">
                 <div className="button-cover">
-                  {[100, 500, 1000, 2000,5000].map((item) => {
+                  {[100, 500, 1000, 2000, 5000].map((item) => {
                     return (
                       <button onClick={() => setBidAmount(item)}>{item}</button>
                     );

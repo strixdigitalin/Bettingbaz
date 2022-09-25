@@ -44,6 +44,9 @@
         left: 20%;
         /* margin: auto; */
     }
+    .sign-in-modal >img {
+        width: 90%;
+    }
     .withdraw-img{
         /* width: 50px; */
     }

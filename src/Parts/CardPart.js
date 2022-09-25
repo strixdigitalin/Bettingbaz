@@ -235,40 +235,36 @@ export const GameSliderMob = ({ selectedGame, changeGame, matchCount }) => {
       {/*  for mobile screen */}
       <div className="middle-games">
         {window.screen.width <= 768 &&
-          allSports
-            .slice(0, 18)
-            .slice(moveSlider, moveSlider + 7)
-            .map((item, key) => {
-              return (
+          allSports.slice(0, 18).map((item, key) => {
+            return (
+              <div
+                style={{
+                  borderBottom:
+                    selectedGame == item.sport ? "5px solid orange" : "",
+                  height: "100%",
+                }}
+              >
                 <div
-                  style={{
-                    borderBottom:
-                      selectedGame == item.sport ? "5px solid orange" : "",
-                    height: "100%",
-                  }}
+                  className={`${"singleGame"}`}
+                  style={{ minWidth: "78px" }}
+                  onClick={() => changeGame(item.sport)}
                 >
-                  <div
-                    className={`${"singleGame"}`}
-                    onClick={() => changeGame(item.sport)}
-                  >
-                    {/* <div> */}
-                    <img
-                      src={fetchImage(item.sport)}
-                      width={window.screen.width < 768 ? "45px" : "25px"}
-                    />
-                    {/* </div> */}
-                    <div className="textcenter" style={{ fontSize: "9.3px" }}>
-                      {item.name}{" "}
-                      <span style={{ fontWeight: "bold", color: "black" }}>
-                        {selectedGame == item.sport
-                          ? "(" + matchCount + ")"
-                          : ""}
-                      </span>
-                    </div>
+                  {/* <div> */}
+                  <img
+                    src={fetchImage(item.sport)}
+                    width={window.screen.width < 768 ? "25px" : "25px"}
+                  />
+                  {/* </div> */}
+                  <div className="textcenter" style={{ fontSize: "9.3px" }}>
+                    {item.name}{" "}
+                    <span style={{ fontWeight: "bold", color: "black" }}>
+                      {selectedGame == item.sport ? "(" + matchCount + ")" : ""}
+                    </span>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            );
+          })}
       </div>
       {/* <div className="navigator right-nav pointer" onClick={onSlideRight}>
         <img src={moveRight} />

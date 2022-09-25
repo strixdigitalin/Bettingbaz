@@ -88,12 +88,12 @@ export function ShowLiveMatchCard({
 
       <div className="card-today">
         <div className="inplay-head-left">
-          <img
+          {/* <img
             src={movedown}
             style={{ cursor: "pointer" }}
             width="15px"
             // onClick={() => setHandleContent(!handleContent)}
-          />
+          /> */}
           <span style={{ marginLeft: "15px" }}>Team</span>{" "}
           {/* <span className="cardTeam"> {item?.competition_name}</span> */}
         </div>

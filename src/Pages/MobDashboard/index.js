@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUserDetail } from "../../ClientApi/BetApi";
 import { allSports, fetchImage } from "../../Components/Controler/ImageBySport";
 import { showSigninModal } from "../../Redux/Reducers/SigninModal";
 
 function MobDashboard() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [IsLoggedIn, setIsLoggedIn] = useState(false);
   const buttons = [
     {
@@ -15,11 +16,11 @@ function MobDashboard() {
         dispatch(showSigninModal(true));
       },
     },
-    { label: "Sign up", onclick: () => (window.location.href = "/signup") },
+    { label: "Sign up", onclick: () => navigate("/sign-up") },
   ];
   const allSportsButton = [
     { label: "All Sports", onclick: () => {} },
-    { label: "All Sports", onclick: () => {} },
+    // { label: "All Sports", onclick: () => {} },
   ];
   const [loggedInUser, setLoggedInUser] = useState({});
 
@@ -71,14 +72,14 @@ function MobDashboard() {
             All Sports
           </button>
         </div>
-        <div className="">
+        {/* <div className="">
           <button
             style={{ background: "white", color: "black" }}
             className="dash-allsport"
           >
             All Sports
           </button>
-        </div>
+        </div> */}
       </div>
       <div
         style={{

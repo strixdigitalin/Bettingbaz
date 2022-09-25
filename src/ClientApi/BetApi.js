@@ -3,6 +3,13 @@ import { baseUrl } from "./Auth";
 export const PlaceBetApi = async (item, successCallback) => {
   var myHeaders = new Headers();
   const user = localStorage.getItem("betting_user");
+  if (user == null || user == "null") {
+    // alert("Log in to place bid");
+    return successCallback({
+      status: false,
+      message: "Log in to place the bid",
+    });
+  }
   const userData = JSON.parse(user);
   const token = userData.usertoken;
   const { bearer } = userData;
@@ -75,6 +82,7 @@ export const getUserDetail = async (successCallback) => {
 
 export const changePasswordApi = async (password, successCallback) => {
   const user = localStorage.getItem("betting_user");
+  console.log(user, "<<<<<userwhilelogin");
   const userData = JSON.parse(user);
   const token = userData.usertoken;
   console.log(userData, "<<<user");

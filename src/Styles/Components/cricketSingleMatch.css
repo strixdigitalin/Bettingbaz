@@ -169,4 +169,26 @@ text-align: center;
         justify-content: center;
         align-items: center;
     }
+
+    .scoredata-team{
+        width: 50%;
+    }
+    .playerScore-odd{
+        width: 25%;
+    }
+    .most-right-score{
+        width: 25%;
+    }
+.cricket-heighlight-row-left{
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    width: 50%;
+    font-size: 12px;
+    word-wrap: break-word;
+}
+
+    /* .playerScore{
+        width: 25%;
+    } */
 }
