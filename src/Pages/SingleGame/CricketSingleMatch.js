@@ -330,6 +330,18 @@ const CricketSingle = () => {
           >
             {matchData[0]?.values[1]?.val1}
           </div>
+          {params.game == "football" && (
+            <div
+              className="flex-row  w100 score-data-single-team"
+              style={{
+                borderTop: "1px solid #707070",
+                padding: "5px 10px",
+                color: "black",
+              }}
+            >
+              {matchData[0]?.values[2]?.val1}
+            </div>
+          )}
           {/* <br /> */}
         </div>
         <div
@@ -371,6 +383,19 @@ const CricketSingle = () => {
           >
             {parseFloat(matchData[0]?.values[1]?.odds).toFixed(2)}
           </div>
+          {params.game == "football" && (
+            <div
+              className="flex-row w100 just-ctr"
+              style={{
+                border: "1px solid #707070",
+                padding: "5px 0px",
+                color: "wheat",
+                height: "40px",
+              }}
+            >
+              {parseFloat(matchData[0]?.values[2]?.odds).toFixed(2)}
+            </div>
+          )}
           {/* <br /> */}
         </div>
         <div
@@ -416,6 +441,22 @@ const CricketSingle = () => {
             ).toFixed(1)}
             {/* <div>(54)</div> */}
           </div>
+          {params.game == "football" && (
+            <div
+              className="flex-row w100 just-ctr"
+              style={{
+                border: "1px solid #707070",
+                padding: "5px 0px",
+                color: "wheat",
+                height: "40px",
+              }}
+            >
+              {parseFloat(
+                parseFloat(matchData[0]?.values[2]?.odds) + 0.1
+              ).toFixed(1)}
+              {/* <div>(54)</div> */}
+            </div>
+          )}
           {/* <br /> */}
         </div>
         {/* <div className="flex-row just-bet"></div> */}
