@@ -3,6 +3,7 @@ import { GameHeading } from ".";
 import { earnAmount, getDataSavedInDb } from "../../ClientApi/BetApi";
 
 function SingleRowRunningBid({ item }) {
+  const [bePlaced, setBePlaced] = useState(false);
   const [odds, setOdds] = useState("...");
   useEffect(() => {
     console.log(item.game_id, "<<<<running bidfinal");
@@ -15,7 +16,7 @@ function SingleRowRunningBid({ item }) {
         setOdds(res[0].values[0].odds);
       }
     );
-  }, []);
+  }, [bePlaced]);
   const showGreen = (amount, currAmount) => {
     if (amount > currAmount) return false;
     else return true;
@@ -25,6 +26,8 @@ function SingleRowRunningBid({ item }) {
     // return null;
     earnAmount(parseFloat(odds * item.amount).toFixed(2), item.id, (res) => {
       console.log(res, "<<<claim now response");
+      setBePlaced(!bePlaced);
+      window.location.reload(true);
     });
   };
 
@@ -72,7 +75,10 @@ function SingleRowRunningBid({ item }) {
           }`,
         }}
       >
-        {item?.reward_amount} to {parseFloat(odds * item.amount).toFixed(2)}
+        {item?.reward_amount} to{" "}
+        {parseFloat(odds * item.amount).toFixed(2) == "NaN"
+          ? "--"
+          : parseFloat(odds * item.amount).toFixed(2)}
       </div>
       <div
         className="table-col"
