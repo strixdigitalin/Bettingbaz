@@ -85,7 +85,7 @@ function SingleRowRunningBid({ item }) {
       >
         {/* {item.is_completed && <button>Claim Now</button>} */}
         {(() => {
-          if (item.is_completed) {
+          if (item.is_completed == 1 && item.is_withdrawl == 0) {
             return (
               <button
                 style={{ borderRadius: "10px", padding: "5px 5px" }}
