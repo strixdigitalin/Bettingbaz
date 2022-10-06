@@ -239,9 +239,9 @@ function Header() {
                     <div>
                       <img src={page} />
                     </div>
-                    <Link to="/my-bet">
+                    <Link to="/my-account">
                       <div style={{ textDecoration: "none", color: "black" }}>
-                        My Bets
+                        My Account
                       </div>
                     </Link>
                   </div>

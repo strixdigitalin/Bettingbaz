@@ -7,3 +7,101 @@
     align-items: center;
     padding: 0px 50px;
 }
+
+
+/* new style for account page */
+.account_detail{
+    padding:20px;
+    background-color: #C7C7C7;
+}
+.profile_title{
+    border-radius: 10px 10px 0 0;
+    background-color:#F97D09;
+    padding: 15px;
+    padding-left: 40px;
+    width: 100%;
+    margin-bottom:3px;
+}
+.profile_title h3{
+    font-size:18px;
+    color: #fff !important;
+    font-weight: 700;
+    margin: 0;
+}
+
+.profile_menu .nav-pills .nav-link{
+    background-color: #fff;
+    color:#000;
+    font-size:15px;
+    font-weight: 700;
+    padding-left:40px;
+    text-align: left;
+    margin-bottom: 2px;
+    border-radius: 0 !important;
+}
+.profile_menu .nav-pills .nav-link.active{
+    background-color:#fff;
+}
+.profile_menu .nav-pills .nav-link:last-child{
+    border-radius: 0 0 10px 10px !important;
+}
+.profile_menu .nav-pills .nav-link:hover{
+    background-color: #E4E4E4;
+}
+
+.account_detail .table{
+    background-color:#fff !important;
+}
+
+.account_detail .table td{
+    padding: 15px;
+    padding-left: 25px;
+    border-bottom: 1px solid #c7c7c7;
+}
+
+.account_detail .table tbody tr td:nth-of-type(1){
+    border-right: 1px solid #c7c7c7;
+    width:25%;
+    font-weight: 700;
+}
+
+.account_detail .table tbody tr td:nth-of-type(2){
+    font-weight: 400;
+}
+
+.table .pass_inr{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.wallet_title{
+    display:flex;
+    align-items: center;
+}
+
+.wallet_title h3{
+    border-radius: 10px 0 0 0;
+    background-color:#F97D09;
+    padding: 15px;
+    padding-left: 40px;
+    width: 100%;
+    margin:0;
+    font-size: 18px;
+    color: #fff !important;
+
+}
+.blance_title{
+    background-color:#F97D09;
+    padding: 15px;
+    padding-left: 40px;
+    width: 100%;
+    border-radius: 0 10px 0 0;
+    margin-left: 3px;
+}
+.blance_title h3{
+    font-size: 18px;
+    color: #fff !important;
+    margin:0 !important;
+}

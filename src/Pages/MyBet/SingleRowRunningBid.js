@@ -37,60 +37,75 @@ function SingleRowRunningBid({ item }) {
         className="table-col"
         style={{
           width: GameHeading[0].width,
+          width: "45%",
+
           wordBreak: "break-word",
+          minWidth: "200px",
         }}
       >
-        {item.game_id?.split("/")[2]}
+        {item.game_id.toUpperCase()?.split("/")[1] +
+          ">" +
+          item.game_id.toUpperCase()?.split("/")[4]}
       </div>
       <div
         className="table-col"
         style={{
-          width: GameHeading[1].width,
+          // width: GameHeading[1].width,
           // wordBreak: "break-word",
           minWidth: "200px",
         }}
       >
-        {item?.game_id}
-      </div>
-      {/* <div className="table-col">Company</div> */}
-      <div
-        className="table-col"
-        style={{ width: GameHeading[2].width, minWidth: "200px" }}
-      >
-        {item?.created_at}
-      </div>
-      <div className="table-col" style={{ width: GameHeading[3].width }}>
-        {item?.amount}
-      </div>
-      <div className="table-col" style={{ width: GameHeading[4].width }}>
-        {/* {item?.multiply_value} */}
-        {odds}
+        {item.odds_type != null ? item.odds_type : "--"}
       </div>
       <div
         className="table-col"
         style={{
-          width: GameHeading[5].width,
+          width: GameHeading[2].width,
+          // wordBreak: "break-word",
+          minWidth: "200px",
+        }}
+      >
+        {/* {item?.game_id} */}
+        {odds}
+      </div>
+      {/* <div className="table-col">Company</div> */}
+      <div className="table-col" style={{ width: GameHeading[4].width }}>
+        {/* {item?.created_at} */}
+        {/* No */}
+        {item?.decision != null ? item.decision : "--"}
+      </div>
+      <div className="table-col" style={{ width: GameHeading[3].width }}>
+        {item?.stake != null ? item.stake : "--"}
+      </div>
+      <div className="table-col" style={{ width: GameHeading[5].width }}>
+        {/* {item?.multiply_value} */}
+        {/* {odds} */}
+        {item?.created_at}
+      </div>
+      <div
+        className="table-col"
+        style={{
+          width: GameHeading[6].width,
+        }}
+      >
+        {item.settled_date != null ? item.settled_date : "--"}
+
+        {/* {item?.reward_amount} to{" "}
+        {parseFloat(odds * item.amount).toFixed(2) == "NaN"
+          ? "--"
+          : parseFloat(odds * item.amount).toFixed(2)} */}
+      </div>
+      <div
+        className="table-col"
+        style={{
+          width: GameHeading[6].width,
           color: `${
             showGreen(item.reward_amount, item.amount * odds) ? "green" : "red"
           }`,
         }}
       >
-        {item?.reward_amount} to{" "}
-        {parseFloat(odds * item.amount).toFixed(2) == "NaN"
-          ? "--"
-          : parseFloat(odds * item.amount).toFixed(2)}
-      </div>
-      <div
-        className="table-col"
-        style={{
-          width: GameHeading[5].width,
-          // color: `${
-          //   showGreen(item.reward_amount, item.amount * odds) ? "green" : "red"
-          // }`,
-        }}
-      >
         {/* {item.is_completed && <button>Claim Now</button>} */}
-        {(() => {
+        {/* {(() => {
           if (item.is_completed == 1 && item.is_withdrawl == 0) {
             return (
               <button
@@ -102,7 +117,11 @@ function SingleRowRunningBid({ item }) {
               </button>
             );
           }
-        })()}
+        })()} */}
+        {parseFloat(odds * item.amount).toFixed(2) != null &&
+        parseFloat(odds * item.amount).toFixed(2) != "null"
+          ? parseFloat(odds * item.amount).toFixed(2)
+          : "--"}
         {/* {item?.reward_amount} to {parseFloat(odds * item.amount).toFixed(2)} */}
       </div>
     </div>

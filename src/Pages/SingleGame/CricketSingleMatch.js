@@ -19,7 +19,8 @@ import batsvg from "../../Assets/Country/bat.svg";
 import ballsvg from "../../Assets/Country/ball.svg";
 
 import pakistansvg from "../../Assets/Country/pakistan.svg";
-
+const typePrem = "PREMIUM";
+const typeFancy = "FANCY";
 const TOTAL_RUNS = "Runs";
 const WICKETS = "Wicket";
 const initialBlock = { row: null, box: null };
@@ -39,6 +40,7 @@ const CricketSingle = () => {
   const [equalValue, setEqualValue] = useState(0);
   const [bidAmount, setBidAmount] = useState(0);
   const [clickedRow, setClickedRow] = useState(null);
+  const [bidType, setBidType] = useState(typePrem);
   const [bidContent, setBidContent] = useState({ odds: 0 });
   const [clickedBlock, setClickedBlock] = useState(initialBlock);
   const [premiumSelected, setPremiumSelected] = useState({
@@ -125,14 +127,20 @@ const CricketSingle = () => {
 
     // alert("here");
 
-    PlaceBetApi({ ...bidContent, amount: bidAmount, matchId }, (res) => {
-      console.log(res);
-      if (res.status) {
-        setbidStatus({ status: true, msg: res.message });
-      } else {
-        setbidStatus({ status: false, msg: res.message });
+    PlaceBetApi(
+      { ...bidContent, amount: bidAmount, matchId, odd_type: bidType },
+      (res) => {
+        console.log(res);
+        if (res.status) {
+          setbidStatus({
+            status: true,
+            msg: res.message,
+          });
+        } else {
+          setbidStatus({ status: false, msg: res.message });
+        }
       }
-    });
+    );
   };
 
   const NumberCalculation = (name, value, operation) => {
@@ -586,6 +594,7 @@ const CricketSingle = () => {
                                   team_id: 2,
                                 });
                                 setClickedRow(index);
+                                setBidType(typeFancy);
                               }}
                             >
                               {/* {params.game != "cricket" && initem?.val2}s */}
@@ -622,6 +631,7 @@ const CricketSingle = () => {
                                   team_id: 2,
                                 });
                                 setClickedRow(index);
+                                setBidType(typeFancy);
                               }}
                             >
                               {/* {NumberCalculation(
@@ -760,6 +770,7 @@ const CricketSingle = () => {
                                 className="heighlight-row-right pointer"
                                 onClick={() => {
                                   // placeBid({ ...item, odds: inItem.odds })
+                                  setBidType(typePrem);
                                   setClickedBlock({
                                     row: index,
                                     box: 1,

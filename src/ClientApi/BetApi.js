@@ -19,6 +19,7 @@ export const PlaceBetApi = async (item, successCallback) => {
     token,
     game_id: item.matchId,
     amount: item.amount,
+    odd_type: item.odd_type,
     multiply_value: item.odds,
     status: "running",
     team_id: item.team_id,
@@ -41,7 +42,7 @@ export const PlaceBetApi = async (item, successCallback) => {
   };
 
   fetch(baseUrl + "/Bet", requestOptions)
-    .then((response) => response.text()) 
+    .then((response) => response.text())
     .then((result) => successCallback(JSON.parse(result)))
     .catch((error) => {
       successCallback({ status: false, msg: "Unable to place bid" });

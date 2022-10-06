@@ -3,15 +3,16 @@ import { getDataSavedInDb, getUserDetail } from "../../ClientApi/BetApi";
 import SingleRowRunningBid from "./SingleRowRunningBid";
 
 export const GameHeading = [
-  { name: "Sports Name", width: "5%" },
-  { name: "Tournament Id", width: "45%" },
-  { name: "Time & Date", width: "25%" },
-  { name: "Bid Amount", width: "5%" },
-  { name: "Current Odds", width: "5%" },
-  { name: "Win/loss", width: "5%" },
-  { name: "Action", width: "5%" },
+  { name: "Market", width: "45%" },
+  { name: "Odds Type", width: "5%" },
+  { name: "Odds", width: "5%" },
+  { name: "Decision", width: "5%" },
+  { name: "Stake", width: "5%" },
+  { name: "Start time", width: "25%" },
+  { name: "Settled date", width: "5%" },
+  { name: "Profit/Loss", width: "5%" },
 ];
-function MyBet() {
+function MyBet({ showBet }) {
   const BET_HISTORY = "BET_HISTORY";
   const RUNNING_BET = "RUNNING_BET";
   const PROFITE_LOSS = "PROFITE_LOSS";
@@ -29,7 +30,7 @@ function MyBet() {
   const [gameTransection, setgameTransection] = useState([]);
   const [coingSentTransaction, setCoingSentTransaction] = useState([]);
   const [coinRieved, setcoinRieved] = useState([]);
-  const [switchTab, setSwitchTab] = useState(BET_HISTORY);
+  const [switchTab, setSwitchTab] = useState(RUNNING_BET);
 
   useEffect(() => {
     getUserDetail((res) => {
@@ -61,7 +62,7 @@ function MyBet() {
 
   return (
     <div className="my-bet-body">
-      <div className="card-group">
+      {/* <div className="card-group">
         <div className="single-card" onClick={() => setSwitchTab(BET_HISTORY)}>
           Bet History
         </div>
@@ -71,22 +72,30 @@ function MyBet() {
         <div className="single-card" onClick={() => setSwitchTab(BET_HISTORY)}>
           Profile/Loss History
         </div>
-      </div>
-      <div className="middle-cal">
+      </div> */}
+      {/* <div className="middle-cal">
         <input type="date" /> to
         <input type="date" />
-      </div>
+      </div> */}
       <div className="table-div">
         <div className="table-cover">
           {switchTab == RUNNING_BET && (
             <>
               {" "}
-              <div className="table-row" style={{ marginBottom: "10px" }}>
+              <div className="admin-table-header">My Bet</div>
+              <div
+                style={{ background: "white", height: "40px", margin: "1.5px" }}
+              ></div>
+              {/* <SingleRowRunningBid item={{}} /> */}
+              <div className="table-row" style={{}}>
                 {GameHeading.map((item, index) => (
                   <div
                     className="table-col"
                     style={{
                       width: item.width,
+                      background: "gray",
+                      color: "white",
+                      padding: "5px 0px",
                       minWidth: `${
                         index == 1 || index == 2 ? "200px" : "100px"
                       }`,
