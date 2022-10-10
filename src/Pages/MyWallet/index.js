@@ -19,9 +19,9 @@ function MyBet({ showBet }) {
 
   const BetHistory = [
     { name: "id", width: "5%" },
-    { name: "Date/time", width: "22%" },
-    { name: "Deposit", width: "10%" },
-    { name: "Withdraw", width: "30%" },
+    { name: "Date/time", width: "25%" },
+    // { name: "Deposit", width: "10%" },
+    { name: "Withdraw", width: "20%" },
     { name: "Balance", width: "35%" },
     { name: "From-to", width: "10%" },
   ];
@@ -78,14 +78,24 @@ function MyBet({ showBet }) {
         <input type="date" />
       </div> */}
       <div className="table-div">
+        {switchTab == BET_HISTORY && (
+          <>
+            <div className="admin-table-header-wallet">My Wallet</div>
+            <div
+              className="admin-table-header-wallet-down"
+              style={{
+                background: "white",
+
+                height: "40px",
+                margin: "1.5px",
+              }}
+            ></div>
+          </>
+        )}
         <div className="table-cover">
           {switchTab == RUNNING_BET && (
             <>
               {" "}
-              <div className="admin-table-header">My Bet</div>
-              <div
-                style={{ background: "white", height: "40px", margin: "1.5px" }}
-              ></div>
               {/* <SingleRowRunningBid item={{}} /> */}
               <div className="table-row" style={{}}>
                 {GameHeading.map((item, index) => (
@@ -173,15 +183,10 @@ function MyBet({ showBet }) {
           {switchTab == BET_HISTORY && (
             <>
               {" "}
-              <div className="admin-table-header">My Bet</div>
               <div
-                style={{
-                  background: "white",
-                  height: "40px",
-                  margin: "1.5px",
-                }}
-              ></div>
-              <div className="table-row" style={{ marginBottom: "10px" }}>
+                className="table-row-wallet"
+                style={{ marginBottom: "10px" }}
+              >
                 {BetHistory.map((item, index) => (
                   <div
                     className="table-col"
@@ -189,10 +194,9 @@ function MyBet({ showBet }) {
                       width: item.width,
                       background: "gray",
                       color: "white",
+
                       padding: "5px 10px",
-                      // minWidth: `${
-                      //   index == 0 ? "200px" : index == 1 ? "100px" : "100px"
-                      // }`,
+                      minWidth: `${index == 1 ? "150px" : "100px"}`,
                     }}
                   >
                     {item.name}
@@ -201,7 +205,7 @@ function MyBet({ showBet }) {
               </div>
               {coinRieved.map((item, index) => (
                 <div
-                  className="table-row"
+                  className="table-row-wallet"
                   // style={backg}
                 >
                   <div
@@ -218,35 +222,70 @@ function MyBet({ showBet }) {
                     style={{
                       width: BetHistory[1].width,
                       // wordBreak: "break-word",
-                      minWidth: "200px",
+                      minWidth: "150px",
                     }}
                   >
-                    {item?.from_id}
+                    {(() => {
+                      const t = new Date(item?.created_at);
+                      return (
+                        t.getHours() +
+                        ":" +
+                        t.getMinutes() +
+                        "    " +
+                        +"   " +
+                        t.getDate() +
+                        "-" +
+                        t.getMonth() +
+                        1 +
+                        "-" +
+                        t.getFullYear()
+                      );
+                    })()}
                   </div>
                   {/* <div className="table-col">Company</div> */}
-                  <div
+                  {/* <div
                     className="table-col"
                     style={{ width: BetHistory[2].width, minWidth: "200px" }}
                   >
-                    {item?.to_id}
-                  </div>
+                    {item?.amount}
+                  </div> */}
                   <div
                     className="table-col"
-                    style={{ width: BetHistory[3].width }}
+                    style={{ width: BetHistory[2].width }}
                   >
                     {item?.amount}
                   </div>
                   <div
                     className="table-col"
-                    style={{ width: BetHistory[4].width }}
+                    style={{ width: BetHistory[3].width }}
                   >
-                    {item?.created_at}
+                    {item.balance == undefined ? "--" : item.balance}
+                    {/* {(() => {
+          const t = new Date(item?.created_at);
+          return (
+            t.getHours() +
+            ":" +
+            t.getMinutes() +
+            "    " +
+            +"   " +
+            t.getDate() +
+            "-" +
+            t.getMonth() +
+            1 +
+            "-" +
+            t.getFullYear()
+          );
+        })()} */}
                   </div>
                   <div
                     className="table-col"
-                    style={{ width: BetHistory[5].width, ...backColor(item) }}
+                    style={{
+                      width: BetHistory[4].width,
+                      //  ...backColor(item)
+                    }}
                   >
-                    {matchTransaction(item.to_id) ? "Received" : "sent"}
+                    {/* {matchTransaction(item.to_id) ? "Received" : "sent"} */}
+                    {item?.from_id} to {item?.to_id}
                   </div>
                 </div>
               ))}

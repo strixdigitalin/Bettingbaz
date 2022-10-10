@@ -78,14 +78,19 @@ function MyBet({ showBet }) {
         <input type="date" />
       </div> */}
       <div className="table-div">
+        {switchTab == RUNNING_BET && (
+          <>
+            <div className="admin-table-header">My Bet</div>
+            <div
+              style={{ background: "white", height: "40px", margin: "1.5px" }}
+            ></div>
+          </>
+        )}
+
         <div className="table-cover">
           {switchTab == RUNNING_BET && (
             <>
               {" "}
-              <div className="admin-table-header">My Bet</div>
-              <div
-                style={{ background: "white", height: "40px", margin: "1.5px" }}
-              ></div>
               {/* <SingleRowRunningBid item={{}} /> */}
               <div className="table-row" style={{}}>
                 {GameHeading.map((item, index) => (

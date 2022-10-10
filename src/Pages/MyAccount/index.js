@@ -57,6 +57,7 @@ function MyAccount() {
                     aria-selected="false"
                     onClick={() => {
                       setshowBet(true);
+                      SetShowWallet(false);
                     }}
                   >
                     My Bet
