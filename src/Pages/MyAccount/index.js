@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import MyBet from "../MyBet";
+import MyWallet from "../MyWallet";
+import { showResetPasswordModal } from "../../Redux/Reducers/ResetPassword.js";
+import { getUserDetail } from "../../ClientApi/BetApi";
 
 function MyAccount() {
+  const dispatch = useDispatch();
   const [showBet, setshowBet] = useState("");
+  const [userData, setUserData] = useState({});
+  const [ShowWallet, SetShowWallet] = useState(false);
+  useEffect(() => {
+    getUserDetail((res) => {
+      console.log(res, "<<<res");
+      setUserData(res.user);
+    });
+  }, []);
+
   return (
     <>
       <div className="account_detail">
@@ -31,30 +45,7 @@ function MyAccount() {
                   >
                     My Profile
                   </button>
-                  <button
-                    class="nav-link"
-                    id="v-pills-profile-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#v-pills-profile"
-                    type="button"
-                    role="tab"
-                    aria-controls="v-pills-profile"
-                    aria-selected="false"
-                  >
-                    My Bet
-                  </button>
-                  <button
-                    class="nav-link"
-                    id="v-pills-messages-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#v-pills-messages"
-                    type="button"
-                    role="tab"
-                    aria-controls="v-pills-messages"
-                    aria-selected="false"
-                  >
-                    Bet History
-                  </button>
+
                   <button
                     class="nav-link"
                     id="v-pills-messages-tab"
@@ -68,7 +59,7 @@ function MyAccount() {
                       setshowBet(true);
                     }}
                   >
-                    Running Bet
+                    My Bet
                   </button>
                   <button
                     class="nav-link"
@@ -79,6 +70,10 @@ function MyAccount() {
                     role="tab"
                     aria-controls="v-pills-messages"
                     aria-selected="false"
+                    onClick={() => {
+                      setshowBet(false);
+                      SetShowWallet(true);
+                    }}
                   >
                     My Wallet
                   </button>
@@ -102,30 +97,37 @@ function MyAccount() {
                         <tbody>
                           <tr>
                             <td>First Name</td>
-                            <td>Rahul</td>
+                            <td>{userData.name}</td>
                           </tr>
-                          <tr>
+                          {/* <tr>
                             <td>Last Name</td>
                             <td>Singh</td>
-                          </tr>
+                          </tr> */}
                           <tr>
                             <td>User Name</td>
-                            <td>rahulsing55</td>
+                            <td>{userData.name}</td>
                           </tr>
                           <tr>
                             <td>Email Id</td>
-                            <td>rahulsingh154@gmail.com</td>
+                            <td>{userData.email}</td>
                           </tr>
                           <tr>
                             <td>Phone Num.</td>
-                            <td>+919810291083</td>
+                            <td>{userData.mobile}</td>
                           </tr>
                           <tr>
                             <td>Password</td>
                             <td>
                               <div className="pass_inr">
                                 <span>****</span>
-                                <a href="#">Edit</a>
+                                <a
+                                  href="#"
+                                  onClick={() => {
+                                    dispatch(showResetPasswordModal(true));
+                                  }}
+                                >
+                                  Edit
+                                </a>
                               </div>
                             </td>
                           </tr>
@@ -143,8 +145,8 @@ function MyAccount() {
                       <div className="wallet_title">
                         <h3>My Wallet</h3>
                         <div className="blance_title">
-                          <h3>My Balance</h3>
-                          <h3>0.00</h3>
+                          <h3>My Balance {"    "} 0.00 </h3>
+                          {/* <h3>0.00</h3> */}
                         </div>
                       </div>
                       <table className="table">
@@ -182,22 +184,18 @@ function MyAccount() {
                       </table>
                     </div>
                   </div>
-                  <div
-                    class="tab-pane fade"
-                    id="v-pills-messages"
-                    role="tabpanel"
-                    aria-labelledby="v-pills-messages-tab"
-                  >
-                    ...
-                  </div>
                 </div>
               </div>
+              {showBet && <MyBet showBet={showBet} setshowBet={setshowBet} />}
+              {ShowWallet && (
+                <MyWallet showBet={ShowWallet} SetShowWallet={SetShowWallet} />
+              )}
             </div>
           </div>
         </div>
         <div></div>
       </div>
-      {showBet && <MyBet showBet={showBet} setshowBet={setshowBet} />}
+      {/* {showBet && <MyBet showBet={showBet} setshowBet={setshowBet} />} */}
     </>
   );
 }

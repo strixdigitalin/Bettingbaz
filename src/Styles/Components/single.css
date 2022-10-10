@@ -11,7 +11,8 @@
 
 /* new style for account page */
 .account_detail{
-    padding:20px;
+    padding: 20px 0px;
+    width: 100%;
     background-color: #C7C7C7;
 }
 .profile_title{
@@ -94,8 +95,8 @@
 }
 .blance_title{
     background-color:#F97D09;
-    padding: 15px;
-    padding-left: 40px;
+    /* padding: 15px; */
+    /* padding-left: 40px; */
     width: 100%;
     border-radius: 0 10px 0 0;
     margin-left: 3px;

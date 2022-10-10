@@ -227,13 +227,13 @@ function Header() {
               {/* ))} */}
               {WalletDropDown.show && (
                 <div className="walletDropDown">
-                  <div className="flex-row  wallet-single">
+                  {/* <div className="flex-row  wallet-single">
                     {" "}
                     <div>
                       <img src={Lock} />
                     </div>
                     <div onClick={resetPass}>Reset Password</div>
-                  </div>
+                  </div> */}
                   <div className="flex-row  wallet-single">
                     {" "}
                     <div>

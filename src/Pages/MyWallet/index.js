@@ -19,18 +19,18 @@ function MyBet({ showBet }) {
 
   const BetHistory = [
     { name: "id", width: "5%" },
-    { name: "From", width: "10%" },
-    { name: "to", width: "10%" },
-    { name: "Amount", width: "30%" },
-    { name: "Date", width: "35%" },
-    { name: "Status", width: "10%" },
+    { name: "Date/time", width: "22%" },
+    { name: "Deposit", width: "10%" },
+    { name: "Withdraw", width: "30%" },
+    { name: "Balance", width: "35%" },
+    { name: "From-to", width: "10%" },
   ];
 
   const [userDetails, setuserDetails] = useState([]);
   const [gameTransection, setgameTransection] = useState([]);
   const [coingSentTransaction, setCoingSentTransaction] = useState([]);
   const [coinRieved, setcoinRieved] = useState([]);
-  const [switchTab, setSwitchTab] = useState(RUNNING_BET);
+  const [switchTab, setSwitchTab] = useState(BET_HISTORY);
 
   useEffect(() => {
     getUserDetail((res) => {
@@ -173,16 +173,26 @@ function MyBet({ showBet }) {
           {switchTab == BET_HISTORY && (
             <>
               {" "}
+              <div className="admin-table-header">My Bet</div>
+              <div
+                style={{
+                  background: "white",
+                  height: "40px",
+                  margin: "1.5px",
+                }}
+              ></div>
               <div className="table-row" style={{ marginBottom: "10px" }}>
                 {BetHistory.map((item, index) => (
                   <div
                     className="table-col"
                     style={{
                       width: item.width,
-                      textAlign: "left",
-                      minWidth: `${
-                        index == 1 || index == 2 ? "200px" : "100px"
-                      }`,
+                      background: "gray",
+                      color: "white",
+                      padding: "5px 10px",
+                      // minWidth: `${
+                      //   index == 0 ? "200px" : index == 1 ? "100px" : "100px"
+                      // }`,
                     }}
                   >
                     {item.name}

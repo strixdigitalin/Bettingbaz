@@ -72,41 +72,41 @@ export function InPlayCard({
   // ---these are live game on home pages----live match ids are being stored in array
 
   useEffect(() => {
-    setInterval(() => {
+    // setInterval(() => {
       API.getInPlay("football", (res) => {
         const ThreeGame = res.slice(0, 3);
         dispatch(FootballAllLiveMatchFun(ThreeGame));
       });
 
       console.log(liveGame, "<<<<football fetched");
-    }, 7000);
+    // }, 7000);
   }, []);
   useEffect(() => {
-    setInterval(() => {
+    // setInterval(() => {
       API.getInPlay("cricket", (res) => {
         const ThreeGame = res.slice(0, 3);
         dispatch(cricketAllLiveMatchFun(ThreeGame));
       });
       console.log("cricket fetched");
-    }, 10000);
-  }, []);
+    // }, 10000);
+  }, [])
   useEffect(() => {
-    setInterval(() => {
+    // setInterval(() => {
       API.getInPlay("basketball", (res) => {
         const ThreeGame = res.slice(0, 3);
         dispatch(BasketBallLiveMatchFun(ThreeGame));
       });
       console.log("basketball fetched");
-    }, 5000);
+    // }, 5000);
   }, []);
   useEffect(() => {
-    setInterval(() => {
+    // setInterval(() => {
       API.getInPlay("tennis", (res) => {
         const ThreeGame = res.slice(0, 3);
         dispatch(TennisAllLiveMatchFun(ThreeGame));
       });
       console.log("tennis fetched");
-    }, 10000);
+    // }, 10000);
   }, []);
   useEffect(() => {
     setShowLoader(true);
