@@ -53,7 +53,7 @@ function SignInModal() {
     login(formData, (res) => {
       console.log(res);
       if (res.user) {
-        alert("success");
+        // alert("success");
         localStorage.setItem(
           "betting_user",
           JSON.stringify({ ...res.user, bearer: res["bearer-token"] })

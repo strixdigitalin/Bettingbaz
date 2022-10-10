@@ -91,7 +91,7 @@ function App() {
           <Route path="/mob-dashboard" element={<MobDashboard />}></Route>
           <Route path="/terms/:terms" element={<Terms />}></Route>
         </Routes>
-        <Footer />
+    
       </BrowserRouter>
       {PlaceBid.show && (
         <div className="modal-outer">

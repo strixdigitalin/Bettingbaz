@@ -6,7 +6,7 @@
     margin: auto;
     gap: 1%;
     padding-top: 20px;
-
+min-height: 120vh;
 }
 
 .home-middle{

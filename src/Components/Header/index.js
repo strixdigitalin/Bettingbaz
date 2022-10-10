@@ -72,7 +72,7 @@ function Header() {
     login(loginData, (res) => {
       console.log(res);
       if (res.user) {
-        alert("success");
+        // alert("success");
         setIsLoggedIn(true);
         setLoggedInUser(res.user);
         localStorage.setItem(
