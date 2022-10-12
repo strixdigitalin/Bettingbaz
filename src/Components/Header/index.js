@@ -155,7 +155,7 @@ function Header() {
   const resetPass = () => dispatch(showResetPasswordModal(true));
   return (
     <div>
-      <div className="">
+          <div className="">
         {/* ---------------top */}
         <div className={`bg2c header-upper flex-row just-ctr col-white `}>
           {headerItems.map((item, key) => {

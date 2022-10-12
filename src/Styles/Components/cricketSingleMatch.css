@@ -27,6 +27,19 @@
     /* border-top-right-radius: 10px; */
 
 }
+.scoreData-mobile {
+    background-color:  rgb(199, 199, 199);
+    
+    /* height: 56px; */
+    display:flex;
+    display: none;
+    padding: 40px 20px;
+    align-items: center;
+    /* color: white; */
+    margin-top: 10px;
+    padding: 10px 0px;
+}
+
 .scoredata-team{
  width: 74%;   
  color: black;
@@ -118,10 +131,39 @@ text-align: center;
 
 
 @media screen and (max-width:768px) {
+    .scoreData-mobile{
+        background-color:  rgb(199, 199, 199);
+    
+        /* height: 56px; */
+        display:flex;
+        align-items: center;
+        padding: 40px 20px;
+        align-items: center;
+        /* color: white; */
+        margin-top: 10px;
+        /* padding: 10px 0px; */
+        background: white;
+        border-radius:40px ;
+        /* margin-top: -10px; */
+        /* z-index: 1; */
+        /* box-shadow: -10px -10px 10px #707070; */
+    }
+    .scoreData{
+        background-color:  rgb(199, 199, 199);
+    
+        /* height: 56px; */
+        display:flex;
+        display: none;
+        align-items: center;
+        /* color: white; */
+        margin-top: 10px;
+        padding: 10px 0px;
+    }
     .one-eaning{
         height: 100px;
         display: flex;
         align-items: center;
+        display: none;
         
     }
     .eaning-mid {
@@ -172,6 +214,7 @@ text-align: center;
 
     .scoredata-team{
         width: 50%;
+        border: 1px solid #707070;
     }
     .playerScore-odd{
         width: 25%;
