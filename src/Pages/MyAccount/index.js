@@ -42,6 +42,10 @@ function MyAccount() {
                     role="tab"
                     aria-controls="v-pills-home"
                     aria-selected="true"
+                    onClick={() => {
+                      setshowBet(false);
+                      SetShowWallet(false);
+                    }}
                   >
                     My Profile
                   </button>
