@@ -8,7 +8,7 @@ import movedown from "../../Assets/Card/Path2.png";
 import RightArrow from "../../Assets/Card/rightbg.png";
 import inPlay from "../../Assets/Header/In Play.png";
 import { useParams } from "react-router-dom";
-import { betbySingleMatc } from "../../Api";
+import { betbySingleMatc, getCricBuzMatch } from "../../Api";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../Redux/Reducers/PlaceBid";
 import { PlaceBetApi } from "../../ClientApi/BetApi";
@@ -43,6 +43,7 @@ const CricketSingle = () => {
   const [bidType, setBidType] = useState(typePrem);
   const [bidContent, setBidContent] = useState({ odds: 0 });
   const [clickedBlock, setClickedBlock] = useState(initialBlock);
+  const [cricBuzData, setcricBuzData] = useState({});
   const [premiumSelected, setPremiumSelected] = useState({
     one: null,
     two: null,
@@ -56,14 +57,15 @@ const CricketSingle = () => {
   console.log(params, "<<<<params");
   const matchId = `/sport/${params.game}/${params.legue}/${params.teams}/${params.id}`;
   useEffect(() => {
-    setInterval(function () {
-      // method to be executed;
-      console.log("fetch by single game called");
-      betbySingleMatc(params, (res) => {
-        console.log(res);
-        setMatchData(res);
-      });
-    }, 5000);
+    // setInterval(function () {
+    // method to be executed;
+    console.log("fetch by single game called");
+    betbySingleMatc(params, (res) => {
+      console.log(res);
+      setMatchData(res);
+      matchTeamNameCricBuz();
+    });
+    // }, 5000);
   }, []);
   const { teams } = params;
   const placeBid = (item) => {
@@ -82,6 +84,47 @@ const CricketSingle = () => {
         })
       );
     }
+  };
+
+  const matchTeamNameCricBuz = () => {
+    // matchData[0]?.values[0]?.val1
+    getCricBuzMatch((data) => {
+      // console.log(res, "<<<<<");
+      data.typeMatches[0].seriesMatches.map((series) => {
+        console.log(series.seriesAdWrapper, "<<<s");
+        series.seriesAdWrapper?.matches.map((match) => {
+          console.log(
+            series.seriesAdWrapper.match.matchInfo.team1.teamName,
+            matchData[0]?.values[0]?.val1
+          );
+          console.log(match, "<<<< match");
+          setcricBuzData(match);
+          console.log(
+            match.matchInfo.team1.teamName,
+            matchData[0]?.values[0]?.val1
+          );
+        });
+
+        // match.map()
+        // console.log(
+        //   series.seriesAdWrapper.match.matchInfo.team1.teamName,
+        //   matchData[0]?.values[0]?.val1
+        // );
+        // console.log(
+        //   series.seriesAdWrapper.match.matchInfo.team2.teamName,
+        //   matchData[0]?.values[2]?.val1
+        // );
+      });
+      // });
+    });
+    const data = {};
+    // data.typeMatches[0].seriesMatches.map((series) => {
+    //   series.matches.map((match) => {
+    //     // match.map()
+    //     console.log(match.team1.teamName, matchData[0]?.values[0]?.val1);
+    //     console.log(match.team2.teamName, matchData[0]?.values[2]?.val1);
+    //   });
+    // });
   };
 
   useEffect(() => {
@@ -269,7 +312,8 @@ const CricketSingle = () => {
               color: "black",
             }}
           >
-            {matchData[0]?.values[0]?.val1}
+            {/* {matchData[0]?.values[0]?.val1} */}
+            {cricBuzData.matchScore.team1Score.inngs1.runs}sss
           </div>
           <div
             className="flex-row  w100 score-data-single-team"
@@ -410,7 +454,10 @@ const CricketSingle = () => {
           <div className="mob-one-eaning-single">
             <img src={indiasvg} />
             <div>India</div>
-            <div style={{ color: "#F98417" }}>24/4</div>
+            <div style={{ color: "#F98417" }}>
+              {cricBuzData?.matchScore?.team1Score?.inngs1?.runs}/
+              {cricBuzData?.matchScore?.team1Score?.inngs1?.wickets}ddd
+            </div>
             <div className="flex-row align-ctr just-ctr" style={{ height: "" }}>
               <div>
                 <img src={batsvg} width="40px" />
@@ -425,14 +472,18 @@ const CricketSingle = () => {
               >
                 V. Kohli
               </div>
-              <div style={{ color: "#F98417", padding: "10px" }}>51 * </div>
+              <div style={{ color: "#F98417", padding: "10px" }}>51 *</div>
             </div>
           </div>
           <div style={{ border: "1px solid #F97D09", height: "40px" }}></div>
           <div className="mob-one-eaning-single">
             <img src={pakistansvg} />
             <div>Pakistan</div>
-            <div style={{ color: "#F98417" }}>24/4</div>
+            <div style={{ color: "#F98417" }}>
+              {/* 24/7 */}
+              {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/
+              {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets}ddd
+            </div>
             <div
               className="flex-row align-ctr just-ctr"
               style={{ height: "", gap: "5%" }}

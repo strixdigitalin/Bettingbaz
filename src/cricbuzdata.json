@@ -1,0 +1,442 @@
+{
+    "typeMatches": [
+      {
+        "matchType": "International",
+        "seriesMatches": [
+          {
+            "seriesAdWrapper": {
+              "seriesId": 4385,
+              "seriesName": "New Zealand T20I Tri-Series 2022",
+              "matches": [
+                {
+                  "matchInfo": {
+                    "matchId": 49178,
+                    "seriesId": 4385,
+                    "seriesName": "New Zealand T20I Tri-Series 2022",
+                    "matchDesc": "6th Match",
+                    "matchFormat": "T20",
+                    "startDate": "1665626400000",
+                    "endDate": "1665639000000",
+                    "state": "Complete",
+                    "status": "Pakistan won by 7 wkts",
+                    "team1": {
+                      "teamId": 6,
+                      "teamName": "Bangladesh",
+                      "teamSName": "BAN",
+                      "imageId": 172120
+                    },
+                    "team2": {
+                      "teamId": 3,
+                      "teamName": "Pakistan",
+                      "teamSName": "PAK",
+                      "imageId": 172116
+                    },
+                    "venueInfo": {
+                      "id": 371,
+                      "ground": "Hagley Oval",
+                      "city": "Christchurch",
+                      "timezone": "+13:00",
+                      "latitude": "-43.535831",
+                      "longitude": "172.624863"
+                    },
+                    "currBatTeamId": 3,
+                    "seriesStartDt": "1665100800000",
+                    "seriesEndDt": "1665878400000",
+                    "isTimeAnnounced": true,
+                    "stateTitle": "PAK Won",
+                    "isFantasyEnabled": true
+                  },
+                  "matchScore": {
+                    "team1Score": {
+                      "inngs1": {
+                        "inningsId": 1,
+                        "runs": 173,
+                        "wickets": 6,
+                        "overs": 19.6
+                      }
+                    },
+                    "team2Score": {
+                      "inngs1": {
+                        "inningsId": 2,
+                        "runs": 177,
+                        "wickets": 3,
+                        "overs": 19.5
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "adDetail": {
+              "name": "native_matches",
+              "layout": "native_large",
+              "position": 1
+            }
+          }
+        ]
+      },
+      {
+        "matchType": "Domestic",
+        "seriesMatches": [
+          {
+            "seriesAdWrapper": {
+              "seriesId": 4674,
+              "seriesName": "ICC Mens T20 World Cup Warm-up Matches 2022",
+              "matches": [
+                {
+                  "matchInfo": {
+                    "matchId": 52720,
+                    "seriesId": 4674,
+                    "seriesName": "ICC Mens T20 World Cup Warm-up Matches 2022",
+                    "matchDesc": "8th Match",
+                    "matchFormat": "T20",
+                    "startDate": "1665648000000",
+                    "endDate": "1665660600000",
+                    "state": "Complete",
+                    "status": "Match Abandoned without a ball bowled due to rain (no toss)",
+                    "team1": {
+                      "teamId": 23,
+                      "teamName": "Scotland",
+                      "teamSName": "SCO",
+                      "imageId": 172137
+                    },
+                    "team2": {
+                      "teamId": 7,
+                      "teamName": "United Arab Emirates",
+                      "teamSName": "UAE",
+                      "imageId": 172121
+                    },
+                    "venueInfo": {
+                      "id": 87,
+                      "ground": "Melbourne Cricket Ground",
+                      "city": "Melbourne",
+                      "timezone": "+11:00",
+                      "latitude": "-37.819967",
+                      "longitude": "144.983449"
+                    },
+                    "seriesStartDt": "1665360000000",
+                    "seriesEndDt": "1666310400000",
+                    "isTimeAnnounced": true,
+                    "stateTitle": "Abandon",
+                    "isFantasyEnabled": true
+                  }
+                },
+                {
+                  "matchInfo": {
+                    "matchId": 52715,
+                    "seriesId": 4674,
+                    "seriesName": "ICC Mens T20 World Cup Warm-up Matches 2022",
+                    "matchDesc": "7th Match",
+                    "matchFormat": "T20",
+                    "startDate": "1665633600000",
+                    "endDate": "1665646200000",
+                    "state": "Complete",
+                    "status": "Match abandoned without a ball being bowled due to rain (no toss)",
+                    "team1": {
+                      "teamId": 5,
+                      "teamName": "Sri Lanka",
+                      "teamSName": "SL",
+                      "imageId": 172119
+                    },
+                    "team2": {
+                      "teamId": 27,
+                      "teamName": "Ireland",
+                      "teamSName": "IRE",
+                      "imageId": 172141
+                    },
+                    "venueInfo": {
+                      "id": 122,
+                      "ground": "Junction Oval",
+                      "city": "Melbourne",
+                      "timezone": "+11:00",
+                      "latitude": "-37.856007",
+                      "longitude": "144.980155"
+                    },
+                    "seriesStartDt": "1665360000000",
+                    "seriesEndDt": "1666310400000",
+                    "isTimeAnnounced": true,
+                    "stateTitle": "Abandon",
+                    "isFantasyEnabled": true
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "seriesAdWrapper": {
+              "seriesId": 4833,
+              "seriesName": "T20 WC Warm-up Matches IND v WA X1 2022",
+              "matches": [
+                {
+                  "matchInfo": {
+                    "matchId": 56152,
+                    "seriesId": 4833,
+                    "seriesName": "T20 WC Warm-up Matches IND v WA X1 2022",
+                    "matchDesc": "2nd Match",
+                    "matchFormat": "T20",
+                    "startDate": "1665639000000",
+                    "endDate": "1665651600000",
+                    "state": "In Progress",
+                    "status": "India need 130 runs in 78 balls",
+                    "team1": {
+                      "teamId": 436,
+                      "teamName": "Western Australia XI",
+                      "teamSName": "WAXI",
+                      "imageId": 172486
+                    },
+                    "team2": {
+                      "teamId": 2,
+                      "teamName": "India",
+                      "teamSName": "IND",
+                      "imageId": 172115
+                    },
+                    "venueInfo": {
+                      "id": 38,
+                      "ground": "W.A.C.A. Ground",
+                      "city": "Perth",
+                      "timezone": "+08:00",
+                      "latitude": "-31.959806",
+                      "longitude": "115.879585"
+                    },
+                    "currBatTeamId": 2,
+                    "seriesStartDt": "1665360000000",
+                    "seriesEndDt": "1665792000000",
+                    "isTimeAnnounced": true,
+                    "stateTitle": "In Progress",
+                    "isFantasyEnabled": true
+                  },
+                  "matchScore": {
+                    "team1Score": {
+                      "inngs1": {
+                        "inningsId": 1,
+                        "runs": 168,
+                        "wickets": 8,
+                        "overs": 19.6
+                      }
+                    },
+                    "team2Score": {
+                      "inngs1": {
+                        "inningsId": 2,
+                        "runs": 33,
+                        "wickets": 2,
+                        "overs": 6.6
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "matchType": "Women",
+        "seriesMatches": [
+          {
+            "seriesAdWrapper": {
+              "seriesId": 4770,
+              "seriesName": "Womens Asia Cup T20 2022",
+              "matches": [
+                {
+                  "matchInfo": {
+                    "matchId": 53338,
+                    "seriesId": 4770,
+                    "seriesName": "Womens Asia Cup T20 2022",
+                    "matchDesc": "Semi Final 2",
+                    "matchFormat": "T20",
+                    "startDate": "1665646200000",
+                    "endDate": "1665658800000",
+                    "state": "In Progress",
+                    "status": "Sri Lanka Women opt to bat",
+                    "team1": {
+                      "teamId": 258,
+                      "teamName": "Sri Lanka Women",
+                      "teamSName": "SLW",
+                      "imageId": 172311
+                    },
+                    "team2": {
+                      "teamId": 259,
+                      "teamName": "Pakistan Women",
+                      "teamSName": "PAKW",
+                      "imageId": 172312
+                    },
+                    "venueInfo": {
+                      "id": 379,
+                      "ground": "Sylhet International Cricket Stadium",
+                      "city": "Sylhet",
+                      "timezone": "+06:00",
+                      "latitude": "24.898183",
+                      "longitude": "91.863608"
+                    },
+                    "currBatTeamId": 258,
+                    "seriesStartDt": "1664582400000",
+                    "seriesEndDt": "1665964800000",
+                    "isTimeAnnounced": true,
+                    "stateTitle": "In Progress",
+                    "isFantasyEnabled": true
+                  },
+                  "matchScore": {
+                    "team1Score": {
+                      "inngs1": {
+                        "inningsId": 1,
+                        "runs": 73,
+                        "wickets": 2,
+                        "overs": 11.5
+                      }
+                    }
+                  }
+                },
+                {
+                  "matchInfo": {
+                    "matchId": 53336,
+                    "seriesId": 4770,
+                    "seriesName": "Womens Asia Cup T20 2022",
+                    "matchDesc": "Semi Final 1",
+                    "matchFormat": "T20",
+                    "startDate": "1665630000000",
+                    "endDate": "1665642600000",
+                    "state": "Complete",
+                    "status": "India Women won by 74 runs",
+                    "team1": {
+                      "teamId": 97,
+                      "teamName": "India Women",
+                      "teamSName": "INDW",
+                      "imageId": 172189
+                    },
+                    "team2": {
+                      "teamId": 382,
+                      "teamName": "Thailand Women",
+                      "teamSName": "THAIW",
+                      "imageId": 172435
+                    },
+                    "venueInfo": {
+                      "id": 379,
+                      "ground": "Sylhet International Cricket Stadium",
+                      "city": "Sylhet",
+                      "timezone": "+06:00",
+                      "latitude": "24.898183",
+                      "longitude": "91.863608"
+                    },
+                    "currBatTeamId": 97,
+                    "seriesStartDt": "1664582400000",
+                    "seriesEndDt": "1665964800000",
+                    "isTimeAnnounced": true,
+                    "stateTitle": "INDW Won",
+                    "isFantasyEnabled": true
+                  },
+                  "matchScore": {
+                    "team1Score": {
+                      "inngs1": {
+                        "inningsId": 1,
+                        "runs": 148,
+                        "wickets": 6,
+                        "overs": 19.6
+                      }
+                    },
+                    "team2Score": {
+                      "inngs1": {
+                        "inningsId": 2,
+                        "runs": 74,
+                        "wickets": 9,
+                        "overs": 19.6
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "seriesAdWrapper": {
+              "seriesId": 4443,
+              "seriesName": "Womens Big Bash League 2022",
+              "matches": [
+                {
+                  "matchInfo": {
+                    "matchId": 50711,
+                    "seriesId": 4443,
+                    "seriesName": "Womens Big Bash League 2022",
+                    "matchDesc": "1st Match",
+                    "matchFormat": "T20",
+                    "startDate": "1665650400000",
+                    "endDate": "1665663000000",
+                    "state": "Toss",
+                    "status": "Sydney Sixers Women opt to bowl",
+                    "team1": {
+                      "teamId": 356,
+                      "teamName": "Brisbane Heat Women",
+                      "teamSName": "BRHW",
+                      "imageId": 172402
+                    },
+                    "team2": {
+                      "teamId": 361,
+                      "teamName": "Sydney Sixers Women",
+                      "teamSName": "SYSW",
+                      "imageId": 172407
+                    },
+                    "venueInfo": {
+                      "id": 439,
+                      "ground": "Ray Mitchell Oval, Harrup Park",
+                      "city": "Mackay",
+                      "timezone": "+10:00",
+                      "latitude": "-21.1586312",
+                      "longitude": "149.1867182"
+                    },
+                    "seriesStartDt": "1665619200000",
+                    "seriesEndDt": "1669075200000",
+                    "isTimeAnnounced": true,
+                    "stateTitle": "Toss",
+                    "isFantasyEnabled": true
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "filters": {
+      "matchType": [
+        "International",
+        "League",
+        "Domestic",
+        "Women"
+      ]
+    },
+    "appIndex": {
+      "seoTitle": "Live Cricket Score - Scorecard and Match Results",
+      "webURL": "www.cricbuzz.com/live-cricket-scores/"
+    },
+    "responseLastUpdated": "1665649229"
+  }
+  // ,
+
+
+
+  [
+    {
+      "id": "/sport/cricket/womens-asia-cup-t20/pakistan-women-v-sri-lanka-women/31822827",
+      "name": "Pakistan Women v Sri Lanka Women",
+      "competition_name": "Women's Asia Cup T20",
+      "competition_group": null,
+      "team1": {
+        "name": "Pakistan Women",
+        "score": null,
+        "sets": null,
+        "games": null
+      },
+      "team2": {
+        "name": "Sri Lanka Women",
+        "score": null,
+        "sets": null,
+        "games": null
+      },
+      "live_time": null,
+      "odds": {
+        "1": "1.727",
+        "2": "2.000"
+      }
+    }
+  ]

@@ -1,8 +1,14 @@
 let API = {};
 const axios = require("axios");
+//  / bettingbaaz old key
+// const headers = {
+//   "X-RapidAPI-Key": "290fd5be0fmsh6cbd06c612060b1p174658jsn61b406721b77",
+//   "X-RapidAPI-Host": "betfair-sportsbook.p.rapidapi.com",
+// };
 
+//  personal key for testing
 const headers = {
-  "X-RapidAPI-Key": "290fd5be0fmsh6cbd06c612060b1p174658jsn61b406721b77",
+  "X-RapidAPI-Key": "3af9616a04mshb875af32508e23cp1b113bjsncbd8310da7d1",
   "X-RapidAPI-Host": "betfair-sportsbook.p.rapidapi.com",
 };
 
@@ -105,10 +111,7 @@ export const betbySingleMatc = async (params, successCallBack) => {
       matchid: `/sport/${params.game}/${params.legue}/${params.teams}/${params.id}`,
       lang: "en",
     },
-    headers: {
-      "X-RapidAPI-Key": "290fd5be0fmsh6cbd06c612060b1p174658jsn61b406721b77",
-      "X-RapidAPI-Host": "betfair-sportsbook.p.rapidapi.com",
-    },
+    headers,
   };
 
   axios
@@ -130,10 +133,7 @@ export const betBysingleGameUsingId = async (id, successCallBack) => {
       matchid: id,
       lang: "en",
     },
-    headers: {
-      "X-RapidAPI-Key": "290fd5be0fmsh6cbd06c612060b1p174658jsn61b406721b77",
-      "X-RapidAPI-Host": "betfair-sportsbook.p.rapidapi.com",
-    },
+    headers,
   };
 
   axios
@@ -153,4 +153,25 @@ API.matchByCompetition = matchByCompetition;
 
 export default API;
 
+export const getCricBuzMatch = (callBack) => {
+  // const axios = require("axios");
 
+  const options = {
+    method: "GET",
+    url: "https://cricbuzz-cricket.p.rapidapi.com/matches/v1/live",
+    headers: {
+      "X-RapidAPI-Key": "3af9616a04mshb875af32508e23cp1b113bjsncbd8310da7d1",
+      "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
+    },
+  };
+
+  axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data);
+      callBack(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+};
