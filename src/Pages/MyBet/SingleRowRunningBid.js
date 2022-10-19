@@ -55,7 +55,7 @@ function SingleRowRunningBid({ item }) {
           minWidth: "100px",
         }}
       >
-        {item.odds_type != null ? item.odds_type : "--"}
+        {item.odd_type != null ? item.odd_type : "--"}
       </div>
       <div
         className="table-col"
@@ -66,11 +66,12 @@ function SingleRowRunningBid({ item }) {
         }}
       >
         {/* {item?.game_id} */}
-        {odds == "..."
+        {item.multiply_value}
+        {/* {odds == "..."
           ? "--"
           : odds == null
           ? "--"
-          : parseFloat(odds).toFixed(2)}
+          : parseFloat(odds).toFixed(2)} */}
       </div>
       {/* <div className="table-col">Company</div> */}
       <div className="table-col" style={{ width: GameHeading[4].width }}>
@@ -79,7 +80,7 @@ function SingleRowRunningBid({ item }) {
         {item?.decision != null ? item.decision : "--"}
       </div>
       <div className="table-col" style={{ width: GameHeading[3].width }}>
-        {item?.stake != null ? item.stake : "--"}
+        {item?.amount != null ? item.amount : "--"}
       </div>
       <div className="table-col" style={{ width: GameHeading[5].width }}>
         {/* {item?.multiply_value} */}
@@ -107,8 +108,23 @@ function SingleRowRunningBid({ item }) {
           width: GameHeading[6].width,
         }}
       >
-        {item.settled_date != null ? item.settled_date : "--"}
-
+        {/* {item.settled_date != null ? item.settled_date : "--"} */}
+        {(() => {
+          const t = new Date(item?.updated_at);
+          return (
+            t.getHours() +
+            ":" +
+            t.getMinutes() +
+            "    " +
+            +"   " +
+            t.getDate() +
+            "-" +
+            t.getMonth() +
+            1 +
+            "-" +
+            t.getFullYear()
+          );
+        })()}
         {/* {item?.reward_amount} to{" "}
         {parseFloat(odds * item.amount).toFixed(2) == "NaN"
           ? "--"

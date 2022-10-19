@@ -1021,6 +1021,7 @@ const CricketSingle = () => {
                                       odds: parseFloat(inItem.odds).toFixed(2),
                                       team: "",
                                       team_id: 1,
+                                      decision: "null",
                                       // matchId:
                                     });
                                     setPremiumSelected({

@@ -179,20 +179,23 @@ function MyBet({ showBet }) {
             <>
               {" "}
               <div className="table-row" style={{ marginBottom: "10px" }}>
-                {BetHistory.map((item, index) => (
-                  <div
-                    className="table-col"
-                    style={{
-                      width: item.width,
-                      textAlign: "left",
-                      minWidth: `${
-                        index == 1 || index == 2 ? "200px" : "100px"
-                      }`,
-                    }}
-                  >
-                    {item.name}
-                  </div>
-                ))}
+                {BetHistory.map((item, index) => {
+                  console.log("bethistory", item);
+                  return (
+                    <div
+                      className="table-col"
+                      style={{
+                        width: item.width,
+                        textAlign: "left",
+                        minWidth: `${
+                          index == 1 || index == 2 ? "200px" : "100px"
+                        }`,
+                      }}
+                    >
+                      {item.name}
+                    </div>
+                  );
+                })}
               </div>
               {coinRieved.map((item, index) => (
                 <div
