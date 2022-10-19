@@ -33,6 +33,8 @@ export const PlaceBetApi = async (item, successCallback) => {
   formdata.append("team_id", payloadData.team_id);
   formdata.append("amount", payloadData.amount);
   formdata.append("multiply_value", payloadData.multiply_value);
+  formdata.append("odd_type", payloadData.odd_type);
+  formdata.append("decision", payloadData.decision);
   formdata.append("status", "running");
 
   var requestOptions = {
