@@ -770,8 +770,8 @@ const CricketSingle = () => {
           </div>
         )}
         {/* {[{}, {}].map((item, index) => { */}
-        {/* {filterNull().map((item, index) => { */}
-        {matchData.map((item, index) => {
+        {/* {matchData.map((item, index) => { */}
+        {filterNull().map((item, index) => {
           if (index > 0) {
             return (
               <>
