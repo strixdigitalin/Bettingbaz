@@ -60,6 +60,7 @@ const CricketSingle = () => {
 
   console.log(params, "<<<<params");
   const matchId = `/sport/${params.game}/${params.legue}/${params.teams}/${params.id}`;
+  const [noData, setNoData] = useState(true);
   useEffect(() => {
     // setInterval(function () {
     // method to be executed;
@@ -67,7 +68,7 @@ const CricketSingle = () => {
     betbySingleMatc(params, (res) => {
       console.log(res);
       setMatchData(res);
-      matchTeamNameCricBuz();
+      // matchTeamNameCricBuz();
     });
     // }, 5000);
   }, []);
@@ -92,35 +93,35 @@ const CricketSingle = () => {
 
   const matchTeamNameCricBuz = () => {
     // matchData[0]?.values[0]?.val1
-    getCricBuzMatch((data) => {
-      // console.log(res, "<<<<<");
-      data.typeMatches[0].seriesMatches.map((series) => {
-        console.log(series.seriesAdWrapper, "<<<s");
-        series.seriesAdWrapper?.matches.map((match) => {
-          console.log(
-            series.seriesAdWrapper.match.matchInfo.team1.teamName,
-            matchData[0]?.values[0]?.val1
-          );
-          console.log(match, "<<<< match");
-          setcricBuzData(match);
-          console.log(
-            match.matchInfo.team1.teamName,
-            matchData[0]?.values[0]?.val1
-          );
-        });
+    // getCricBuzMatch((data) => {
+    //   // console.log(res, "<<<<<");
+    //   data.typeMatches[0].seriesMatches.map((series) => {
+    //     console.log(series.seriesAdWrapper, "<<<s");
+    //     series.seriesAdWrapper?.matches.map((match) => {
+    //       console.log(
+    //         series.seriesAdWrapper.match.matchInfo.team1.teamName,
+    //         matchData[0]?.values[0]?.val1
+    //       );
+    //       console.log(match, "<<<< match");
+    //       setcricBuzData(match);
+    //       console.log(
+    //         match.matchInfo.team1.teamName,
+    //         matchData[0]?.values[0]?.val1
+    //       );
+    //     });
 
-        // match.map()
-        // console.log(
-        //   series.seriesAdWrapper.match.matchInfo.team1.teamName,
-        //   matchData[0]?.values[0]?.val1
-        // );
-        // console.log(
-        //   series.seriesAdWrapper.match.matchInfo.team2.teamName,
-        //   matchData[0]?.values[2]?.val1
-        // );
-      });
-      // });
-    });
+    //     // match.map()
+    //     // console.log(
+    //     //   series.seriesAdWrapper.match.matchInfo.team1.teamName,
+    //     //   matchData[0]?.values[0]?.val1
+    //     // );
+    //     // console.log(
+    //     //   series.seriesAdWrapper.match.matchInfo.team2.teamName,
+    //     //   matchData[0]?.values[2]?.val1
+    //     // );
+    //   });
+    //   // });
+    // });
     const data = {};
     // data.typeMatches[0].seriesMatches.map((series) => {
     //   series.matches.map((match) => {
@@ -296,8 +297,8 @@ const CricketSingle = () => {
           className="flex-col align-ctr just-bet playerScore scoredata-team"
           style={{
             background: "white",
-            borderTopLeftRadius: "25px",
-            borderTopRightRadius: "25px",
+            borderTopLeftRadius: "15px",
+            borderTopRightRadius: "15px",
           }}
         >
           <div
@@ -420,7 +421,7 @@ const CricketSingle = () => {
           >
             {parseFloat(
               parseFloat(matchData[0]?.values[0]?.odds) + 0.1
-            ).toFixed(1)}
+            ).toFixed(2)}
           </div>
           <div
             className="flex-row w100 just-ctr"
@@ -433,7 +434,7 @@ const CricketSingle = () => {
           >
             {parseFloat(
               parseFloat(matchData[0]?.values[1]?.odds) + 0.1
-            ).toFixed(1)}
+            ).toFixed(2)}
           </div>
           {params.game == "football" && (
             <div
@@ -773,6 +774,7 @@ const CricketSingle = () => {
         {/* {filterNull(item.values).map((item, index) => { */}
         {matchData.map((item, index) => {
           if (index > 0) {
+            // setNoData(false);
             return (
               <>
                 <div style={{ marginTop: "1px" }}>
@@ -1124,7 +1126,8 @@ const CricketSingle = () => {
                           );
                         })}
 
-                      {hideThis.includes(index) && <div>No Data</div>}
+                      {/* {hideThis.includes(index) && <div>No Data</div>} */}
+                      {hideThis.includes(index) && <div>No Datda</div>}
                     </>
                   )}
                 </div>
