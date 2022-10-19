@@ -822,12 +822,12 @@ const CricketSingle = () => {
                                 }}
                               >
                                 {/* {params.game != "cricket" && initem?.val2} */}
-                                {/* {params.game == "cricket" &&
-                                NumberCalculation(
-                                  item?.name,
-                                  initem.val2?.substring(1),
-                                  "-"
-                                )} */}
+                                {params.game == "cricket" &&
+                                  NumberCalculation(
+                                    item?.name,
+                                    initem.val2?.substring(1),
+                                    "-"
+                                  )}
                                 <br />
                                 {/* {calCulatePercentage(item.values[0].val2)} */}
                                 {/* calCulatePercentage(item.values[0].odds) */}
@@ -866,11 +866,11 @@ const CricketSingle = () => {
                                   setBidType(typeFancy);
                                 }}
                               >
-                                {/* {NumberCalculation(
-            item?.name,
-            item?.values[1].val2?.substring(1),
-            "+"
-          )} */}
+                                {NumberCalculation(
+                                  item?.name,
+                                  item?.values[1].val2?.substring(1),
+                                  "+"
+                                )}
                                 {/* {item.values[1].val2?.substring(1)} */}
                                 <br />
                                 {/* {item.values[1].odds}{" "} */}
