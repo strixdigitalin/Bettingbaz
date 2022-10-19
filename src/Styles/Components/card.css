@@ -530,7 +530,8 @@ border-bottom-right-radius: 10px;
 }
 
 .in-play-row-left{
-    width: 40%;
+    /* width: 40%; */
+    width: 100%;
 
 }
 .row-left{

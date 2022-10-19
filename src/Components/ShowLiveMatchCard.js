@@ -97,11 +97,11 @@ export function ShowLiveMatchCard({
           <span style={{ marginLeft: "15px" }}>Team</span>{" "}
           {/* <span className="cardTeam"> {item?.competition_name}</span> */}
         </div>
-        <div className="card-today-right-in-play">
+        {/* <div className="card-today-right-in-play">
           <div className="singleRight">1</div>
           <div className="singleRight">X</div>
           <div className="singleRight">2</div>
-        </div>
+        </div> */}
       </div>
 
       {data.map((item, index) => {
@@ -128,13 +128,13 @@ export function ShowLiveMatchCard({
                   </div>
                 </Link>
               </div>
-              <div className="card-today-right-in-play-mob">
+              {/* <div className="card-today-right-in-play-mob">
                 <div className="singleRight-mob">1</div>
                 <div className="singleRight-mob">X</div>
                 <div className="singleRight-mob">2</div>
-              </div>
+              </div> */}
               <div className="card-today-wrap-right">
-                <div
+                {/* <div
                   className="card-today-right"
                   style={{
                     background:
@@ -144,10 +144,7 @@ export function ShowLiveMatchCard({
                     color: "white",
                   }}
                   onClick={() => {
-                    // openBidModal({
-                    //   odds: parseFloat(showOdds(item?.odds[1])).toFixed(1),
-                    //   team: item?.team1?.name,
-                    // })
+                   
                     setClickedBlock({
                       row: index,
                       box: 1,
@@ -164,9 +161,9 @@ export function ShowLiveMatchCard({
                   {parseFloat(showOdds(item.odds[1])).toFixed(1) == "NaN"
                     ? "--"
                     : parseFloat(showOdds(item.odds[1])).toFixed(1)}
-                </div>
+                </div> */}
 
-                <div
+                {/* <div
                   className="card-today-right"
                   style={{
                     background:
@@ -187,7 +184,6 @@ export function ShowLiveMatchCard({
                       ).toFixed(1),
                       team: item.team1.name,
                       team_id: 1,
-                      // team_id: 1,
                       game_id: item.id,
                     });
                     setClickedRow(index);
@@ -200,9 +196,8 @@ export function ShowLiveMatchCard({
                     : parseFloat(
                         parseFloat(showOdds(item?.odds[1])) + +0.1
                       ).toFixed(1)}
-                  {/* {+firstOdd + 1} */}
-                </div>
-                <div
+                </div> */}
+                {/* <div
                   className="card-today-right"
                   style={{
                     background: "#064778",
@@ -222,7 +217,6 @@ export function ShowLiveMatchCard({
                       odds: showOdds(item?.odds.X),
                       team: "X",
                       team_id: "X",
-                      // team_id: 1,
                       game_id: item.id,
                     });
                     setClickedRow(index);
@@ -231,8 +225,8 @@ export function ShowLiveMatchCard({
                   {showOdds(item?.odds.X) != "NaN"
                     ? showOdds(item?.odds.X)
                     : "--"}
-                </div>
-                <div
+                </div> */}
+                {/* <div
                   className="card-today-right"
                   style={{
                     background: "#F98417",
@@ -253,7 +247,6 @@ export function ShowLiveMatchCard({
                       ).toFixed(1),
                       team: "X",
                       team_id: "X",
-                      // team_id: 1,
                       game_id: item.id,
                     });
                     setClickedRow(index);
@@ -266,10 +259,8 @@ export function ShowLiveMatchCard({
                         parseFloat(showOdds(item.odds.X)) + 0.1
                       ).toFixed(1)
                     : "--"}
-
-                  {/* {second} */}
-                </div>
-                <div
+                </div> */}
+                {/* <div
                   className="card-today-right"
                   style={{
                     background: "#064778",
@@ -294,10 +285,8 @@ export function ShowLiveMatchCard({
                   }}
                 >
                   {showOdds(item.odds[2])}
-
-                  {/* {second} */}
-                </div>
-                <div
+                </div> */}
+                {/* <div
                   className="card-today-right"
                   style={{
                     background: "#F98417",
@@ -317,14 +306,12 @@ export function ShowLiveMatchCard({
                       ).toFixed(1),
                       team: item.team2.name,
                       team_id: 2,
-                      // team_id: 1,
                       game_id: item.id,
                     });
 
                     setClickedRow(index);
                   }}
                 >
-                  {/* /                      {+second + 1} */}
                   {parseFloat(
                     parseFloat(showOdds(item?.odds[2])) + 0.1
                   ).toFixed(1) == "NaN"
@@ -332,7 +319,7 @@ export function ShowLiveMatchCard({
                     : parseFloat(
                         parseFloat(showOdds(item?.odds[2])) + 0.1
                       ).toFixed(1)}
-                </div>
+                </div> */}
               </div>
             </div>
 
