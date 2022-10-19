@@ -174,7 +174,7 @@ const CricketSingle = () => {
 
     // alert("here");
     console.log(bidContent, bidType, bidAmount, matchId, "<<<<bid content");
-    return null;
+    // return null;
     PlaceBetApi(
       { ...bidContent, amount: bidAmount, matchId, odd_type: bidType },
       (res) => {
