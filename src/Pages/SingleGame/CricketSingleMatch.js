@@ -317,8 +317,8 @@ const CricketSingle = () => {
               color: "black",
             }}
           >
-            {/* {matchData[0]?.values[0]?.val1} */}
-            {cricBuzData.matchScore?.team1Score?.inngs1.runs}sss
+            {matchData[0]?.values[0]?.val1}
+            {/* {cricBuzData.matchScore?.team1Score?.inngs1.runs}sss */}
           </div>
           <div
             className="flex-row  w100 score-data-single-team"
@@ -770,8 +770,8 @@ const CricketSingle = () => {
           </div>
         )}
         {/* {[{}, {}].map((item, index) => { */}
-        {/* {matchData.map((item, index) => { */}
-        {filterNull().map((item, index) => {
+        {/* {filterNull(item.values).map((item, index) => { */}
+        {matchData.map((item, index) => {
           if (index > 0) {
             return (
               <>
@@ -781,8 +781,8 @@ const CricketSingle = () => {
                       // if (inItem.val2 == null || inItem.val2 == "null") return null;
 
                       console.log(item, "<<<initem");
-                      // return filterNull(item.values).map((initem, row) => {
-                      return item.values.map((initem, row) => {
+                      return filterNull(item.values).map((initem, row) => {
+                        // return item.values.map((initem, row) => {
                         return (
                           <>
                             <div className="flex-row just-bet w100 cricket-data-table">
