@@ -5,12 +5,15 @@ const axios = require("axios");
 //   "X-RapidAPI-Key": "290fd5be0fmsh6cbd06c612060b1p174658jsn61b406721b77",
 //   "X-RapidAPI-Host": "betfair-sportsbook.p.rapidapi.com",
 // };
-
-//  personal key for testing
 const headers = {
-  "X-RapidAPI-Key": "3af9616a04mshb875af32508e23cp1b113bjsncbd8310da7d1",
+  "X-RapidAPI-Key": "a58cf9baf1msh54ab6765c6533c2p151ccejsn85832d4e5eb2",
   "X-RapidAPI-Host": "betfair-sportsbook.p.rapidapi.com",
 };
+//  personal key for testing
+// const headers = {
+//   "X-RapidAPI-Key": "3af9616a04mshb875af32508e23cp1b113bjsncbd8310da7d1",
+//   "X-RapidAPI-Host": "betfair-sportsbook.p.rapidapi.com",
+// };
 
 //  Outrights by competition
 const getHighlights = async (sport, successCallback) => {

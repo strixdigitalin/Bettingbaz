@@ -70,11 +70,11 @@ const InPlaySingleGame = (props) => {
           /> */}
           <span className="cardTeam"> Teams</span>
         </div>
-        <div className="card-today-right-in-play">
+        {/* <div className="card-today-right-in-play">
           <div className="singleRight">1</div>
           <div className="singleRight">X</div>
           <div className="singleRight">2</div>
-        </div>
+        </div> */}
       </div>
 
       {/* ----- single row */}
@@ -106,7 +106,7 @@ const InPlaySingleGame = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="card-today-wrap-right">
+              {/* <div className="card-today-wrap-right">
                 <div
                   className="card-today-right"
                   style={{ background: "#064778", color: "white" }}
@@ -205,7 +205,7 @@ const InPlaySingleGame = (props) => {
                 >
                   {parseFloat(parseFloat(showOdds(second)) + +0.1).toFixed(1)}
                 </div>
-              </div>
+              </div> */}
             </div>
             {index == clickedRow && (
               <div className="placebid-cover ">
