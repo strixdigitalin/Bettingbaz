@@ -37,6 +37,10 @@ const CricketSingle = () => {
     params.game == "cricket" ? false : true
   );
   const [matchData, setMatchData] = useState([]);
+  const [clickRowFancy, setClickRowFancy] = useState({
+    index: null,
+    row: null,
+  });
   const [equalValue, setEqualValue] = useState(0);
   const [bidAmount, setBidAmount] = useState(0);
   const [clickedRow, setClickedRow] = useState(null);
@@ -169,7 +173,8 @@ const CricketSingle = () => {
     setbidStatus({ status: null, msg: "" });
 
     // alert("here");
-
+    console.log(bidContent, bidType, bidAmount, matchId, "<<<<bid content");
+    return null;
     PlaceBetApi(
       { ...bidContent, amount: bidAmount, matchId, odd_type: bidType },
       (res) => {
@@ -313,7 +318,7 @@ const CricketSingle = () => {
             }}
           >
             {/* {matchData[0]?.values[0]?.val1} */}
-            {cricBuzData.matchScore.team1Score.inngs1.runs}sss
+            {cricBuzData.matchScore?.team1Score?.inngs1.runs}sss
           </div>
           <div
             className="flex-row  w100 score-data-single-team"
@@ -775,8 +780,9 @@ const CricketSingle = () => {
                     if (premiumToggle == false) {
                       // if (inItem.val2 == null || inItem.val2 == "null") return null;
 
-                      return filterNull(item.values).map((initem, row) => {
-                        console.log(initem, "<<<initem");
+                      console.log(item, "<<<initem");
+                      // return filterNull(item.values).map((initem, row) => {
+                      return item.values.map((initem, row) => {
                         return (
                           <>
                             <div className="flex-row just-bet w100 cricket-data-table">
@@ -793,13 +799,19 @@ const CricketSingle = () => {
                                 }}
                                 className="heighlight-row-right pointer"
                                 onClick={() => {
-                                  setClickedBlock({
-                                    row: index,
-                                    box: 1,
+                                  // setClickedBlock({
+                                  //   row: index,
+                                  //   box: 1,
+                                  // });
+                                  setClickRowFancy({
+                                    index: index,
+                                    row: row,
                                   });
                                   setBidContent({
                                     odds: showOdds(initem?.val2),
                                     // odds: showOdds(item?.values[0]?.val2),
+                                    decision: "NO",
+
                                     team: "",
                                     team_id: 2,
                                   });
@@ -827,9 +839,13 @@ const CricketSingle = () => {
                                   color: "white",
                                 }}
                                 onClick={() => {
-                                  setClickedBlock({
-                                    row: index,
-                                    box: 2,
+                                  // setClickedBlock({
+                                  //   row: index,
+                                  //   box: 2,
+                                  // });
+                                  setClickRowFancy({
+                                    index: index,
+                                    row: row,
                                   });
                                   setBidContent({
                                     odds: NumberCalculation(
@@ -838,9 +854,11 @@ const CricketSingle = () => {
                                       "+"
                                     ),
                                     team: "",
+                                    decision: "YES",
+
                                     team_id: 2,
                                   });
-                                  setClickedRow(index);
+                                  // setClickedRow(index);
                                   setBidType(typeFancy);
                                 }}
                               >
@@ -859,87 +877,95 @@ const CricketSingle = () => {
                               </div>{" "}
                             </div>
                             {/* {true && ( */}
-                            {index == clickedRow && (
-                              <div className="placebid-cover ">
-                                <div className="button-cover">
-                                  {[100, 500, 1000, 2000, 5000].map((item) => {
-                                    return (
-                                      <button
-                                        onClick={() => setBidAmount(item)}
-                                      >
-                                        {item}
-                                      </button>
-                                    );
-                                  })}
-                                </div>
-                                <div className="input-est-cover">
-                                  <input
-                                    value={bidAmount}
-                                    onChange={(e) =>
-                                      setBidAmount(e?.target?.value)
-                                    }
-                                  />
-                                  <div className="button-est">
-                                    {[
-                                      {
-                                        label: "Place Bid",
-                                        onClick: submitBid,
-                                      },
-                                      {
-                                        label: "Hide",
-                                        onClick: () => {
-                                          setClickedRow(null);
-                                          setClickedBlock(initialBlock);
-                                          setbidStatus({
-                                            status: null,
-                                            message: "",
-                                          });
-                                          setBidAmount(0);
-                                          setBidContent({ odds: 0 });
+                            {/* {index == clickedRow && ( */}
+                            {index == clickRowFancy.index &&
+                              row == clickRowFancy.row && (
+                                <div className="placebid-cover ">
+                                  <div className="button-cover">
+                                    {[100, 500, 1000, 2000, 5000].map(
+                                      (item) => {
+                                        return (
+                                          <button
+                                            onClick={() => setBidAmount(item)}
+                                          >
+                                            {item}
+                                          </button>
+                                        );
+                                      }
+                                    )}
+                                  </div>
+                                  <div className="input-est-cover">
+                                    <input
+                                      value={bidAmount}
+                                      onChange={(e) =>
+                                        setBidAmount(e?.target?.value)
+                                      }
+                                    />
+                                    <div className="button-est">
+                                      {[
+                                        {
+                                          label: "Place Bid",
+                                          onClick: submitBid,
                                         },
-                                      },
-                                    ].map((item, key) => {
-                                      return (
-                                        <button
-                                          onClick={item?.onClick}
-                                          style={{
-                                            background: `${
-                                              key == 0 ? "green" : "red"
-                                            }`,
-                                          }}
-                                        >
-                                          {item?.label}
-                                        </button>
-                                      );
-                                    })}
-                                    <button>
-                                      Est:
-                                      {parseFloat(
-                                        bidContent.odds * bidAmount
-                                      ).toFixed(1)}
-                                    </button>
+                                        {
+                                          label: "Hide",
+                                          onClick: () => {
+                                            // setClickedRow(null);
+                                            setClickRowFancy({
+                                              index: null,
+                                              row: null,
+                                            });
+                                            setClickedBlock(initialBlock);
+                                            setbidStatus({
+                                              status: null,
+                                              message: "",
+                                            });
+                                            setBidAmount(0);
+                                            setBidContent({ odds: 0 });
+                                          },
+                                        },
+                                      ].map((item, key) => {
+                                        return (
+                                          <button
+                                            onClick={item?.onClick}
+                                            style={{
+                                              background: `${
+                                                key == 0 ? "green" : "red"
+                                              }`,
+                                            }}
+                                          >
+                                            {item?.label}
+                                          </button>
+                                        );
+                                      })}
+                                      <button>
+                                        Est:
+                                        {parseFloat(
+                                          bidContent.odds * bidAmount
+                                        ).toFixed(1)}
+                                      </button>
+                                    </div>
                                   </div>
+                                  {bidStatus?.status != null && (
+                                    <div
+                                      className="bid-placed"
+                                      style={{
+                                        display: `${
+                                          bidStatus?.status == null && "none"
+                                        }`,
+                                        color: `${
+                                          bidStatus?.status == true
+                                            ? "green"
+                                            : "red"
+                                        }`,
+                                      }}
+                                    >
+                                      {" "}
+                                      {bidStatus?.msg}
+                                    </div>
+                                  )}
                                 </div>
-                                {bidStatus?.status != null && (
-                                  <div
-                                    className="bid-placed"
-                                    style={{
-                                      display: `${
-                                        bidStatus?.status == null && "none"
-                                      }`,
-                                      color: `${
-                                        bidStatus?.status == true
-                                          ? "green"
-                                          : "red"
-                                      }`,
-                                    }}
-                                  >
-                                    {" "}
-                                    {bidStatus?.msg}
-                                  </div>
-                                )}
-                              </div>
-                            )}
+                              )}
                           </>
                         );
                       });
@@ -986,8 +1012,8 @@ const CricketSingle = () => {
                                     // placeBid({ ...item, odds: inItem.odds })
                                     setBidType(typePrem);
                                     setClickedBlock({
-                                      row: index,
-                                      box: 1,
+                                      index: index,
+                                      key: key,
                                     });
                                     setBidContent({
                                       odds: parseFloat(inItem.odds).toFixed(2),
@@ -1006,8 +1032,8 @@ const CricketSingle = () => {
                                     : parseFloat(inItem.odds).toFixed(2)}
                                 </div>{" "}
                               </div>
-                              {key == premiumSelected.two &&
-                                index == premiumSelected.one && (
+                              {index == clickedBlock.index &&
+                                key == clickedBlock.key && (
                                   <div className="placebid-cover ">
                                     <div className="button-cover">
                                       {[100, 500, 1000, 2000, 5000].map(
