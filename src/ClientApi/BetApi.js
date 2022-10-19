@@ -21,6 +21,7 @@ export const PlaceBetApi = async (item, successCallback) => {
     amount: item.amount,
     odd_type: item.odd_type,
     multiply_value: item.odds,
+    decision: item.decision,
     status: "running",
     team_id: item.team_id,
   };
