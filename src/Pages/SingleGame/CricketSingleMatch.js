@@ -247,7 +247,7 @@ const CricketSingle = () => {
   const filterNull = (arr) => {
     if (premiumToggle == true) return arr;
     console.log(arr);
-    const sendThis = arr.filter(
+    const sendThis = arr?.filter(
       (item) => item.val2 != null && item.val2 != "null"
     );
     console.log(arr, sendThis, "<<<<sendThis");
@@ -781,7 +781,7 @@ const CricketSingle = () => {
                       // if (inItem.val2 == null || inItem.val2 == "null") return null;
 
                       console.log(item, "<<<initem");
-                      return filterNull(item.values).map((initem, row) => {
+                      return filterNull(item?.values).map((initem, row) => {
                         // return item.values.map((initem, row) => {
                         return (
                           <>
@@ -819,7 +819,7 @@ const CricketSingle = () => {
                                   setBidType(typeFancy);
                                 }}
                               >
-                                {/* {params.game != "cricket" && initem?.val2}s */}
+                                {/* {params.game != "cricket" && initem?.val2} */}
                                 {/* {params.game == "cricket" &&
                                 NumberCalculation(
                                   item?.name,
@@ -830,7 +830,9 @@ const CricketSingle = () => {
                                 {/* {calCulatePercentage(item.values[0].val2)} */}
                                 {/* calCulatePercentage(item.values[0].odds) */}
                                 {/* {IncreaseOrangeData(initem.val2?.substring(1))} */}
-                                {initem.val2?.substring(1)}
+                                {/* {initem.val2?.substring(1)} */}
+
+                                {+200 - calCulatePercentage(initem.odds)}
                               </div>{" "}
                               <div
                                 className="heighlight-row-right pointer"
@@ -871,9 +873,7 @@ const CricketSingle = () => {
                                 <br />
                                 {/* {item.values[1].odds}{" "} */}
                                 {/* {calCulatePercentage(item.values[1].val2)} */}
-                                {decreaseDataBlue(
-                                  calCulatePercentage(initem.odds)
-                                )}
+                                {calCulatePercentage(initem.odds)}
                               </div>{" "}
                             </div>
                             {/* {true && ( */}
