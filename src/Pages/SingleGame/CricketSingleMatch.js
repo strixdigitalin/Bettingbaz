@@ -62,15 +62,15 @@ const CricketSingle = () => {
   const matchId = `/sport/${params.game}/${params.legue}/${params.teams}/${params.id}`;
   const [noData, setNoData] = useState(true);
   useEffect(() => {
-    // setInterval(function () {
-    // method to be executed;
-    console.log("fetch by single game called");
-    betbySingleMatc(params, (res) => {
-      console.log(res);
-      setMatchData(res);
-      // matchTeamNameCricBuz();
-    });
-    // }, 5000);
+    setInterval(function () {
+      // method to be executed;
+      console.log("fetch by single game called");
+      betbySingleMatc(params, (res) => {
+        console.log(res);
+        setMatchData(res);
+        // matchTeamNameCricBuz();
+      });
+    }, 1000);
   }, []);
   const { teams } = params;
   const placeBid = (item) => {
