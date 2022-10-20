@@ -266,6 +266,19 @@ const CricketSingle = () => {
   };
   // const openThis=(item)
 
+  const showBlueBid = (odd) => {
+    const decimalPArt = odd.split(".")[1];
+    const subString = decimalPArt.substring(0, 2);
+    return subString;
+  };
+
+  const showORange = (odd) => {
+    const decimalPArt = odd.split(".")[1];
+    const subString = decimalPArt.substring(0, 2);
+
+    return subString;
+  };
+
   return (
     <div className="single-middle">
       <div className="single-top-head">{params.teams}</div>
@@ -782,15 +795,26 @@ const CricketSingle = () => {
                     if (premiumToggle == false) {
                       // if (inItem.val2 == null || inItem.val2 == "null") return null;
 
-                      console.log(item, "<<<initem");
-                      return filterNull(item?.values).map((initem, row) => {
-                        // return item.values.map((initem, row) => {
+                      // console.log(item, "<<<initem");
+                      // return filterNull(item?.values).map((initem, row) => {
+                      // return item.values.map((initem, row) => {
+                      // console.log(initem, "<<<<initems");
+                      if (
+                        item.values.length == 2 &&
+                        item.values[0].val2 != null &&
+                        item.values[1].val2 != null
+                      )
                         return (
                           <>
                             <div className="flex-row just-bet w100 cricket-data-table">
                               <div className="cricket-heighlight-row-left">
-                                {/* {item.name.replace(" A ", ` ${teams?.split("-")[0]} `)} */}
-                                {replaceString(item.name, item.values)}
+                                {item.name} {item.values[0].val1}
+                                {/* {item.name.replace(
+                                  " A ",
+                                  ` ${teams?.split("-")[0]} `
+                                )} */}
+                                {/* {replaceString(item.name, item.values)} */}
+                                {/* {initem.val1} */}
                                 {/* <br /> */}
                                 {/* {item.values[0].val1} */}
                               </div>{" "}
@@ -807,10 +831,10 @@ const CricketSingle = () => {
                                   // });
                                   setClickRowFancy({
                                     index: index,
-                                    row: row,
+                                    // row: row,
                                   });
                                   setBidContent({
-                                    odds: showOdds(initem?.val2),
+                                    // odds: showOdds(initem?.val2),
                                     // odds: showOdds(item?.values[0]?.val2),
                                     decision: "NO",
 
@@ -822,19 +846,21 @@ const CricketSingle = () => {
                                 }}
                               >
                                 {/* {params.game != "cricket" && initem?.val2} */}
-                                {params.game == "cricket" &&
+                                {/* {params.game == "cricket" &&
                                   NumberCalculation(
                                     item?.name,
                                     initem.val2?.substring(1),
                                     "-"
-                                  )}
+                                  )}{" "} */}
+                                {item.values[0].val2.substring(1)}
                                 <br />
                                 {/* {calCulatePercentage(item.values[0].val2)} */}
                                 {/* calCulatePercentage(item.values[0].odds) */}
                                 {/* {IncreaseOrangeData(initem.val2?.substring(1))} */}
                                 {/* {initem.val2?.substring(1)} */}
-
-                                {+200 - calCulatePercentage(initem.odds)}
+                                {/* {+200 - calCulatePercentage(initem.odds)} */}
+                                {/* {item.values[0].odds} */}
+                                {showBlueBid(item.values[0].odds)}
                               </div>{" "}
                               <div
                                 className="heighlight-row-right pointer"
@@ -849,12 +875,12 @@ const CricketSingle = () => {
                                   // });
                                   setClickRowFancy({
                                     index: index,
-                                    row: row,
+                                    // row: row,
                                   });
                                   setBidContent({
                                     odds: NumberCalculation(
                                       item?.name,
-                                      initem.val2?.substring(1),
+                                      // initem.val2?.substring(1),
                                       "+"
                                     ),
                                     team: "",
@@ -866,111 +892,110 @@ const CricketSingle = () => {
                                   setBidType(typeFancy);
                                 }}
                               >
-                                {NumberCalculation(
+                                {/* {NumberCalculation(
                                   item?.name,
                                   item?.values[1].val2?.substring(1),
                                   "+"
-                                )}
-                                {/* {item.values[1].val2?.substring(1)} */}
+                                )} */}
+                                {item.values[1].val2?.substring(1)}
                                 <br />
                                 {/* {item.values[1].odds}{" "} */}
                                 {/* {calCulatePercentage(item.values[1].val2)} */}
-                                {calCulatePercentage(initem.odds)}
+                                {/* {calCulatePercentage(initem.odds)} */}
+                                {/* {item.values[1].odds} */}
+                                {showORange(item.values[1].odds)}
                               </div>{" "}
                             </div>
                             {/* {true && ( */}
                             {/* {index == clickedRow && ( */}
-                            {index == clickRowFancy.index &&
-                              row == clickRowFancy.row && (
-                                <div className="placebid-cover ">
-                                  <div className="button-cover">
-                                    {[100, 500, 1000, 2000, 5000].map(
-                                      (item) => {
-                                        return (
-                                          <button
-                                            onClick={() => setBidAmount(item)}
-                                          >
-                                            {item}
-                                          </button>
-                                        );
-                                      }
-                                    )}
-                                  </div>
-                                  <div className="input-est-cover">
-                                    <input
-                                      value={bidAmount}
-                                      onChange={(e) =>
-                                        setBidAmount(e?.target?.value)
-                                      }
-                                    />
-                                    <div className="button-est">
-                                      {[
-                                        {
-                                          label: "Place Bid",
-                                          onClick: submitBid,
-                                        },
-                                        {
-                                          label: "Hide",
-                                          onClick: () => {
-                                            // setClickedRow(null);
-                                            setClickRowFancy({
-                                              index: null,
-                                              row: null,
-                                            });
-                                            setClickedBlock(initialBlock);
-                                            setbidStatus({
-                                              status: null,
-                                              message: "",
-                                            });
-                                            setBidAmount(0);
-                                            setBidContent({ odds: 0 });
-                                          },
-                                        },
-                                      ].map((item, key) => {
-                                        return (
-                                          <button
-                                            onClick={item?.onClick}
-                                            style={{
-                                              background: `${
-                                                key == 0 ? "green" : "red"
-                                              }`,
-                                            }}
-                                          >
-                                            {item?.label}
-                                          </button>
-                                        );
-                                      })}
-                                      <button>
-                                        Est:
-                                        {parseFloat(
-                                          bidContent.odds * bidAmount
-                                        ).toFixed(1)}
+                            {index == clickRowFancy.index && (
+                              <div className="placebid-cover ">
+                                <div className="button-cover">
+                                  {[100, 500, 1000, 2000, 5000].map((item) => {
+                                    return (
+                                      <button
+                                        onClick={() => setBidAmount(item)}
+                                      >
+                                        {item}
                                       </button>
-                                    </div>
-                                  </div>
-                                  {bidStatus?.status != null && (
-                                    <div
-                                      className="bid-placed"
-                                      style={{
-                                        display: `${
-                                          bidStatus?.status == null && "none"
-                                        }`,
-                                        color: `${
-                                          bidStatus?.status == true
-                                            ? "green"
-                                            : "red"
-                                        }`,
-                                      }}
-                                    >
-                                      {" "}
-                                      {bidStatus?.msg}
-                                    </div>
-                                  )}
+                                    );
+                                  })}
                                 </div>
-                              )}
+                                <div className="input-est-cover">
+                                  <input
+                                    value={bidAmount}
+                                    onChange={(e) =>
+                                      setBidAmount(e?.target?.value)
+                                    }
+                                  />
+                                  <div className="button-est">
+                                    {[
+                                      {
+                                        label: "Place Bid",
+                                        onClick: submitBid,
+                                      },
+                                      {
+                                        label: "Hide",
+                                        onClick: () => {
+                                          // setClickedRow(null);
+                                          setClickRowFancy({
+                                            index: null,
+                                            row: null,
+                                          });
+                                          setClickedBlock(initialBlock);
+                                          setbidStatus({
+                                            status: null,
+                                            message: "",
+                                          });
+                                          setBidAmount(0);
+                                          setBidContent({ odds: 0 });
+                                        },
+                                      },
+                                    ].map((item, key) => {
+                                      return (
+                                        <button
+                                          onClick={item?.onClick}
+                                          style={{
+                                            background: `${
+                                              key == 0 ? "green" : "red"
+                                            }`,
+                                          }}
+                                        >
+                                          {item?.label}
+                                        </button>
+                                      );
+                                    })}
+                                    <button>
+                                      Est:
+                                      {parseFloat(
+                                        bidContent.odds * bidAmount
+                                      ).toFixed(1)}
+                                    </button>
+                                  </div>
+                                </div>
+                                {bidStatus?.status != null && (
+                                  <div
+                                    className="bid-placed"
+                                    style={{
+                                      display: `${
+                                        bidStatus?.status == null && "none"
+                                      }`,
+                                      color: `${
+                                        bidStatus?.status == true
+                                          ? "green"
+                                          : "red"
+                                      }`,
+                                    }}
+                                  >
+                                    {" "}
+                                    {bidStatus?.msg}
+                                  </div>
+                                )}
+                              </div>
+                            )}
                           </>
                         );
-                      });
+                      // });
                     }
                   })()}
                   {/* {premiumToggle == false &&
