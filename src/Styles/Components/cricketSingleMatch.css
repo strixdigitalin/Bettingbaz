@@ -159,7 +159,7 @@ text-align: center;
         margin-top: 20px;
         /* padding: 10px 0px; */
         background: white;
-        border-radius:40px ;
+        border-radius:15px ;
         margin-bottom: 20px;
         /* margin-top: -10px; */
         /* z-index: 1; */
@@ -213,9 +213,11 @@ text-align: center;
     }
     .mob-one-eaning{
         display: flex;
-        border-radius: 40px;
+        border-radius: 15px;
+    
         width: 95%;
         margin: auto;
+        margin-top: 10px;
         display: flex;
         background-color: white;
         align-items: center;
