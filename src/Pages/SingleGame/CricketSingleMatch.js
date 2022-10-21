@@ -19,6 +19,7 @@ import batsvg from "../../Assets/Country/bat.svg";
 import ballsvg from "../../Assets/Country/ball.svg";
 
 import pakistansvg from "../../Assets/Country/pakistan.svg";
+import { replaceNAmeAlbabet, showOddCustomized } from "../../ClientApi/Auth";
 const typePrem = "PREMIUM";
 const typeFancy = "FANCY";
 const TOTAL_RUNS = "Runs";
@@ -70,7 +71,7 @@ const CricketSingle = () => {
         setMatchData(res);
         // matchTeamNameCricBuz();
       });
-    }, 1000);
+    }, 3000);
   }, []);
   const { teams } = params;
   const placeBid = (item) => {
@@ -266,17 +267,40 @@ const CricketSingle = () => {
   };
   // const openThis=(item)
 
-  const showBlueBid = (odd) => {
-    const decimalPArt = odd.split(".")[1];
-    const subString = decimalPArt.substring(0, 2);
-    return subString;
+  const showBlueBid = (values) => {
+    const leftPARt = values[0].odds.split(".")[1];
+    const leftSub = leftPARt.substring(0, 2);
+    const rightPart = values[1].odds.split(".")[1];
+    const rightSub = rightPart.substring(0, 2);
+    if (leftSub == rightSub) return 100;
+    else return showOddCustomized(leftSub);
   };
 
-  const showORange = (odd) => {
-    const decimalPArt = odd.split(".")[1];
-    const subString = decimalPArt.substring(0, 2);
+  const showORange = (values) => {
+    const leftPARt = values[0].odds.split(".")[1];
+    const leftSub = leftPARt.substring(0, 2);
+    const rightPart = values[1].odds.split(".")[1];
+    const rightSub = rightPart.substring(0, 2);
+    if (leftSub == rightSub) return 100;
+    else return showOddCustomized(rightSub);
+  };
 
-    return subString;
+  const fancyReplaceNAme = (name) => {
+    if (name.match("Team A")) {
+      console.log(name, "<<<<<matchingteama", matchData[0]?.values[1]?.val1);
+      return name.replace("(Team A)", "");
+    } else if (name.match("(Team B)")) {
+      return name.replace("(Team B)", "");
+    } else return name.replace("(2nd Innings)", "");
+  };
+
+  const fancyUpperPartCalculationLEft = (name, odd) => {
+    if (name.match("10 Over")) return Math.floor(odd);
+    else return Math.ceil(odd.substring(1));
+  };
+  const fancyUpperPartCalculationRight = (name, odd) => {
+    if (name.match("10 Over")) return Math.ceil(odd);
+    else return Math.ceil(odd.substring(1));
   };
 
   return (
@@ -361,15 +385,15 @@ const CricketSingle = () => {
           className="flex-col align-ctr just-bet playerScore-odd"
           style={{
             background: "#064778",
-            borderTopRightRadius: "10px",
-            borderTopLeftRadius: "10px",
+            borderTopRightRadius: "16px",
+            borderTopLeftRadius: "16px",
           }}
         >
           <div
             className="flex-row w100 just-ctr"
             style={{ padding: "5px 0px", color: "wheat", height: "40px" }}
           >
-            Back
+            Back All
           </div>
           <div
             className="flex-row w100 just-ctr"
@@ -380,7 +404,9 @@ const CricketSingle = () => {
               color: "wheat",
             }}
           >
-            {parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)}
+            {parseFloat(matchData[0]?.values[0]?.odds).toFixed(2) == "NaN"
+              ? "--"
+              : parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)}
           </div>
 
           <div
@@ -392,7 +418,9 @@ const CricketSingle = () => {
               height: "40px",
             }}
           >
-            {parseFloat(matchData[0]?.values[1]?.odds).toFixed(2)}
+            {parseFloat(matchData[0]?.values[1]?.odds).toFixed(2) == "NaN"
+              ? "--"
+              : parseFloat(matchData[0]?.values[1]?.odds).toFixed(2)}
           </div>
           {params.game == "football" && (
             <div
@@ -404,7 +432,9 @@ const CricketSingle = () => {
                 height: "40px",
               }}
             >
-              {parseFloat(matchData[0]?.values[2]?.odds).toFixed(2)}
+              {parseFloat(matchData[0]?.values[2]?.odds).toFixed(2) == "NaN"
+                ? "--"
+                : parseFloat(matchData[0]?.values[2]?.odds).toFixed(2)}
             </div>
           )}
         </div>
@@ -413,15 +443,15 @@ const CricketSingle = () => {
           style={{
             background: "#F97D09",
             height: "100%",
-            borderTopRightRadius: "10px",
-            borderTopLeftRadius: "10px",
+            borderTopRightRadius: "16px",
+            borderTopLeftRadius: "16px",
           }}
         >
           <div
             className="flex-row w100 text-center just-ctr"
             style={{ padding: "5px 0px", color: "wheat", height: "40px" }}
           >
-            Lay
+            Lay All
           </div>
           <div
             className="flex-row w100 text-center just-ctr"
@@ -434,7 +464,11 @@ const CricketSingle = () => {
           >
             {parseFloat(
               parseFloat(matchData[0]?.values[0]?.odds) + 0.1
-            ).toFixed(2)}
+            ).toFixed(2) == "NaN"
+              ? "--"
+              : parseFloat(
+                  parseFloat(matchData[0]?.values[0]?.odds) + 0.1
+                ).toFixed(2)}
           </div>
           <div
             className="flex-row w100 just-ctr"
@@ -447,7 +481,11 @@ const CricketSingle = () => {
           >
             {parseFloat(
               parseFloat(matchData[0]?.values[1]?.odds) + 0.1
-            ).toFixed(2)}
+            ).toFixed(2) == "NaN"
+              ? "--"
+              : parseFloat(
+                  parseFloat(matchData[0]?.values[1]?.odds) + 0.1
+                ).toFixed(2)}
           </div>
           {params.game == "football" && (
             <div
@@ -461,7 +499,11 @@ const CricketSingle = () => {
             >
               {parseFloat(
                 parseFloat(matchData[0]?.values[2]?.odds) + 0.1
-              ).toFixed(1)}
+              ).toFixed(1) == "NaN"
+                ? "--"
+                : parseFloat(
+                    parseFloat(matchData[0]?.values[2]?.odds) + 0.1
+                  ).toFixed(1)}
             </div>
           )}
         </div>
@@ -741,27 +783,27 @@ const CricketSingle = () => {
               onClick={() => setPremiumToggle(false)}
               className="prem-fancy pointer"
               style={{
-                backgroundColor: !premiumToggle ? "#F97D09" : "white",
+                backgroundColor: premiumToggle ? "#F97D09" : "white",
                 // color: "white",
-                color: !premiumToggle ? "white" : "black",
+                color: premiumToggle ? "white" : "black",
                 zIndex: !premiumToggle ? 2 : 1,
               }}
             >
               {/* <img src={inPlay} /> */}
-              Fancy
+              Fancy Bet
             </div>
           )}
           <div
             className="prem-fancy pointer"
             onClick={() => setPremiumToggle(true)}
             style={{
-              backgroundColor: premiumToggle ? "#F97D09" : "white",
-              color: premiumToggle ? "white" : "black",
+              backgroundColor: !premiumToggle ? "#F97D09" : "white",
+              color: !premiumToggle ? "white" : "black",
               marginLeft: "-10px",
               zIndex: premiumToggle ? 2 : 1,
             }}
           >
-            Premium
+            Premium Bet
           </div>
         </div>
         {premiumToggle == false && (
@@ -808,7 +850,15 @@ const CricketSingle = () => {
                           <>
                             <div className="flex-row just-bet w100 cricket-data-table">
                               <div className="cricket-heighlight-row-left">
-                                {item.name} {item.values[0].val1}
+                                {/* {item.name} {item.values[0].val1} */}
+                                {item.values[0].val1
+                                  .replace("Under", "")
+                                  .replace("Over", "")
+                                  .replace("2nd Innings", "")
+                                  .replace("Batsman", "")}
+                                {fancyReplaceNAme(
+                                  replaceNAmeAlbabet(item.name)
+                                )}{" "}
                                 {/* {item.name.replace(
                                   " A ",
                                   ` ${teams?.split("-")[0]} `
@@ -845,14 +895,11 @@ const CricketSingle = () => {
                                   setBidType(typeFancy);
                                 }}
                               >
-                                {/* {params.game != "cricket" && initem?.val2} */}
-                                {/* {params.game == "cricket" &&
-                                  NumberCalculation(
-                                    item?.name,
-                                    initem.val2?.substring(1),
-                                    "-"
-                                  )}{" "} */}
-                                {item.values[0].val2.substring(1)}
+                                {fancyUpperPartCalculationLEft(
+                                  item.name,
+                                  item.values[1].val2
+                                )}
+
                                 <br />
                                 {/* {calCulatePercentage(item.values[0].val2)} */}
                                 {/* calCulatePercentage(item.values[0].odds) */}
@@ -860,7 +907,7 @@ const CricketSingle = () => {
                                 {/* {initem.val2?.substring(1)} */}
                                 {/* {+200 - calCulatePercentage(initem.odds)} */}
                                 {/* {item.values[0].odds} */}
-                                {showBlueBid(item.values[0].odds)}
+                                {showBlueBid(item.values)}
                               </div>{" "}
                               <div
                                 className="heighlight-row-right pointer"
@@ -897,13 +944,22 @@ const CricketSingle = () => {
                                   item?.values[1].val2?.substring(1),
                                   "+"
                                 )} */}
-                                {item.values[1].val2?.substring(1)}
+                                {fancyUpperPartCalculationRight(
+                                  item.name,
+                                  item.values[1].val2
+                                )}
+
+                                {/* {
+                                  item.values[1].val2
+                                    ?.substring(1)
+                                    .split(".")[0] 
+                                } */}
                                 <br />
                                 {/* {item.values[1].odds}{" "} */}
                                 {/* {calCulatePercentage(item.values[1].val2)} */}
                                 {/* {calCulatePercentage(initem.odds)} */}
                                 {/* {item.values[1].odds} */}
-                                {showORange(item.values[1].odds)}
+                                {showORange(item.values)}
                               </div>{" "}
                             </div>
                             {/* {true && ( */}
