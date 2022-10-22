@@ -124,7 +124,7 @@ text-align: center;
     align-items: center;
     justify-content: center;
     
-    width: 30%;
+    width: 40%;
     padding: 10px;
     margin-bottom: -3px;
 
@@ -138,12 +138,11 @@ text-align: center;
 
 @media screen and (max-width:768px) {
 .mob-single-table{
-    /* padding: 20px 20px 1px 10; */
-    background-color: white;
+    background-color: #f0f0f0;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     /* margin-top: 20px; */
-    padding: 20px 20px 20px 20px;
+    padding: 1px 8px 1px 8px;
 }
 
     .scoreData-mobile{
@@ -153,12 +152,12 @@ text-align: center;
         /* height: 56px; */
         display:flex;
         align-items: center;
-        padding: 40px 20px;
+        padding: 7px 4px;
         align-items: center;
         /* color: white; */
         margin-top: 20px;
         /* padding: 10px 0px; */
-        background: white;
+        /* background: white; */
         border-radius:15px ;
         margin-bottom: 20px;
         /* margin-top: -10px; */
