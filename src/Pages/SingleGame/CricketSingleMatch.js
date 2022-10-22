@@ -267,7 +267,7 @@ const CricketSingle = () => {
   };
   // const openThis=(item)
 
-  const showBlueBid = (values) => {
+  const showORange = (values) => {
     const leftPARt = values[0].odds.split(".")[1];
     const leftSub = leftPARt.substring(0, 2);
     const rightPart = values[1].odds.split(".")[1];
@@ -277,7 +277,7 @@ const CricketSingle = () => {
     else return showOddCustomized(leftSub);
   };
 
-  const showORange = (values) => {
+  const showBlueBid = (values) => {
     const leftPARt = values[0].odds.split(".")[1];
     const leftSub = leftPARt.substring(0, 2);
     const rightPart = values[1].odds.split(".")[1];
@@ -463,13 +463,17 @@ const CricketSingle = () => {
               height: "40px",
             }}
           >
-            {parseFloat(
-              parseFloat(matchData[0]?.values[0]?.odds) + 0.1
-            ).toFixed(2) == "NaN"
+            {/* {parseFloat(parseFloat(matchData[0]?.values[0]?.odds)).toFixed(2) ==
+            "NaN"
+              ? "--"
+              : parseFloat(parseFloat(matchData[0]?.values[0]?.odds)).toFixed(
+                  2
+                )} */}
+            {parseFloat(matchData[0]?.values[0]?.odds).toFixed(2) == "NaN"
               ? "--"
               : parseFloat(
-                  parseFloat(matchData[0]?.values[0]?.odds) + 0.1
-                ).toFixed(2)}
+                  parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)
+                ) + parseFloat(0.02 * parseInt(matchData[0]?.values[0]?.odds))}
           </div>
           <div
             className="flex-row w100 just-ctr"
@@ -480,12 +484,11 @@ const CricketSingle = () => {
               height: "40px",
             }}
           >
-            {parseFloat(
-              parseFloat(matchData[0]?.values[1]?.odds) + 0.1
-            ).toFixed(2) == "NaN"
+            {parseFloat(parseFloat(matchData[0]?.values[1]?.odds)).toFixed(2) ==
+            "NaN"
               ? "--"
               : parseFloat(
-                  parseFloat(matchData[0]?.values[1]?.odds) + 0.1
+                  parseFloat(matchData[0]?.values[1]?.odds) + 0.01
                 ).toFixed(2)}
           </div>
           {params.game == "football" && (
@@ -885,7 +888,7 @@ const CricketSingle = () => {
                                     // row: row,
                                   });
                                   setBidContent({
-                                    // odds: showOdds(initem?.val2),
+                                    odds: showORange(item.values) / 100,
                                     // odds: showOdds(item?.values[0]?.val2),
                                     decision: "NO",
 
@@ -908,7 +911,7 @@ const CricketSingle = () => {
                                 {/* {initem.val2?.substring(1)} */}
                                 {/* {+200 - calCulatePercentage(initem.odds)} */}
                                 {/* {item.values[0].odds} */}
-                                {showBlueBid(item.values)}
+                                {showORange(item.values)}
                               </div>{" "}
                               <div
                                 className="heighlight-row-right pointer"
@@ -926,11 +929,7 @@ const CricketSingle = () => {
                                     // row: row,
                                   });
                                   setBidContent({
-                                    odds: NumberCalculation(
-                                      item?.name,
-                                      // initem.val2?.substring(1),
-                                      "+"
-                                    ),
+                                    odds: +showBlueBid(item.values) / 100,
                                     team: "",
                                     decision: "YES",
 
@@ -960,7 +959,7 @@ const CricketSingle = () => {
                                 {/* {calCulatePercentage(item.values[1].val2)} */}
                                 {/* {calCulatePercentage(initem.odds)} */}
                                 {/* {item.values[1].odds} */}
-                                {showORange(item.values)}
+                                {showBlueBid(item.values)}
                               </div>{" "}
                             </div>
                             {/* {true && ( */}
@@ -981,9 +980,10 @@ const CricketSingle = () => {
                                 <div className="input-est-cover">
                                   <input
                                     value={bidAmount}
-                                    onChange={(e) =>
-                                      setBidAmount(e?.target?.value)
-                                    }
+                                    onChange={(e) => {
+                                      console.log(bidContent, "<<<<bidcontent");
+                                      setBidAmount(e?.target?.value);
+                                    }}
                                   />
                                   <div className="button-est">
                                     {[
@@ -1024,9 +1024,8 @@ const CricketSingle = () => {
                                     })}
                                     <button>
                                       Est:
-                                      {parseFloat(
-                                        bidContent.odds * bidAmount
-                                      ).toFixed(1)}
+                                      {+bidAmount +
+                                        parseFloat(bidContent.odds * bidAmount)}
                                     </button>
                                   </div>
                                 </div>
