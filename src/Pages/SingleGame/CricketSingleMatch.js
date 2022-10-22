@@ -273,6 +273,7 @@ const CricketSingle = () => {
     const rightPart = values[1].odds.split(".")[1];
     const rightSub = rightPart.substring(0, 2);
     if (leftSub == rightSub) return 100;
+    else if (+leftSub < +rightSub) return showOddCustomized(+rightSub + 10);
     else return showOddCustomized(leftSub);
   };
 
