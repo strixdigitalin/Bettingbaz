@@ -304,6 +304,18 @@ const CricketSingle = () => {
     else return Math.ceil(odd.substring(1));
   };
 
+  const layAllFirstRow = (odd) => {
+    if (odd == "NaN") return "--";
+    const split1 = `${odd}`?.split(".")[0];
+    if (split1 == 1) {
+      return parseFloat(odd) + 0.01;
+    } else if (split1 == 2) {
+      return parseFloat(odd) + 0.02;
+    } else {
+      return parseFloat(odd).toFixed(2) + parseFloat(odd);
+    }
+  };
+
   return (
     <div className="single-middle">
       <div className="single-top-head">{params.teams}</div>
@@ -468,12 +480,12 @@ const CricketSingle = () => {
               ? "--"
               : parseFloat(parseFloat(matchData[0]?.values[0]?.odds)).toFixed(
                   2
+                  
                 )} */}
-            {parseFloat(matchData[0]?.values[0]?.odds).toFixed(2) == "NaN"
-              ? "--"
-              : parseFloat(
-                  parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)
-                ) + parseFloat(0.02 * parseInt(matchData[0]?.values[0]?.odds))}
+
+            {layAllFirstRow(
+              parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)
+            )}
           </div>
           <div
             className="flex-row w100 just-ctr"
