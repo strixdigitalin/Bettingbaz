@@ -55,7 +55,17 @@ min-height: 120vh;
     .home-middle{
         width: 100%;
     }   
-   }
+    .bottom-popup{
+        position: fixed;
+        bottom: 4rem;
+        right: 0px;
+        display: none;
+        background: white;
+border: 1px solid gray;
+        padding: 5px 10px;
+    }
+}
+   
 
    .mobile-bottom{
     position: fixed;

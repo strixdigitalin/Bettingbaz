@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import homeorange from "../Assets/mobile-icons/homeorange.png";
+import homeblack from "../Assets/mobile-icons/homeblack.png";
+import accountblack from "../Assets/mobile-icons/accountblack.png";
+import accountorange from "../Assets/mobile-icons/accountorange.png";
+import moreblack from "../Assets/mobile-icons/moreblack.png";
+import walletblack from "../Assets/mobile-icons/walletblack.png";
+import walletorange from "../Assets/mobile-icons/walletorange.png";
+import mybetblack from "../Assets/mobile-icons/mybetblack.png";
 import QuickLinks from "../Components/QuickLinks";
 import { showSigninModal } from "../Redux/Reducers/SigninModal";
 import homeicon from "../Assets/Card/home.png";
@@ -16,6 +24,7 @@ import {
 } from "./Controler/ImageBySport";
 
 function PageCover({ component, gamename }) {
+  const popupRef = useRef();
   const [userLoggedIn, setUserLoggedIn] = useState({});
   const dispatch = useDispatch();
   const openSigninModal = () => {
@@ -26,6 +35,17 @@ function PageCover({ component, gamename }) {
     // alert("Log in to place bid");
     // }
   };
+
+  window.onclick = (e) => {
+    console.log(e.target, "<<<className");
+    if (e.target.className != "moreclick") {
+      popupRef.current.style.display = "none";
+    }
+  };
+  const moreClick = () => {
+    popupRef.current.style.display = "block";
+  };
+
   return (
     <div style={{ backgroundColor: "#C7C7C7" }}>
       <div className="home-body">
@@ -46,44 +66,88 @@ function PageCover({ component, gamename }) {
       <div className="mobile-bottom">
         <Link to="/home" className="text-icon-cover">
           <img
-            src={homeicon}
-            width="30px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+            src={homeblack}
+            width="50px"
+            style={{ width: "50px", margin: "auto", textAlign: "center" }}
           />
-          <div style={{ textDecoration: "none", color: "black" }}>Home</div>
+          {/* <div style={{ textDecoration: "none", color: "black" }}>Home</div> */}
         </Link>
 
         <Link
-          to="/home"
+          to="/my-account"
           // onClick={openSigninModal}
           className="text-icon-cover"
           style={{ textDecoration: "none", color: "black" }}
         >
           {" "}
           <img
-            src={footballicon}
-            width="30px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+            src={mybetblack}
+            width="50px"
+            style={{ width: "50px", margin: "auto", textAlign: "center" }}
           />
-          Sports
+          {/* Sports */}
         </Link>
 
-        <Link to="/e-sport" className="text-icon-cover">
+        <Link to="/my-account" className="text-icon-cover">
           <img
-            src={videogame}
-            width="30px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+            src={walletblack}
+            width="50px"
+            style={{ width: "50px", margin: "auto", textAlign: "center" }}
           />
-          <div style={{ textDecoration: "none", color: "black" }}>E sports</div>
+          {/* <div style={{ textDecoration: "none", color: "black" }}>E sports</div> */}
         </Link>
-        <Link to="/casino" className="text-icon-cover">
+        <Link to="/my-account" className="text-icon-cover">
           <img
-            src={casino}
-            width="30px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+            src={accountblack}
+            width="50px"
+            style={{ width: "50px", margin: "auto", textAlign: "center" }}
           />
-          <div style={{ textDecoration: "none", color: "black" }}>Casino</div>
+          {/* <div style={{ textDecoration: "none", color: "black" }}>Casino</div> */}
         </Link>
+        <div className="text-icon-cover">
+          <img
+            onClick={moreClick}
+            className="moreclick"
+            src={moreblack}
+            width="50px"
+            style={{ width: "50px", margin: "auto", textAlign: "center" }}
+          />
+          {/* <div style={{ textDecoration: "none", color: "black" }}>Casino</div> */}
+        </div>
+      </div>
+      <div className="bottom-popup" ref={popupRef}>
+        <div className="">
+          <img
+            src={homeicon}
+            width="20px"
+            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+          />{" "}
+          <span style={{ marginLeft: "10px" }}>Casino</span>
+        </div>
+        <div className="">
+          <img
+            src={homeicon}
+            width="20px"
+            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+          />{" "}
+          <span style={{ marginLeft: "10px" }}>E Sport</span>
+        </div>
+        <div className="">
+          <img
+            src={homeicon}
+            width="20px"
+            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+          />{" "}
+          <span style={{ marginLeft: "10px" }}>Support</span>
+        </div>
+        <div className="">
+          <img
+            src={homeicon}
+            width="20px"
+            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+          />{" "}
+          <span style={{ marginLeft: "10px" }}>Blog</span>
+        </div>
       </div>
     </div>
   );
