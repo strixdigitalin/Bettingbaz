@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import Home from "./Pages/Home/Index";
 import Header from "./Components/Header";
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
 
 // ------------------------STYLES-----------------
 
@@ -50,12 +50,15 @@ import MobDashboard from "./Pages/MobDashboard";
 import Withdraw from "./Modals/Withdraw";
 import Signup from "./Pages/Signup";
 import MyAccount from "./Pages/MyAccount";
+import { getSocket } from "./ClientApi/BetApi";
 
 function App() {
   const { PlaceBid, SignInState, ResetPassword } = useSelector(
     (state) => state
   );
+
   console.log(PlaceBid, ResetPassword, "<<<< Place Bid");
+  getSocket();
   return (
     <div className="App">
       <BrowserRouter>
@@ -91,7 +94,6 @@ function App() {
           <Route path="/mob-dashboard" element={<MobDashboard />}></Route>
           <Route path="/terms/:terms" element={<Terms />}></Route>
         </Routes>
-    
       </BrowserRouter>
       {PlaceBid.show && (
         <div className="modal-outer">
