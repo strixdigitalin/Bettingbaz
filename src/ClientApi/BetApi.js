@@ -250,3 +250,18 @@ export const withdrawApi = async (amount, successCallBack) => {
     })
     .catch((error) => console.log("error", error));
 };
+
+export const getSocket = () => {
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  fetch(
+    "https://api.thesports.com/v1/cricket/odds/live?user=omrahul&secret=110a77c9f841e6c6e683045d5d77f4b9",
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
+};
