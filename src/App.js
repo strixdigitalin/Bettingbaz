@@ -51,6 +51,7 @@ import Withdraw from "./Modals/Withdraw";
 import Signup from "./Pages/Signup";
 import MyAccount from "./Pages/MyAccount";
 import { getSocket } from "./ClientApi/BetApi";
+import MobileFooter from "./Components/MobileFooter";
 
 function App() {
   const { PlaceBid, SignInState, ResetPassword } = useSelector(
@@ -88,8 +89,33 @@ function App() {
             path="/match-single/sport/:game/:legue/:teams/:id"
             element={<CricketSingleMatch />}
           ></Route>
-          <Route path="my-bet" element={<MyBet />}></Route>
-          <Route path="my-account" element={<MyAccount />}></Route>
+          <Route
+            path="/my-bet"
+            element={
+              <>
+                <MyBet />
+                <MobileFooter showOrange="my-bet" />
+              </>
+            }
+          ></Route>
+          <Route
+            path="/my-account"
+            element={
+              <>
+                <MyAccount />
+                <MobileFooter showOrange="Account" />
+              </>
+            }
+          ></Route>
+          <Route
+            path="/my-wallet"
+            element={
+              <>
+                <MyAccount />
+                <MobileFooter showOrange="Wallet" />
+              </>
+            }
+          ></Route>
 
           <Route path="/mob-dashboard" element={<MobDashboard />}></Route>
           <Route path="/terms/:terms" element={<Terms />}></Route>

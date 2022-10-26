@@ -44,6 +44,14 @@ const CricketSingle = () => {
   });
   const [equalValue, setEqualValue] = useState(0);
   const [bidAmount, setBidAmount] = useState(0);
+  const [showMatchMainOdd, setshowMatchMainOdd] = useState({
+    show: false,
+    odd: null,
+    decision: null,
+
+    team: "",
+    team_id: null,
+  });
   const [clickedRow, setClickedRow] = useState(null);
   const [bidType, setBidType] = useState(typePrem);
   const [bidContent, setBidContent] = useState({ odds: 0 });
@@ -296,7 +304,10 @@ const CricketSingle = () => {
   };
 
   const fancyUpperPartCalculationLEft = (name, odd) => {
+    if (name.match("6 Over")) return Math.floor(odd);
     if (name.match("10 Over")) return Math.floor(odd);
+    if (name.match("15 Over")) return Math.floor(odd);
+    if (name.match("Total Over")) return Math.floor(odd);
     else return Math.ceil(odd.substring(1));
   };
   const fancyUpperPartCalculationRight = (name, odd) => {
@@ -307,10 +318,17 @@ const CricketSingle = () => {
   const layAllFirstRow = (odd) => {
     if (odd == "NaN") return "--";
     const split1 = `${odd}`?.split(".")[0];
+    // const split1 = 6;
     if (split1 == 1) {
       return parseFloat(odd) + 0.01;
     } else if (split1 == 2) {
-      return parseFloat(odd) + 0.02;
+      return parseFloat(odd) + 0.1;
+    } else if (split1 == 3 || split1 == 4) {
+      return parseFloat(odd) + 0.1;
+    } else if (split1 == 5) {
+      return parseFloat(odd) + 0.2;
+    } else if (split1 == 6) {
+      return parseFloat(odd) + 0.5;
     } else {
       return parseFloat(odd).toFixed(2) + parseFloat(odd);
     }
@@ -318,26 +336,28 @@ const CricketSingle = () => {
 
   return (
     <div className="single-middle">
-      <div className="single-top-head">{params.teams}</div>
+      <div className="single-top-head">
+        {params.teams.toLocaleUpperCase().replace("-", " ")}
+      </div>
       {/*desktop ------------------------------------ */}
       <div className="flex-row just-bet one-eaning bgwhite">
         <div className="eaning-left">
           <div className="flex-row align-ctr">
-            <img src={bat} width="60px" height="60px" />
-            <img src={india} width="30px" height="30px" />
+            {/* <img src={bat} width="60px" height="60px" /> */}
+            {/* <img src={india} width="30px" height="30px" /> */}
           </div>
-          <div>{matchData[0]?.values[0]?.val1}</div>
-          <span>15-2</span>
+          <div>{matchData[0]?.values[0]?.val1.toLocaleUpperCase()}</div>
+          {/* <span>15-2</span> */}
         </div>
         <div className="eaning-mid">1 st Ennings</div>
         <div className="eaning-left">
-          <div className="flex-row align-ctr">
-            <img src={pakistan} />
+          {/* <div className="flex-row align-ctr"> */}
+          {/* <img src={pakistan} /> */}
 
-            <img src={ball} width="40px" height="40px" />
-          </div>
-          <div> {matchData[0]?.values[1]?.val1}</div>
-          <span>15-2</span>
+          {/* <img src={ball} width="40px" height="40px" /> */}
+          {/* </div> */}
+          <div> {matchData[0]?.values[1]?.val1.toLocaleUpperCase()}</div>
+          {/* <span>15-2</span> */}
         </div>
       </div>
 
@@ -409,6 +429,16 @@ const CricketSingle = () => {
             Back All
           </div>
           <div
+            onClick={() => {
+              setshowMatchMainOdd({
+                show: true,
+                odd: parseFloat(matchData[0]?.values[0]?.odds).toFixed(2),
+                decision: "YES",
+
+                team: matchData[0]?.values[0]?.val1,
+                team_id: 1,
+              });
+            }}
             className="flex-row w100 just-ctr"
             style={{
               border: "1px solid #707070",
@@ -429,6 +459,16 @@ const CricketSingle = () => {
               padding: "5px 0px",
               color: "wheat",
               height: "40px",
+            }}
+            onClick={() => {
+              setshowMatchMainOdd({
+                show: true,
+                odd: parseFloat(matchData[0]?.values[1]?.odds).toFixed(2),
+                decision: "YES",
+
+                team: matchData[0]?.values[1]?.val1,
+                team_id: 2,
+              });
             }}
           >
             {parseFloat(matchData[0]?.values[1]?.odds).toFixed(2) == "NaN"
@@ -474,6 +514,18 @@ const CricketSingle = () => {
               color: "wheat",
               height: "40px",
             }}
+            onClick={() => {
+              setshowMatchMainOdd({
+                show: true,
+                odd: layAllFirstRow(
+                  parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)
+                ),
+                decision: "NO",
+
+                team: matchData[0]?.values[0]?.val1,
+                team_id: 0,
+              });
+            }}
           >
             {/* {parseFloat(parseFloat(matchData[0]?.values[0]?.odds)).toFixed(2) ==
             "NaN"
@@ -494,6 +546,24 @@ const CricketSingle = () => {
               padding: "5px 0px",
               color: "wheat",
               height: "40px",
+            }}
+            onClick={() => {
+              console.log(
+                parseFloat(
+                  parseFloat(matchData[0]?.values[1]?.odds) + 0.01
+                ).toFixed(2),
+                "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+              );
+              setshowMatchMainOdd({
+                show: true,
+                odd: parseFloat(
+                  parseFloat(matchData[0]?.values[1]?.odds) + 0.01
+                ).toFixed(2),
+                decision: "NO",
+
+                team: matchData[0]?.values[1]?.val1,
+                team_id: 1,
+              });
             }}
           >
             {parseFloat(parseFloat(matchData[0]?.values[1]?.odds)).toFixed(2) ==
@@ -523,7 +593,93 @@ const CricketSingle = () => {
             </div>
           )}
         </div>
+
+        {/*  */}
       </div>
+      {showMatchMainOdd.show && (
+        <div className="placebid-cover ">
+          <div className="button-cover">
+            {[100, 500, 1000, 2000, 5000].map((item) => {
+              return <button onClick={() => setBidAmount(item)}>{item}</button>;
+            })}
+          </div>
+          <div className="input-est-cover">
+            <input
+              value={bidAmount}
+              onChange={(e) => {
+                console.log(bidContent, "<<<<bidcontent");
+                setBidAmount(e?.target?.value);
+                console.log(
+                  bidAmount,
+                  showMatchMainOdd.odd,
+                  "<<<<<<<matchodds"
+                );
+              }}
+            />
+            <div className="button-est">
+              {[
+                {
+                  label: "Place Bid",
+                  onClick: submitBid,
+                },
+                {
+                  label: "Hide",
+                  onClick: () => {
+                    setshowMatchMainOdd({
+                      ...showMatchMainOdd,
+                      show: false,
+                    });
+                    // setClickedRow(null);
+                    // setClickRowFancy({
+                    //   index: null,
+                    //   row: null,
+                    // });
+                    // setClickedBlock(initialBlock);
+                    // setbidStatus({
+                    //   status: null,
+                    //   message: "",
+                    // });
+                    setBidAmount(0);
+                    setBidContent({ odds: 0 });
+                  },
+                },
+              ].map((item, key) => {
+                return (
+                  <button
+                    onClick={item?.onClick}
+                    style={{
+                      background: `${key == 0 ? "green" : "red"}`,
+                    }}
+                  >
+                    {item?.label}
+                  </button>
+                );
+              })}
+              <button>
+                Est:
+                {
+                  +parseFloat(
+                    showMatchMainOdd.odd * bidAmount +
+                      parseFloat(bidAmount).toFixed(1)
+                  ).toFixed(1)
+                }
+              </button>
+            </div>
+          </div>
+          {bidStatus?.status != null && (
+            <div
+              className="bid-placed"
+              style={{
+                display: `${bidStatus?.status == null && "none"}`,
+                color: `${bidStatus?.status == true ? "green" : "red"}`,
+              }}
+            >
+              {" "}
+              {bidStatus?.msg}
+            </div>
+          )}
+        </div>
+      )}
       {/*  <768 px */}
       {/* <768 px mob */}
       <div>

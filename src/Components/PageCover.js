@@ -22,11 +22,19 @@ import {
   leftLinkData,
   rightLinkData,
 } from "./Controler/ImageBySport";
+import MobileFooter from "./MobileFooter";
 
 function PageCover({ component, gamename }) {
   const popupRef = useRef();
   const [userLoggedIn, setUserLoggedIn] = useState({});
   const dispatch = useDispatch();
+
+  const showHome = () => {
+    const path = window.location.pathname;
+    if (path == "/") return true;
+    else return false;
+  };
+
   const openSigninModal = () => {
     const user = localStorage.getItem("betting_user");
     // if (user != null || user != "") {
@@ -63,92 +71,7 @@ function PageCover({ component, gamename }) {
           data={allSports.slice(0, 18)}
         />
       </div>
-      <div className="mobile-bottom">
-        <Link to="/home" className="text-icon-cover">
-          <img
-            src={homeblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* <div style={{ textDecoration: "none", color: "black" }}>Home</div> */}
-        </Link>
-
-        <Link
-          to="/my-account"
-          // onClick={openSigninModal}
-          className="text-icon-cover"
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          {" "}
-          <img
-            src={mybetblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* Sports */}
-        </Link>
-
-        <Link to="/my-account" className="text-icon-cover">
-          <img
-            src={walletblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* <div style={{ textDecoration: "none", color: "black" }}>E sports</div> */}
-        </Link>
-        <Link to="/my-account" className="text-icon-cover">
-          <img
-            src={accountblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* <div style={{ textDecoration: "none", color: "black" }}>Casino</div> */}
-        </Link>
-        <div className="text-icon-cover">
-          <img
-            onClick={moreClick}
-            className="moreclick"
-            src={moreblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* <div style={{ textDecoration: "none", color: "black" }}>Casino</div> */}
-        </div>
-      </div>
-      <div className="bottom-popup" ref={popupRef}>
-        <div className="">
-          <img
-            src={homeicon}
-            width="20px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
-          />{" "}
-          <span style={{ marginLeft: "10px" }}>Casino</span>
-        </div>
-        <div className="">
-          <img
-            src={homeicon}
-            width="20px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
-          />{" "}
-          <span style={{ marginLeft: "10px" }}>E Sport</span>
-        </div>
-        <div className="">
-          <img
-            src={homeicon}
-            width="20px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
-          />{" "}
-          <span style={{ marginLeft: "10px" }}>Support</span>
-        </div>
-        <div className="">
-          <img
-            src={homeicon}
-            width="20px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
-          />{" "}
-          <span style={{ marginLeft: "10px" }}>Blog</span>
-        </div>
-      </div>
+      <MobileFooter />
     </div>
   );
 }

@@ -17,6 +17,7 @@ import moreblack from "../../Assets/mobile-icons/moreblack.png";
 import walletblack from "../../Assets/mobile-icons/walletblack.png";
 import walletorange from "../../Assets/mobile-icons/walletorange.png";
 import mybetblack from "../../Assets/mobile-icons/mybetblack.png";
+import MobileFooter from "../../Components/MobileFooter";
 
 function SinglePages() {
   const popupRef = useRef();
@@ -62,102 +63,7 @@ function SinglePages() {
           </div>
         </div>
       </div>
-      <div className="mobile-bottom">
-        <Link to="/home" className="text-icon-cover">
-          <img
-            src={homeblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* <div style={{ textDecoration: "none", color: "black" }}>Home</div> */}
-        </Link>
-
-        <Link
-          to="/my-account"
-          // onClick={openSigninModal}
-          className="text-icon-cover"
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          {" "}
-          <img
-            src={mybetblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* My Bets */}
-        </Link>
-
-        <Link to="/my-account" className="text-icon-cover">
-          <img
-            src={walletblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* <div style={{ textDecoration: "none", color: "black" }}>Wallet</div> */}
-        </Link>
-        <div className="text-icon-cover" onClick={moreClick}>
-          <img
-            className="moreclick"
-            src={accountblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* <div
-            style={{ textDecoration: "none", color: "black" }}
-            className="moreclick"
-          >
-            Account
-          </div> */}
-        </div>
-        <div className="text-icon-cover" onClick={moreClick}>
-          <img
-            className="moreclick"
-            src={moreblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* <div
-            style={{ textDecoration: "none", color: "black" }}
-            className="moreclick"
-          >
-            More
-          </div> */}
-        </div>
-      </div>
-      <div className="bottom-popup" ref={popupRef}>
-        <div className="">
-          <img
-            src={homeicon}
-            width="20px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
-          />{" "}
-          <span style={{ marginLeft: "10px" }}>Casino</span>
-        </div>
-        <div className="">
-          <img
-            src={homeicon}
-            width="20px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
-          />{" "}
-          <span style={{ marginLeft: "10px" }}>E Sport</span>
-        </div>
-        <div className="">
-          <img
-            src={homeicon}
-            width="20px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
-          />{" "}
-          <span style={{ marginLeft: "10px" }}>Support</span>
-        </div>
-        <div className="">
-          <img
-            src={homeicon}
-            width="20px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
-          />{" "}
-          <span style={{ marginLeft: "10px" }}>Blog</span>
-        </div>
-      </div>
+      <MobileFooter />
     </div>
   );
 }

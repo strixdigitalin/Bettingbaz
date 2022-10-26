@@ -109,8 +109,10 @@ font-size: 12px;
 .walletDropDown{
     position: absolute;
     width: 150px;
-background-color: rgb(207, 207, 207);
+/* background-color: rgb(207, 207, 207); */
+background: white;
 /* padding: 10px; */
+display: none;
 border-radius: 5px;
 gap: 2%;
 /* bottom: 0px; */

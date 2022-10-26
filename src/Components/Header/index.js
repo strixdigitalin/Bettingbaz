@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "../../Assets/Header/logo.png";
 import wallet from "../../Assets/Header/wallet.png";
 import avatar from "../../Assets/Header/avatar.png";
@@ -10,6 +10,7 @@ import Lock from "../../Assets/Header/Svgs/lock.svg";
 import logout from "../../Assets/Header/Svgs/logout.svg";
 import page from "../../Assets/Header/Svgs/page.svg";
 import hamburger from "../../Assets/Header/Svgs/burgericon.svg";
+import withdraw from "../../Assets/mobile-icons/withdraw.jpg";
 import rule from "../../Assets/Header/Svgs/rule.svg";
 import { Link, BrowserRouter as Router, useNavigate } from "react-router-dom";
 
@@ -34,6 +35,7 @@ function Header() {
   const dispatch = useDispatch();
   console.log(WalletDropDown, "<<<wallet");
   const navigation = useNavigate();
+  const showmodal = useRef();
 
   const headerItems = [
     {
@@ -66,6 +68,19 @@ function Header() {
     }
     // const parseIt = JSON.parse(stringUser);
   }, []);
+
+  window.onclick = (e) => {
+    console.log(e.target.className);
+    if (
+      e.target.className != "walletDropDown" &&
+      !e.target.className.match("showmodal")
+    ) {
+      showmodal.current.style.display = "none";
+    } else {
+      showmodal.current.style.display = "block";
+    }
+  };
+
   console.log(isLoggedIn, "<<<is logged in");
   const handleSubmit = () => {
     console.log(loginData);
@@ -155,7 +170,7 @@ function Header() {
   const resetPass = () => dispatch(showResetPasswordModal(true));
   return (
     <div>
-          <div className="">
+      <div className="">
         {/* ---------------top */}
         <div className={`bg2c header-upper flex-row just-ctr col-white `}>
           {headerItems.map((item, key) => {
@@ -216,17 +231,21 @@ function Header() {
                 </button>
               </Link>
               <button
-                className="loggedInButton pointer"
-                onClick={() => dispatch(openWallet(!WalletDropDown.show))}
+                className="loggedInButton pointer showmodal"
+                onClick={() => {
+                  // dispatch(openWallet(!WalletDropDown.show))
+                  showmodal.current.style.display = "block";
+                }}
               >
-                <div>
+                <div className="showmodal">
                   <img src={avatar} height="18px" />
                 </div>
-                <div>{loggedInUser?.name}</div>
+                <div className="showmodal">{loggedInUser?.name}</div>
               </button>
               {/* ))} */}
-              {WalletDropDown.show && (
-                <div className="walletDropDown">
+              {/* {WalletDropDown.show && ( */}
+              {true && (
+                <div className="walletDropDown" ref={showmodal}>
                   {/* <div className="flex-row  wallet-single">
                     {" "}
                     <div>
@@ -237,7 +256,7 @@ function Header() {
                   <div className="flex-row  wallet-single">
                     {" "}
                     <div>
-                      <img src={page} />
+                      <img src={avatar} />
                     </div>
                     <Link to="/my-account">
                       <div style={{ textDecoration: "none", color: "black" }}>
@@ -262,7 +281,7 @@ function Header() {
                   <div className="flex-row  wallet-single">
                     {" "}
                     <div>
-                      <img src={logout} />
+                      <img src={withdraw} width="28px" />
                     </div>
                     <div
                       onClick={() => {

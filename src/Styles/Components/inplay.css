@@ -30,7 +30,7 @@
     border: 1px solid  #707070;
 }
 .button-est{
-    width: 60%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     padding: 0px 10px;
@@ -46,12 +46,40 @@
 }
 
 @media screen and (max-width: 767px) {
+    .button-cover > button {
+        background-color: #707070;
+        color: white;
+        border-radius: 20px;
+        width: 50px;
+        cursor: pointer;
+        height: 30px;
+        border: none;
+    }
     .input-est-cover {
         margin-top: 20px;
         display: flex;
         justify-content: space-between;
         flex-direction: column;
-
+    }
+    .button-est {
+        width: "95%";
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 10px;
+    }
+    /* .button-est > button {
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        min-width: 80px;
+        width:"20%";
+        background-color: #707070;
+        cursor: pointer;
+    } */
+    .placebid-cover {
+        padding: 10px 1%;
+        background-color: white;
     }
     .input-est-cover > input {
         border-radius: 10px;

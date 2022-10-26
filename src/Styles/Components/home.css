@@ -40,7 +40,9 @@ min-height: 120vh;
     background-color: white;
     color: rgb(249, 132, 23);
 }
-
+.showmobile-footer{
+    display: none;
+}
 
 @media screen and (max-width: 1200px) {
     .home-body{
@@ -49,6 +51,9 @@ min-height: 120vh;
 }
 
 @media screen and (max-width:768px) {
+    .showmobile-footer{
+        display: block;
+    }
     .home-body{
         width: 100%;
     }
