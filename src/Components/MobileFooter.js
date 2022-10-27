@@ -7,9 +7,11 @@ import homeblack from "../Assets/mobile-icons/homeblack.png";
 import accountblack from "../Assets/mobile-icons/accountblack.png";
 import accountorange from "../Assets/mobile-icons/accountorange.png";
 import moreblack from "../Assets/mobile-icons/moreblack.png";
+import moreorange from "../Assets/mobile-icons/moreorange.png";
 import walletblack from "../Assets/mobile-icons/walletblack.png";
 import walletorange from "../Assets/mobile-icons/walletorange.png";
 import mybetblack from "../Assets/mobile-icons/mybetblack.png";
+import mybetorange1 from "../Assets/mobile-icons/mybetorange1.jpg";
 import QuickLinks from "../Components/QuickLinks";
 import casinomobile from "../Assets/mobile-icons/casinoblack.jpg";
 import inplay from "../Assets/mobile-icons/inplay.jpg";
@@ -52,7 +54,7 @@ function MobileFooter({ showOrange = "home" }) {
   const showWallet = () => {
     const path = window.location.pathname;
 
-    if (switchAccountTabs == "Wallet" || path == "/my-wallet") return true;
+    if (switchAccountTabs == "Wallet") return true;
     else return false;
   };
 
@@ -105,11 +107,15 @@ function MobileFooter({ showOrange = "home" }) {
             onClick={() => {
               setSwitchAccountTabs("my-bet");
             }}
-            src={showMyBet() ? mybetblack : mybetblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
+            src={showMyBet() ? mybetorange1 : mybetblack}
+            width={showMyBet() ? "50px" : "60px"}
+            style={{
+              width: showMyBet() ? "30px" : "60px",
+              margin: "auto",
+              textAlign: "center",
+            }}
           />
-          {/* Sports */}
+          {showMyBet() && <span style={{ color: "orange" }}>My Bet</span>}
         </Link>
 
         <Link to="/my-wallet" className="text-icon-cover">
@@ -138,7 +144,7 @@ function MobileFooter({ showOrange = "home" }) {
           <img
             onClick={moreClick}
             className="moreclick"
-            src={moreblack}
+            src={showMore() ? moreorange : moreblack}
             width="40px"
             style={{ width: "40px", margin: "auto", textAlign: "center" }}
           />
@@ -178,9 +184,14 @@ function MobileFooter({ showOrange = "home" }) {
           <img
             src={rule}
             width="20px"
-            style={{ width: "30px", margin: "auto", textAlign: "center" }}
+            style={{
+              width: "20px",
+              margin: "auto",
+              marginTop: "5px",
+              textAlign: "center",
+            }}
           />{" "}
-          <span style={{ marginLeft: "10px" }}>Blog</span>
+          <span style={{ marginLeft: "20px" }}>Blog</span>
         </div>
       </div>
     </div>

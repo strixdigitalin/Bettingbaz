@@ -34,7 +34,7 @@ function MyBet({ showBet }) {
 
   useEffect(() => {
     getUserDetail((res) => {
-      console.log(res);
+      console.log(res, "<<<user details");
       console.log(res.games, "<<<<< games");
       setuserDetails(res);
       setgameTransection(res.games.reverse());
@@ -80,7 +80,10 @@ function MyBet({ showBet }) {
       <div className="table-div">
         {switchTab == BET_HISTORY && (
           <>
-            <div className="admin-table-header-wallet">My Wallet</div>
+            <div className="admin-table-header-wallet">
+              <div>My Wallet</div>
+              <div>Total Coins: {userDetails?.user?.user_coin}</div>
+            </div>
             <div
               className="admin-table-header-wallet-down"
               style={{

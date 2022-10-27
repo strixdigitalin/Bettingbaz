@@ -131,7 +131,7 @@ function SingleRowRunningBid({ item }) {
                 style={{ borderRadius: "10px", padding: "5px 5px" }}
                 className="pointer"
                 onClick={claimNow}
-              >
+              > 
                 Claim Now
               </button>
             );

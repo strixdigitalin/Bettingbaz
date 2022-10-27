@@ -181,6 +181,8 @@ const CricketSingle = () => {
 
   const submitBid = () => {
     setbidStatus({ status: null, msg: "" });
+    console.log(bidContent, "<<<< bidcontent");
+    // return null;
 
     // alert("here");
     console.log(bidContent, bidType, bidAmount, matchId, "<<<<bid content");
@@ -469,6 +471,14 @@ const CricketSingle = () => {
                 team: matchData[0]?.values[1]?.val1,
                 team_id: 2,
               });
+              setBidContent({
+                show: true,
+                odds: parseFloat(matchData[0]?.values[1]?.odds).toFixed(2),
+                decision: "YES",
+
+                team: matchData[0]?.values[1]?.val1,
+                team_id: 2,
+              });
             }}
           >
             {parseFloat(matchData[0]?.values[1]?.odds).toFixed(2) == "NaN"
@@ -620,7 +630,9 @@ const CricketSingle = () => {
               {[
                 {
                   label: "Place Bid",
-                  onClick: submitBid,
+                  onClick: () => {
+                    submitBid();
+                  },
                 },
                 {
                   label: "Hide",
@@ -657,12 +669,7 @@ const CricketSingle = () => {
               })}
               <button>
                 Est:
-                {
-                  +parseFloat(
-                    showMatchMainOdd.odd * bidAmount +
-                      parseFloat(bidAmount).toFixed(1)
-                  ).toFixed(1)
-                }
+                {+parseFloat(showMatchMainOdd.odd * bidAmount).toFixed(2)}
               </button>
             </div>
           </div>

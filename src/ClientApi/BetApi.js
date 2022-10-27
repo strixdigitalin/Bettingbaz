@@ -151,7 +151,10 @@ export const getDataSavedInDb = (payload, successCallback) => {
         console.log(parseData, "<<<parse it data");
         successCallback(parseData);
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {
+        successCallback([]);
+        console.log("error", error);
+      });
   } catch (e) {
     console.log(e);
   }

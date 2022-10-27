@@ -17,7 +17,7 @@ function SingleRowRunningBid({ item }) {
       }
     );
   }, [bePlaced]);
-  const showGreen = (amount, currAmount) => {
+  const showGreen = (currAmount, amount) => {
     if (amount > currAmount) return false;
     else return true;
   };
@@ -135,7 +135,7 @@ function SingleRowRunningBid({ item }) {
         style={{
           width: GameHeading[6].width,
           color: `${
-            showGreen(item.reward_amount, item.amount * odds) ? "green" : "red"
+            showGreen(item.reward_amount, item.amount) ? "green" : "red"
           }`,
         }}
       >
@@ -153,10 +153,11 @@ function SingleRowRunningBid({ item }) {
             );
           }
         })()} */}
-        {parseFloat(odds * item.amount).toFixed(2) != null &&
+        {/* {parseFloat(odds * item.amount).toFixed(2) != null &&
         parseFloat(odds * item.amount).toFixed(2) != "null"
           ? parseFloat(odds * item.amount).toFixed(2)
-          : "--"}
+          : "--"} */}
+        {item?.reward_amount}
         {/* {item?.reward_amount} to {parseFloat(odds * item.amount).toFixed(2)} */}
       </div>
     </div>
