@@ -8,7 +8,7 @@ import movedown from "../../Assets/Card/Path2.png";
 import RightArrow from "../../Assets/Card/rightbg.png";
 import inPlay from "../../Assets/Header/In Play.png";
 import { useParams } from "react-router-dom";
-import { betbySingleMatc, getCricBuzMatch } from "../../Api";
+import { betbySingleMatc, getCricBuzMatch, getScoreCard } from "../../Api";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../Redux/Reducers/PlaceBid";
 import { PlaceBetApi } from "../../ClientApi/BetApi";
@@ -20,6 +20,7 @@ import ballsvg from "../../Assets/Country/ball.svg";
 
 import pakistansvg from "../../Assets/Country/pakistan.svg";
 import { replaceNAmeAlbabet, showOddCustomized } from "../../ClientApi/Auth";
+import ScoreCard from "./ScoreCard";
 const typePrem = "PREMIUM";
 const typeFancy = "FANCY";
 const TOTAL_RUNS = "Runs";
@@ -38,6 +39,7 @@ const CricketSingle = () => {
     params.game == "cricket" ? false : true
   );
   const [matchData, setMatchData] = useState([]);
+  const [cricBuzMatchId, setCricBuzMatchId] = useState(43131);
   const [clickRowFancy, setClickRowFancy] = useState({
     index: null,
     row: null,
@@ -53,7 +55,9 @@ const CricketSingle = () => {
     team_id: null,
   });
   const [clickedRow, setClickedRow] = useState(null);
+  const [showScoreCard, setShowScoreCard] = useState(false);
   const [bidType, setBidType] = useState(typePrem);
+  const [cricBuzSingleMatchData, setCricBuzSingleMatchData] = useState({});
   const [bidContent, setBidContent] = useState({ odds: 0 });
   const [clickedBlock, setClickedBlock] = useState(initialBlock);
   const [cricBuzData, setcricBuzData] = useState({});
@@ -71,16 +75,31 @@ const CricketSingle = () => {
   const matchId = `/sport/${params.game}/${params.legue}/${params.teams}/${params.id}`;
   const [noData, setNoData] = useState(true);
   useEffect(() => {
-    setInterval(function () {
-      // method to be executed;
-      console.log("fetch by single game called");
-      betbySingleMatc(params, (res) => {
-        console.log(res);
-        setMatchData(res);
-        // matchTeamNameCricBuz();
-      });
-    }, 3000);
+    // setInterval(function () {
+    // method to be executed;
+    console.log("fetch by single game called");
+    betbySingleMatc(params, (res) => {
+      console.log(res);
+      setMatchData(res);
+    });
+    // }, 10000000);
   }, []);
+
+  // useEffect(() => {
+  //   if (matchData != []) {
+  //     // matchTeamNameCricBuz();
+  //   }
+  // }, [matchData]);
+
+  // useEffect(() => {
+  // if (cricBuzMatchId != null) {
+  //   getScoreCard(cricBuzMatchId, (res) => {
+  //     console.log(res, "cricmatchdata");
+  //     // setCricBuzSingleMatchData(res);
+  //   });
+  // }
+  // }, [cricBuzMatchId]);
+
   const { teams } = params;
   const placeBid = (item) => {
     console.log(">>>", item);
@@ -102,36 +121,66 @@ const CricketSingle = () => {
 
   const matchTeamNameCricBuz = () => {
     // matchData[0]?.values[0]?.val1
-    // getCricBuzMatch((data) => {
-    //   // console.log(res, "<<<<<");
-    //   data.typeMatches[0].seriesMatches.map((series) => {
-    //     console.log(series.seriesAdWrapper, "<<<s");
-    //     series.seriesAdWrapper?.matches.map((match) => {
-    //       console.log(
-    //         series.seriesAdWrapper.match.matchInfo.team1.teamName,
-    //         matchData[0]?.values[0]?.val1
-    //       );
-    //       console.log(match, "<<<< match");
-    //       setcricBuzData(match);
-    //       console.log(
-    //         match.matchInfo.team1.teamName,
-    //         matchData[0]?.values[0]?.val1
-    //       );
-    //     });
 
-    //     // match.map()
-    //     // console.log(
-    //     //   series.seriesAdWrapper.match.matchInfo.team1.teamName,
-    //     //   matchData[0]?.values[0]?.val1
-    //     // );
-    //     // console.log(
-    //     //   series.seriesAdWrapper.match.matchInfo.team2.teamName,
-    //     //   matchData[0]?.values[2]?.val1
-    //     // );
-    //   });
-    //   // });
-    // });
-    const data = {};
+    const betFairTeam1 = matchData[0]?.values[0]?.val1;
+    const betFairTeam2 = matchData[0]?.values[1]?.val1;
+    getCricBuzMatch((data) => {
+      data.typeMatches[0].seriesMatches.map((series, ss) => {
+        console.log(series.seriesAdWrapper, "<<<s");
+        series.seriesAdWrapper?.matches.map((match, se) => {
+          console.log("matchCricbuzdata", "<<<<<");
+          const cricTeam1 = match.matchInfo.team1.teamName;
+          const cricTeam2 = match.matchInfo.team2.teamName;
+          console.log(
+            cricTeam1,
+            betFairTeam1,
+            cricTeam2,
+            betFairTeam2,
+            "matchCricbuzdata",
+            match.matchInfo.matchId,
+            series.seriesAdWrapper.seriesId,
+            ss,
+            se
+          );
+
+          if (betFairTeam1 == cricTeam1 && betFairTeam2 == cricTeam2) {
+            console.log(
+              cricTeam1,
+              betFairTeam1,
+              cricTeam2,
+              betFairTeam2,
+              "matchCricbuzdata",
+              match.matchInfo.matchId,
+              series.seriesAdWrapper.seriesId,
+              ss,
+              se
+            );
+            setCricBuzMatchId(match.matchInfo.matchId);
+            // let cricBuzDEtail = {
+            //   matchStatus: match.matchInfo.status,
+            // };
+          }
+          console.log(match, "<<<< match");
+          setcricBuzData(match);
+          console.log(
+            match.matchInfo.team1.teamName,
+            matchData[0]?.values[0]?.val1
+          );
+        });
+
+        // match.map()
+        // console.log(
+        //   series.seriesAdWrapper.match.matchInfo.team1.teamName,
+        //   matchData[0]?.values[0]?.val1
+        // );
+        // console.log(
+        //   series.seriesAdWrapper.match.matchInfo.team2.teamName,
+        //   matchData[0]?.values[2]?.val1
+        // );
+      });
+      // });
+    });
+    // const data = {};
     // data.typeMatches[0].seriesMatches.map((series) => {
     //   series.matches.map((match) => {
     //     // match.map()
@@ -161,6 +210,7 @@ const CricketSingle = () => {
     // console.log(temp, value?.split(".")[1], base, "<<<temp");
     return parseInt(temp * 100);
   };
+
   const replaceString = (name, values) => {
     if (params.game != "cricket") return name;
     let a = name?.replace(
@@ -312,6 +362,7 @@ const CricketSingle = () => {
     if (name.match("Total Over")) return Math.floor(odd);
     else return Math.ceil(odd.substring(1));
   };
+
   const fancyUpperPartCalculationRight = (name, odd) => {
     if (name.match("10 Over")) return Math.ceil(odd);
     else return Math.ceil(odd.substring(1));
@@ -362,7 +413,18 @@ const CricketSingle = () => {
           {/* <span>15-2</span> */}
         </div>
       </div>
+      {/* ------------
+       */}
 
+      <div>
+        <div
+          className="drop-score"
+          onClick={() => setShowScoreCard(!showScoreCard)}
+        >
+          Scorecard
+        </div>
+        {showScoreCard && <ScoreCard cricBuzData={cricBuzSingleMatchData} />}
+      </div>
       {/* ----------------------------- */}
       <div className="flex-row just-bet scoreData ">
         <div

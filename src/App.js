@@ -26,6 +26,7 @@ import "./Styles/Components/inplay.css";
 import "./Styles/Components/staticpage.css";
 import "./Styles/Components/signup.css";
 import "./Styles/Components/mobdashboard.css";
+import "./Styles/Components/scorecard.css";
 import { SingleGameCard } from "./Components/Heighlights";
 
 import SingleGame from "./Pages/SingleGame";

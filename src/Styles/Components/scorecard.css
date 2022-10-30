@@ -1,0 +1,89 @@
+.drop-score{
+    width: 100%;
+    text-align: center;
+    font: 15px;
+    color: white;
+    background-color: #212121;
+}
+.score-card-cover {
+    /* display: flex; */
+    /* justify-content: space-between; */
+    background: #3f3f3f;
+    text-align: center;
+    color: white;
+    font-weight: 500;
+}
+.score-card-outer {
+       display: flex;
+    justify-content: space-between;
+    background: #3f3f3f;
+    text-align: center;
+    color: white;
+    border-top: 3px solid #212121;
+
+}
+.score-card-left{
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    /* border-right: 1px solid gray; */
+    
+    
+
+}
+.mid-bord{
+    border-left: 3px solid #212121;
+}
+.score-card-right{
+    width:50%;
+    
+
+}
+
+.left-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1px 5px;
+    height: 43px;
+    border-bottom: 3px solid #212121;
+}
+.right-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1px 5px;
+    height: 43px;
+    align-items: center;
+    
+
+    border-bottom: 3px solid #212121;
+
+}
+.left-1{
+    width: 40%;
+    text-align: left;
+    font-size: 13px;
+}
+.left-2{
+width: 12%;
+text-align: left;
+font-size: 13px;
+
+
+}
+
+.down-right-data{
+    margin-top: 2rem;
+    border-top: 3px solid #212121;
+    font-size: 12px;
+    font-weight: 300 !important;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.extra-data-cover{
+    display: flex;
+    gap: 2%;
+    flex-wrap: wrap;
+}

@@ -163,7 +163,7 @@ export const getCricBuzMatch = (callBack) => {
     method: "GET",
     url: "https://cricbuzz-cricket.p.rapidapi.com/matches/v1/live",
     headers: {
-      "X-RapidAPI-Key": "3af9616a04mshb875af32508e23cp1b113bjsncbd8310da7d1",
+      "X-RapidAPI-Key": "a58cf9baf1msh54ab6765c6533c2p151ccejsn85832d4e5eb2",
       "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
     },
   };
@@ -177,4 +177,25 @@ export const getCricBuzMatch = (callBack) => {
     .catch(function (error) {
       console.error(error);
     });
+};
+
+export const getScoreCard = (matchId, callBack) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "a58cf9baf1msh54ab6765c6533c2p151ccejsn85832d4e5eb2",
+      "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
+    },
+  };
+
+  fetch(
+    "https://cricbuzz-cricket.p.rapidapi.com/mcenter/v1/" + matchId + "/scard",
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response, "<<<<matchCricbuzdata");
+      callBack(response);
+    })
+    .catch((err) => console.error(err));
 };
