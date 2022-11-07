@@ -3,8 +3,8 @@ import { cricData } from "./cricdata";
 // import cricData from "./cricdata";
 // const parsedData = JSON.parse(cricData);
 
-function ScoreCard() {
-  const cricBuzData = cricData;
+function ScoreCard({ cricBuzData }) {
+  // const cricBuzData = cricData;
   const [betTeam, setbetTeam] = useState({});
   const [batsManDetail, setBatsManDetail] = useState({});
   const [batTeamDetail, setBatTeamDetail] = useState({});

@@ -115,7 +115,9 @@ function MobileFooter({ showOrange = "home" }) {
               textAlign: "center",
             }}
           />
-          {showMyBet() && <span style={{ color: "orange" }}>My Bet</span>}
+          {showMyBet() && (
+            <span style={{ color: "orange", fontSize: "12px" }}>My Bet</span>
+          )}
         </Link>
 
         <Link to="/my-wallet" className="text-icon-cover">

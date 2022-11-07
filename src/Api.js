@@ -9,6 +9,11 @@ const headers = {
   "X-RapidAPI-Key": "a58cf9baf1msh54ab6765c6533c2p151ccejsn85832d4e5eb2",
   "X-RapidAPI-Host": "betfair-sportsbook.p.rapidapi.com",
 };
+
+const cricHeader = {
+  "X-RapidAPI-Key": "09e0f76a5bmshce6fb9d13354522p1bec2ejsn858243511b0c",
+  "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
+};
 //  personal key for testing
 // const headers = {
 //   "X-RapidAPI-Key": "3af9616a04mshb875af32508e23cp1b113bjsncbd8310da7d1",
@@ -162,10 +167,7 @@ export const getCricBuzMatch = (callBack) => {
   const options = {
     method: "GET",
     url: "https://cricbuzz-cricket.p.rapidapi.com/matches/v1/live",
-    headers: {
-      "X-RapidAPI-Key": "a58cf9baf1msh54ab6765c6533c2p151ccejsn85832d4e5eb2",
-      "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
-    },
+    headers: cricHeader,
   };
 
   axios
@@ -182,10 +184,7 @@ export const getCricBuzMatch = (callBack) => {
 export const getScoreCard = (matchId, callBack) => {
   const options = {
     method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "a58cf9baf1msh54ab6765c6533c2p151ccejsn85832d4e5eb2",
-      "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
-    },
+    headers: cricHeader,
   };
 
   fetch(
@@ -195,6 +194,45 @@ export const getScoreCard = (matchId, callBack) => {
     .then((response) => response.json())
     .then((response) => {
       console.log(response, "<<<<matchCricbuzdata");
+      callBack(response);
+    })
+    .catch((err) => console.error(err));
+};
+
+export const getImageLink = (imageId, callBack) => {
+  const options = {
+    method: "GET",
+    headers: cricHeader,
+  };
+
+  fetch(
+    "https://cricbuzz-cricket.p.rapidapi.com/img/v1/i1/c" + imageId + "/i.jpg",
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(`${response}`, "<<<<< image link");
+      // callBack(response);
+    })
+    .catch((err) => console.error(err));
+};
+
+export const getDataByOVer = (matchId, callBack) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "09e0f76a5bmshce6fb9d13354522p1bec2ejsn858243511b0c",
+      "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
+    },
+  };
+
+  fetch(
+    "https://cricbuzz-cricket.p.rapidapi.com/mcenter/v1/" + matchId + "/overs",
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response, "<<<<<overresponse");
       callBack(response);
     })
     .catch((err) => console.error(err));

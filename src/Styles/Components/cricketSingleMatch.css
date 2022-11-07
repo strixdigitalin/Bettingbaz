@@ -130,11 +130,27 @@ text-align: center;
 
 }
 .mob-one-eaning{
-    display: none;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
-    margin-top: 20px;
-}
+    display: flex;
+    border-radius: 15px;
 
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    /* box-shadow: 20px 30px 20px gray; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 5px;
+
+
+}
+.mob-one-eaning-single{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 @media screen and (max-width:768px) {
 .mob-single-table{

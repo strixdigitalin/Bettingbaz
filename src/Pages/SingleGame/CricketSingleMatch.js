@@ -8,7 +8,13 @@ import movedown from "../../Assets/Card/Path2.png";
 import RightArrow from "../../Assets/Card/rightbg.png";
 import inPlay from "../../Assets/Header/In Play.png";
 import { useParams } from "react-router-dom";
-import { betbySingleMatc, getCricBuzMatch, getScoreCard } from "../../Api";
+import {
+  betbySingleMatc,
+  getCricBuzMatch,
+  getDataByOVer,
+  getImageLink,
+  getScoreCard,
+} from "../../Api";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../Redux/Reducers/PlaceBid";
 import { PlaceBetApi } from "../../ClientApi/BetApi";
@@ -21,6 +27,8 @@ import ballsvg from "../../Assets/Country/ball.svg";
 import pakistansvg from "../../Assets/Country/pakistan.svg";
 import { replaceNAmeAlbabet, showOddCustomized } from "../../ClientApi/Auth";
 import ScoreCard from "./ScoreCard";
+import { getImageId } from "./TeamList";
+import { cricData } from "./cricdata";
 const typePrem = "PREMIUM";
 const typeFancy = "FANCY";
 const TOTAL_RUNS = "Runs";
@@ -85,20 +93,43 @@ const CricketSingle = () => {
     // }, 10000000);
   }, []);
 
-  // useEffect(() => {
-  //   if (matchData != []) {
-  //     // matchTeamNameCricBuz();
-  //   }
-  // }, [matchData]);
+  useEffect(() => {
+    if (matchData != []) {
+      // matchTeamNameCricBuz();
+    }
+  }, [matchData]);
 
-  // useEffect(() => {
-  // if (cricBuzMatchId != null) {
-  //   getScoreCard(cricBuzMatchId, (res) => {
-  //     console.log(res, "cricmatchdata");
-  //     // setCricBuzSingleMatchData(res);
-  //   });
-  // }
-  // }, [cricBuzMatchId]);
+  useEffect(() => {
+    // getScoreCard(cricBuzMatchId, (res) => {
+    // console.log(res, "cricmatchdata");
+    // setCricBuzSingleMatchData(cricData);
+    // const matchId = cricData.scoreCard[0].matchId;
+    // const inningsId = cricData.scoreCard[0].inningsId;
+    // const imageId1 = cricBuzHeader(cricData).bettingTeam.teamId;
+    // const imageId2 = cricBuzHeader(cricData).bowlingTeam.teamId;
+    // console.log(imageId1, imageId2, "<<<<these are image ids");
+
+    // getImageLink(24, (res) => {
+    //   console.log(res, "<<<imagelink");
+    // });
+    // getImageLink(4, (res) => {
+    //   console.log(`${res}`, "<<<imagelink");
+    // });
+    getDataByOVer(4316, (res) => {
+      console.log(res, "<<<<databyover");
+    });
+  }, [matchData]);
+
+  useEffect(() => {
+    // if (cricBuzMatchId != null) {
+    //   getScoreCard(cricBuzMatchId, (res) => {
+    //     console.log(res, "cricmatchdata");
+    //     setCricBuzSingleMatchData(res);
+    //     const imageId1 = cricBuzHeader(res).bettingTeam;
+    //     console.log(imageId1, "<<<imagedid1");
+    //   });
+    // }
+  }, [cricBuzMatchId]);
 
   const { teams } = params;
   const placeBid = (item) => {
@@ -167,27 +198,9 @@ const CricketSingle = () => {
             matchData[0]?.values[0]?.val1
           );
         });
-
-        // match.map()
-        // console.log(
-        //   series.seriesAdWrapper.match.matchInfo.team1.teamName,
-        //   matchData[0]?.values[0]?.val1
-        // );
-        // console.log(
-        //   series.seriesAdWrapper.match.matchInfo.team2.teamName,
-        //   matchData[0]?.values[2]?.val1
-        // );
       });
       // });
     });
-    // const data = {};
-    // data.typeMatches[0].seriesMatches.map((series) => {
-    //   series.matches.map((match) => {
-    //     // match.map()
-    //     console.log(match.team1.teamName, matchData[0]?.values[0]?.val1);
-    //     console.log(match.team2.teamName, matchData[0]?.values[2]?.val1);
-    //   });
-    // });
   };
 
   useEffect(() => {
@@ -382,37 +395,60 @@ const CricketSingle = () => {
       return parseFloat(odd) + 0.2;
     } else if (split1 == 6) {
       return parseFloat(odd) + 0.5;
+    } else if (split1 == 7) {
+      return parseFloat(odd) + 0.6;
+    } else if (split1 == 8) {
+      return parseFloat(odd) + 0.7;
+    } else if (split1 == 9) {
+      return parseFloat(odd) + 1;
+    } else if (split1 >= 10 && split1 < 20) {
+      return parseFloat(odd) + 1;
+    } else if (split1 >= 20 && split1 < 30) {
+      return parseFloat(odd) + 2;
+    } else if (split1 >= 30 && split1 < 40) {
+      return parseFloat(odd) + 3;
+    } else if (split1 >= 40 && split1 < 50) {
+      return parseFloat(odd) + 4;
     } else {
       return parseFloat(odd).toFixed(2) + parseFloat(odd);
     }
   };
 
+  const cricBuzHeader = (res) => {
+    console.log(res.matchHeader.matchTeamInfo, "<<<< cricBuzHeader");
+    // console.log(res.matchHeader.matchTeamInfo, "<<<< cricBuzHeader");
+
+    return {
+      bettingTeam: getImageId(res.matchHeader.matchTeamInfo[0].battingTeamId),
+      bowlingTeam: getImageId(res.matchHeader.matchTeamInfo[0].bowlingTeamId),
+    };
+  };
+  // cricBuzHeader();
   return (
     <div className="single-middle">
-      <div className="single-top-head">
+      {/* <div className="single-top-head">
         {params.teams.toLocaleUpperCase().replace("-", " ")}
       </div>
-      {/*desktop ------------------------------------ */}
       <div className="flex-row just-bet one-eaning bgwhite">
         <div className="eaning-left">
           <div className="flex-row align-ctr">
-            {/* <img src={bat} width="60px" height="60px" /> */}
-            {/* <img src={india} width="30px" height="30px" /> */}
+            <img src={bat} width="60px" height="60px" />
+            <img src={india} width="30px" height="30px" />
           </div>
           <div>{matchData[0]?.values[0]?.val1.toLocaleUpperCase()}</div>
-          {/* <span>15-2</span> */}
+          <span>15-2</span>
         </div>
         <div className="eaning-mid">1 st Ennings</div>
         <div className="eaning-left">
-          {/* <div className="flex-row align-ctr"> */}
-          {/* <img src={pakistan} /> */}
+          <div className="flex-row align-ctr">
+            <img src={pakistan} />
 
-          {/* <img src={ball} width="40px" height="40px" /> */}
-          {/* </div> */}
+            <img src={ball} width="40px" height="40px" />
+          </div>
           <div> {matchData[0]?.values[1]?.val1.toLocaleUpperCase()}</div>
-          {/* <span>15-2</span> */}
+          <span>15-2</span>
         </div>
-      </div>
+      </div> */}
       {/* ------------
        */}
 
@@ -426,6 +462,240 @@ const CricketSingle = () => {
         {showScoreCard && <ScoreCard cricBuzData={cricBuzSingleMatchData} />}
       </div>
       {/* ----------------------------- */}
+
+      {/*  <768 px */}
+      {/* <768 px mob */}
+      <div>
+        <div className="mob-one-eaning">
+          <div className="mob-one-eaning-single">
+            <img src={indiasvg} />
+            <div>India</div>
+            <div style={{ color: "#F98417" }}>
+              {cricBuzData?.matchScore?.team1Score?.inngs1?.runs}/
+              {cricBuzData?.matchScore?.team1Score?.inngs1?.wickets}ddd
+            </div>
+            <div className="flex-row align-ctr just-ctr" style={{ height: "" }}>
+              <div>
+                <img src={batsvg} width="40px" />
+              </div>
+              <div
+                style={{
+                  height: "40%",
+                  borderLeft: "1px solid #F98417",
+                  borderRight: "1px solid #F98417",
+                  padding: "0px 5px",
+                }}
+              >
+                V. Kohli
+              </div>
+              <div style={{ color: "#F98417", padding: "10px" }}>51 *</div>
+            </div>
+          </div>
+          <div style={{ border: "1px solid #F97D09", height: "40px" }}></div>
+          <div className="mob-one-eaning-single">
+            <img src={pakistansvg} />
+            <div>Pakistan</div>
+            <div style={{ color: "#F98417" }}>
+              {/* 24/7 */}
+              {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/
+              {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets}ddd
+            </div>
+            <div
+              className="flex-row align-ctr just-ctr"
+              style={{ height: "", gap: "5%" }}
+            >
+              <div>
+                <img src={ballsvg} width="20px" />
+              </div>
+              <div
+                style={{
+                  height: "40%",
+                  borderLeft: "1px solid #F98417",
+                  borderRight: "1px solid #F98417",
+                  padding: "0px 5px",
+                }}
+              >
+                Irfan
+              </div>
+              <div style={{ color: "#F98417", padding: "10px" }}>6.5/1 </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex-row just-bet scoreData-mobile ">
+          <div
+            className="flex-col align-ctr just-bet playerScore scoredata-team"
+            style={{
+              background: "white",
+              borderTopLeftRadius: "25px",
+              borderTopRightRadius: "25px",
+              borderBottomLeftRadius: "25px",
+            }}
+          >
+            <div
+              className="flex-row w100  score-data-single-team"
+              style={{
+                padding: "5px 10px",
+                fontSize: "12px",
+                color: "white",
+                background: "#6E6E6E",
+                borderTopLeftRadius: "25px",
+                borderTopRightRadius: "25px",
+              }}
+            >
+              {showLeague(params.legue)}
+              <span
+                style={{ color: "black", marginLeft: "2px", fontSize: "12px" }}
+              ></span>
+            </div>
+            <div
+              className="flex-row  w100 score-data-single-team"
+              style={{
+                borderTop: "1px solid #707070",
+                padding: "5px 10px",
+                color: "black",
+              }}
+            >
+              {matchData[0]?.values[0]?.val1}
+            </div>
+            <div
+              className="flex-row  w100 score-data-single-team"
+              style={{
+                borderTop: "1px solid #707070",
+                padding: "5px 10px",
+                color: "black",
+              }}
+            >
+              {matchData[0]?.values[1]?.val1}
+            </div>
+            {params.game == "football" && (
+              <div
+                className="flex-row  w100 score-data-single-team"
+                style={{
+                  borderTop: "1px solid #707070",
+                  padding: "5px 10px",
+                  color: "black",
+                }}
+              >
+                {matchData[0]?.values[2]?.val1}
+              </div>
+            )}
+          </div>
+          <div
+            className="flex-col align-ctr just-bet playerScore-odd"
+            style={{
+              background: "#064778",
+              borderTopRightRadius: "0px",
+              borderTopLeftRadius: "25px",
+            }}
+          >
+            <div
+              className="flex-row w100 just-ctr"
+              style={{ padding: "5px 0px", color: "wheat", height: "40px" }}
+            >
+              Back
+            </div>
+            <div
+              className="flex-row w100 just-ctr"
+              style={{
+                border: "1px solid #707070",
+                height: "40px",
+                padding: "5px 0px",
+                color: "wheat",
+              }}
+            >
+              {parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)}
+            </div>
+
+            <div
+              className="flex-row w100 just-ctr"
+              style={{
+                border: "1px solid #707070",
+                padding: "5px 0px",
+                color: "wheat",
+                height: "40px",
+              }}
+            >
+              {parseFloat(matchData[0]?.values[1]?.odds).toFixed(2)}
+            </div>
+            {params.game == "football" && (
+              <div
+                className="flex-row w100 just-ctr"
+                style={{
+                  border: "1px solid #707070",
+                  padding: "5px 0px",
+                  color: "wheat",
+                  height: "40px",
+                }}
+              >
+                {parseFloat(matchData[0]?.values[2]?.odds).toFixed(2)}
+              </div>
+            )}
+          </div>
+          <div
+            className="flex-col align-ctr just-bet playerScore most-right-score"
+            style={{
+              background: "#F97D09",
+              height: "100%",
+              borderTopRightRadius: "25px",
+              borderTopLeftRadius: "0px",
+              borderBottomRightRadius: "25px",
+            }}
+          >
+            <div
+              className="flex-row w100 text-center just-ctr"
+              style={{ padding: "5px 0px", color: "wheat", height: "40px" }}
+            >
+              Lay
+            </div>
+            <div
+              className="flex-row w100 text-center just-ctr"
+              style={{
+                border: "1px solid #707070",
+                padding: "5px 0px",
+                color: "wheat",
+                height: "40px",
+              }}
+            >
+              {parseFloat(
+                parseFloat(matchData[0]?.values[0]?.odds) + 0.1
+              ).toFixed(1)}
+            </div>
+            <div
+              className="flex-row w100 just-ctr"
+              style={{
+                border: "1px solid #707070",
+                padding: "5px 0px",
+                color: "wheat",
+                height: "40px",
+                // borderTopLeftRadius: "25px",
+                borderBottomRightRadius: "25px",
+              }}
+            >
+              {parseFloat(
+                parseFloat(matchData[0]?.values[1]?.odds) + 0.1
+              ).toFixed(1)}
+            </div>
+            {params.game == "football" && (
+              <div
+                className="flex-row w100 just-ctr"
+                style={{
+                  border: "1px solid #707070",
+                  padding: "5px 0px",
+                  color: "wheat",
+                  height: "40px",
+                  borderBottomRightRadius: "25px",
+                }}
+              >
+                {parseFloat(
+                  parseFloat(matchData[0]?.values[2]?.odds) + 0.1
+                ).toFixed(1)}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      {/* ---- score data new */}
+
       <div className="flex-row just-bet scoreData ">
         <div
           className="flex-col align-ctr just-bet playerScore scoredata-team"
@@ -749,273 +1019,7 @@ const CricketSingle = () => {
           )}
         </div>
       )}
-      {/*  <768 px */}
-      {/* <768 px mob */}
-      <div>
-        <div className="mob-one-eaning">
-          <div className="mob-one-eaning-single">
-            <img src={indiasvg} />
-            <div>India</div>
-            <div style={{ color: "#F98417" }}>
-              {cricBuzData?.matchScore?.team1Score?.inngs1?.runs}/
-              {cricBuzData?.matchScore?.team1Score?.inngs1?.wickets}ddd
-            </div>
-            <div className="flex-row align-ctr just-ctr" style={{ height: "" }}>
-              <div>
-                <img src={batsvg} width="40px" />
-              </div>
-              <div
-                style={{
-                  height: "40%",
-                  borderLeft: "1px solid #F98417",
-                  borderRight: "1px solid #F98417",
-                  padding: "0px 5px",
-                }}
-              >
-                V. Kohli
-              </div>
-              <div style={{ color: "#F98417", padding: "10px" }}>51 *</div>
-            </div>
-          </div>
-          <div style={{ border: "1px solid #F97D09", height: "40px" }}></div>
-          <div className="mob-one-eaning-single">
-            <img src={pakistansvg} />
-            <div>Pakistan</div>
-            <div style={{ color: "#F98417" }}>
-              {/* 24/7 */}
-              {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/
-              {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets}ddd
-            </div>
-            <div
-              className="flex-row align-ctr just-ctr"
-              style={{ height: "", gap: "5%" }}
-            >
-              <div>
-                <img src={ballsvg} width="20px" />
-              </div>
-              <div
-                style={{
-                  height: "40%",
-                  borderLeft: "1px solid #F98417",
-                  borderRight: "1px solid #F98417",
-                  padding: "0px 5px",
-                }}
-              >
-                Irfan
-              </div>
-              <div style={{ color: "#F98417", padding: "10px" }}>6.5/1 </div>
-            </div>
-          </div>
-        </div>
-        <div className="flex-row just-bet scoreData-mobile ">
-          <div
-            className="flex-col align-ctr just-bet playerScore scoredata-team"
-            style={{
-              background: "white",
-              borderTopLeftRadius: "25px",
-              borderTopRightRadius: "25px",
-              borderBottomLeftRadius: "25px",
-            }}
-          >
-            <div
-              className="flex-row w100  score-data-single-team"
-              style={{
-                padding: "5px 10px",
-                fontSize: "12px",
-                color: "white",
-                background: "#6E6E6E",
-                borderTopLeftRadius: "25px",
-                borderTopRightRadius: "25px",
-              }}
-            >
-              {showLeague(params.legue)}
-              <span
-                style={{ color: "black", marginLeft: "2px", fontSize: "12px" }}
-              ></span>
-            </div>
-            <div
-              className="flex-row  w100 score-data-single-team"
-              style={{
-                borderTop: "1px solid #707070",
-                padding: "5px 10px",
-                color: "black",
-              }}
-            >
-              {matchData[0]?.values[0]?.val1}
-            </div>
-            <div
-              className="flex-row  w100 score-data-single-team"
-              style={{
-                borderTop: "1px solid #707070",
-                padding: "5px 10px",
-                color: "black",
-              }}
-            >
-              {matchData[0]?.values[1]?.val1}
-            </div>
-            {params.game == "football" && (
-              <div
-                className="flex-row  w100 score-data-single-team"
-                style={{
-                  borderTop: "1px solid #707070",
-                  padding: "5px 10px",
-                  color: "black",
-                }}
-              >
-                {matchData[0]?.values[2]?.val1}
-              </div>
-            )}
-          </div>
-          <div
-            className="flex-col align-ctr just-bet playerScore-odd"
-            style={{
-              background: "#064778",
-              borderTopRightRadius: "0px",
-              borderTopLeftRadius: "25px",
-            }}
-          >
-            <div
-              className="flex-row w100 just-ctr"
-              style={{ padding: "5px 0px", color: "wheat", height: "40px" }}
-            >
-              Back
-            </div>
-            <div
-              className="flex-row w100 just-ctr"
-              style={{
-                border: "1px solid #707070",
-                height: "40px",
-                padding: "5px 0px",
-                color: "wheat",
-              }}
-            >
-              {parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)}
-            </div>
 
-            <div
-              className="flex-row w100 just-ctr"
-              style={{
-                border: "1px solid #707070",
-                padding: "5px 0px",
-                color: "wheat",
-                height: "40px",
-              }}
-            >
-              {parseFloat(matchData[0]?.values[1]?.odds).toFixed(2)}
-            </div>
-            {params.game == "football" && (
-              <div
-                className="flex-row w100 just-ctr"
-                style={{
-                  border: "1px solid #707070",
-                  padding: "5px 0px",
-                  color: "wheat",
-                  height: "40px",
-                }}
-              >
-                {parseFloat(matchData[0]?.values[2]?.odds).toFixed(2)}
-              </div>
-            )}
-          </div>
-          <div
-            className="flex-col align-ctr just-bet playerScore most-right-score"
-            style={{
-              background: "#F97D09",
-              height: "100%",
-              borderTopRightRadius: "25px",
-              borderTopLeftRadius: "0px",
-              borderBottomRightRadius: "25px",
-            }}
-          >
-            <div
-              className="flex-row w100 text-center just-ctr"
-              style={{ padding: "5px 0px", color: "wheat", height: "40px" }}
-            >
-              Lay
-            </div>
-            <div
-              className="flex-row w100 text-center just-ctr"
-              style={{
-                border: "1px solid #707070",
-                padding: "5px 0px",
-                color: "wheat",
-                height: "40px",
-              }}
-            >
-              {parseFloat(
-                parseFloat(matchData[0]?.values[0]?.odds) + 0.1
-              ).toFixed(1)}
-            </div>
-            <div
-              className="flex-row w100 just-ctr"
-              style={{
-                border: "1px solid #707070",
-                padding: "5px 0px",
-                color: "wheat",
-                height: "40px",
-                // borderTopLeftRadius: "25px",
-                borderBottomRightRadius: "25px",
-              }}
-            >
-              {parseFloat(
-                parseFloat(matchData[0]?.values[1]?.odds) + 0.1
-              ).toFixed(1)}
-            </div>
-            {params.game == "football" && (
-              <div
-                className="flex-row w100 just-ctr"
-                style={{
-                  border: "1px solid #707070",
-                  padding: "5px 0px",
-                  color: "wheat",
-                  height: "40px",
-                  borderBottomRightRadius: "25px",
-                }}
-              >
-                {parseFloat(
-                  parseFloat(matchData[0]?.values[2]?.odds) + 0.1
-                ).toFixed(1)}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      {/* <div className="flex-row just-bet scoreData scoredata-team">
-        <div className="flex-col align-ctr just-bet playerScore">
-          <div className="flex-row just-bet w100">
-            <div>V Kohli</div>
-            <div>(54)</div>
-          </div>
-          <div className="flex-row just-bet w100">
-            <div>V Kohli</div>
-            <div>(54)</div>
-          </div>
-          <br />
-        </div>
-        <div className="flex-col align-ctr just-bet playerScore">
-          <div className="flex-row just-bet w100">
-            <div>V Kohli</div>
-            <div>(54)</div>
-          </div>
-          <div className="flex-row just-bet w100">
-            <div>V Kohli</div>
-            <div>(54)</div>
-          </div>
-          <br />
-        </div>
-        <div className="flex-col align-ctr just-bet playerScore">
-          <div className="flex-row just-bet w100">
-            <div>V Kohli</div>
-            <div>(54)</div>
-          </div>
-          <div className="flex-row just-bet w100">
-            <div>V Kohli</div>
-            <div>(54)</div>
-          </div>
-          <br />
-        </div>
-        <div className="flex-row just-bet"></div>
-      </div> */}
       {/* ----------------- */}
       <div className="mob-single-table">
         <div className="prem-fancy-cover">
