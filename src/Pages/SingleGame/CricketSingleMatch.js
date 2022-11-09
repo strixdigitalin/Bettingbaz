@@ -69,6 +69,7 @@ const CricketSingle = () => {
   const [bidContent, setBidContent] = useState({ odds: 0 });
   const [clickedBlock, setClickedBlock] = useState(initialBlock);
   const [cricBuzData, setcricBuzData] = useState({});
+  const [databyover, setDataByOver] = useState({});
   const [premiumSelected, setPremiumSelected] = useState({
     one: null,
     two: null,
@@ -95,40 +96,58 @@ const CricketSingle = () => {
 
   useEffect(() => {
     if (matchData != []) {
-      // matchTeamNameCricBuz();
+      matchTeamNameCricBuz();
     }
   }, [matchData]);
 
-  useEffect(() => {
-    // getScoreCard(cricBuzMatchId, (res) => {
-    // console.log(res, "cricmatchdata");
-    // setCricBuzSingleMatchData(cricData);
-    // const matchId = cricData.scoreCard[0].matchId;
-    // const inningsId = cricData.scoreCard[0].inningsId;
-    // const imageId1 = cricBuzHeader(cricData).bettingTeam.teamId;
-    // const imageId2 = cricBuzHeader(cricData).bowlingTeam.teamId;
-    // console.log(imageId1, imageId2, "<<<<these are image ids");
+  // useEffect(() => {
+  //   getScoreCard(cricBuzMatchId, (res) => {
+  //     console.log(res, "cricmatchdata");
+  //     const cricData = res;
+  //     setCricBuzSingleMatchData(cricData);
+  //     const matchId = cricData.scoreCard[0].matchId;
+  //     const inningsId = cricData.scoreCard[0].inningsId;
+  //     const imageId1 = cricBuzHeader(cricData).bettingTeam.teamId;
+  //     const imageId2 = cricBuzHeader(cricData).bowlingTeam.teamId;
+  //     console.log(imageId1, imageId2, "<<<<these are image ids");
 
-    // getImageLink(24, (res) => {
-    //   console.log(res, "<<<imagelink");
-    // });
-    // getImageLink(4, (res) => {
-    //   console.log(`${res}`, "<<<imagelink");
-    // });
-    getDataByOVer(4316, (res) => {
-      console.log(res, "<<<<databyover");
-    });
-  }, [matchData]);
+  //     getImageLink(24, (res) => {
+  //       console.log(res, "<<<imagelink");
+  //     });
+  //     getImageLink(4, (res) => {
+  //       console.log(`${res}`, "<<<imagelink");
+  //     });
+  //     getDataByOVer(4316, (res) => {
+  //       console.log(res, "<<<<databyover");
+  //     });
+  //   });
+  // }, [matchData]);
 
   useEffect(() => {
-    // if (cricBuzMatchId != null) {
-    //   getScoreCard(cricBuzMatchId, (res) => {
-    //     console.log(res, "cricmatchdata");
-    //     setCricBuzSingleMatchData(res);
-    //     const imageId1 = cricBuzHeader(res).bettingTeam;
-    //     console.log(imageId1, "<<<imagedid1");
-    //   });
-    // }
+    setTimeout(() => {
+      if (cricBuzMatchId != null) {
+        getScoreCard(cricBuzMatchId, (res) => {
+          console.log(res, "cricmatchdata---");
+          setCricBuzSingleMatchData(res);
+          const imageId1 = cricBuzHeader(res).bettingTeam.teamId;
+          const matchId = res.scoreCard[0].matchId;
+
+          const imageId2 = cricBuzHeader(res).bowlingTeam.teamId;
+          console.log(imageId1, imageId2, "<<<imagedid1");
+          // getImageLink(24, (res) => {
+          //   console.log(res, "<<<imagelink");
+          // });
+          // getImageLink(4, (res) => {
+          //   console.log(`${res}`, "<<<imagelink");
+          // });
+
+          getDataByOVer(matchId, (res) => {
+            console.log(res, "<<<<databyover");
+            setDataByOver(res);
+          });
+        });
+      }
+    }, 6000);
   }, [cricBuzMatchId]);
 
   const { teams } = params;
@@ -153,28 +172,53 @@ const CricketSingle = () => {
   const matchTeamNameCricBuz = () => {
     // matchData[0]?.values[0]?.val1
 
-    const betFairTeam1 = matchData[0]?.values[0]?.val1;
-    const betFairTeam2 = matchData[0]?.values[1]?.val1;
+    const betFairTeam1 = matchData[0]?.values[0]?.val1.replace("WBBL", "Women");
+    const betFairTeam2 = matchData[0]?.values[1]?.val1.replace("WBBL", "Women");
     getCricBuzMatch((data) => {
       data.typeMatches[0].seriesMatches.map((series, ss) => {
         console.log(series.seriesAdWrapper, "<<<s");
         series.seriesAdWrapper?.matches.map((match, se) => {
-          console.log("matchCricbuzdata", "<<<<<");
+          // console.log("matchCricbuzdata", "<<<<<");
           const cricTeam1 = match.matchInfo.team1.teamName;
           const cricTeam2 = match.matchInfo.team2.teamName;
           console.log(
             cricTeam1,
-            betFairTeam1,
-            cricTeam2,
+            "--",
             betFairTeam2,
+            "--",
+            cricTeam2,
+            "--",
+            betFairTeam1,
+            "--",
             "matchCricbuzdata",
+            "--",
             match.matchInfo.matchId,
+            "--",
             series.seriesAdWrapper.seriesId,
+            "--",
             ss,
+            "--",
             se
           );
 
           if (betFairTeam1 == cricTeam1 && betFairTeam2 == cricTeam2) {
+            // console.log(
+            //   cricTeam1,
+            //   betFairTeam1,
+            //   cricTeam2,
+            //   betFairTeam2,
+            //   "matchCricbuzdata",
+            //   match.matchInfo.matchId,
+            //   series.seriesAdWrapper.seriesId,
+            //   ss,
+            //   se
+            // );
+            setCricBuzMatchId(match.matchInfo.matchId);
+            // let cricBuzDEtail = {
+            //   matchStatus: match.matchInfo.status,
+            // };
+          }
+          if (betFairTeam1 == cricTeam2 && betFairTeam2 == cricTeam1) {
             console.log(
               cricTeam1,
               betFairTeam1,
@@ -452,15 +496,6 @@ const CricketSingle = () => {
       {/* ------------
        */}
 
-      <div>
-        <div
-          className="drop-score"
-          onClick={() => setShowScoreCard(!showScoreCard)}
-        >
-          Scorecard
-        </div>
-        {showScoreCard && <ScoreCard cricBuzData={cricBuzSingleMatchData} />}
-      </div>
       {/* ----------------------------- */}
 
       {/*  <768 px */}
@@ -694,6 +729,21 @@ const CricketSingle = () => {
           </div>
         </div>
       </div>
+      <div>
+        <div
+          className="drop-score"
+          onClick={() => setShowScoreCard(!showScoreCard)}
+        >
+          Scorecard
+        </div>
+      </div>
+      {showScoreCard && (
+        <ScoreCard
+          dataByOver={databyover}
+          cricBuzData={cricBuzSingleMatchData}
+        />
+      )}
+
       {/* ---- score data new */}
 
       <div className="flex-row just-bet scoreData ">

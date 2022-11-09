@@ -3,20 +3,20 @@ import { cricData } from "./cricdata";
 // import cricData from "./cricdata";
 // const parsedData = JSON.parse(cricData);
 
-function ScoreCard({ cricBuzData }) {
+function ScoreCard({ cricBuzData = cricData }) {
   // const cricBuzData = cricData;
   const [betTeam, setbetTeam] = useState({});
   const [batsManDetail, setBatsManDetail] = useState({});
   const [batTeamDetail, setBatTeamDetail] = useState({});
-  const scoreData = cricBuzData?.scoreCard[0];
+  // const scoreData = cricBuzData?.scoreCard[0];
   console.log(cricBuzData, "<<<cricbuzdatain scorecard");
   // if (cricBuzData?.scoreCard?.length) {
   // setBatTeamDetail(cricBuzData.scoreCard[0].batTeamDetails);
   // setBatsManDetail(cricBuzData?.scoreCard[0]?.batTeamDetails);
   // }
-  const batsmanData = cricData.scoreCard[0].batTeamDetails.batsmenData;
-  const bowlerData = cricData.scoreCard[0].bowlTeamDetails.bowlersData;
-  const { wicketsData, extrasData, scoreDetails } = cricData.scoreCard[0];
+  const batsmanData = cricBuzData.scoreCard[0].batTeamDetails.batsmenData;
+  const bowlerData = cricBuzData.scoreCard[0].bowlTeamDetails.bowlersData;
+  const { wicketsData, extrasData, scoreDetails } = cricBuzData.scoreCard[0];
 
   // // console.log(cricData, "<<<cric");
   // setbetTeam({
@@ -54,8 +54,8 @@ function ScoreCard({ cricBuzData }) {
             "bat_9",
             "bat_10",
             "bat_11",
-            "bat_12",
           ].map((item) => {
+            console.log(`${item}`, "<<<<< this is item");
             const data = batsmanData[item];
             console.log(data);
 

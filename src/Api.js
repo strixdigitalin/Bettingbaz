@@ -11,7 +11,7 @@ const headers = {
 };
 
 const cricHeader = {
-  "X-RapidAPI-Key": "09e0f76a5bmshce6fb9d13354522p1bec2ejsn858243511b0c",
+  "X-RapidAPI-Key": "a58cf9baf1msh54ab6765c6533c2p151ccejsn85832d4e5eb2",
   "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
 };
 //  personal key for testing
@@ -220,10 +220,7 @@ export const getImageLink = (imageId, callBack) => {
 export const getDataByOVer = (matchId, callBack) => {
   const options = {
     method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "09e0f76a5bmshce6fb9d13354522p1bec2ejsn858243511b0c",
-      "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
-    },
+    headers: cricHeader,
   };
 
   fetch(

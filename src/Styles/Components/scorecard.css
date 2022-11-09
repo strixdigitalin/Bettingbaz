@@ -1,7 +1,10 @@
 .drop-score{
     width: 100%;
     text-align: center;
+    /* margin-top: 20px; */
     font: 15px;
+    padding: 7px 0px;
+
     color: white;
     background-color: #212121;
 }
