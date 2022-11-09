@@ -43,9 +43,9 @@
 .scoredata-team{
  width: 74%;   
  color: black;
- 
- border-top-left-radius: 10px;
- border-top-right-radius: 10px;
+ border: none;
+ /* border-top-left-radius: 10px; */
+ /* border-top-right-radius: 10px; */
  /* padding:px 0px; */
  /* padding-left: 15px; */
 }
@@ -79,7 +79,7 @@ height: 100%;
     color: black;
    }
 .score-data-single-team{
-    height: 40px;
+    height: 44px;
     
 
 
@@ -111,7 +111,7 @@ height: 100%;
 }
 .prem-fancy-cover{
     display: flex;
-    margin-top: 20px;
+    margin-top: 10px;
 /* margin-bottom: -20px; */
 align-items: center ;
 text-align: center;
@@ -127,6 +127,7 @@ text-align: center;
     width: 40%;
     padding: 10px;
     margin-bottom: -3px;
+    height: 30px;
 
 }
 .mob-one-eaning{
@@ -154,21 +155,21 @@ text-align: center;
 
 @media screen and (max-width:768px) {
 .mob-single-table{
-    background-color: #f0f0f0;
+    /* background-color: #fff; */
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     /* margin-top: 20px; */
-    padding: 1px 8px 1px 8px;
+    /* padding: 1px 8px 1px 8px; */
 }
 
     .scoreData-mobile{
-        background-color:  rgb(199, 199, 199);
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 15px;
+        /* background-color:  rgb(255, 255, 255); */
+        /* box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 15px; */
         margin-top: 10px;
         /* height: 56px; */
         display:flex;
         align-items: center;
-        padding: 7px 4px;
+        padding: 7px 0px;
         align-items: center;
         /* color: white; */
         margin-top: 5px;
@@ -228,16 +229,16 @@ text-align: center;
     }
     .mob-one-eaning{
         display: flex;
-        border-radius: 15px;
+        /* border-radius: 15px; */
     
-        width: 95%;
+        width: 100%;
         margin: auto;
         margin-top: 10px;
         display: flex;
         background-color: white;
         align-items: center;
         /* box-shadow: 20px 30px 20px gray; */
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 5px;
+        /* box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 5px; */
 
 
     }
@@ -255,9 +256,11 @@ text-align: center;
     }
     .playerScore-odd{
         width: 25%;
+        border: 1px solid gray;
     }
     .most-right-score{
         width: 25%;
+        border: 1px solid gray;
     }
 .cricket-heighlight-row-left{
     margin-left: 10px;

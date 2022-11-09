@@ -24,7 +24,8 @@ function ScoreCard(props) {
     bowlerData = cricBuzData.scoreCard[inningId]?.bowlTeamDetails.bowlersData;
   }
   console.log(bowlerData, "<<<<thisisbowlerdata");
-  const { wicketsData, extrasData, scoreDetails } = cricBuzData.scoreCard[0];
+  const { wicketsData, extrasData, scoreDetails } =
+    cricBuzData.scoreCard[inningId];
 
   // // console.log(cricData, "<<<cric");
   // setbetTeam({
@@ -32,8 +33,8 @@ function ScoreCard(props) {
   // });
   return (
     <div className="score-card-cover">
-      Score Card
-      <div>{cricBuzData.status}</div>
+      {/* Score Card */}
+      <div style={{ fontSize: "12px" }}>{cricBuzData.status}</div>
       <div className="score-card-outer">
         <div className="score-card-left">
           <div
@@ -63,7 +64,7 @@ function ScoreCard(props) {
             "bat_10",
             "bat_11",
           ].map((item) => {
-            if (batsManDetail[item] == undefined) return null;
+            // if (batsManDetail[item] == undefined) return null;
             const data = batsmanData[item];
             console.log(data);
 

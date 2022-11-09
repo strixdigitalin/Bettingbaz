@@ -6,6 +6,8 @@ import bat from "../../Assets/Card/bat.png";
 import ball from "../../Assets/Card/Cricket ball icon.png";
 import movedown from "../../Assets/Card/Path2.png";
 import RightArrow from "../../Assets/Card/rightbg.png";
+import downIcon from "../../Assets/downicon.svg";
+import upicon from "../../Assets/upicon.svg";
 import inPlay from "../../Assets/Header/In Play.png";
 import { useParams } from "react-router-dom";
 import {
@@ -148,7 +150,10 @@ const CricketSingle = () => {
           // });
 
           getDataByOVer(matchId, (res) => {
-            console.log(res, "<<<<databyover");
+            console.log(
+              res?.matchHeader?.matchTeamInfo[inningId == 2 ? 1 : 0],
+              "<<<<databyover"
+            );
             setInningId(res.inningsId);
             setDataByOver(res);
           });
@@ -461,7 +466,8 @@ const CricketSingle = () => {
     } else if (split1 >= 40 && split1 < 50) {
       return parseFloat(odd) + 4;
     } else {
-      return parseFloat(odd).toFixed(2) + parseFloat(odd);
+      return +odd;
+      // return parseFloat(odd).toFixed(2) + parseFloat(odd);
     }
   };
 
@@ -470,8 +476,12 @@ const CricketSingle = () => {
     // console.log(res.matchHeader.matchTeamInfo, "<<<< cricBuzHeader");
 
     return {
-      bettingTeam: getImageId(res.matchHeader.matchTeamInfo[0].battingTeamId),
-      bowlingTeam: getImageId(res.matchHeader.matchTeamInfo[0].bowlingTeamId),
+      bettingTeam: getImageId(
+        res.matchHeader.matchTeamInfo[inningId == 2 ? 1 : 0].battingTeamId
+      ),
+      bowlingTeam: getImageId(
+        res.matchHeader.matchTeamInfo[inningId == 2 ? 1 : 0].bowlingTeamId
+      ),
     };
   };
   // cricBuzHeader();
@@ -494,7 +504,7 @@ const CricketSingle = () => {
           <div className="flex-row align-ctr">
             <img src={pakistan} />
 
-            <img src={ball} width="40px" height="40px" />
+            <img src={ball} width="44px" height="44px" />
           </div>
           <div> {matchData[0]?.values[1]?.val1.toLocaleUpperCase()}</div>
           <span>15-2</span>
@@ -511,7 +521,13 @@ const CricketSingle = () => {
         <div className="mob-one-eaning">
           <div className="mob-one-eaning-single">
             <img src={indiasvg} />
-            <div>{headerData?.bettingTeam?.teamName}</div>
+            {/* <div>{headerData?.bettingTeam?.teamName}</div> */}
+            <div>
+              {
+                databyover?.matchHeader?.matchTeamInfo[inningId == 2 ? 1 : 0]
+                  ?.battingTeamShortName
+              }
+            </div>
             <div style={{ color: "#F98417" }}>
               {cricBuzData?.matchScore?.team1Score?.inngs1?.runs}/
               {cricBuzData?.matchScore?.team1Score?.inngs1?.wickets}
@@ -521,7 +537,7 @@ const CricketSingle = () => {
               style={{ height: "", width: "100%" }}
             >
               <div>
-                <img src={batsvg} width="40px" />
+                <img src={batsvg} width="44px" />
               </div>
               <div
                 style={{
@@ -529,19 +545,27 @@ const CricketSingle = () => {
                   borderLeft: "1px solid #F98417",
                   borderRight: "1px solid #F98417",
                   padding: "0px 5px",
+                  fontSize: "12px",
                 }}
               >
                 {databyover?.batsmanStriker?.batName}
+                <br />
+                {databyover?.batsmanNonStriker?.batName}
               </div>
               <div style={{ color: "#F98417", padding: "10px" }}>
                 {databyover?.batsmanStriker?.batRuns} *
+                <br />
+                {databyover?.batsmanNonStriker?.batRuns}
               </div>
             </div>
           </div>
-          <div style={{ border: "1px solid #F97D09", height: "40px" }}></div>
+          <div style={{ border: "1px solid #F97D09", height: "44px" }}></div>
           <div className="mob-one-eaning-single">
             <img src={pakistansvg} />
-            <div>{headerData?.bowlingTeam?.teamName}</div>
+            {
+              databyover?.matchHeader?.matchTeamInfo[inningId == 2 ? 1 : 0]
+                ?.bowlingTeamShortName
+            }
             <div style={{ color: "#F98417" }}>
               {/* 24/7 */}
               {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/
@@ -549,7 +573,7 @@ const CricketSingle = () => {
             </div>
             <div
               className="flex-row align-ctr just-ctr"
-              style={{ height: "", gap: "5%" }}
+              style={{ height: "", gap: "5%", width: "100%" }}
             >
               <div>
                 <img src={ballsvg} width="20px" />
@@ -560,6 +584,7 @@ const CricketSingle = () => {
                   borderLeft: "1px solid #F98417",
                   borderRight: "1px solid #F98417",
                   padding: "0px 5px",
+                  fontSize: "12px",
                 }}
               >
                 {databyover?.bowlerStriker?.bowlName}
@@ -571,7 +596,7 @@ const CricketSingle = () => {
             </div>
           </div>
         </div>
-        <div className="flex-row just-bet scoreData-mobile ">
+        {/* <div className="flex-row just-bet scoreData-mobile ">
           <div
             className="flex-col align-ctr just-bet playerScore scoredata-team"
             style={{
@@ -640,7 +665,7 @@ const CricketSingle = () => {
           >
             <div
               className="flex-row w100 just-ctr"
-              style={{ padding: "5px 0px", color: "wheat", height: "40px" }}
+              style={{ padding: "5px 0px", color: "wheat", height: "44px" }}
             >
               Back
             </div>
@@ -648,7 +673,7 @@ const CricketSingle = () => {
               className="flex-row w100 just-ctr"
               style={{
                 border: "1px solid #707070",
-                height: "40px",
+                height: "44px",
                 padding: "5px 0px",
                 color: "wheat",
               }}
@@ -662,7 +687,7 @@ const CricketSingle = () => {
                 border: "1px solid #707070",
                 padding: "5px 0px",
                 color: "wheat",
-                height: "40px",
+                height: "44px",
               }}
             >
               {parseFloat(matchData[0]?.values[1]?.odds).toFixed(2)}
@@ -674,7 +699,7 @@ const CricketSingle = () => {
                   border: "1px solid #707070",
                   padding: "5px 0px",
                   color: "wheat",
-                  height: "40px",
+                  height: "44px",
                 }}
               >
                 {parseFloat(matchData[0]?.values[2]?.odds).toFixed(2)}
@@ -693,7 +718,7 @@ const CricketSingle = () => {
           >
             <div
               className="flex-row w100 text-center just-ctr"
-              style={{ padding: "5px 0px", color: "wheat", height: "40px" }}
+              style={{ padding: "5px 0px", color: "wheat", height: "44px" }}
             >
               Lay
             </div>
@@ -703,7 +728,7 @@ const CricketSingle = () => {
                 border: "1px solid #707070",
                 padding: "5px 0px",
                 color: "wheat",
-                height: "40px",
+                height: "44px",
               }}
             >
               {parseFloat(
@@ -716,7 +741,7 @@ const CricketSingle = () => {
                 border: "1px solid #707070",
                 padding: "5px 0px",
                 color: "wheat",
-                height: "40px",
+                height: "44px",
                 // borderTopLeftRadius: "25px",
                 borderBottomRightRadius: "25px",
               }}
@@ -732,7 +757,7 @@ const CricketSingle = () => {
                   border: "1px solid #707070",
                   padding: "5px 0px",
                   color: "wheat",
-                  height: "40px",
+                  height: "44px",
                   borderBottomRightRadius: "25px",
                 }}
               >
@@ -742,14 +767,16 @@ const CricketSingle = () => {
               </div>
             )}
           </div>
-        </div>
+        </div> */}
       </div>
       <div>
         <div
           className="drop-score"
+          style={{ fontSize: "12px" }}
           onClick={() => setShowScoreCard(!showScoreCard)}
         >
-          Scorecard
+          Scorecard{" "}
+          <img src={!showScoreCard ? downIcon : upicon} width="12px" />
         </div>
       </div>
       {showScoreCard && (
@@ -761,14 +788,263 @@ const CricketSingle = () => {
       )}
 
       {/* ---- score data new */}
+      <div>
+        {/* <div className="mob-one-eaning">
+          <div className="mob-one-eaning-single">
+            <img src={indiasvg} />
+            <div>{headerData?.bettingTeam?.teamName}</div>
+            <div>
+              {
+                databyover?.matchHeader?.matchTeamInfo[inningId == 2 ? 1 : 0]
+                  ?.battingTeamShortName
+              }
+            </div>
+            <div style={{ color: "#F98417" }}>
+              {cricBuzData?.matchScore?.team1Score?.inngs1?.runs}/
+              {cricBuzData?.matchScore?.team1Score?.inngs1?.wickets}
+            </div>
+            <div
+              className="flex-row align-ctr just-ctr"
+              style={{ height: "", width: "100%" }}
+            >
+              <div>
+                <img src={batsvg} width="44px" />
+              </div>
+              <div
+                style={{
+                  height: "40%",
+                  borderLeft: "1px solid #F98417",
+                  borderRight: "1px solid #F98417",
+                  padding: "0px 5px",
+                  fontSize: "12px",
+                }}
+              >
+                {databyover?.batsmanStriker?.batName}
+                <br />
+                {databyover?.batsmanNonStriker?.batName}
+              </div>
+              <div style={{ color: "#F98417", padding: "10px" }}>
+                {databyover?.batsmanStriker?.batRuns} *
+                <br />
+                {databyover?.batsmanNonStriker?.batRuns}
+              </div>
+            </div>
+          </div>
+          <div style={{ border: "1px solid #F97D09", height: "44px" }}></div>
+          <div className="mob-one-eaning-single">
+            <img src={pakistansvg} />
+            {
+              databyover?.matchHeader?.matchTeamInfo[inningId == 2 ? 1 : 0]
+                ?.bowlingTeamShortName
+            }
+            <div style={{ color: "#F98417" }}>
+              24/7
+              {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/
+              {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets}
+            </div>
+            <div
+              className="flex-row align-ctr just-ctr"
+              style={{ height: "", gap: "5%", width: "100%" }}
+            >
+              <div>
+                <img src={ballsvg} width="20px" />
+              </div>
+              <div
+                style={{
+                  height: "40%",
+                  borderLeft: "1px solid #F98417",
+                  borderRight: "1px solid #F98417",
+                  padding: "0px 5px",
+                  fontSize: "12px",
+                }}
+              >
+                {databyover?.bowlerStriker?.bowlName}
+              </div>
+              <div style={{ color: "#F98417", padding: "10px" }}>
+                {databyover?.bowlerStriker?.bowlRuns}/
+                {databyover?.bowlerStriker?.bowlWkts}
+              </div>
+            </div>
+          </div>
+        </div> */}
+        <div className="flex-row just-bet scoreData-mobile ">
+          <div
+            className="flex-col align-ctr just-bet playerScore scoredata-team"
+            style={{
+              background: "white",
+              // borderTopLeftRadius: "25px",
+              // borderTopRightRadius: "25px",
+              // borderBottomLeftRadius: "25px",
+            }}
+          >
+            <div
+              className="flex-row w100  score-data-single-team"
+              style={{
+                padding: "5px 10px",
+                fontSize: "12px",
+                color: "white",
+                background: "#6E6E6E",
+                height: "30px",
+                // borderTopLeftRadius: "25px",
+                // borderTopRightRadius: "25px",
+              }}
+            >
+              {showLeague(params.legue)}
+            </div>
+            <div
+              className="flex-row  w100 score-data-single-team"
+              style={{
+                borderTop: "1px solid #707070",
+                padding: "5px 10px",
+                color: "black",
+              }}
+            >
+              {matchData[0]?.values[0]?.val1}
+            </div>
+            <div
+              className="flex-row  w100 score-data-single-team"
+              style={{
+                borderTop: "1px solid #707070",
+                padding: "5px 10px",
+                color: "black",
+              }}
+            >
+              {matchData[0]?.values[1]?.val1}
+            </div>
+            {params.game == "football" && (
+              <div
+                className="flex-row  w100 score-data-single-team"
+                style={{
+                  borderTop: "1px solid #707070",
+                  padding: "5px 10px",
+                  color: "black",
+                }}
+              >
+                {matchData[0]?.values[2]?.val1}
+              </div>
+            )}
+          </div>
+          <div
+            className="flex-col align-ctr just-bet playerScore-odd"
+            style={{
+              background: "#064778",
+              // borderTopRightRadius: "0px",
+              // borderTopLeftRadius: "25px",
+            }}
+          >
+            <div
+              className="flex-row w100 just-ctr"
+              style={{ padding: "5px 0px", color: "wheat", height: "30px" }}
+            >
+              Back
+            </div>
+            <div
+              className="flex-row w100 just-ctr"
+              style={{
+                border: "1px solid #707070",
+                height: "44px",
+                padding: "5px 0px",
+                color: "wheat",
+              }}
+            >
+              {parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)}
+            </div>
 
+            <div
+              className="flex-row w100 just-ctr"
+              style={{
+                border: "1px solid #707070",
+                padding: "5px 0px",
+                color: "wheat",
+                height: "44px",
+              }}
+            >
+              {parseFloat(matchData[0]?.values[1]?.odds).toFixed(2)}
+            </div>
+            {params.game == "football" && (
+              <div
+                className="flex-row w100 just-ctr"
+                style={{
+                  border: "1px solid #707070",
+                  padding: "5px 0px",
+                  color: "wheat",
+                  height: "44px",
+                }}
+              >
+                {parseFloat(matchData[0]?.values[2]?.odds).toFixed(2)}
+              </div>
+            )}
+          </div>
+          <div
+            className="flex-col align-ctr just-bet playerScore most-right-score"
+            style={{
+              background: "#F97D09",
+              height: "100%",
+              // borderTopRightRadius: "25px",
+              // borderTopLeftRadius: "0px",
+              // borderBottomRightRadius: "25px",
+            }}
+          >
+            <div
+              className="flex-row w100 text-center just-ctr"
+              style={{ padding: "5px 0px", color: "wheat", height: "30px" }}
+            >
+              Lay
+            </div>
+            <div
+              className="flex-row w100 text-center just-ctr"
+              style={{
+                border: "1px solid #707070",
+                padding: "5px 0px",
+                color: "wheat",
+                height: "44px",
+              }}
+            >
+              {parseFloat(
+                parseFloat(matchData[0]?.values[0]?.odds) + 0.1
+              ).toFixed(1)}
+            </div>
+            <div
+              className="flex-row w100 just-ctr"
+              style={{
+                border: "1px solid #707070",
+                padding: "5px 0px",
+                color: "wheat",
+                height: "44px",
+                // borderTopLeftRadius: "25px",
+                // borderBottomRightRadius: "25px",
+              }}
+            >
+              {parseFloat(
+                parseFloat(matchData[0]?.values[1]?.odds) + 0.1
+              ).toFixed(1)}
+            </div>
+            {params.game == "football" && (
+              <div
+                className="flex-row w100 just-ctr"
+                style={{
+                  border: "1px solid #707070",
+                  padding: "5px 0px",
+                  color: "wheat",
+                  height: "44px",
+                  borderBottomRightRadius: "25px",
+                }}
+              >
+                {parseFloat(
+                  parseFloat(matchData[0]?.values[2]?.odds) + 0.1
+                ).toFixed(1)}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
       <div className="flex-row just-bet scoreData ">
         <div
           className="flex-col align-ctr just-bet playerScore scoredata-team"
           style={{
             background: "white",
-            borderTopLeftRadius: "15px",
-            borderTopRightRadius: "15px",
+            // borderTopLeftRadius: "15px",
+            // borderTopRightRadius: "15px",
           }}
         >
           <div
@@ -818,13 +1094,13 @@ const CricketSingle = () => {
           className="flex-col align-ctr just-bet playerScore-odd"
           style={{
             background: "#064778",
-            borderTopRightRadius: "16px",
-            borderTopLeftRadius: "16px",
+            // borderTopRightRadius: "16px",
+            // borderTopLeftRadius: "16px",
           }}
         >
           <div
             className="flex-row w100 just-ctr"
-            style={{ padding: "5px 0px", color: "wheat", height: "40px" }}
+            style={{ padding: "5px 0px", color: "wheat", height: "44px" }}
           >
             Back All
           </div>
@@ -842,14 +1118,14 @@ const CricketSingle = () => {
             className="flex-row w100 just-ctr"
             style={{
               border: "1px solid #707070",
-              height: "40px",
+              height: "44px",
               padding: "5px 0px",
               color: "wheat",
             }}
           >
             {parseFloat(matchData[0]?.values[0]?.odds).toFixed(2) == "NaN"
               ? "--"
-              : parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)}
+              : +matchData[0]?.values[0]?.odds}
           </div>
 
           <div
@@ -858,7 +1134,7 @@ const CricketSingle = () => {
               border: "1px solid #707070",
               padding: "5px 0px",
               color: "wheat",
-              height: "40px",
+              height: "44px",
             }}
             onClick={() => {
               setshowMatchMainOdd({
@@ -890,7 +1166,7 @@ const CricketSingle = () => {
                 border: "1px solid #707070",
                 padding: "5px 0px",
                 color: "wheat",
-                height: "40px",
+                height: "44px",
               }}
             >
               {parseFloat(matchData[0]?.values[2]?.odds).toFixed(2) == "NaN"
@@ -904,13 +1180,13 @@ const CricketSingle = () => {
           style={{
             background: "#F97D09",
             height: "100%",
-            borderTopRightRadius: "16px",
-            borderTopLeftRadius: "16px",
+            // borderTopRightRadius: "16px",
+            // borderTopLeftRadius: "16px",
           }}
         >
           <div
             className="flex-row w100 text-center just-ctr"
-            style={{ padding: "5px 0px", color: "wheat", height: "40px" }}
+            style={{ padding: "5px 0px", color: "wheat", height: "44px" }}
           >
             Lay All
           </div>
@@ -920,7 +1196,7 @@ const CricketSingle = () => {
               border: "1px solid #707070",
               padding: "5px 0px",
               color: "wheat",
-              height: "40px",
+              height: "44px",
             }}
             onClick={() => {
               setshowMatchMainOdd({
@@ -953,7 +1229,7 @@ const CricketSingle = () => {
               border: "1px solid #707070",
               padding: "5px 0px",
               color: "wheat",
-              height: "40px",
+              height: "44px",
             }}
             onClick={() => {
               console.log(
@@ -988,7 +1264,7 @@ const CricketSingle = () => {
                 border: "1px solid #707070",
                 padding: "5px 0px",
                 color: "wheat",
-                height: "40px",
+                height: "44px",
               }}
             >
               {parseFloat(
@@ -1118,18 +1394,44 @@ const CricketSingle = () => {
           </div>
         </div>
         {premiumToggle == false && (
-          <div className="flex-row just-bet w100 cricket-data-table">
-            <div className="cricket-heighlight-row-left">Fancy Bet</div>{" "}
+          <div
+            className="flex-row just-bet w100 cricket-data-table"
+            style={{ height: "30px" }}
+          >
             <div
-              style={{ color: "black" }}
+              className="cricket-heighlight-row-left"
+              style={{
+                background: "#6E6E6E",
+                color: "white",
+                marginLeft: "0px",
+                paddingLeft: "10px",
+                height: "30px",
+              }}
+            >
+              Fancy Bet
+            </div>{" "}
+            <div
               className="heighlight-row-right pointer"
+              style={{
+                background: "#6E6E6E",
+                color: "white",
+                marginLeft: "0px",
+                paddingLeft: "10px",
+                height: "30px",
+              }}
               // onClick={() => placeBid({ ...item, odds: inItem.odds })}
             >
               No
             </div>{" "}
             <div
               className="heighlight-row-right pointer"
-              style={{ color: "black" }}
+              style={{
+                background: "#6E6E6E",
+                color: "white",
+                marginLeft: "0px",
+                paddingLeft: "10px",
+                height: "30px",
+              }}
               // onClick={() => placeBid({ ...item, odds: inItem.odds })}
             >
               Yes{" "}
