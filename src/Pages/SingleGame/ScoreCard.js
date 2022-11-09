@@ -5,6 +5,7 @@ import { cricData } from "./cricdata";
 
 function ScoreCard(props) {
   const cricBuzData = props.cricBuzData;
+  const inningId = props.inningId;
   // const cricBuzData = cricData;
   const [betTeam, setbetTeam] = useState({});
   const [batsManDetail, setBatsManDetail] = useState({});
@@ -19,9 +20,10 @@ function ScoreCard(props) {
   let batsmanData = [];
   let bowlerData = [];
   if (cricBuzData.scoreCard != []) {
-    batsmanData = cricBuzData.scoreCard[0]?.batTeamDetails.batsmenData;
-    bowlerData = cricBuzData.scoreCard[0]?.bowlTeamDetails.bowlersData;
+    batsmanData = cricBuzData.scoreCard[inningId]?.batTeamDetails.batsmenData;
+    bowlerData = cricBuzData.scoreCard[inningId]?.bowlTeamDetails.bowlersData;
   }
+  console.log(bowlerData, "<<<<thisisbowlerdata");
   const { wicketsData, extrasData, scoreDetails } = cricBuzData.scoreCard[0];
 
   // // console.log(cricData, "<<<cric");
@@ -61,7 +63,7 @@ function ScoreCard(props) {
             "bat_10",
             "bat_11",
           ].map((item) => {
-            console.log(`${item}`, "<<<<< this is item");
+            if (batsManDetail[item] == undefined) return null;
             const data = batsmanData[item];
             console.log(data);
 
@@ -99,15 +101,16 @@ function ScoreCard(props) {
           </div>
           {["bowl_1", "bowl_2", "bowl_3", "bowl_4", "bowl_5", "bowl_6"].map(
             (item) => {
+              if (!bowlerData[item]) return null;
               const data = bowlerData[item];
               return (
                 <div className="right-row">
-                  <div className="left-1">{data.bowlName}</div>
-                  <div className="left-2">{data.overs}</div>
-                  <div className="left-2">{data.maidens}</div>
-                  <div className="left-2">{data.runs}</div>
-                  <div className="left-2">{data.wickets}</div>
-                  <div className="left-2">{data.economy}</div>
+                  <div className="left-1">{data?.bowlName}</div>
+                  <div className="left-2">{data?.overs}</div>
+                  <div className="left-2">{data?.maidens}</div>
+                  <div className="left-2">{data?.runs}</div>
+                  <div className="left-2">{data?.wickets}</div>
+                  <div className="left-2">{data?.economy}</div>
                 </div>
               );
             }

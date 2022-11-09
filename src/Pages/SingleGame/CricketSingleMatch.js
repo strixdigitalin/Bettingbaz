@@ -69,6 +69,7 @@ const CricketSingle = () => {
   const [bidContent, setBidContent] = useState({ odds: 0 });
   const [clickedBlock, setClickedBlock] = useState(initialBlock);
   const [cricBuzData, setcricBuzData] = useState({});
+  const [inningId, setInningId] = useState(0);
   const [databyover, setDataByOver] = useState({});
   const [headerData, setHeaderData] = useState({});
   const [premiumSelected, setPremiumSelected] = useState({
@@ -148,6 +149,7 @@ const CricketSingle = () => {
 
           getDataByOVer(matchId, (res) => {
             console.log(res, "<<<<databyover");
+            setInningId(res.inningsId);
             setDataByOver(res);
           });
         });
@@ -512,7 +514,7 @@ const CricketSingle = () => {
             <div>{headerData?.bettingTeam?.teamName}</div>
             <div style={{ color: "#F98417" }}>
               {cricBuzData?.matchScore?.team1Score?.inngs1?.runs}/
-              {cricBuzData?.matchScore?.team1Score?.inngs1?.wickets}ddd
+              {cricBuzData?.matchScore?.team1Score?.inngs1?.wickets}
             </div>
             <div
               className="flex-row align-ctr just-ctr"
@@ -753,6 +755,7 @@ const CricketSingle = () => {
       {showScoreCard && (
         <ScoreCard
           dataByOver={databyover}
+          inningId={inningId == 2 ? 1 : 0}
           cricBuzData={cricBuzSingleMatchData}
         />
       )}
