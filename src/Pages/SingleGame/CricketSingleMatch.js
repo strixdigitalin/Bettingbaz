@@ -70,6 +70,7 @@ const CricketSingle = () => {
   const [clickedBlock, setClickedBlock] = useState(initialBlock);
   const [cricBuzData, setcricBuzData] = useState({});
   const [databyover, setDataByOver] = useState({});
+  const [headerData, setHeaderData] = useState({});
   const [premiumSelected, setPremiumSelected] = useState({
     one: null,
     two: null,
@@ -129,7 +130,11 @@ const CricketSingle = () => {
         getScoreCard(cricBuzMatchId, (res) => {
           console.log(res, "cricmatchdata---");
           setCricBuzSingleMatchData(res);
-          const imageId1 = cricBuzHeader(res).bettingTeam.teamId;
+          const headerData = cricBuzHeader(res);
+          console.log(cricBuzHeader(res), "headerdata");
+          setHeaderData(headerData);
+          const imageId1 = headerData.bettingTeam.teamId;
+          // setHeaderData(cricBuzData(res));
           const matchId = res.scoreCard[0].matchId;
 
           const imageId2 = cricBuzHeader(res).bowlingTeam.teamId;
@@ -504,12 +509,15 @@ const CricketSingle = () => {
         <div className="mob-one-eaning">
           <div className="mob-one-eaning-single">
             <img src={indiasvg} />
-            <div>India</div>
+            <div>{headerData?.bettingTeam?.teamName}</div>
             <div style={{ color: "#F98417" }}>
               {cricBuzData?.matchScore?.team1Score?.inngs1?.runs}/
               {cricBuzData?.matchScore?.team1Score?.inngs1?.wickets}ddd
             </div>
-            <div className="flex-row align-ctr just-ctr" style={{ height: "" }}>
+            <div
+              className="flex-row align-ctr just-ctr"
+              style={{ height: "", width: "100%" }}
+            >
               <div>
                 <img src={batsvg} width="40px" />
               </div>
@@ -521,19 +529,21 @@ const CricketSingle = () => {
                   padding: "0px 5px",
                 }}
               >
-                V. Kohli
+                {databyover?.batsmanStriker?.batName}
               </div>
-              <div style={{ color: "#F98417", padding: "10px" }}>51 *</div>
+              <div style={{ color: "#F98417", padding: "10px" }}>
+                {databyover?.batsmanStriker?.batRuns} *
+              </div>
             </div>
           </div>
           <div style={{ border: "1px solid #F97D09", height: "40px" }}></div>
           <div className="mob-one-eaning-single">
             <img src={pakistansvg} />
-            <div>Pakistan</div>
+            <div>{headerData?.bowlingTeam?.teamName}</div>
             <div style={{ color: "#F98417" }}>
               {/* 24/7 */}
               {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/
-              {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets}ddd
+              {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets}
             </div>
             <div
               className="flex-row align-ctr just-ctr"
@@ -550,9 +560,12 @@ const CricketSingle = () => {
                   padding: "0px 5px",
                 }}
               >
-                Irfan
+                {databyover?.bowlerStriker?.bowlName}
               </div>
-              <div style={{ color: "#F98417", padding: "10px" }}>6.5/1 </div>
+              <div style={{ color: "#F98417", padding: "10px" }}>
+                {databyover?.bowlerStriker?.bowlRuns}/
+                {databyover?.bowlerStriker?.bowlWkts}
+              </div>
             </div>
           </div>
         </div>

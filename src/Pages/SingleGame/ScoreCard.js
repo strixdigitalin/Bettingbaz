@@ -3,19 +3,25 @@ import { cricData } from "./cricdata";
 // import cricData from "./cricdata";
 // const parsedData = JSON.parse(cricData);
 
-function ScoreCard({ cricBuzData = cricData }) {
+function ScoreCard(props) {
+  const cricBuzData = props.cricBuzData;
   // const cricBuzData = cricData;
   const [betTeam, setbetTeam] = useState({});
   const [batsManDetail, setBatsManDetail] = useState({});
   const [batTeamDetail, setBatTeamDetail] = useState({});
   // const scoreData = cricBuzData?.scoreCard[0];
-  console.log(cricBuzData, "<<<cricbuzdatain scorecard");
+
+  console.log(props, "props");
   // if (cricBuzData?.scoreCard?.length) {
   // setBatTeamDetail(cricBuzData.scoreCard[0].batTeamDetails);
   // setBatsManDetail(cricBuzData?.scoreCard[0]?.batTeamDetails);
   // }
-  const batsmanData = cricBuzData.scoreCard[0].batTeamDetails.batsmenData;
-  const bowlerData = cricBuzData.scoreCard[0].bowlTeamDetails.bowlersData;
+  let batsmanData = [];
+  let bowlerData = [];
+  if (cricBuzData.scoreCard != []) {
+    batsmanData = cricBuzData.scoreCard[0]?.batTeamDetails.batsmenData;
+    bowlerData = cricBuzData.scoreCard[0]?.bowlTeamDetails.bowlersData;
+  }
   const { wicketsData, extrasData, scoreDetails } = cricBuzData.scoreCard[0];
 
   // // console.log(cricData, "<<<cric");
