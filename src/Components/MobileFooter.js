@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -6,12 +6,17 @@ import homeorange from "../Assets/mobile-icons/homeorange.png";
 import homeblack from "../Assets/mobile-icons/homeblack.png";
 import accountblack from "../Assets/mobile-icons/accountblack.png";
 import accountorange from "../Assets/mobile-icons/accountorange.png";
+import sportsblack from "../Assets/mobile-icons/sportsblack.png";
+import sportsorange from "../Assets/mobile-icons/esportsorange.png";
+import esportsorange from "../Assets/mobile-icons/esportsorange1.png";
+import esportsblack from "../Assets/mobile-icons/esportsblack.png";
 import moreblack from "../Assets/mobile-icons/moreblack.png";
 import moreorange from "../Assets/mobile-icons/moreorange.png";
 import walletblack from "../Assets/mobile-icons/walletblack.png";
 import walletorange from "../Assets/mobile-icons/walletorange.png";
 import mybetblack from "../Assets/mobile-icons/mybetblack.png";
 import mybetorange1 from "../Assets/mobile-icons/mybetorange1.jpg";
+import casinoblack from "../Assets/mobile-icons/casinoblack.png";
 import QuickLinks from "../Components/QuickLinks";
 import casinomobile from "../Assets/mobile-icons/casinoblack.jpg";
 import inplay from "../Assets/mobile-icons/inplay.jpg";
@@ -32,6 +37,7 @@ import {
 function MobileFooter({ showOrange = "home" }) {
   const popupRef = useRef();
   const [switchAccountTabs, setSwitchAccountTabs] = useState(showOrange);
+
   const [userLoggedIn, setUserLoggedIn] = useState({});
   const dispatch = useDispatch();
 
@@ -50,6 +56,23 @@ function MobileFooter({ showOrange = "home" }) {
     if (switchAccountTabs == "Account") return true;
     else return false;
   };
+  const showEsports = () => {
+    const path = window.location.pathname;
+    if (switchAccountTabs == "e-sport") return true;
+    else return false;
+  };
+  console.log(switchAccountTabs, "<<<<<switchaccounttab");
+  const showSports = () => {
+    const path = window.location.pathname;
+
+    if (switchAccountTabs == "sports") return true;
+    else return false;
+  };
+  const showCasino = () => {
+    const path = window.location.pathname;
+    if (switchAccountTabs == "casino") return true;
+    else return false;
+  };
 
   const showWallet = () => {
     const path = window.location.pathname;
@@ -63,6 +86,15 @@ function MobileFooter({ showOrange = "home" }) {
     if (switchAccountTabs == "More") return true;
     else return false;
   };
+  useEffect(() => {
+    const stringUser = localStorage.getItem("betting_user");
+    if (stringUser == null || stringUser == "null") {
+      setUserLoggedIn(false);
+    } else {
+      setUserLoggedIn(true);
+    }
+    console.log(stringUser, "<<<isloggedinuser");
+  }, []);
 
   const openSigninModal = () => {
     const user = localStorage.getItem("betting_user");
@@ -87,71 +119,113 @@ function MobileFooter({ showOrange = "home" }) {
   return (
     <div style={{ backgroundColor: "#C7C7C7" }} className="showmobile-footer">
       <div className="mobile-bottom">
-        <Link to="/home" className="text-icon-cover">
-          <img
-            src={showHome() ? homeorange : homeblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* <div style={{ textDecoration: "none", color: "black" }}>Home</div> */}
-        </Link>
+        {userLoggedIn && (
+          <>
+            {" "}
+            <Link to="/home" className="text-icon-cover">
+              <img
+                src={showHome() ? homeorange : homeblack}
+                width="50px"
+                style={{ width: "50px", margin: "auto", textAlign: "center" }}
+              />
+              {/* <div style={{ textDecoration: "none", color: "black" }}>Home</div> */}
+            </Link>
+            <Link
+              to="/my-bet"
+              // onClick={openSigninModal}
+              className="text-icon-cover"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              {" "}
+              <img
+                onClick={() => {
+                  setSwitchAccountTabs("my-bet");
+                }}
+                src={showMyBet() ? mybetorange1 : mybetblack}
+                width={showMyBet() ? "50px" : "60px"}
+                style={{
+                  width: showMyBet() ? "30px" : "60px",
+                  margin: "auto",
+                  textAlign: "center",
+                }}
+              />
+              {showMyBet() && (
+                <span style={{ color: "orange", fontSize: "12px" }}>
+                  My Bet
+                </span>
+              )}
+            </Link>
+            <Link to="/my-wallet" className="text-icon-cover">
+              <img
+                src={showWallet() ? walletorange : walletblack}
+                onClick={() => {
+                  setSwitchAccountTabs("Wallet");
+                }}
+                width="50px"
+                style={{ width: "50px", margin: "auto", textAlign: "center" }}
+              />
+              {/* <div style={{ textDecoration: "none", color: "black" }}>E sports</div> */}
+            </Link>
+            <Link to="/my-account" className="text-icon-cover">
+              <img
+                onClick={() => {
+                  setSwitchAccountTabs("Account");
+                }}
+                src={showAccount() ? accountorange : accountblack}
+                width="50px"
+                style={{ width: "50px", margin: "auto", textAlign: "center" }}
+              />
+              {/* <div style={{ textDecoration: "none", color: "black" }}>Casino</div> */}
+            </Link>
+            <div className="text-icon-cover">
+              <img
+                onClick={moreClick}
+                className="moreclick"
+                src={showMore() ? moreorange : moreblack}
+                width="40px"
+                style={{ width: "40px", margin: "auto", textAlign: "center" }}
+              />
+              {/* <div style={{ textDecoration: "none", color: "black" }}>Casino</div> */}
+            </div>
+          </>
+        )}
+        {!userLoggedIn && (
+          <>
+            <Link to="/home" className="text-icon-cover">
+              <img
+                src={showHome() ? homeorange : homeblack}
+                width="50px"
+                style={{ width: "50px", margin: "auto", textAlign: "center" }}
+              />
+              {/* <div style={{ textDecoration: "none", color: "black" }}>Home</div> */}
+            </Link>
+            <a href="/sports" className="text-icon-cover">
+              <img
+                src={showSports() ? sportsorange : sportsblack}
+                width="50px"
+                style={{ width: "50px", margin: "auto", textAlign: "center" }}
+              />
+              {/* <div style={{ textDecoration: "none", color: "black" }}>Home</div> */}
+            </a>
+            <a href="/e-sport" className="text-icon-cover">
+              <img
+                src={showEsports() ? esportsorange : esportsblack}
+                width="50px"
+                style={{ width: "50px", margin: "auto", textAlign: "center" }}
+              />
+              {/* <div style={{ textDecoration: "none", color: "black" }}>Home</div> */}
+            </a>
 
-        <Link
-          to="/my-bet"
-          // onClick={openSigninModal}
-          className="text-icon-cover"
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          {" "}
-          <img
-            onClick={() => {
-              setSwitchAccountTabs("my-bet");
-            }}
-            src={showMyBet() ? mybetorange1 : mybetblack}
-            width={showMyBet() ? "50px" : "60px"}
-            style={{
-              width: showMyBet() ? "30px" : "60px",
-              margin: "auto",
-              textAlign: "center",
-            }}
-          />
-          {showMyBet() && (
-            <span style={{ color: "orange", fontSize: "12px" }}>My Bet</span>
-          )}
-        </Link>
-
-        <Link to="/my-wallet" className="text-icon-cover">
-          <img
-            src={showWallet() ? walletorange : walletblack}
-            onClick={() => {
-              setSwitchAccountTabs("Wallet");
-            }}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* <div style={{ textDecoration: "none", color: "black" }}>E sports</div> */}
-        </Link>
-        <Link to="/my-account" className="text-icon-cover">
-          <img
-            onClick={() => {
-              setSwitchAccountTabs("Account");
-            }}
-            src={showAccount() ? accountorange : accountblack}
-            width="50px"
-            style={{ width: "50px", margin: "auto", textAlign: "center" }}
-          />
-          {/* <div style={{ textDecoration: "none", color: "black" }}>Casino</div> */}
-        </Link>
-        <div className="text-icon-cover">
-          <img
-            onClick={moreClick}
-            className="moreclick"
-            src={showMore() ? moreorange : moreblack}
-            width="40px"
-            style={{ width: "40px", margin: "auto", textAlign: "center" }}
-          />
-          {/* <div style={{ textDecoration: "none", color: "black" }}>Casino</div> */}
-        </div>
+            <a href="/casino" className="text-icon-cover">
+              <img
+                src={showCasino() ? casinoblack : casinoblack}
+                width="50px"
+                style={{ width: "50px", margin: "auto", textAlign: "center" }}
+              />
+              {/* <div style={{ textDecoration: "none", color: "black" }}>Home</div> */}
+            </a>
+          </>
+        )}
       </div>
       <div className="bottom-popup" ref={popupRef}>
         <Link to="/casino" style={{ color: "black" }}>

@@ -74,8 +74,33 @@ function App() {
           <Route path="/game" element={<SingleGame />}></Route>
           <Route path="/sign-up" element={<Signup />}></Route>
           {/* <Route path="/" element={<SingleGame />}></Route> */}
-          <Route path="/casino" element={<SinglePages />}></Route>
-          <Route path="/e-sport" element={<SinglePages />}></Route>
+          <Route
+            path="/casino"
+            element={
+              <>
+                <SinglePages />
+                <MobileFooter showOrange="casino" />
+              </>
+            }
+          ></Route>
+          <Route
+            path="/sports"
+            element={
+              <>
+                <SinglePages />
+                <MobileFooter showOrange="sports" />
+              </>
+            }
+          ></Route>
+          <Route
+            path="/e-sport"
+            element={
+              <>
+                <SinglePages />
+                <MobileFooter showOrange="e-sport" />
+              </>
+            }
+          ></Route>
           <Route path="/in-play" element={<InPlayGame />}></Route>
           <Route path="/in-play/:gamename" element={<InPlayGame />}></Route>
           <Route

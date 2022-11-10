@@ -63,7 +63,7 @@ function SinglePages() {
           </div>
         </div>
       </div>
-      <MobileFooter />
+      {/* <MobileFooter /> */}
     </div>
   );
 }
