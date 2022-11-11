@@ -136,7 +136,7 @@ text-align: center;
 
     width: 100%;
     margin: auto;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     display: flex;
     background-color: white;
     align-items: center;
@@ -145,6 +145,36 @@ text-align: center;
 
 
 }
+
+.balls-cover{
+width: 100%;
+justify-content: center;
+display: flex;
+gap: 1%;
+padding-bottom: 20px;
+
+}
+.ball1{
+    color: black;
+}
+.ball2{
+    background-color: orange;
+    color: white;
+}
+.single-ball{
+    border: 1px solid orange;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    padding: 5px;
+    font-size: 10px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+}
+
 .mob-one-eaning-single{
     width: 50%;
     display: flex;

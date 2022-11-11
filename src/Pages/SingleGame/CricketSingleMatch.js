@@ -144,6 +144,7 @@ const CricketSingle = () => {
 
           const imageId2 = cricBuzHeader(res).bowlingTeam.teamId;
           console.log(imageId1, imageId2, "<<<imagedid1");
+
           // getImageLink(24, (res) => {
           //   console.log(res, "<<<imagelink");
           // });
@@ -600,6 +601,17 @@ const CricketSingle = () => {
             </div>
           </div>
         </div>
+
+        <div className="mob-one-eaning balls-cover">
+          {[1, 2, 3, 4, "wb", 6].map((item) => {
+            return (
+              <div className={`single-ball ${item == "wb" && "ball2"}`}>
+                {item}
+              </div>
+            );
+          })}
+        </div>
+
         {/* <div className="flex-row just-bet scoreData-mobile ">
           <div
             className="flex-col align-ctr just-bet playerScore scoredata-team"
