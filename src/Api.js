@@ -193,7 +193,7 @@ export const getScoreCard = (matchId, callBack) => {
   )
     .then((response) => response.json())
     .then((response) => {
-      console.log(response, "<<<<matchCricbuzdata");
+      console.log(response, "<<<<matchCricbuzdata   ");
       callBack(response);
     })
     .catch((err) => console.error(err));

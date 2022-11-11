@@ -45,11 +45,13 @@ const CricketSingle = () => {
   const dispatch = useDispatch();
 
   const params = useParams();
+
   const [premiumToggle, setPremiumToggle] = useState(
     params.game == "cricket" ? false : true
   );
+
   const [matchData, setMatchData] = useState([]);
-  const [cricBuzMatchId, setCricBuzMatchId] = useState(43131);
+  const [cricBuzMatchId, setCricBuzMatchId] = useState(null);
   const [clickRowFancy, setClickRowFancy] = useState({
     index: null,
     row: null,
@@ -202,7 +204,7 @@ const CricketSingle = () => {
             "--",
             betFairTeam1,
             "--",
-            "matchCricbuzdata",
+            "matchCricbuzdata -3",
             "--",
             match.matchInfo.matchId,
             "--",
@@ -214,29 +216,31 @@ const CricketSingle = () => {
           );
 
           if (betFairTeam1 == cricTeam1 && betFairTeam2 == cricTeam2) {
-            // console.log(
-            //   cricTeam1,
-            //   betFairTeam1,
-            //   cricTeam2,
-            //   betFairTeam2,
-            //   "matchCricbuzdata",
-            //   match.matchInfo.matchId,
-            //   series.seriesAdWrapper.seriesId,
-            //   ss,
-            //   se
-            // );
+            console.log(
+              cricTeam1,
+              betFairTeam1,
+              cricTeam2,
+              betFairTeam2,
+              "matchCricbuzdata -1",
+              match.matchInfo.matchId,
+              series.seriesAdWrapper.seriesId,
+              ss,
+              se
+            );
+            alert("here");
             setCricBuzMatchId(match.matchInfo.matchId);
             // let cricBuzDEtail = {
             //   matchStatus: match.matchInfo.status,
             // };
           }
           if (betFairTeam1 == cricTeam2 && betFairTeam2 == cricTeam1) {
+            alert("jkljlkjlk");
             console.log(
               cricTeam1,
-              betFairTeam1,
               cricTeam2,
+              betFairTeam1,
               betFairTeam2,
-              "matchCricbuzdata",
+              "matchCricbuzdata -2",
               match.matchInfo.matchId,
               series.seriesAdWrapper.seriesId,
               ss,
