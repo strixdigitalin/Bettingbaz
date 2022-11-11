@@ -30,6 +30,7 @@ import {
 } from "../Redux/Reducers/LiveMatch";
 import { SingleGameCard } from "./Heighlights";
 import { fetchImage } from "./Controler/ImageBySport";
+import MatchByCompetition from "../Pages/MatchByCompetition/MatchByCompetition";
 
 export function InPlayCard({
   heading = "heading",
@@ -47,8 +48,10 @@ export function InPlayCard({
   const [InPlayGames, setInPlayGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState("cricket");
   const [showLoader, setShowLoader] = useState(false);
+  const [upCommingMatchNames, setUpCommingMatchNames] = useState([]);
   const { gamename } = useParams();
   const [matchCount, setMatchCount] = useState(null);
+  const [upcommingMatchIds, setUpcommingMatchIds] = useState([]);
   const [handleLive, setHandleLive] = useState(true);
   const [singleGame, setSingleGame] = useState([]);
 
@@ -73,50 +76,67 @@ export function InPlayCard({
 
   useEffect(() => {
     // setInterval(() => {
-      API.getInPlay("football", (res) => {
-        const ThreeGame = res.slice(0, 3);
-        dispatch(FootballAllLiveMatchFun(ThreeGame));
-      });
+    API.getInPlay("football", (res) => {
+      const ThreeGame = res.slice(0, 3);
+      dispatch(FootballAllLiveMatchFun(ThreeGame));
+    });
 
-      console.log(liveGame, "<<<<football fetched");
+    console.log(liveGame, "<<<<football fetched");
     // }, 7000);
   }, []);
   useEffect(() => {
     // setInterval(() => {
-      API.getInPlay("cricket", (res) => {
-        const ThreeGame = res.slice(0, 3);
-        dispatch(cricketAllLiveMatchFun(ThreeGame));
-      });
-      console.log("cricket fetched");
+    API.getInPlay("cricket", (res) => {
+      const ThreeGame = res.slice(0, 3);
+      dispatch(cricketAllLiveMatchFun(ThreeGame));
+    });
+    console.log("cricket fetched");
     // }, 10000);
-  }, [])
+  }, []);
   useEffect(() => {
     // setInterval(() => {
-      API.getInPlay("basketball", (res) => {
-        const ThreeGame = res.slice(0, 3);
-        dispatch(BasketBallLiveMatchFun(ThreeGame));
-      });
-      console.log("basketball fetched");
+    API.getInPlay("basketball", (res) => {
+      const ThreeGame = res.slice(0, 3);
+      dispatch(BasketBallLiveMatchFun(ThreeGame));
+    });
+    console.log("basketball fetched");
     // }, 5000);
   }, []);
   useEffect(() => {
     // setInterval(() => {
-      API.getInPlay("tennis", (res) => {
-        const ThreeGame = res.slice(0, 3);
-        dispatch(TennisAllLiveMatchFun(ThreeGame));
-      });
-      console.log("tennis fetched");
+    API.getInPlay("tennis", (res) => {
+      const ThreeGame = res.slice(0, 3);
+      dispatch(TennisAllLiveMatchFun(ThreeGame));
+    });
+    console.log("tennis fetched");
     // }, 10000);
   }, []);
   useEffect(() => {
     setShowLoader(true);
     API.competitionBySports(selectedGame, (res) => {
-      console.log(selectedGame, "-->>>", res);
+      console.log(selectedGame, "-->>>groupdata", res);
+      setUpcommingMatchIds([res[0].id, res[1].id, res[2].id]);
       setSingleGame(res);
       setShowLoader(false);
     });
   }, [selectedGame]);
+
+  useEffect(() => {
+    if (upcommingMatchIds != []) {
+      let data = [];
+      // alert("upcomming");
+      upcommingMatchIds.map((item) => {
+        API.matchByCompetition(item, (res) => {
+          console.log(res, "<<<<upcommingdata");
+          data = [...data, res[0]];
+          setUpCommingMatchNames([...upCommingMatchNames, res[0]]);
+        });
+      });
+    }
+  }, [upcommingMatchIds]);
+
   //   ------ ONCLCICKS-----
+  console.log(upCommingMatchNames, "<<<< upcomming matchnames");
   //   const onChangeGame = (game) => set;
   //   ----
 
@@ -178,7 +198,7 @@ export function InPlayCard({
       )}
       {!handleLive && show != "all" && !showLoader && singleGame.length > 0 && (
         <>
-          {singleGame.slice(0, 3)?.map((item, key) => {
+          {upCommingMatchNames.slice(0, 3)?.map((item, key) => {
             console.log(item, "<<<item in single game card");
             return (
               <Link
@@ -196,7 +216,7 @@ export function InPlayCard({
                       style={{ color: "black" }}
                       className="row-left flex-row just-bet w100 align-ctr"
                     >
-                      <div className="col-70">{item?.group}</div>
+                      <div className="col-70">{item?.name}</div>
                       {/* <div className="flex-row just-center align-ctr">
                   <img src={inPlay} width="30px" />
                   <img src={BetMark} width="30px" />
@@ -212,7 +232,7 @@ export function InPlayCard({
                         className="singleRightrow col-70"
                         style={{ border: "none" }}
                       >
-                        {item?.name}
+                        {item?.start_datetime}
                       </div>
                     </div>
 
