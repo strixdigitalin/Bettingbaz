@@ -71,6 +71,7 @@ const CricketSingle = () => {
   const [bidType, setBidType] = useState(typePrem);
   const [cricBuzSingleMatchData, setCricBuzSingleMatchData] = useState({});
   const [bidContent, setBidContent] = useState({ odds: 0 });
+  const [imageLink, setimageLink] = useState({ tea1: "", team2: "" });
   const [clickedBlock, setClickedBlock] = useState(initialBlock);
   const [cricBuzData, setcricBuzData] = useState({});
   const [inningId, setInningId] = useState(0);
@@ -130,10 +131,11 @@ const CricketSingle = () => {
   // }, [matchData]);
 
   useEffect(() => {
-    setTimeout(() => {
+    setInterval(() => {
       if (cricBuzMatchId != null) {
         getScoreCard(cricBuzMatchId, (res) => {
           console.log(res, "cricmatchdata---");
+
           setCricBuzSingleMatchData(res);
           const headerData = cricBuzHeader(res);
           console.log(cricBuzHeader(res), "headerdata");
@@ -145,24 +147,60 @@ const CricketSingle = () => {
           const imageId2 = cricBuzHeader(res).bowlingTeam.teamId;
           console.log(imageId1, imageId2, "<<<imagedid1");
 
-          // getImageLink(24, (res) => {
-          //   console.log(res, "<<<imagelink");
-          // });
-          // getImageLink(4, (res) => {
-          //   console.log(`${res}`, "<<<imagelink");
-          // });
+          getImageLink(imageId1, (res) => {
+            console.log(`${res}`, "<<<imagelink");
+            setimageLink({ ...imageLink, team1: res });
+          });
+          getImageLink(imageId2, (res) => {
+            console.log(`${res}`, "<<<imagelink");
+            setimageLink({ ...imageLink, team2: res });
+          });
+          // alert("klkjlk");
 
-          getDataByOVer(matchId, (res) => {
-            console.log(
-              res?.matchHeader?.matchTeamInfo[inningId == 2 ? 1 : 0],
-              "<<<<databyover"
-            );
-            setInningId(res.inningsId);
-            setDataByOver(res);
+          getDataByOVer(matchId, (resd) => {
+            console.log("thisismatchid", matchId);
+            console.log(resd, "<<<<databyover1");
+            setInningId(resd.inningsId);
+            setDataByOver(resd);
           });
         });
       }
-    }, 6000);
+    }, 2000);
+    // setTimeout(() => {
+    //   if (cricBuzMatchId != null) {
+    //     getScoreCard(cricBuzMatchId, (res) => {
+    //       console.log(res, "cricmatchdata---");
+
+    //       setCricBuzSingleMatchData(res);
+    //       const headerData = cricBuzHeader(res);
+    //       console.log(cricBuzHeader(res), "headerdata");
+    //       setHeaderData(headerData);
+    //       const imageId1 = headerData.bettingTeam.teamId;
+    //       // setHeaderData(cricBuzData(res));
+    //       const matchId = res.scoreCard[0].matchId;
+
+    //       const imageId2 = cricBuzHeader(res).bowlingTeam.teamId;
+    //       console.log(imageId1, imageId2, "<<<imagedid1");
+
+    //       getImageLink(imageId1, (res) => {
+    //         console.log(`${res}`, "<<<imagelink");
+    //         setimageLink({ ...imageLink, team1: res });
+    //       });
+    //       getImageLink(imageId2, (res) => {
+    //         console.log(`${res}`, "<<<imagelink");
+    //         setimageLink({ ...imageLink, team2: res });
+    //       });
+    //       alert("klkjlk");
+
+    //       getDataByOVer(matchId, (resd) => {
+    //         console.log("thisismatchid", matchId);
+    //         console.log(resd, "<<<<databyover1");
+    //         setInningId(resd.inningsId);
+    //         setDataByOver(resd);
+    //       });
+    //     });
+    //   }
+    // }, 6000);
   }, [cricBuzMatchId]);
 
   const { teams } = params;
@@ -228,7 +266,7 @@ const CricketSingle = () => {
               ss,
               se
             );
-            alert("here");
+            // alert("here");
             setCricBuzMatchId(match.matchInfo.matchId);
             // let cricBuzDEtail = {
             //   matchStatus: match.matchInfo.status,
@@ -350,7 +388,6 @@ const CricketSingle = () => {
   const showLeague = (league) => {
     return league.replace("-", " ").toLocaleUpperCase();
   };
-
   const IncreaseOrangeData = (num) => {
     let sendThis = num;
     const values = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
@@ -438,43 +475,56 @@ const CricketSingle = () => {
   };
 
   const fancyUpperPartCalculationRight = (name, odd) => {
+    console.log("Team total runs", name);
+    if (name.match("Total Runs")) {
+      // alert("total ");
+      return Math.ceil(odd.substring(1)) + 2;
+    }
     if (name.match("10 Over")) return Math.ceil(odd);
     else return Math.ceil(odd.substring(1));
   };
 
-  const layAllFirstRow = (odd) => {
-    if (odd == "NaN") return "--";
+  const layAllFirstRow = (num) => {
+    if (num == "NaN") return "--";
+    const odd = num.toFixed(2);
     const split1 = `${odd}`?.split(".")[0];
     // const split1 = 6;
     if (split1 == 1) {
-      return parseFloat(odd) + 0.01;
+      return (parseFloat(odd) + 0.01).toFixed(2);
     } else if (split1 == 2) {
-      return parseFloat(odd) + 0.1;
+      return (parseFloat(odd) + 0.1).toFixed(2);
     } else if (split1 == 3 || split1 == 4) {
-      return parseFloat(odd) + 0.1;
+      return (parseFloat(odd) + 0.1).toFixed(2);
     } else if (split1 == 5) {
-      return parseFloat(odd) + 0.2;
+      return (parseFloat(odd) + 0.2).toFixed(2);
     } else if (split1 == 6) {
-      return parseFloat(odd) + 0.5;
+      return (parseFloat(odd) + 0.5).toFixed(2);
     } else if (split1 == 7) {
-      return parseFloat(odd) + 0.6;
+      return (parseFloat(odd) + 0.6).toFixed(2);
     } else if (split1 == 8) {
-      return parseFloat(odd) + 0.7;
+      return (parseFloat(odd) + 0.7).toFixed(2);
     } else if (split1 == 9) {
-      return parseFloat(odd) + 1;
+      return (parseFloat(odd) + 1).toFixed(2);
     } else if (split1 >= 10 && split1 < 20) {
-      return parseFloat(odd) + 1;
+      return (parseFloat(odd) + 1).toFixed(2);
     } else if (split1 >= 20 && split1 < 30) {
-      return parseFloat(odd) + 2;
+      return (parseFloat(odd) + 2).toFixed(2);
     } else if (split1 >= 30 && split1 < 40) {
-      return parseFloat(odd) + 3;
+      return (parseFloat(odd) + 3).toFixed(2);
     } else if (split1 >= 40 && split1 < 50) {
-      return parseFloat(odd) + 4;
+      return (parseFloat(odd) + 4).toFixed(2);
     } else {
       return +odd;
       // return parseFloat(odd).toFixed(2) + parseFloat(odd);
     }
   };
+
+  const toFix1Float = (num) => {
+    if (`num`.indexOf(0, 1) == 0) {
+      return num.toFixed(1);
+    } else return num;
+  };
+  console.log(cricBuzData, "<<<thisiscricbuzdata");
 
   const cricBuzHeader = (res) => {
     console.log(res.matchHeader.matchTeamInfo, "<<<< cricBuzHeader");
@@ -490,6 +540,29 @@ const CricketSingle = () => {
     };
   };
   // cricBuzHeader();
+  const overStat = (over) => {
+    const sec = over?.split("|")[2];
+    const inArr = sec?.split(" ");
+    console.log(inArr, "overstat");
+    return inArr;
+  };
+
+  const isBallDot = (num) => {
+    if (num == "") {
+      return true;
+    }
+    if (
+      num != 0 &&
+      num != 1 &&
+      num != 2 &&
+      num != 3 &&
+      num != 4 &&
+      num != 5 &&
+      num != 6
+    )
+      return true;
+    else return false;
+  };
   return (
     <div className="single-middle">
       {/* <div className="single-top-head">
@@ -523,9 +596,34 @@ const CricketSingle = () => {
       {/*  <768 px */}
       {/* <768 px mob */}
       <div>
+        <div
+          style={{
+            width: "100%",
+            textAlign: "center",
+            background: "white",
+            fontWeight: "bold",
+            fontSize: "10px",
+            height: "20px",
+            paddingTop: "10px",
+          }}
+        >
+          {" "}
+          {inningId != 0 && (
+            <>
+              {inningId}
+              {inningId == 1 ? "st" : "nd"} Inning
+            </>
+          )}
+        </div>
         <div className="mob-one-eaning">
           <div className="mob-one-eaning-single">
-            <img src={indiasvg} />
+            {/* <img src={imageLink.team2} /> */}
+            {/* <img src="https://cricbuzz-cricket.p.rapidapi.com/img/v1/i1/c3/i.jpg" /> */}
+            {/* <img
+              src="data:image/png;base64, /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCABEAFoDASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAAQFAQMCBv/EABgBAAMBAQAAAAAAAAAAAAAAAAACAwEE/9oADAMBAAIQAxAAAAG7poS0mkZ8vQ5mJ0PPkOhzA91I9bXf3Np1SEXkZ8hQWcGmALN1J9Fm815FbB/c2vXIReRlyNUI19qfPlKesvJ70zlXkVxntza9chF5GfIdOZi1/cXNo8kGJleRXNa0K9aq4T5tAxQADAAeBn//xAAjEAACAQMFAAMBAQAAAAAAAAAAAQIDBDEQERITMiAhIxQw/9oACAEBAAEFAkjYupOMucznM7JnOZzmc5nOZ2TE3ssF361a2+KwsF3704qjTzo6H1osLBd+yhHlVu/Jvsf0fm8iwsF37LZ/rcQ5U/isLBd+xPi4SU41rf7cZIUJsnFR0WFgu/ekJypuNzFjr0ypcN6rCwXfv/BY3NyrBSOmB0wOmB0wOmB0wOmB1QOCP//EAB8RAAICAQQDAAAAAAAAAAAAAAABAhEQAyExMhMgQf/aAAgBAwEBPwEm9y2WyyLxPsRW14lXwjifY091Q4tFEcT7HB5GNtkcT59In//EABoRAAIDAQEAAAAAAAAAAAAAAAEQACAxERL/2gAIAQIBAT8Bh2gR2BFnYJyh1ekEaCf/xAAhEAABAwQDAAMAAAAAAAAAAAAAARAxESAhMgISMEFRcf/aAAgBAQAGPwJkobGxsbGxsbEkulmfBH7LsVWWTlH3cjII2BElfm5H/PFGqVO3A1UwhSubUfEGWpwuT0yQQQQQQQQ3/8QAIRAAAgICAQUBAQAAAAAAAAAAAAERMSAhQRAwYXGBUcH/2gAIAQEAAT8hRBATDx2JBpIww2QyTbhKWN1tg6+lGJPQublDbaTYhvSUjGtpGhqXFDKMSQD8J+A4EzTYkoAGTklHgZRiSD5Kq9hV/MHX0oxI9CcMW02MfI5RYA5h/tkSsuQ6KMiTh/QTcGRLTNKQujoo9ZlhELq6+lAmgmO01nsgAACKGj//2gAMAwEAAgADAAAAEJDDQSPFPHttblPvk3e1OMJiq4Pwg3wP/8QAHBEAAgMBAAMAAAAAAAAAAAAAAAEQETEhIEFR/9oACAEDAQE/EBic+EFhlRsUuL7bMRiNhk1x7g2XWe8bCba0Kumbg2+SiP/EABsRAQEBAQADAQAAAAAAAAAAAAEAERAgITFB/9oACAECAQE/EJzW1tZPYet5j8js9MlFjHYctSr19eL/xAAiEAACAQMEAwEBAAAAAAAAAAAAAREhMUFRYXGBkaHwELH/2gAIAQEAAT8QYWg44gsSxG637H2R8kcTo+yPsj7IRSdabWBpmlYLX73f8Q3n2SHUC2aftmqSijoJdKLRg9UdyG3FTbhIcEymG0Y3Sm1Ewmm0VxrEU2XG9BOhb2j00WjB6pkQ0qkkoWuRU5ZEZ8LZk8JFAcoV20Fq5Qyv4RaMHojErTpMBr8ijUZuVmnDExYhJ2qVomWuAq60WjB6Iy5WhvgbCkaqh/WtQMYU6IXc4IQzipS+Ez+yPTRaMHomTfGUTMNnVhVnrCMntUKXOaSRVuW26udT+yPXFox+DWpvNTskukJblJDreFwdotcDb2QmtTdJlIUar8m/8m/8m/8AJv8Ayb/yNLVXkanyWRNFp1P/2Q=="
+              alt="response"
+              style={{ width: "100px" }}
+            /> */}
             {/* <div>{headerData?.bettingTeam?.teamName}</div> */}
             <div>
               {
@@ -534,12 +632,21 @@ const CricketSingle = () => {
               }
             </div>
             <div style={{ color: "#F98417" }}>
-              {cricBuzData?.matchScore?.team1Score?.inngs1?.runs}/
-              {cricBuzData?.matchScore?.team1Score?.inngs1?.wickets}
+              {inningId == 1 ? (
+                <>
+                  {cricBuzData?.matchScore?.team1Score?.inngs1?.runs}/
+                  {cricBuzData?.matchScore?.team1Score?.inngs1?.wickets}
+                </>
+              ) : (
+                <>
+                  {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/
+                  {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets}
+                </>
+              )}
             </div>
             <div
               className="flex-row align-ctr just-ctr"
-              style={{ height: "", width: "100%" }}
+              style={{ height: "100%", width: "100%" }}
             >
               <div>
                 <img src={batsvg} width="44px" />
@@ -564,21 +671,35 @@ const CricketSingle = () => {
               </div>
             </div>
           </div>
-          <div style={{ border: "1px solid #F97D09", height: "44px" }}></div>
+          {/* <div style={{}}> */}
+
+          <div
+            style={{
+              border: "1px solid #F97D09",
+              height: "44px",
+              borderRight: "none",
+            }}
+          ></div>
+          {/* </div> */}
+
           <div className="mob-one-eaning-single">
-            <img src={pakistansvg} />
-            {
-              databyover?.matchHeader?.matchTeamInfo[inningId == 2 ? 1 : 0]
-                ?.bowlingTeamShortName
-            }
+            {/* <img src={pakistansvg} /> */}
+            <div>
+              {
+                databyover?.matchHeader?.matchTeamInfo[inningId == 2 ? 1 : 0]
+                  ?.bowlingTeamShortName
+              }
+            </div>
+
             <div style={{ color: "#F98417" }}>
-              {/* 24/7 */}
-              {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/
-              {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets}
+              {/* 24/7ss */}
+              {databyover.overs} Overs
+              {/* {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/ */}
+              {/* {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets} */}
             </div>
             <div
               className="flex-row align-ctr just-ctr"
-              style={{ height: "", gap: "5%", width: "100%" }}
+              style={{ height: "100%", gap: "5%", width: "100%" }}
             >
               <div>
                 <img src={ballsvg} width="20px" />
@@ -593,7 +714,10 @@ const CricketSingle = () => {
                 }}
               >
                 {databyover?.bowlerStriker?.bowlName}
+                <br />
+                {databyover?.bowlerStriker?.bowlName}
               </div>
+
               <div style={{ color: "#F98417", padding: "10px" }}>
                 {databyover?.bowlerStriker?.bowlRuns}/
                 {databyover?.bowlerStriker?.bowlWkts}
@@ -603,13 +727,25 @@ const CricketSingle = () => {
         </div>
 
         <div className="mob-one-eaning balls-cover">
-          {[1, 2, 3, 4, "wb", 6].map((item) => {
+          <span style={{ fontSize: "10px", marginRight: "20px" }}>
+            Current Over
+          </span>{" "}
+          {overStat(databyover?.recentOvsStats)?.map((item) => {
             return (
-              <div className={`single-ball ${item == "wb" && "ball2"}`}>
+              <div
+                className={`single-ball ${isBallDot(item) ? "ball2" : "ball1"}`}
+              >
                 {item}
               </div>
             );
           })}
+        </div>
+
+        <div
+          className="mob-one-eaning balls-cover"
+          style={{ fontSize: "10px" }}
+        >
+          {cricBuzSingleMatchData.status}
         </div>
 
         {/* <div className="flex-row just-bet scoreData-mobile ">
@@ -1141,7 +1277,9 @@ const CricketSingle = () => {
           >
             {parseFloat(matchData[0]?.values[0]?.odds).toFixed(2) == "NaN"
               ? "--"
-              : +matchData[0]?.values[0]?.odds}
+              : toFix1Float(
+                  parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)
+                )}
           </div>
 
           <div
@@ -1173,7 +1311,9 @@ const CricketSingle = () => {
           >
             {parseFloat(matchData[0]?.values[1]?.odds).toFixed(2) == "NaN"
               ? "--"
-              : parseFloat(matchData[0]?.values[1]?.odds).toFixed(2)}
+              : toFix1Float(
+                  parseFloat(matchData[0]?.values[1]?.odds).toFixed(2)
+                )}
           </div>
           {params.game == "football" && (
             <div
@@ -1187,7 +1327,9 @@ const CricketSingle = () => {
             >
               {parseFloat(matchData[0]?.values[2]?.odds).toFixed(2) == "NaN"
                 ? "--"
-                : parseFloat(matchData[0]?.values[2]?.odds).toFixed(2)}
+                : toFix1Float(
+                    parseFloat(matchData[0]?.values[2]?.odds).toFixed(2)
+                  )}
             </div>
           )}
         </div>
@@ -1234,9 +1376,8 @@ const CricketSingle = () => {
                   2
                   
                 )} */}
-
-            {layAllFirstRow(
-              parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)
+            {toFix1Float(
+              layAllFirstRow(parseFloat(matchData[0]?.values[0]?.odds))
             )}
           </div>
           <div
@@ -1269,9 +1410,11 @@ const CricketSingle = () => {
             {parseFloat(parseFloat(matchData[0]?.values[1]?.odds)).toFixed(2) ==
             "NaN"
               ? "--"
-              : parseFloat(
-                  parseFloat(matchData[0]?.values[1]?.odds) + 0.01
-                ).toFixed(2)}
+              : toFix1Float(
+                  parseFloat(
+                    parseFloat(matchData[0]?.values[1]?.odds) + 0.01
+                  ).toFixed(2)
+                )}
           </div>
           {params.game == "football" && (
             <div
@@ -1488,6 +1631,7 @@ const CricketSingle = () => {
                                 {fancyReplaceNAme(
                                   replaceNAmeAlbabet(item.name)
                                 )}{" "}
+                                sss
                                 {/* {item.name.replace(
                                   " A ",
                                   ` ${teams?.split("-")[0]} `

@@ -256,7 +256,7 @@ function Header() {
                   <div className="flex-row  wallet-single">
                     {" "}
                     <div>
-                      <img src={avatar} />
+                      <img src={avatar} width="24px" />
                     </div>
                     <Link to="/my-account">
                       <div style={{ textDecoration: "none", color: "black" }}>
@@ -267,21 +267,15 @@ function Header() {
                   <div className="flex-row  wallet-single">
                     {" "}
                     <div>
-                      <img src={rule} />
+                      <img src={rule} width="24px" />
                     </div>
                     <div>Rule</div>
                   </div>
+
                   <div className="flex-row  wallet-single">
                     {" "}
                     <div>
-                      <img src={logout} />
-                    </div>
-                    <div onClick={Logout}>Logout</div>
-                  </div>
-                  <div className="flex-row  wallet-single">
-                    {" "}
-                    <div>
-                      <img src={withdraw} width="28px" />
+                      <img src={withdraw} width="24px" />
                     </div>
                     <div
                       onClick={() => {
@@ -291,6 +285,13 @@ function Header() {
                     >
                       Withdraw
                     </div>
+                  </div>
+                  <div className="flex-row  wallet-single">
+                    {" "}
+                    <div>
+                      <img src={logout} width="24px" />
+                    </div>
+                    <div onClick={Logout}>Logout</div>
                   </div>
                 </div>
               )}

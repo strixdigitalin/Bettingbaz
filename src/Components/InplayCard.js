@@ -200,6 +200,7 @@ export function InPlayCard({
         <>
           {upCommingMatchNames.slice(0, 3)?.map((item, key) => {
             console.log(item, "<<<item in single game card");
+            // path="/match-single/sport/:game/:legue/:teams/:id"
             return (
               <Link
                 to={`/match-by-competition${item?.id}`}

@@ -209,11 +209,13 @@ export const getImageLink = (imageId, callBack) => {
     "https://cricbuzz-cricket.p.rapidapi.com/img/v1/i1/c" + imageId + "/i.jpg",
     options
   )
-    .then((response) => response.json())
     .then((response) => {
-      console.log(`${response}`, "<<<<< image link");
-      // callBack(response);
+      console.log(response, "<<<<< imagelink");
     })
+    // .then((response) => {
+    //   // callBack(response);
+    //   console.log(`${}`, "<<<<< image link");
+    // })
     .catch((err) => console.error(err));
 };
 
