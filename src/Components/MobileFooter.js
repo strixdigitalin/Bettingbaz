@@ -107,7 +107,7 @@ function MobileFooter({ showOrange = "home" }) {
 
   window.onclick = (e) => {
     console.log(e.target, "<<<className");
-    if (e.target.className != "moreclick") {
+    if (e.target.className != "moreclick" && popupRef.current.style) {
       popupRef.current.style.display = "none";
     }
   };

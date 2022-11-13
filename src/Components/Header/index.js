@@ -69,17 +69,17 @@ function Header() {
     // const parseIt = JSON.parse(stringUser);
   }, []);
 
-  window.onclick = (e) => {
-    console.log(e.target.className);
-    if (
-      e.target.className != "walletDropDown" &&
-      !e.target.className.match("showmodal")
-    ) {
-      showmodal.current.style.display = "none";
-    } else {
-      showmodal.current.style.display = "block";
-    }
-  };
+  // window.onclick = (e) => {
+  //   console.log(e.target.className);
+  //   if (
+  //     e.target.className != "walletDropDown" &&
+  //     !e.target.className.match("showmodal")
+  //   ) {
+  //     // showmodal.current.style.display = "none";
+  //   } else {
+  //     // showmodal.current.style.display = "block";
+  //   }
+  // };
 
   console.log(isLoggedIn, "<<<is logged in");
   const handleSubmit = () => {
@@ -101,6 +101,10 @@ function Header() {
   };
   const buttons = [
     { name: "Log In", onClick: handleSubmit },
+    { name: "Sign Up", onClick: () => navigation("/sign-up") },
+  ];
+  const buttonsMob = [
+    { name: "Log In", onClick: () => navigation("/login") },
     { name: "Sign Up", onClick: () => navigation("/sign-up") },
   ];
   const bottomItems = [
@@ -219,6 +223,7 @@ function Header() {
               <div></div>
             </div>
           )}
+
           {isLoggedIn && (
             <div className="logged-in-buttons">
               {/* {loggedInButtons.map((item, key) => ( */}
@@ -298,11 +303,26 @@ function Header() {
             </div>
           )}
 
-          <div className="breadcrum">
-            <Link to="/mob-dashboard">
-              <img src={hamburger} height="40px" width="40px" />
-            </Link>
-          </div>
+          {isLoggedIn && (
+            <div className="breadcrum">
+              <Link to="/mob-dashboard">
+                <img src={hamburger} height="40px" width="40px" />
+              </Link>
+            </div>
+          )}
+          {!isLoggedIn && (
+            <div className="mob-log-but">
+              {buttonsMob.map((item, key) => (
+                <button className="singlebutton" onClick={item.onClick}>
+                  {item.name}
+                </button>
+              ))}
+
+              {/* <Link to="/mob-dashboard">
+                <img src={hamburger} height="40px" width="40px" />
+              </Link> */}
+            </div>
+          )}
         </div>
 
         {/* ------------------bottom */}

@@ -59,7 +59,7 @@ function App() {
     (state) => state
   );
 
-  console.log(PlaceBid, ResetPassword, "<<<< Place Bid");
+  console.log(window.location.pathname, "<<<<this is pathname");
   getSocket();
   return (
     <div className="App">
@@ -73,6 +73,7 @@ function App() {
           <Route path="/home" element={<Home />}></Route>
           <Route path="/game" element={<SingleGame />}></Route>
           <Route path="/sign-up" element={<Signup />}></Route>
+          <Route path="/login" element={<SignIn />}></Route>
           {/* <Route path="/" element={<SingleGame />}></Route> */}
           <Route
             path="/casino"
@@ -113,7 +114,12 @@ function App() {
           ></Route>
           <Route
             path="/match-single/sport/:game/:legue/:teams/:id"
-            element={<CricketSingleMatch />}
+            element={
+              <>
+                <CricketSingleMatch />
+                <MobileFooter showOrange="casino" />
+              </>
+            }
           ></Route>
           <Route
             path="/my-bet"

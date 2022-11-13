@@ -120,13 +120,43 @@ top:100px;
 color: black;
 
 }
+
+
+
 .wallet-single{
     border-bottom: 1px solid black;
     padding: 5px;
     cursor: pointer;
     gap: 6%;
 }
+
 @media screen and (max-width:768px) {
+  .mob-log-but{
+    display: flex;
+
+  }
+  .singlebutton{
+    width: 70px;
+    padding: 5px;
+    height: 35px;
+    font-size: 12px;
+  }
+
+  .mid-header{
+    height: 56px;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    color: white;
+    border-top: 1px solid #707070;
+    border-bottom: 1px solid #707070;
+}
+
+    .header-upper{
+        display: none;
+    }
     .bottom-header{
         display: none;
     }

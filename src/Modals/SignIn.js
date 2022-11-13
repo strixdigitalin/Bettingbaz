@@ -6,9 +6,10 @@ import { hideModal, placeBid } from "../Redux/Reducers/PlaceBid";
 import SigninModal, { showSigninModal } from "../Redux/Reducers/SigninModal";
 import loginsvg from "../Assets/Header/Svgs/login.svg";
 import signup from "../Assets/Header/Svgs/signup.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function SignInModal() {
   const { PlaceBid } = useSelector((state) => state);
+  const navigate = useNavigate();
   const [IsLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch = useDispatch();
   console.log(PlaceBid);
@@ -82,10 +83,10 @@ function SignInModal() {
       {/* <button className="submit-but" onClick={handleSubmit}>
         Sign in
       </button> */}
-      <img onClick={handleSubmit} src={loginsvg} />
-      <Link to="/sign-up">
-        <img onClick={handleSubmit} src={signup} />
-      </Link>
+      <img onClick={handleSubmit} src={loginsvg} width="100%" />
+      {/* <Link to="/sign-up"> */}
+      <img src={signup} onClick={() => navigate("/sign-up")} width="80%" />
+      {/* </Link> */}
     </div>
   );
 }

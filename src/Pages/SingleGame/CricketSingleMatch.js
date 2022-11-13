@@ -921,16 +921,18 @@ const CricketSingle = () => {
           </div>
         </div> */}
       </div>
-      <div>
-        <div
-          className="drop-score"
-          style={{ fontSize: "12px" }}
-          onClick={() => setShowScoreCard(!showScoreCard)}
-        >
-          Scorecard{" "}
-          <img src={!showScoreCard ? downIcon : upicon} width="12px" />
+      {cricBuzMatchId != null && (
+        <div>
+          <div
+            className="drop-score"
+            style={{ fontSize: "12px" }}
+            onClick={() => setShowScoreCard(!showScoreCard)}
+          >
+            Scorecard{" "}
+            <img src={!showScoreCard ? downIcon : upicon} width="12px" />
+          </div>
         </div>
-      </div>
+      )}
       {showScoreCard && (
         <ScoreCard
           dataByOver={databyover}
