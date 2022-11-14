@@ -96,7 +96,7 @@ const CricketSingle = ({ setShowHeader }) => {
   const [noData, setNoData] = useState(true);
   useEffect(() => {
     // setInterval(function () {
-    setShowHeader(false);
+    if (window.screen.width <= 769) setShowHeader(false);
     // method to be executed;
     console.log("fetch by single game called");
     betbySingleMatc(params, (res) => {
@@ -151,20 +151,20 @@ const CricketSingle = ({ setShowHeader }) => {
           const headerData = cricBuzHeader(res, matchId);
           console.log(cricBuzHeader(res), "headerdata");
           setHeaderData(headerData);
-          const imageId1 = headerData.bettingTeam.teamId;
+          // const imageId1 = headerData.bettingTeam?.teamId;
           // setHeaderData(cricBuzData(res));
 
-          const imageId2 = cricBuzHeader(res).bowlingTeam.teamId;
-          console.log(imageId1, imageId2, "<<<imagedid1");
+          // const imageId2 = cricBuzHeader(res).bowlingTeam?.teamId;
+          // console.log(imageId1, imageId2, "<<<imagedid1");
 
-          getImageLink(imageId1, (res) => {
-            console.log(`${res}`, "<<<imagelink");
-            setimageLink({ ...imageLink, team1: res });
-          });
-          getImageLink(imageId2, (res) => {
-            console.log(`${res}`, "<<<imagelink");
-            setimageLink({ ...imageLink, team2: res });
-          });
+          // getImageLink(imageId1, (res) => {
+          //   console.log(`${res}`, "<<<imagelink");
+          //   setimageLink({ ...imageLink, team1: res });
+          // });
+          // getImageLink(imageId2, (res) => {
+          //   console.log(`${res}`, "<<<imagelink");
+          //   setimageLink({ ...imageLink, team2: res });
+          // });
           // alert("klkjlk");
         });
       }
@@ -513,7 +513,12 @@ const CricketSingle = ({ setShowHeader }) => {
     console.log(bidContent, bidType, bidAmount, matchId, "<<<<bid content");
     // return null;
     PlaceBetApi(
-      { ...bidContent, amount: bidAmount, matchId, odd_type: bidType },
+      {
+        ...bidContent,
+        amount: bidAmount,
+        matchId: matchId + "/" + bidContent.team,
+        odd_type: bidType,
+      },
       (res) => {
         console.log(res);
         if (res.status) {
@@ -649,7 +654,7 @@ const CricketSingle = ({ setShowHeader }) => {
 
   const layAllFirstRow = (num) => {
     if (num == "NaN") return "--";
-    const odd = num.toFixed(2);
+    const odd = parseFloat(num).toFixed(2);
     const split1 = `${odd}`?.split(".")[0];
     // const split1 = 6;
     if (split1 == 1) {
@@ -1816,15 +1821,7 @@ const CricketSingle = ({ setShowHeader }) => {
                                   .replace("Batsman", "")}
                                 {fancyReplaceNAme(
                                   replaceNAmeAlbabet(item.name)
-                                )}{" "}
-                                {/* {item.name.replace(
-                                  " A ",
-                                  ` ${teams?.split("-")[0]} `
-                                )} */}
-                                {/* {replaceString(item.name, item.values)} */}
-                                {/* {initem.val1} */}
-                                {/* <br /> */}
-                                {/* {item.values[0].val1} */}
+                                )}
                               </div>{" "}
                               <div
                                 style={{
@@ -1846,7 +1843,9 @@ const CricketSingle = ({ setShowHeader }) => {
                                     // odds: showOdds(item?.values[0]?.val2),
                                     decision: "NO",
 
-                                    team: "",
+                                    team: fancyReplaceNAme(
+                                      replaceNAmeAlbabet(item.name)
+                                    ),
                                     team_id: 2,
                                   });
                                   setClickedRow(index);
@@ -1884,7 +1883,9 @@ const CricketSingle = ({ setShowHeader }) => {
                                   });
                                   setBidContent({
                                     odds: +showBlueBid(item.values) / 100,
-                                    team: "",
+                                    team: fancyReplaceNAme(
+                                      replaceNAmeAlbabet(item.name)
+                                    ),
                                     decision: "YES",
 
                                     team_id: 2,

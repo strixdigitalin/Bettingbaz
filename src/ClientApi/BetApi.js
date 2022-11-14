@@ -14,7 +14,7 @@ export const PlaceBetApi = async (item, successCallback) => {
   const token = userData.usertoken;
   const { bearer } = userData;
   console.log(item.matchId, "<<<<item match id");
-  console.log(user);
+  // console.log(user);
   const payloadData = {
     token,
     game_id: item.matchId,
@@ -25,6 +25,8 @@ export const PlaceBetApi = async (item, successCallback) => {
     status: "running",
     team_id: item.team_id,
   };
+  console.log(payloadData, "<<< payload while bid");
+  return null;
   myHeaders.append("Authorization", "Bearer " + bearer);
 
   var formdata = new FormData();

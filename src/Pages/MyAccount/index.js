@@ -4,6 +4,7 @@ import MyBet from "../MyBet";
 import MyWallet from "../MyWallet";
 import { showResetPasswordModal } from "../../Redux/Reducers/ResetPassword.js";
 import { getUserDetail } from "../../ClientApi/BetApi";
+import { betting_user } from "../../Components/Header";
 
 function MyAccount() {
   const dispatch = useDispatch();
@@ -81,6 +82,22 @@ function MyAccount() {
                     }}
                   >
                     My Wallet
+                  </button>
+                  <button
+                    class="nav-link"
+                    id="v-pills-messages-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#v-pills-messages"
+                    type="button"
+                    role="tab"
+                    aria-controls="v-pills-messages"
+                    aria-selected="false"
+                    onClick={() => {
+                      localStorage.setItem(betting_user, null);
+                      window.location.reload(true);
+                    }}
+                  >
+                    Log out
                   </button>
                 </div>
               </div>
