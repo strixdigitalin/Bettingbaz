@@ -1567,14 +1567,17 @@ const CricketSingle = () => {
               });
             }}
           >
-            {parseFloat(parseFloat(matchData[0]?.values[1]?.odds)).toFixed(2) ==
+            {/* {parseFloat(parseFloat(matchData[0]?.values[1]?.odds)).toFixed(2) ==
             "NaN"
               ? "--"
               : toFix1Float(
                   parseFloat(
                     parseFloat(matchData[0]?.values[1]?.odds) + 0.01
                   ).toFixed(2)
-                )}
+                )} */}
+            {toFix1Float(
+              layAllFirstRow(parseFloat(matchData[0]?.values[1]?.odds))
+            )}
           </div>
           {params.game == "football" && (
             <div
