@@ -134,15 +134,20 @@ const CricketSingle = () => {
     setInterval(() => {
       if (cricBuzMatchId != null) {
         getScoreCard(cricBuzMatchId, (res) => {
+          const matchId = res.scoreCard[0].matchId;
           console.log(res, "cricmatchdata---");
-
+          getDataByOVer(matchId, (resd) => {
+            console.log("thisismatchid", matchId);
+            console.log(resd, "<<<<databyover1");
+            setInningId(resd.inningsId);
+            setDataByOver(resd);
+          });
           setCricBuzSingleMatchData(res);
-          const headerData = cricBuzHeader(res);
+          const headerData = cricBuzHeader(res, matchId);
           console.log(cricBuzHeader(res), "headerdata");
           setHeaderData(headerData);
           const imageId1 = headerData.bettingTeam.teamId;
           // setHeaderData(cricBuzData(res));
-          const matchId = res.scoreCard[0].matchId;
 
           const imageId2 = cricBuzHeader(res).bowlingTeam.teamId;
           console.log(imageId1, imageId2, "<<<imagedid1");
@@ -156,13 +161,6 @@ const CricketSingle = () => {
             setimageLink({ ...imageLink, team2: res });
           });
           // alert("klkjlk");
-
-          getDataByOVer(matchId, (resd) => {
-            console.log("thisismatchid", matchId);
-            console.log(resd, "<<<<databyover1");
-            setInningId(resd.inningsId);
-            setDataByOver(resd);
-          });
         });
       }
     }, 2000);
@@ -224,6 +222,7 @@ const CricketSingle = () => {
 
   const matchTeamNameCricBuz = () => {
     // matchData[0]?.values[0]?.val1
+    let flag = false;
 
     const betFairTeam1 = matchData[0]?.values[0]?.val1.replace("WBBL", "Women");
     const betFairTeam2 = matchData[0]?.values[1]?.val1.replace("WBBL", "Women");
@@ -255,12 +254,13 @@ const CricketSingle = () => {
           );
 
           if (betFairTeam1 == cricTeam1 && betFairTeam2 == cricTeam2) {
+            flag = true;
             console.log(
               cricTeam1,
               betFairTeam1,
               cricTeam2,
               betFairTeam2,
-              "matchCricbuzdatm -1",
+              "matchCricbuzdatam -1",
               match.matchInfo.matchId,
               series.seriesAdWrapper.seriesId,
               ss,
@@ -273,7 +273,8 @@ const CricketSingle = () => {
             // };
           }
           if (betFairTeam1 == cricTeam2 && betFairTeam2 == cricTeam1) {
-            alert("jkljlkjlk");
+            alert(match.matchInfo.matchId);
+            flag = true;
             console.log(
               cricTeam1,
               cricTeam2,
@@ -290,6 +291,9 @@ const CricketSingle = () => {
             //   matchStatus: match.matchInfo.status,
             // };
           }
+
+          if (flag != true) {
+          }
           console.log(match, "<<<< match");
           setcricBuzData(match);
           console.log(
@@ -298,6 +302,160 @@ const CricketSingle = () => {
           );
         });
       });
+      if (flag == false) {
+        data.typeMatches[1].seriesMatches.map((series, ss) => {
+          console.log(series.seriesAdWrapper, "<<<s");
+          series.seriesAdWrapper?.matches.map((match, se) => {
+            // console.log("matchCricbuzdata", "<<<<<");
+            const cricTeam1 = match.matchInfo.team1.teamName;
+            const cricTeam2 = match.matchInfo.team2.teamName;
+            console.log(
+              cricTeam1,
+              "--",
+              betFairTeam2,
+              "--",
+              cricTeam2,
+              "--",
+              betFairTeam1,
+              "--",
+              "matchCricbuzdata -3",
+              "--",
+              match.matchInfo.matchId,
+              "--",
+              series.seriesAdWrapper.seriesId,
+              "--",
+              ss,
+              "--",
+              se
+            );
+
+            if (betFairTeam1 == cricTeam1 && betFairTeam2 == cricTeam2) {
+              flag = true;
+              console.log(
+                cricTeam1,
+                betFairTeam1,
+                cricTeam2,
+                betFairTeam2,
+                "matchCricbuzdatam -1",
+                match.matchInfo.matchId,
+                series.seriesAdWrapper.seriesId,
+                ss,
+                se
+              );
+              // alert("here");
+              setCricBuzMatchId(match.matchInfo.matchId);
+              // let cricBuzDEtail = {
+              //   matchStatus: match.matchInfo.status,
+              // };
+            }
+            if (betFairTeam1 == cricTeam2 && betFairTeam2 == cricTeam1) {
+              alert(match.matchInfo.matchId);
+              flag = true;
+              console.log(
+                cricTeam1,
+                cricTeam2,
+                betFairTeam1,
+                betFairTeam2,
+                "matchCricbuzdatam -2",
+                match.matchInfo.matchId,
+                series.seriesAdWrapper.seriesId,
+                ss,
+                se
+              );
+              setCricBuzMatchId(match.matchInfo.matchId);
+              // let cricBuzDEtail = {
+              //   matchStatus: match.matchInfo.status,
+              // };
+            }
+
+            if (flag != true) {
+            }
+            console.log(match, "<<<< match");
+            setcricBuzData(match);
+            console.log(
+              match.matchInfo.team1.teamName,
+              matchData[0]?.values[0]?.val1
+            );
+          });
+        });
+      }
+      if (flag == false) {
+        data.typeMatches[2].seriesMatches.map((series, ss) => {
+          console.log(series.seriesAdWrapper, "<<<s");
+          series.seriesAdWrapper?.matches.map((match, se) => {
+            // console.log("matchCricbuzdata", "<<<<<");
+            const cricTeam1 = match.matchInfo.team1.teamName;
+            const cricTeam2 = match.matchInfo.team2.teamName;
+            console.log(
+              cricTeam1,
+              "--",
+              betFairTeam2,
+              "--",
+              cricTeam2,
+              "--",
+              betFairTeam1,
+              "--",
+              "matchCricbuzdata -3",
+              "--",
+              match.matchInfo.matchId,
+              "--",
+              series.seriesAdWrapper.seriesId,
+              "--",
+              ss,
+              "--",
+              se
+            );
+
+            if (betFairTeam1 == cricTeam1 && betFairTeam2 == cricTeam2) {
+              flag = true;
+              console.log(
+                cricTeam1,
+                betFairTeam1,
+                cricTeam2,
+                betFairTeam2,
+                "matchCricbuzdatam -1",
+                match.matchInfo.matchId,
+                series.seriesAdWrapper.seriesId,
+                ss,
+                se
+              );
+              // alert("here");
+              setCricBuzMatchId(match.matchInfo.matchId);
+              // let cricBuzDEtail = {
+              //   matchStatus: match.matchInfo.status,
+              // };
+            }
+            if (betFairTeam1 == cricTeam2 && betFairTeam2 == cricTeam1) {
+              alert(match.matchInfo.matchId);
+              flag = true;
+              console.log(
+                cricTeam1,
+                cricTeam2,
+                betFairTeam1,
+                betFairTeam2,
+                "matchCricbuzdatam -2",
+                match.matchInfo.matchId,
+                series.seriesAdWrapper.seriesId,
+                ss,
+                se
+              );
+              setCricBuzMatchId(match.matchInfo.matchId);
+              // let cricBuzDEtail = {
+              //   matchStatus: match.matchInfo.status,
+              // };
+            }
+
+            if (flag != true) {
+            }
+            console.log(match, "<<<< match");
+            setcricBuzData(match);
+            console.log(
+              match.matchInfo.team1.teamName,
+              matchData[0]?.values[0]?.val1
+            );
+          });
+        });
+      }
       // });
     });
   };
@@ -526,16 +684,16 @@ const CricketSingle = () => {
   };
   console.log(cricBuzData, "<<<thisiscricbuzdata");
 
-  const cricBuzHeader = (res) => {
+  const cricBuzHeader = (res, id) => {
     console.log(res.matchHeader.matchTeamInfo, "<<<< cricBuzHeader");
     // console.log(res.matchHeader.matchTeamInfo, "<<<< cricBuzHeader");
 
     return {
       bettingTeam: getImageId(
-        res.matchHeader.matchTeamInfo[inningId == 2 ? 1 : 0].battingTeamId
+        res.matchHeader.matchTeamInfo[id == 2 ? 1 : 0].battingTeamId
       ),
       bowlingTeam: getImageId(
-        res.matchHeader.matchTeamInfo[inningId == 2 ? 1 : 0].bowlingTeamId
+        res.matchHeader.matchTeamInfo[id == 2 ? 1 : 0].bowlingTeamId
       ),
     };
   };
