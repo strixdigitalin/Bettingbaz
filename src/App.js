@@ -53,8 +53,10 @@ import Signup from "./Pages/Signup";
 import MyAccount from "./Pages/MyAccount";
 import { getSocket } from "./ClientApi/BetApi";
 import MobileFooter from "./Components/MobileFooter";
+import { useState } from "react";
 
 function App() {
+  const [showHeader, setShowHeader] = useState(true);
   const { PlaceBid, SignInState, ResetPassword } = useSelector(
     (state) => state
   );
@@ -64,7 +66,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
+        {showHeader && <Header />}
         <Routes>
           {/* <Route path="/" > */}
           {/* </Route> */}
@@ -116,7 +118,7 @@ function App() {
             path="/match-single/sport/:game/:legue/:teams/:id"
             element={
               <>
-                <CricketSingleMatch />
+                <CricketSingleMatch setShowHeader={setShowHeader} />
                 <MobileFooter showOrange="casino" />
               </>
             }

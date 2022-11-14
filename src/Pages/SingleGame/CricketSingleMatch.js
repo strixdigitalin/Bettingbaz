@@ -37,11 +37,15 @@ const TOTAL_RUNS = "Runs";
 const WICKETS = "Wicket";
 const initialBlock = { row: null, box: null };
 
-export default function CricketSingleMatch() {
-  return <PageCover component={<CricketSingle />} />;
+export default function CricketSingleMatch(props) {
+  return (
+    <PageCover
+      component={<CricketSingle setShowHeader={props.setShowHeader} />}
+    />
+  );
 }
 
-const CricketSingle = () => {
+const CricketSingle = ({ setShowHeader }) => {
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -92,6 +96,7 @@ const CricketSingle = () => {
   const [noData, setNoData] = useState(true);
   useEffect(() => {
     // setInterval(function () {
+    setShowHeader(false);
     // method to be executed;
     console.log("fetch by single game called");
     betbySingleMatc(params, (res) => {
@@ -290,12 +295,12 @@ const CricketSingle = () => {
             // let cricBuzDEtail = {
             //   matchStatus: match.matchInfo.status,
             // };
+            setcricBuzData(match);
           }
 
           if (flag != true) {
           }
           console.log(match, "<<<< match");
-          setcricBuzData(match);
           console.log(
             match.matchInfo.team1.teamName,
             matchData[0]?.values[0]?.val1
@@ -366,12 +371,12 @@ const CricketSingle = () => {
               // let cricBuzDEtail = {
               //   matchStatus: match.matchInfo.status,
               // };
+              setcricBuzData(match);
             }
 
             if (flag != true) {
             }
             console.log(match, "<<<< match");
-            setcricBuzData(match);
             console.log(
               match.matchInfo.team1.teamName,
               matchData[0]?.values[0]?.val1
@@ -443,12 +448,12 @@ const CricketSingle = () => {
               // let cricBuzDEtail = {
               //   matchStatus: match.matchInfo.status,
               // };
+              setcricBuzData(match);
             }
 
             if (flag != true) {
             }
             console.log(match, "<<<< match");
-            setcricBuzData(match);
             console.log(
               match.matchInfo.team1.teamName,
               matchData[0]?.values[0]?.val1
@@ -803,8 +808,9 @@ const CricketSingle = () => {
               )}
             </div>
             <div
-              className="flex-row align-ctr just-ctr"
-              style={{ height: "100%", width: "100%" }}
+              // className="flex-row align-ctr just-ctr"
+              className="flex-row  just-ctr"
+              style={{ height: "100%", width: "100%", marginTop: "20px" }}
             >
               <div>
                 <img src={batsvg} width="44px" />
@@ -815,14 +821,18 @@ const CricketSingle = () => {
                   borderLeft: "1px solid #F98417",
                   borderRight: "1px solid #F98417",
                   padding: "0px 5px",
-                  fontSize: "12px",
+                  // fontSize: "12px",
                 }}
+                className="playerNamesFont"
               >
                 {databyover?.batsmanStriker?.batName}
                 <br />
                 {databyover?.batsmanNonStriker?.batName}
               </div>
-              <div style={{ color: "#F98417", padding: "10px" }}>
+              <div
+                style={{ color: "#F98417", padding: " 0px 10px" }}
+                className="playerNamesFont"
+              >
                 {databyover?.batsmanStriker?.batRuns} *
                 <br />
                 {databyover?.batsmanNonStriker?.batRuns}
@@ -834,7 +844,7 @@ const CricketSingle = () => {
           <div
             style={{
               border: "1px solid #F97D09",
-              height: "44px",
+              height: "57px",
               borderRight: "none",
             }}
           ></div>
@@ -856,8 +866,14 @@ const CricketSingle = () => {
               {/* {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets} */}
             </div>
             <div
-              className="flex-row align-ctr just-ctr"
-              style={{ height: "100%", gap: "5%", width: "100%" }}
+              // className="flex-row align-ctr just-ctr"
+              className="flex-row  just-ctr"
+              style={{
+                height: "100%",
+                gap: "5%",
+                width: "100%",
+                marginTop: "20px",
+              }}
             >
               <div>
                 <img src={ballsvg} width="20px" />
@@ -868,17 +884,24 @@ const CricketSingle = () => {
                   borderLeft: "1px solid #F98417",
                   borderRight: "1px solid #F98417",
                   padding: "0px 5px",
-                  fontSize: "12px",
+                  // fontSize: "12px",
                 }}
+                className="playerNamesFont"
               >
-                {databyover?.bowlerStriker?.bowlName}
+                {databyover?.bowlerStriker?.bowlName} *
                 <br />
-                {databyover?.bowlerStriker?.bowlName}
+                {databyover?.bowlerNonStriker?.bowlName}
               </div>
 
-              <div style={{ color: "#F98417", padding: "10px" }}>
+              <div
+                style={{ color: "#F98417", padding: " 0px 10px" }}
+                className="playerNamesFont"
+              >
                 {databyover?.bowlerStriker?.bowlRuns}/
                 {databyover?.bowlerStriker?.bowlWkts}
+                <br />
+                {databyover?.bowlerNonStriker?.bowlRuns}/
+                {databyover?.bowlerNonStriker?.bowlWkts}
               </div>
             </div>
           </div>
@@ -1794,7 +1817,6 @@ const CricketSingle = () => {
                                 {fancyReplaceNAme(
                                   replaceNAmeAlbabet(item.name)
                                 )}{" "}
-                                sss
                                 {/* {item.name.replace(
                                   " A ",
                                   ` ${teams?.split("-")[0]} `
