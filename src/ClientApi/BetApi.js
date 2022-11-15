@@ -228,7 +228,7 @@ export const earnAmount = async (amount, id, successCallBack) => {
 };
 
 export const withdrawApi = async (amount, successCallBack) => {
-  var myHeaders = new Headers();
+  var myHeaders = new Headers
   const user = localStorage.getItem("betting_user");
   const userData = JSON.parse(user);
   const token = userData.usertoken;

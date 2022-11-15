@@ -273,6 +273,7 @@ const CricketSingle = ({ setShowHeader }) => {
             );
             // alert("here");
             setCricBuzMatchId(match.matchInfo.matchId);
+            setcricBuzData(match);
             // let cricBuzDEtail = {
             //   matchStatus: match.matchInfo.status,
             // };
@@ -298,14 +299,6 @@ const CricketSingle = ({ setShowHeader }) => {
             // console.log(match,"<<<<<cricbuzdatascore")
             setcricBuzData(match);
           }
-
-          if (flag != true) {
-          }
-          console.log(match, "<<<< match");
-          console.log(
-            match.matchInfo.team1.teamName,
-            matchData[0]?.values[0]?.val1
-          );
         });
       });
       if (flag == false) {
@@ -375,14 +368,6 @@ const CricketSingle = ({ setShowHeader }) => {
               // };
               setcricBuzData(match);
             }
-
-            if (flag != true) {
-            }
-            console.log(match, "<<<< match");
-            console.log(
-              match.matchInfo.team1.teamName,
-              matchData[0]?.values[0]?.val1
-            );
           });
         });
       }
@@ -428,6 +413,7 @@ const CricketSingle = ({ setShowHeader }) => {
               );
               // alert("here");
               setCricBuzMatchId(match.matchInfo.matchId);
+              setcricBuzData(match);
               // let cricBuzDEtail = {
               //   matchStatus: match.matchInfo.status,
               // };
@@ -1419,7 +1405,8 @@ const CricketSingle = ({ setShowHeader }) => {
               color: "black",
             }}
           >
-            {matchData[0]?.values[0]?.val1}
+            {matchData[0]?.values[0]?.val1?.split(" ")[0]}{" "}
+            {matchData[0]?.values[0]?.val1?.split(" ")[1]}
             {/* {cricBuzData.matchScore?.team1Score?.inngs1.runs}sss */}
           </div>
           <div
@@ -1430,7 +1417,8 @@ const CricketSingle = ({ setShowHeader }) => {
               color: "black",
             }}
           >
-            {matchData[0]?.values[1]?.val1}
+            {matchData[0]?.values[1]?.val1?.split(" ")[0]}{" "}
+            {matchData[0]?.values[1]?.val1?.split(" ")[1]}
           </div>
           {params.game == "football" && (
             <div

@@ -122,14 +122,14 @@ function MobileFooter({ showOrange = "home" }) {
         {userLoggedIn && (
           <>
             {" "}
-            <Link to="/home" className="text-icon-cover">
+            <a href="/home" className="text-icon-cover">
               <img
                 src={showHome() ? homeorange : homeblack}
                 width="50px"
                 style={{ width: "50px", margin: "auto", textAlign: "center" }}
               />
               {/* <div style={{ textDecoration: "none", color: "black" }}>Home</div> */}
-            </Link>
+            </a>
             <Link
               to="/my-bet"
               // onClick={openSigninModal}
@@ -191,14 +191,14 @@ function MobileFooter({ showOrange = "home" }) {
         )}
         {!userLoggedIn && (
           <>
-            <Link to="/home" className="text-icon-cover">
+            <a href="/home" className="text-icon-cover">
               <img
                 src={showHome() ? homeorange : homeblack}
                 width="50px"
                 style={{ width: "50px", margin: "auto", textAlign: "center" }}
               />
               {/* <div style={{ textDecoration: "none", color: "black" }}>Home</div> */}
-            </Link>
+            </a>
             <a href="/sports" className="text-icon-cover">
               <img
                 src={showSports() ? sportsorange : sportsblack}
