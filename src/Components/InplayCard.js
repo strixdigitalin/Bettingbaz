@@ -203,7 +203,8 @@ export function InPlayCard({
             // path="/match-single/sport/:game/:legue/:teams/:id"
             return (
               <Link
-                to={`/match-by-competition${item?.id}`}
+                to={"/match-single" + item.id}
+                // to={`/match-by-competition${item?.id}`}
                 className="hoverRow"
               >
                 <div

@@ -391,7 +391,7 @@ export function ShowLiveMatchCard({
             to={`/in-play`}
             style={{ color: "black", textDecoration: "underLine" }}
           >
-            See more in play
+            See more
           </Link>
         </div>
       )}

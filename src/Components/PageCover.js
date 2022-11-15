@@ -66,7 +66,7 @@ function PageCover({ component, gamename }) {
         {component}
 
         <QuickLinks
-          heading="Quick Links"
+          heading="All Games"
           item={[1, 2, 3]}
           data={allSports.slice(0, 18)}
         />
