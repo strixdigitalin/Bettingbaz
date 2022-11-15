@@ -11,12 +11,24 @@ function MyAccount() {
   const [showBet, setshowBet] = useState("");
   const [userData, setUserData] = useState({});
   const [ShowWallet, SetShowWallet] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
   useEffect(() => {
+    console.log("href", window.location.pathname);
+    if (window.location.pathname == "/my-wallet") {
+      setshowBet(false);
+      setShowProfile(false);
+      SetShowWallet(true);
+    }
+    if (window.location.pathname == "/my-account") {
+      setshowBet(false);
+      setShowProfile(true);
+      SetShowWallet(false);
+    }
     getUserDetail((res) => {
       console.log(res, "<<<res");
       setUserData(res.user);
     });
-  }, []);
+  }, [window.location.pathname]);
 
   return (
     <>
@@ -45,6 +57,7 @@ function MyAccount() {
                     aria-selected="true"
                     onClick={() => {
                       setshowBet(false);
+                      setShowProfile(true);
                       SetShowWallet(false);
                     }}
                   >
@@ -92,6 +105,9 @@ function MyAccount() {
                     role="tab"
                     aria-controls="v-pills-messages"
                     aria-selected="false"
+                    style={{
+                      color: "red",
+                    }}
                     onClick={() => {
                       localStorage.setItem(betting_user, null);
                       window.location.reload(true);
@@ -103,111 +119,113 @@ function MyAccount() {
               </div>
             </div>
             <div className="col-md-9">
-              <div className="profile_info">
-                <div class="tab-content" id="v-pills-tabContent">
-                  <div
-                    class="tab-pane fade show active"
-                    id="v-pills-home"
-                    role="tabpanel"
-                    aria-labelledby="v-pills-home-tab"
-                  >
-                    <div className="profile_inr_info">
-                      <div className="profile_title">
-                        <h3>My Profile</h3>
-                      </div>
-                      <table className="table">
-                        <tbody>
-                          <tr>
-                            <td>First Name</td>
-                            <td>{userData.name}</td>
-                          </tr>
-                          {/* <tr>
+              {showProfile && (
+                <div className="profile_info">
+                  <div class="tab-content" id="v-pills-tabContent">
+                    <div
+                      class="tab-pane fade show active"
+                      id="v-pills-home"
+                      role="tabpanel"
+                      aria-labelledby="v-pills-home-tab"
+                    >
+                      <div className="profile_inr_info">
+                        <div className="profile_title">
+                          <h3>My Profile</h3>
+                        </div>
+                        <table className="table">
+                          <tbody>
+                            <tr>
+                              <td>First Name</td>
+                              <td>{userData.name}</td>
+                            </tr>
+                            {/* <tr>
                             <td>Last Name</td>
                             <td>Singh</td>
                           </tr> */}
-                          <tr>
-                            <td>User Name</td>
-                            <td>{userData.name}</td>
-                          </tr>
-                          <tr>
-                            <td>Email Id</td>
-                            <td>{userData.email}</td>
-                          </tr>
-                          <tr>
-                            <td>Phone Num.</td>
-                            <td>{userData.mobile}</td>
-                          </tr>
-                          <tr>
-                            <td>Password</td>
-                            <td>
-                              <div className="pass_inr">
-                                <span>****</span>
-                                <a
-                                  href="#"
-                                  onClick={() => {
-                                    dispatch(showResetPasswordModal(true));
-                                  }}
-                                >
-                                  Edit
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div
-                    class="tab-pane fade"
-                    id="v-pills-profile"
-                    role="tabpanel"
-                    aria-labelledby="v-pills-profile-tab"
-                  >
-                    <div className="profile_inr_info">
-                      <div className="wallet_title">
-                        <h3>My Wallet</h3>
-                        <div className="blance_title">
-                          <h3>My Balance {"    "} 0.00 </h3>
-                          {/* <h3>0.00</h3> */}
-                        </div>
+                            <tr>
+                              <td>User Name</td>
+                              <td>{userData.name}</td>
+                            </tr>
+                            <tr>
+                              <td>Email Id</td>
+                              <td>{userData.email}</td>
+                            </tr>
+                            <tr>
+                              <td>Phone Num.</td>
+                              <td>{userData.mobile}</td>
+                            </tr>
+                            <tr>
+                              <td>Password</td>
+                              <td>
+                                <div className="pass_inr">
+                                  <span>****</span>
+                                  <a
+                                    href="#"
+                                    onClick={() => {
+                                      dispatch(showResetPasswordModal(true));
+                                    }}
+                                  >
+                                    Edit
+                                  </a>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
-                      <table className="table">
-                        <tbody>
-                          <tr>
-                            <td>First Name</td>
-                            <td>Rahul</td>
-                          </tr>
-                          <tr>
-                            <td>Last Name</td>
-                            <td>Singh</td>
-                          </tr>
-                          <tr>
-                            <td>User Name</td>
-                            <td>rahulsing55</td>
-                          </tr>
-                          <tr>
-                            <td>Email Id</td>
-                            <td>rahulsingh154@gmail.com</td>
-                          </tr>
-                          <tr>
-                            <td>Phone Num.</td>
-                            <td>+919810291083</td>
-                          </tr>
-                          <tr>
-                            <td>Password</td>
-                            <td>
-                              <div className="pass_inr">
-                                <span>****</span>
-                                <a href="#">Edit</a>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    </div>
+                    <div
+                      class="tab-pane fade"
+                      id="v-pills-profile"
+                      role="tabpanel"
+                      aria-labelledby="v-pills-profile-tab"
+                    >
+                      <div className="profile_inr_info">
+                        <div className="wallet_title">
+                          <h3>My Wallet</h3>
+                          <div className="blance_title">
+                            <h3>My Balance {"    "} 0.00 </h3>
+                            {/* <h3>0.00</h3> */}
+                          </div>
+                        </div>
+                        <table className="table">
+                          <tbody>
+                            <tr>
+                              <td>First Name</td>
+                              <td>Rahul</td>
+                            </tr>
+                            <tr>
+                              <td>Last Name</td>
+                              <td>Singh</td>
+                            </tr>
+                            <tr>
+                              <td>User Name</td>
+                              <td>rahulsing55</td>
+                            </tr>
+                            <tr>
+                              <td>Email Id</td>
+                              <td>rahulsingh154@gmail.com</td>
+                            </tr>
+                            <tr>
+                              <td>Phone Num.</td>
+                              <td>+919810291083</td>
+                            </tr>
+                            <tr>
+                              <td>Password</td>
+                              <td>
+                                <div className="pass_inr">
+                                  <span>****</span>
+                                  <a href="#">Edit</a>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
               {showBet && <MyBet showBet={showBet} setshowBet={setshowBet} />}
               {ShowWallet && (
                 <MyWallet showBet={ShowWallet} SetShowWallet={SetShowWallet} />

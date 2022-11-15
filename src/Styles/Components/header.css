@@ -129,6 +129,10 @@ color: black;
     cursor: pointer;
     gap: 6%;
 }
+.mob-log-but{
+    display: none;
+
+  }
 
 @media screen and (max-width:768px) {
   .mob-log-but{

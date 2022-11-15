@@ -734,29 +734,36 @@ const CricketSingle = ({ setShowHeader }) => {
   };
   return (
     <div className="single-middle">
-      {/* <div className="single-top-head">
+      <div className="single-top-head">
         {params.teams.toLocaleUpperCase().replace("-", " ")}
       </div>
-      <div className="flex-row just-bet one-eaning bgwhite">
-        <div className="eaning-left">
-          <div className="flex-row align-ctr">
-            <img src={bat} width="60px" height="60px" />
-            <img src={india} width="30px" height="30px" />
-          </div>
-          <div>{matchData[0]?.values[0]?.val1.toLocaleUpperCase()}</div>
-          <span>15-2</span>
-        </div>
-        <div className="eaning-mid">1 st Ennings</div>
-        <div className="eaning-left">
-          <div className="flex-row align-ctr">
-            <img src={pakistan} />
+      {cricBuzMatchId == null && (
+        <>
+          <div className="flex-row just-bet one-eaning bgwhite">
+            <div className="eaning-left">
+              <div className="flex-row align-ctr">
+                {/* <img src={bat} width="60px" height="60px" />
+            <img src={india} width="30px" height="30px" /> */}
+              </div>
+              <div>{matchData[0]?.values[0]?.val1.toLocaleUpperCase()}</div>
+              {/* <span>15-2</span> */}
+            </div>
+            {/* <div className="eaning-mid">1 st Ennings</div> */}
+            <div className="eaning-left">
+              <div className="flex-row align-ctr">
+                {/* <img src={pakistan} /> */}
 
-            <img src={ball} width="44px" height="44px" />
+                {/* <img src={ball} width="44px" height="44px" /> */}
+              </div>
+              <div> {matchData[0]?.values[1]?.val1.toLocaleUpperCase()}</div>
+              {/* <span>15-2</span>  */}
+            </div>
           </div>
-          <div> {matchData[0]?.values[1]?.val1.toLocaleUpperCase()}</div>
-          <span>15-2</span>
-        </div>
-      </div> */}
+          <div style={{ width: "100%", textAlign: "center",background:"white" }}>
+            Score Not available{" "}
+          </div>
+        </>
+      )}
       {/* ------------
        */}
 
@@ -764,178 +771,181 @@ const CricketSingle = ({ setShowHeader }) => {
 
       {/*  <768 px */}
       {/* <768 px mob */}
-      <div>
-        <div
-          style={{
-            width: "100%",
-            textAlign: "center",
-            background: "white",
-            fontWeight: "bold",
-            fontSize: "10px",
-            height: "20px",
-            paddingTop: "10px",
-          }}
-        >
-          {" "}
-          {inningId != 0 && (
-            <>
-              {inningId}
-              {inningId == 1 ? "st" : "nd"} Inning
-            </>
-          )}
-        </div>
-        <div className="mob-one-eaning">
-          <div className="mob-one-eaning-single">
-            {/* <img src={imageLink.team2} /> */}
-            {/* <img src="https://cricbuzz-cricket.p.rapidapi.com/img/v1/i1/c3/i.jpg" /> */}
-            {/* <img
+      {cricBuzMatchId != null && (
+        <div>
+          <div
+            style={{
+              width: "100%",
+              textAlign: "center",
+              background: "white",
+              fontWeight: "bold",
+              fontSize: "10px",
+              height: "20px",
+              paddingTop: "10px",
+            }}
+          >
+            {" "}
+            {inningId != 0 && (
+              <>
+                {inningId}
+                {inningId == 1 ? "st" : "nd"} Inning
+              </>
+            )}
+          </div>
+          <div className="mob-one-eaning">
+            <div className="mob-one-eaning-single">
+              {/* <img src={imageLink.team2} /> */}
+              {/* <img src="https://cricbuzz-cricket.p.rapidapi.com/img/v1/i1/c3/i.jpg" /> */}
+              {/* <img
               src="data:image/png;base64, /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCABEAFoDASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAAQFAQMCBv/EABgBAAMBAQAAAAAAAAAAAAAAAAACAwEE/9oADAMBAAIQAxAAAAG7poS0mkZ8vQ5mJ0PPkOhzA91I9bXf3Np1SEXkZ8hQWcGmALN1J9Fm815FbB/c2vXIReRlyNUI19qfPlKesvJ70zlXkVxntza9chF5GfIdOZi1/cXNo8kGJleRXNa0K9aq4T5tAxQADAAeBn//xAAjEAACAQMFAAMBAQAAAAAAAAAAAQIDBDEQERITMiAhIxQw/9oACAEBAAEFAkjYupOMucznM7JnOZzmc5nOZ2TE3ssF361a2+KwsF3704qjTzo6H1osLBd+yhHlVu/Jvsf0fm8iwsF37LZ/rcQ5U/isLBd+xPi4SU41rf7cZIUJsnFR0WFgu/ekJypuNzFjr0ypcN6rCwXfv/BY3NyrBSOmB0wOmB0wOmB0wOmB1QOCP//EAB8RAAICAQQDAAAAAAAAAAAAAAABAhEQAyExMhMgQf/aAAgBAwEBPwEm9y2WyyLxPsRW14lXwjifY091Q4tFEcT7HB5GNtkcT59In//EABoRAAIDAQEAAAAAAAAAAAAAAAEQACAxERL/2gAIAQIBAT8Bh2gR2BFnYJyh1ekEaCf/xAAhEAABAwQDAAMAAAAAAAAAAAAAARAxESAhMgISMEFRcf/aAAgBAQAGPwJkobGxsbGxsbEkulmfBH7LsVWWTlH3cjII2BElfm5H/PFGqVO3A1UwhSubUfEGWpwuT0yQQQQQQQQ3/8QAIRAAAgICAQUBAQAAAAAAAAAAAAERMSAhQRAwYXGBUcH/2gAIAQEAAT8hRBATDx2JBpIww2QyTbhKWN1tg6+lGJPQublDbaTYhvSUjGtpGhqXFDKMSQD8J+A4EzTYkoAGTklHgZRiSD5Kq9hV/MHX0oxI9CcMW02MfI5RYA5h/tkSsuQ6KMiTh/QTcGRLTNKQujoo9ZlhELq6+lAmgmO01nsgAACKGj//2gAMAwEAAgADAAAAEJDDQSPFPHttblPvk3e1OMJiq4Pwg3wP/8QAHBEAAgMBAAMAAAAAAAAAAAAAAAEQETEhIEFR/9oACAEDAQE/EBic+EFhlRsUuL7bMRiNhk1x7g2XWe8bCba0Kumbg2+SiP/EABsRAQEBAQADAQAAAAAAAAAAAAEAERAgITFB/9oACAECAQE/EJzW1tZPYet5j8js9MlFjHYctSr19eL/xAAiEAACAQMEAwEBAAAAAAAAAAAAAREhMUFRYXGBkaHwELH/2gAIAQEAAT8QYWg44gsSxG637H2R8kcTo+yPsj7IRSdabWBpmlYLX73f8Q3n2SHUC2aftmqSijoJdKLRg9UdyG3FTbhIcEymG0Y3Sm1Ewmm0VxrEU2XG9BOhb2j00WjB6pkQ0qkkoWuRU5ZEZ8LZk8JFAcoV20Fq5Qyv4RaMHojErTpMBr8ijUZuVmnDExYhJ2qVomWuAq60WjB6Iy5WhvgbCkaqh/WtQMYU6IXc4IQzipS+Ez+yPTRaMHomTfGUTMNnVhVnrCMntUKXOaSRVuW26udT+yPXFox+DWpvNTskukJblJDreFwdotcDb2QmtTdJlIUar8m/8m/8m/8AJv8Ayb/yNLVXkanyWRNFp1P/2Q=="
               alt="response"
               style={{ width: "100px" }}
             /> */}
-            {/* <div>{headerData?.bettingTeam?.teamName}</div> */}
-            <div>
-              {
-                databyover?.matchHeader?.matchTeamInfo[inningId == 2 ? 1 : 0]
-                  ?.battingTeamShortName
-              }
-            </div>
-            <div style={{ color: "#F98417" }}>
-              {inningId == 1 ? (
-                <>
-                  {cricBuzData?.matchScore?.team1Score?.inngs1?.runs}/
-                  {cricBuzData?.matchScore?.team1Score?.inngs1?.wickets}
-                </>
-              ) : (
-                <>
-                  {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/
-                  {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets}
-                </>
-              )}
-            </div>
-            <div
-              // className="flex-row align-ctr just-ctr"
-              className="flex-row  just-ctr"
-              style={{ height: "100%", width: "100%", marginTop: "20px" }}
-            >
+              {/* <div>{headerData?.bettingTeam?.teamName}</div> */}
               <div>
-                <img src={batsvg} width="44px" />
+                {
+                  databyover?.matchHeader?.matchTeamInfo[inningId == 2 ? 1 : 0]
+                    ?.battingTeamShortName
+                }
+              </div>
+              <div style={{ color: "#F98417" }}>
+                {inningId == 1 ? (
+                  <>
+                    {cricBuzData?.matchScore?.team1Score?.inngs1?.runs}/
+                    {cricBuzData?.matchScore?.team1Score?.inngs1?.wickets}
+                  </>
+                ) : (
+                  <>
+                    {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/
+                    {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets}
+                  </>
+                )}
               </div>
               <div
+                // className="flex-row align-ctr just-ctr"
+                className="flex-row  just-ctr"
+                style={{ height: "100%", width: "100%", marginTop: "20px" }}
+              >
+                <div>
+                  <img src={batsvg} width="44px" />
+                </div>
+                <div
+                  style={{
+                    height: "40%",
+                    borderLeft: "1px solid #F98417",
+                    borderRight: "1px solid #F98417",
+                    padding: "0px 5px",
+                    // fontSize: "12px",
+                  }}
+                  className="playerNamesFont"
+                >
+                  {databyover?.batsmanStriker?.batName}
+                  <br />
+                  {databyover?.batsmanNonStriker?.batName}
+                </div>
+                <div
+                  style={{ color: "#F98417", padding: " 0px 10px" }}
+                  className="playerNamesFont"
+                >
+                  {databyover?.batsmanStriker?.batRuns} *
+                  <br />
+                  {databyover?.batsmanNonStriker?.batRuns}
+                </div>
+              </div>
+            </div>
+            {/* <div style={{}}> */}
+
+            <div
+              style={{
+                border: "1px solid #F97D09",
+                height: "57px",
+                borderRight: "none",
+              }}
+            ></div>
+            {/* </div> */}
+
+            <div className="mob-one-eaning-single">
+              {/* <img src={pakistansvg} /> */}
+              <div>
+                {
+                  databyover?.matchHeader?.matchTeamInfo[inningId == 2 ? 1 : 0]
+                    ?.bowlingTeamShortName
+                }
+              </div>
+
+              <div style={{ color: "#F98417" }}>
+                {/* 24/7ss */}
+                {databyover.overs} Overs
+                {/* {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/ */}
+                {/* {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets} */}
+              </div>
+              <div
+                // className="flex-row align-ctr just-ctr"
+                className="flex-row  just-ctr"
                 style={{
-                  height: "40%",
-                  borderLeft: "1px solid #F98417",
-                  borderRight: "1px solid #F98417",
-                  padding: "0px 5px",
-                  // fontSize: "12px",
+                  height: "100%",
+                  gap: "5%",
+                  width: "100%",
+                  marginTop: "20px",
                 }}
-                className="playerNamesFont"
               >
-                {databyover?.batsmanStriker?.batName}
-                <br />
-                {databyover?.batsmanNonStriker?.batName}
-              </div>
-              <div
-                style={{ color: "#F98417", padding: " 0px 10px" }}
-                className="playerNamesFont"
-              >
-                {databyover?.batsmanStriker?.batRuns} *
-                <br />
-                {databyover?.batsmanNonStriker?.batRuns}
+                <div>
+                  <img src={ballsvg} width="20px" />
+                </div>
+                <div
+                  style={{
+                    height: "40%",
+                    borderLeft: "1px solid #F98417",
+                    borderRight: "1px solid #F98417",
+                    padding: "0px 5px",
+                    // fontSize: "12px",
+                  }}
+                  className="playerNamesFont"
+                >
+                  {databyover?.bowlerStriker?.bowlName} *
+                  <br />
+                  {databyover?.bowlerNonStriker?.bowlName}
+                </div>
+
+                <div
+                  style={{ color: "#F98417", padding: " 0px 10px" }}
+                  className="playerNamesFont"
+                >
+                  {databyover?.bowlerStriker?.bowlRuns}/
+                  {databyover?.bowlerStriker?.bowlWkts}
+                  <br />
+                  {databyover?.bowlerNonStriker?.bowlRuns}/
+                  {databyover?.bowlerNonStriker?.bowlWkts}
+                </div>
               </div>
             </div>
           </div>
-          {/* <div style={{}}> */}
+
+          <div className="mob-one-eaning balls-cover">
+            <span style={{ fontSize: "10px", marginRight: "20px" }}>
+              Current Over
+            </span>{" "}
+            {overStat(databyover?.recentOvsStats)?.map((item) => {
+              return (
+                <div
+                  className={`single-ball ${
+                    isBallDot(item) ? "ball2" : "ball1"
+                  }`}
+                >
+                  {item}
+                </div>
+              );
+            })}
+          </div>
 
           <div
-            style={{
-              border: "1px solid #F97D09",
-              height: "57px",
-              borderRight: "none",
-            }}
-          ></div>
-          {/* </div> */}
-
-          <div className="mob-one-eaning-single">
-            {/* <img src={pakistansvg} /> */}
-            <div>
-              {
-                databyover?.matchHeader?.matchTeamInfo[inningId == 2 ? 1 : 0]
-                  ?.bowlingTeamShortName
-              }
-            </div>
-
-            <div style={{ color: "#F98417" }}>
-              {/* 24/7ss */}
-              {databyover.overs} Overs
-              {/* {cricBuzData?.matchScore?.team2Score?.inngs1?.runs}/ */}
-              {/* {cricBuzData?.matchScore?.team2Score?.inngs1?.wickets} */}
-            </div>
-            <div
-              // className="flex-row align-ctr just-ctr"
-              className="flex-row  just-ctr"
-              style={{
-                height: "100%",
-                gap: "5%",
-                width: "100%",
-                marginTop: "20px",
-              }}
-            >
-              <div>
-                <img src={ballsvg} width="20px" />
-              </div>
-              <div
-                style={{
-                  height: "40%",
-                  borderLeft: "1px solid #F98417",
-                  borderRight: "1px solid #F98417",
-                  padding: "0px 5px",
-                  // fontSize: "12px",
-                }}
-                className="playerNamesFont"
-              >
-                {databyover?.bowlerStriker?.bowlName} *
-                <br />
-                {databyover?.bowlerNonStriker?.bowlName}
-              </div>
-
-              <div
-                style={{ color: "#F98417", padding: " 0px 10px" }}
-                className="playerNamesFont"
-              >
-                {databyover?.bowlerStriker?.bowlRuns}/
-                {databyover?.bowlerStriker?.bowlWkts}
-                <br />
-                {databyover?.bowlerNonStriker?.bowlRuns}/
-                {databyover?.bowlerNonStriker?.bowlWkts}
-              </div>
-            </div>
+            className="mob-one-eaning balls-cover"
+            style={{ fontSize: "10px" }}
+          >
+            {cricBuzSingleMatchData.status}
           </div>
-        </div>
 
-        <div className="mob-one-eaning balls-cover">
-          <span style={{ fontSize: "10px", marginRight: "20px" }}>
-            Current Over
-          </span>{" "}
-          {overStat(databyover?.recentOvsStats)?.map((item) => {
-            return (
-              <div
-                className={`single-ball ${isBallDot(item) ? "ball2" : "ball1"}`}
-              >
-                {item}
-              </div>
-            );
-          })}
-        </div>
-
-        <div
-          className="mob-one-eaning balls-cover"
-          style={{ fontSize: "10px" }}
-        >
-          {cricBuzSingleMatchData.status}
-        </div>
-
-        {/* <div className="flex-row just-bet scoreData-mobile ">
+          {/* <div className="flex-row just-bet scoreData-mobile ">
           <div
             className="flex-col align-ctr just-bet playerScore scoredata-team"
             style={{
@@ -1107,7 +1117,8 @@ const CricketSingle = ({ setShowHeader }) => {
             )}
           </div>
         </div> */}
-      </div>
+        </div>
+      )}
       {cricBuzMatchId != null && (
         <div>
           <div
@@ -1464,6 +1475,7 @@ const CricketSingle = ({ setShowHeader }) => {
               height: "44px",
               padding: "5px 0px",
               color: "wheat",
+              fontWeight: "bold",
             }}
           >
             {parseFloat(matchData[0]?.values[0]?.odds).toFixed(2) == "NaN"
@@ -1481,6 +1493,7 @@ const CricketSingle = ({ setShowHeader }) => {
               padding: "5px 0px",
               color: "wheat",
               height: "44px",
+              fontWeight: "bold",
             }}
             onClick={() => {
               setshowMatchMainOdd({
@@ -1515,6 +1528,7 @@ const CricketSingle = ({ setShowHeader }) => {
                 padding: "5px 0px",
                 color: "wheat",
                 height: "44px",
+                fontWeight: "bold",
               }}
             >
               {parseFloat(matchData[0]?.values[2]?.odds).toFixed(2) == "NaN"
@@ -1547,6 +1561,7 @@ const CricketSingle = ({ setShowHeader }) => {
               padding: "5px 0px",
               color: "wheat",
               height: "44px",
+              fontWeight: "bold",
             }}
             onClick={() => {
               setshowMatchMainOdd({
@@ -1580,6 +1595,7 @@ const CricketSingle = ({ setShowHeader }) => {
               padding: "5px 0px",
               color: "wheat",
               height: "44px",
+              fontWeight: "bold",
             }}
             onClick={() => {
               console.log(
@@ -1620,6 +1636,7 @@ const CricketSingle = ({ setShowHeader }) => {
                 padding: "5px 0px",
                 color: "wheat",
                 height: "44px",
+                fontWeight: "bold",
               }}
             >
               {parseFloat(
@@ -1741,7 +1758,7 @@ const CricketSingle = ({ setShowHeader }) => {
             style={{
               backgroundColor: !premiumToggle ? "#F97D09" : "white",
               color: !premiumToggle ? "white" : "black",
-              marginLeft: "-10px",
+              // marginLeft: "-10px",
               zIndex: premiumToggle ? 2 : 1,
             }}
           >
