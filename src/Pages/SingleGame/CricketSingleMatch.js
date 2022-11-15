@@ -295,6 +295,7 @@ const CricketSingle = ({ setShowHeader }) => {
             // let cricBuzDEtail = {
             //   matchStatus: match.matchInfo.status,
             // };
+            // console.log(match,"<<<<<cricbuzdatascore")
             setcricBuzData(match);
           }
 
@@ -349,6 +350,7 @@ const CricketSingle = ({ setShowHeader }) => {
               );
               // alert("here");
               setCricBuzMatchId(match.matchInfo.matchId);
+              setcricBuzData(match);
               // let cricBuzDEtail = {
               //   matchStatus: match.matchInfo.status,
               // };
