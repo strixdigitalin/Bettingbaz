@@ -688,9 +688,22 @@ const CricketSingle = ({ setShowHeader }) => {
   };
 
   const toFix1Float = (num) => {
-    if (`num`.indexOf(0, 1) == 0) {
-      return num.toFixed(1);
-    } else return num;
+    const decimalValue = `${num}`.split(".")[1];
+    console.log(
+      "manageodds",
+      num,
+      `${num}`.indexOf(0, 1),
+      `${num}`.length - 1,
+      decimalValue,
+      decimalValue?.substring(1, 2)
+    );
+    if (
+      decimalValue?.substring(1, 2) == 0 &&
+      decimalValue?.substring(0, 1) == 0
+    )
+      return parseInt(num);
+    if (decimalValue?.substring(1, 2) == 0) return parseFloat(num).toFixed(1);
+    return num;
   };
   console.log(cricBuzData, "<<<thisiscricbuzdata");
 
@@ -1468,6 +1481,7 @@ const CricketSingle = ({ setShowHeader }) => {
               : toFix1Float(
                   parseFloat(matchData[0]?.values[0]?.odds).toFixed(2)
                 )}
+            {/* // parseFloat(matchData[0]?.values[0]?.odds).toFixed(2) */}
           </div>
 
           <div
@@ -1564,6 +1578,7 @@ const CricketSingle = ({ setShowHeader }) => {
                   2
                   
                 )} */}
+            {/* {toFix1Float(layAllFirstRow(1.8))} */}
             {toFix1Float(
               layAllFirstRow(parseFloat(matchData[0]?.values[0]?.odds))
             )}
