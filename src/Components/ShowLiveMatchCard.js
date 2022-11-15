@@ -387,12 +387,12 @@ export function ShowLiveMatchCard({
 
       {show != "all" && (
         <div className="seemore linktag">
-          {/* <Link
+          <Link
             to={`/in-play`}
             style={{ color: "black", textDecoration: "underLine" }}
           >
             See more in play
-          </Link> */}
+          </Link>
         </div>
       )}
     </div>
