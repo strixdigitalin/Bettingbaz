@@ -196,6 +196,7 @@ export function InPlayCard({
       {handleLive && show == "all" && !showLoader && InPlayGames.length > 0 && (
         <InPlaySingleGame allMatch={InPlayGames} />
       )}
+      
       {!handleLive && show != "all" && !showLoader && singleGame.length > 0 && (
         <>
           {upCommingMatchNames.slice(0, 3)?.map((item, key) => {

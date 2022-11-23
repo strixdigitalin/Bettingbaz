@@ -1,6 +1,7 @@
 import { baseUrl } from "./Auth";
 
 export const PlaceBetApi = async (item, successCallback) => {
+  console.log("calling api");
   var myHeaders = new Headers();
   const user = localStorage.getItem("betting_user");
   if (user == null || user == "null") {
@@ -26,7 +27,7 @@ export const PlaceBetApi = async (item, successCallback) => {
     team_id: item.team_id,
   };
   console.log(payloadData, "<<< payload while bid");
-  return null;
+  // return null;
   myHeaders.append("Authorization", "Bearer " + bearer);
 
   var formdata = new FormData();
@@ -228,7 +229,7 @@ export const earnAmount = async (amount, id, successCallBack) => {
 };
 
 export const withdrawApi = async (amount, successCallBack) => {
-  var myHeaders = new Headers
+  var myHeaders = new Headers();
   const user = localStorage.getItem("betting_user");
   const userData = JSON.parse(user);
   const token = userData.usertoken;

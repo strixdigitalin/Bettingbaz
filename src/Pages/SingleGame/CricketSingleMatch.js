@@ -498,12 +498,19 @@ const CricketSingle = ({ setShowHeader }) => {
     // return null;
 
     // alert("here");
-    console.log(bidContent, bidType, bidAmount, matchId, "<<<<bid content");
+    // bidContent,
+    console.log(
+      bidType,
+      `${bidAmount}`,
+      matchId,
+      "<<<<bid content",
+      bidContent
+    );
     // return null;
     PlaceBetApi(
       {
         ...bidContent,
-        amount: bidAmount,
+        amount: `${bidAmount}`,
         matchId: matchId + "/" + bidContent.team,
         odd_type: bidType,
       },
@@ -759,7 +766,9 @@ const CricketSingle = ({ setShowHeader }) => {
               {/* <span>15-2</span>  */}
             </div>
           </div>
-          <div style={{ width: "100%", textAlign: "center",background:"white" }}>
+          <div
+            style={{ width: "100%", textAlign: "center", background: "white" }}
+          >
             Score Not available{" "}
           </div>
         </>
@@ -1675,7 +1684,7 @@ const CricketSingle = ({ setShowHeader }) => {
             <div className="button-est">
               {[
                 {
-                  label: "Place Bid",
+                  label: "Place Bid2",
                   onClick: () => {
                     submitBid();
                   },
@@ -1965,7 +1974,7 @@ const CricketSingle = ({ setShowHeader }) => {
                                   <div className="button-est">
                                     {[
                                       {
-                                        label: "Place Bid",
+                                        label: "Place Bid1",
                                         onClick: submitBid,
                                       },
                                       {
@@ -2119,7 +2128,7 @@ const CricketSingle = ({ setShowHeader }) => {
                                       <div className="button-est">
                                         {[
                                           {
-                                            label: "Place Bid",
+                                            label: "Place Bid1",
                                             onClick: submitBid,
                                           },
                                           {
